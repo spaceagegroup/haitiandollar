@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <!-- Google Consent Mode v2 + GA4 -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    const savedConsent = JSON.parse(localStorage.getItem('htd_cookie_consent') || 'null');
+
+    if (savedConsent) {
+      gtag('consent', 'default', {
+        'analytics_storage': savedConsent.analytics ? 'granted' : 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'functionality_storage': 'denied',
+        'security_storage': 'granted'
+      });
+    } else {
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'functionality_storage': 'denied',
+        'security_storage': 'granted'
+      });
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'G-DMBN9HX803');
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DMBN9HX803"></script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <title>404 — Page Not Found | Haitian Dollar Inc.</title>
+  <meta name="description" content="The page you requested could not be found. Explore Haitian Dollar digital settlement infrastructure, newsroom, or token documentation.">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="alternate" type="application/rss+xml" title="Haitian Dollar (HTD) News" href="/feed.xml">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandYellow: '#FCC419',
+            brandRed: '#E03131',
+            ink: '#0A0A0A',
+            offWhite: '#FFFBF0',
+            borderGray: '#E5E5E5',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-offWhite text-ink font-sans antialiased selection:bg-brandYellow selection:text-ink min-h-screen flex flex-col">
+
+  <!-- TOP COMPLIANCE BAR -->
+  <aside aria-label="Regulatory Notice" class="bg-ink text-white/80 text-xs py-2 px-4 border-b border-white/10">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-2 text-center sm:text-left">
+        <img src="/logo.png" alt="HTD" class="w-4 h-4 rounded-full" />
+        <span>Haitian Dollar Inc. (SEC CIK 0001906040) &bull; Reg D 506(b) Issuer</span>
+      </div>
+      <a href="/legal" class="underline hover:text-brandYellow transition-colors">Offering &amp; Risk Disclosures</a>
+    </div>
+  </aside>
+
+  <!-- NAVIGATION -->
+  <header class="sticky top-0 z-50 bg-offWhite/90 backdrop-blur-md border-b border-borderGray">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-brandRed">
+          <img src="/logo.png" alt="Haitian Dollar" class="w-full h-full object-cover" />
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display font-black text-xl leading-none tracking-tight text-ink">HAITIAN DOLLAR</span>
+          <span class="text-[10px] font-semibold tracking-widest text-ink/60 uppercase">1 HTD = 5 HTG</span>
+        </div>
+      </a>
+
+      <div class="hidden lg:flex items-center gap-7 font-medium text-sm">
+        <a href="/about" class="text-ink hover:text-brandRed transition-colors">About</a>
+        <a href="/htd" class="text-ink hover:text-brandRed transition-colors">HTD Token</a>
+        <a href="/investors" class="text-ink hover:text-brandRed transition-colors">Investors</a>
+        <a href="/merchants" class="text-ink hover:text-brandRed transition-colors">Merchants</a>
+        <a href="/users" class="text-ink hover:text-brandRed transition-colors">Users</a>
+        <a href="/news" class="text-ink hover:text-brandRed transition-colors">News</a>
+        <a href="/contact" class="text-ink hover:text-brandRed transition-colors">Contact</a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="/contact" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-brandRed text-white font-display font-bold text-sm hover:bg-brandRed/90 transition-all shadow-sm">
+          Contact Us
+        </a>
+        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-ink hover:bg-black/5" aria-label="Toggle Menu">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Drawer -->
+    <div id="mobile-menu" class="hidden lg:hidden border-b border-borderGray bg-white px-4 pt-2 pb-6 space-y-3">
+      <a href="/about" class="block py-2 text-ink hover:text-brandRed">About</a>
+      <a href="/htd" class="block py-2 text-ink hover:text-brandRed">HTD Token</a>
+      <a href="/merchants" class="block py-2 text-ink hover:text-brandRed">Merchants</a>
+      <a href="/users" class="block py-2 text-ink hover:text-brandRed">Users</a>
+      <a href="/investors" class="block py-2 text-ink hover:text-brandRed">Investors</a>
+      <a href="/news" class="block py-2 text-ink hover:text-brandRed">News</a>
+      <a href="/contact" class="block py-2 text-ink hover:text-brandRed">Contact</a>
+      <a href="/contact" class="block w-full text-center py-3 rounded-lg bg-brandRed text-white font-display font-bold">Contact Us</a>
+    </div>
+  </header>
+
+  <!-- MAIN 404 CONTENT -->
+  <main class="flex-grow flex items-center justify-center py-16 sm:py-24">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 bg-brandRed/10 border border-brandRed/30 text-brandRed px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-6">
+        <i data-lucide="alert-circle" class="w-4 h-4"></i>
+        <span>Error 404 &bull; Page Not Found</span>
+      </div>
+
+      <!-- Numeric Graphic -->
+      <div class="mb-4">
+        <span class="font-display font-black text-7xl sm:text-9xl text-ink tracking-tight select-none opacity-90">
+          4<span class="text-brandRed">0</span>4
+        </span>
+      </div>
+
+      <!-- Heading -->
+      <h1 class="font-display font-black text-2xl sm:text-4xl text-ink tracking-tight mb-4">
+        This Page Doesn't Exist in the Haitian Dollar Ecosystem
+      </h1>
+
+      <!-- Description -->
+      <p class="text-ink/70 text-base sm:text-lg max-w-xl mx-auto mb-8 leading-relaxed">
+        The link you followed may be broken, outdated, or the page may have moved. Explore the verified resources below or return to the homepage.
+      </p>
+
+      <!-- Primary Action Buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-12">
+        <a href="/" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-brandRed text-white font-display font-bold text-sm sm:text-base hover:bg-brandRed/90 shadow-md hover:shadow-lg transition-all hover:-translate-y-0.5">
+          <i data-lucide="home" class="w-4 h-4"></i>
+          <span>Return Home</span>
+        </a>
+        <a href="/htd" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white border border-borderGray text-ink font-display font-bold text-sm sm:text-base hover:border-ink hover:bg-black/5 transition-all shadow-sm">
+          <i data-lucide="coins" class="w-4 h-4 text-brandYellow"></i>
+          <span>HTD Rates &amp; Token</span>
+        </a>
+        <a href="/news" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white border border-borderGray text-ink font-display font-bold text-sm sm:text-base hover:border-ink hover:bg-black/5 transition-all shadow-sm">
+          <i data-lucide="newspaper" class="w-4 h-4 text-brandRed"></i>
+          <span>Newsroom</span>
+        </a>
+      </div>
+
+      <!-- Quick Destination Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left max-w-3xl mx-auto pt-8 border-t border-borderGray">
+        <a href="/about" class="p-4 rounded-xl bg-white border border-borderGray hover:border-brandRed hover:shadow-md transition-all group">
+          <div class="w-8 h-8 rounded-lg bg-brandYellow/20 flex items-center justify-center text-ink mb-2 group-hover:scale-110 transition-transform">
+            <i data-lucide="info" class="w-4 h-4"></i>
+          </div>
+          <h2 class="font-display font-bold text-sm text-ink group-hover:text-brandRed transition-colors">About Us</h2>
+          <p class="text-xs text-ink/60 mt-1">Our mission, leadership, and Delaware/Maryland corporate history.</p>
+        </a>
+
+        <a href="/investors" class="p-4 rounded-xl bg-white border border-borderGray hover:border-brandRed hover:shadow-md transition-all group">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-600 mb-2 group-hover:scale-110 transition-transform">
+            <i data-lucide="trending-up" class="w-4 h-4"></i>
+          </div>
+          <h2 class="font-display font-bold text-sm text-ink group-hover:text-brandRed transition-colors">Investors</h2>
+          <p class="text-xs text-ink/60 mt-1">Reg D 506(b) accreditation and institutional documentation.</p>
+        </a>
+
+        <a href="/merchants" class="p-4 rounded-xl bg-white border border-borderGray hover:border-brandRed hover:shadow-md transition-all group">
+          <div class="w-8 h-8 rounded-lg bg-brandRed/10 flex items-center justify-center text-brandRed mb-2 group-hover:scale-110 transition-transform">
+            <i data-lucide="store" class="w-4 h-4"></i>
+          </div>
+          <h2 class="font-display font-bold text-sm text-ink group-hover:text-brandRed transition-colors">Merchants</h2>
+          <p class="text-xs text-ink/60 mt-1">Sub-cent POS checkout and verified merchant settlement.</p>
+        </a>
+
+        <a href="/contact" class="p-4 rounded-xl bg-white border border-borderGray hover:border-brandRed hover:shadow-md transition-all group">
+          <div class="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-600 mb-2 group-hover:scale-110 transition-transform">
+            <i data-lucide="mail" class="w-4 h-4"></i>
+          </div>
+          <h2 class="font-display font-bold text-sm text-ink group-hover:text-brandRed transition-colors">Contact</h2>
+          <p class="text-xs text-ink/60 mt-1">Get in touch directly with our team in Baltimore, MD.</p>
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-ink text-white border-t border-white/10 pt-12 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+        <div class="md:col-span-6">
+          <a href="/" class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-brandYellow flex-shrink-0">
+              <img src="/logo.png" alt="Haitian Dollar" class="w-full h-full object-cover" />
+            </div>
+            <span class="font-display font-black text-xl tracking-tight text-white">HAITIAN DOLLAR</span>
+          </a>
+          <p class="text-white/60 text-xs leading-relaxed max-w-md">
+            Digital settlement infrastructure for the Haitian Dollar. 1 HTD = 5 HTG. Fixed unit of account on Base Layer 2.
+          </p>
+        </div>
+
+        <div class="md:col-span-3 space-y-2">
+          <p class="text-xs font-bold uppercase tracking-wider text-brandYellow">Protocol</p>
+          <ul class="text-xs space-y-1.5 text-white/70">
+            <li><a href="/htd" class="hover:text-white transition-colors">HTD Rates</a></li>
+            <li><a href="/whitepaper" class="hover:text-white transition-colors">White Paper</a></li>
+            <li><a href="/news" class="hover:text-white transition-colors">Newsroom</a></li>
+            <li><a href="/legal" class="hover:text-white transition-colors">Legal &amp; Privacy</a></li>
+          </ul>
+        </div>
+
+        <div class="md:col-span-3 space-y-2">
+          <p class="text-xs font-bold uppercase tracking-wider text-brandYellow">Company</p>
+          <ul class="text-xs space-y-1.5 text-white/70 font-mono">
+            <li><a href="/contact" class="text-brandYellow hover:underline font-sans">Contact Form &rarr;</a></li>
+            <li>admin@haitiandollar.com</li>
+            <li>legal@haitiandollar.com</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-white/10 pt-6 text-[11px] text-white/40 flex flex-col sm:flex-row justify-between items-center gap-3">
+        <p>&copy; <span id="year"></span> Haitian Dollar Inc. All rights reserved. SEC CIK 0001906040.</p>
+        <p class="font-mono">L'Union Fait La Force.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    lucide.createIcons();
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    if (btn && menu) btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+  </script>
+</body>
+</html>

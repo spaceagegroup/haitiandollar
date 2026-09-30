@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <!-- Google Consent Mode v2 + GA4 -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    const savedConsent = JSON.parse(localStorage.getItem('htd_cookie_consent') || 'null');
+
+    if (savedConsent) {
+      gtag('consent', 'default', {
+        'analytics_storage': savedConsent.analytics ? 'granted' : 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'functionality_storage': 'denied',
+        'security_storage': 'granted'
+      });
+    } else {
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'functionality_storage': 'denied',
+        'security_storage': 'granted'
+      });
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'G-DMBN9HX803');
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DMBN9HX803"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <title>News &amp; Updates | Haitian Dollar Inc</title>
+  <meta name="description" content="News, regulatory filings, and milestone updates from Haitian Dollar Inc (SEC CIK 0001906040) building digital settlement infrastructure for the Haitian Dollar.">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="alternate" type="application/rss+xml" title="Haitian Dollar (HTD) News" href="/feed.xml">
+
+  <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://haitiandollar.com/news" />
+  <meta property="og:title" content="Newsroom | Haitian Dollar Inc." />
+  <meta property="og:description" content="News, regulatory filings, and milestone updates from Haitian Dollar Inc (SEC CIK 0001906040) building digital settlement infrastructure for the Haitian Dollar." />
+  <meta property="og:image" content="https://haitiandollar.com/banner-wide.jpg" />
+  <meta property="og:image:secure_url" content="https://haitiandollar.com/banner-wide.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Haitian Dollar Inc." />
+
+  <!-- Twitter / X Card Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@haitiandollar" />
+  <meta name="twitter:creator" content="@haitiandollar" />
+  <meta name="twitter:title" content="Newsroom | Haitian Dollar Inc." />
+  <meta name="twitter:description" content="News, regulatory filings, and milestone updates from Haitian Dollar Inc (SEC CIK 0001906040) building digital settlement infrastructure for the Haitian Dollar." />
+  <meta name="twitter:image" content="https://haitiandollar.com/banner-wide.jpg" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandYellow: '#FCC419',
+            brandRed: '#E03131',
+            ink: '#0A0A0A',
+            offWhite: '#FFFBF0',
+            borderGray: '#E5E5E5',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-offWhite text-ink font-sans antialiased selection:bg-brandYellow selection:text-ink">
+
+  <!-- TOP COMPLIANCE NOTIFICATION BAR -->
+  <aside aria-label="Regulatory Notice" class="bg-ink text-white/80 text-xs py-2 px-4 border-b border-white/10">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-2 text-center sm:text-left">
+        <img src="/logo.png" alt="HTD" class="w-4 h-4 rounded-full" />
+        <span>Haitian Dollar Inc. (SEC CIK 0001906040) · Not currently offering or soliciting securities</span>
+      </div>
+      <a href="/legal.html" class="underline hover:text-brandYellow transition-colors">Offering &amp; Risk Disclosures</a>
+    </div>
+  </aside>
+
+  <!-- NAVIGATION -->
+  <header class="sticky top-0 z-50 bg-offWhite/90 backdrop-blur-md border-b border-borderGray">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-brandRed">
+          <img src="/logo.png" alt="Haitian Dollar" class="w-full h-full object-cover" />
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display font-black text-xl leading-none tracking-tight text-ink">HAITIAN DOLLAR</span>
+          <span class="text-[10px] font-semibold tracking-widest text-ink/60 uppercase">1 HTD = 5 HTG</span>
+        </div>
+      </a>      <!-- Desktop Links -->
+      <div class="hidden md:flex items-center gap-8 font-medium text-sm">
+        <a href="/about.html" class="text-ink hover:text-brandRed transition-colors">About</a>
+        <a href="/htd.html" class="text-ink hover:text-brandRed transition-colors">HTD Token</a>
+        <a href="/merchants.html" class="text-ink hover:text-brandRed transition-colors">Merchants</a>
+        <a href="/users.html" class="text-ink hover:text-brandRed transition-colors">Users</a>
+        <a href="/investors.html" class="text-ink hover:text-brandRed transition-colors">Investors</a>
+        <a href="/news.html" class="text-brandRed font-bold">News</a>
+        <a href="/contact.html" class="text-ink hover:text-brandRed transition-colors">Contact</a>
+      </div>
+
+      <!-- Action Button -->
+      <div class="flex items-center gap-3">
+        <a href="/contact.html" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-brandRed text-white font-display font-bold text-sm hover:bg-brandRed/90 transition-all shadow-sm">
+          Contact Us
+        </a>
+        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-ink hover:bg-black/5" aria-label="Toggle Menu">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden border-b border-borderGray bg-offWhite px-4 pt-3 pb-6 space-y-3 font-medium text-base">
+      <!-- Mobile Live Rate Pill -->
+      <a href="/htd.html#official-rates" class="flex items-center justify-between p-3 rounded-xl bg-brandYellow/20 border border-brandYellow/50 hover:bg-brandYellow/30 transition-colors">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="text-xs font-mono font-bold text-ink">1 HTD = 5 HTG</span>
+        </div>
+        <span class="text-xs font-mono font-bold text-brandRed flex items-center gap-1">
+          <span class="mobile-drawer-rate">$0.0382</span> USD &rarr;
+        </span>
+      </a>
+
+      <a href="/about.html" class="block py-2 text-ink hover:text-brandRed">About</a>
+      <a href="/htd.html" class="block py-2 text-ink hover:text-brandRed">HTD Token</a>
+      <a href="/merchants.html" class="block py-2 text-ink hover:text-brandRed">Merchants</a>
+      <a href="/users.html" class="block py-2 text-ink hover:text-brandRed">Users</a>
+      <a href="/investors.html" class="block py-2 text-ink hover:text-brandRed">Investors</a>
+      <a href="/news.html" class="block py-2 text-brandRed font-bold">News</a>
+      <a href="/contact.html" class="block py-2 text-ink hover:text-brandRed">Contact</a>
+      <a href="/contact.html" class="block w-full text-center py-3 rounded-lg bg-brandRed text-white font-display font-bold">Contact Us</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="py-16 sm:py-20 border-b border-borderGray bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+        <div class="flex items-center justify-center gap-3">
+          <div class="inline-flex items-center gap-2 bg-brandYellow/30 border border-brandYellow text-ink px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
+            <i data-lucide="newspaper" class="w-3.5 h-3.5"></i>
+            News &amp; Updates
+          </div>
+          <a href="/feed.xml" target="_blank" class="inline-flex items-center gap-1.5 text-ink/70 hover:text-brandRed text-xs font-medium transition-colors bg-ink/5 hover:bg-ink/10 px-2.5 py-1 rounded-full" title="Subscribe via RSS">
+            <i data-lucide="rss" class="w-3.5 h-3.5 text-brandRed"></i>
+            <span>RSS Feed</span>
+          </a>
+        </div>
+        <h1 class="font-display font-black text-4xl sm:text-5xl text-ink tracking-tight">
+          From the Newsroom
+        </h1>
+        <p class="text-base sm:text-lg text-ink/70 leading-relaxed max-w-2xl mx-auto">
+          Verified regulatory filings, intellectual property milestones, and technical development updates from Haitian Dollar Inc.
+        </p>
+      </div>
+    </section>
+
+    <!-- FEATURED PRESS RELEASES CAROUSEL -->
+    <section class="py-12 sm:py-16 border-b border-borderGray bg-offWhite relative overflow-hidden" id="featured-section">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Top Header & Controls -->
+        <div class="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <span class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-brandRed animate-pulse"></span>
+              Featured PR Rotation
+            </span>
+            <span class="text-[11px] font-mono text-ink/60 bg-ink/5 px-2.5 py-0.5 rounded-full border border-borderGray">
+              24-Hour Active Window
+            </span>
+          </div>
+
+          <!-- Carousel Controls -->
+          <div class="flex items-center gap-3 self-end sm:self-auto">
+            <span id="carousel-counter" class="text-xs font-mono text-ink/60 select-none">1 of 3</span>
+            <div class="flex items-center gap-1.5">
+              <button id="carousel-prev" aria-label="Previous PR" class="w-8 h-8 rounded-full bg-white border border-borderGray hover:border-ink hover:bg-black/5 flex items-center justify-center text-ink transition-all shadow-sm">
+                <i data-lucide="chevron-left" class="w-4 h-4"></i>
+              </button>
+              <button id="carousel-next" aria-label="Next PR" class="w-8 h-8 rounded-full bg-white border border-borderGray hover:border-ink hover:bg-black/5 flex items-center justify-center text-ink transition-all shadow-sm">
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Carousel Slides Container -->
+        <div class="relative overflow-hidden rounded-3xl" id="carousel-track">
+
+          <!-- SLIDE 1: BRH Rates Integration PR (Sep 30, 2026) -->
+          <article class="featured-slide transition-opacity duration-500 ease-in-out block bg-white border border-borderGray rounded-3xl overflow-hidden shadow-xl border-l-8 border-l-brandRed"
+                   data-published="2026-09-30T07:30:00-04:00"
+                   data-index="0">
+            <div class="grid grid-cols-1 lg:grid-cols-12">
+              <div class="lg:col-span-4 bg-brandYellow/15 border-b lg:border-b-0 lg:border-r border-borderGray p-8 sm:p-12 flex flex-col items-center justify-center text-center">
+                <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden ring-4 ring-white shadow-xl mb-4 group-hover:scale-105 transition-transform">
+                  <img src="/logo.png" alt="Haitian Dollar" class="w-full h-full object-cover" />
+                </div>
+                <span class="font-display font-black text-ink text-base sm:text-lg tracking-tight">Haitian Dollar Inc.</span>
+                <span class="text-xs text-ink/60 font-mono mt-1">SEC CIK 0001906040 &bull; Base L2</span>
+                <span class="mt-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 slide-status-pill">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  Active in 24h Window
+                </span>
+              </div>
+              <div class="lg:col-span-8 p-6 sm:p-10 lg:p-12 flex flex-col justify-center">
+                <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-4">
+                  <span class="bg-brandRed text-white text-[10px] sm:text-xs font-display font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                    Press Release
+                  </span>
+                  <span class="bg-ink/5 text-ink text-[10px] sm:text-xs font-mono font-semibold px-2.5 py-1 rounded-full">
+                    BALTIMORE, MD
+                  </span>
+                  <span class="text-xs text-ink/60 font-mono">Sep 30, 2026</span>
+                </div>
+                <h2 class="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-ink mb-4 hover:text-brandRed transition-colors leading-tight">
+                  <a href="/news/automated-brh-daily-rate-integration.html">
+                    Haitian Dollar Inc. Launches Automated Daily Market Rate Engine Powered by Central Bank (BRH) Publications
+                  </a>
+                </h2>
+                <p class="text-ink/70 leading-relaxed text-sm sm:text-base mb-6">
+                  BALTIMORE, MD — Multi-tier market oracle indexes central bank reference and informal market spreads on Base Layer 2 infrastructure. Data updates automatically every business morning, Monday through Saturday.
+                </p>
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-borderGray/60">
+                  <div class="flex items-center gap-2 text-xs text-ink/60 font-medium">
+                    <span>Protocol Parity: 1 HTD = 5 HTG</span>
+                    <span>&bull;</span>
+                    <span>BRH Automated Feed</span>
+                  </div>
+                  <a href="/news/automated-brh-daily-rate-integration.html" class="inline-flex items-center gap-2 text-brandRed font-display font-bold text-sm hover:underline">
+                    Read Full Press Release <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- SLIDE 2: Prior Investor Update (Sep 29, 2026) -->
+          <article class="featured-slide hidden transition-opacity duration-500 ease-in-out block bg-white border border-borderGray rounded-3xl overflow-hidden shadow-xl border-l-8 border-l-brandRed"
+                   data-published="2026-09-29T12:00:00-04:00"
+                   data-index="1">
+            <div class="grid grid-cols-1 lg:grid-cols-12">
+              <div class="lg:col-span-4 bg-brandYellow/15 border-b lg:border-b-0 lg:border-r border-borderGray p-8 sm:p-12 flex flex-col items-center justify-center text-center">
+                <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden ring-4 ring-white shadow-xl mb-4 group-hover:scale-105 transition-transform">
+                  <img src="/logo.png" alt="Haitian Dollar" class="w-full h-full object-cover" />
+                </div>
+                <span class="font-display font-black text-ink text-base sm:text-lg tracking-tight">Haitian Dollar Inc.</span>
+                <span class="text-xs text-ink/60 font-mono mt-1">SEC CIK 0001906040 &bull; Base L2</span>
+                <span class="mt-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 slide-status-pill">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  Active in 24h Window
+                </span>
+              </div>
+              <div class="lg:col-span-8 p-6 sm:p-10 lg:p-12 flex flex-col justify-center">
+                <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-4">
+                  <span class="bg-brandRed text-white text-[10px] sm:text-xs font-display font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                    Press Release
+                  </span>
+                  <span class="bg-ink/5 text-ink text-[10px] sm:text-xs font-mono font-semibold px-2.5 py-1 rounded-full">
+                    BALTIMORE, MD
+                  </span>
+                  <span class="text-xs text-ink/60 font-mono">Sep 29, 2026</span>
+                </div>
+                <h2 class="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-ink mb-4 hover:text-brandRed transition-colors leading-tight">
+                  <a href="/news/prior-investor-update.html">
+                    Haitian Dollar Inc. Issues Update to Prior Investors and Clarifies Regulatory Status
+                  </a>
+                </h2>
+                <p class="text-ink/70 leading-relaxed text-sm sm:text-base mb-6">
+                  BALTIMORE, MD — Formal update to prior investors clarifying closed offering status under Rule 506(b), architecture migration to Base L2, and elastic redemption receipt mechanics.
+                </p>
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-borderGray/60">
+                  <div class="flex items-center gap-2 text-xs text-ink/60 font-medium">
+                    <span>Founder: Honson Luma</span>
+                    <span>&bull;</span>
+                    <span>USPTO Reg. 6,267,276</span>
+                  </div>
+                  <a href="/news/prior-investor-update.html" class="inline-flex items-center gap-2 text-brandRed font-display font-bold text-sm hover:underline">
+                    Read Full Press Release <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- SLIDE 3: Base L2 Settlement & Pilot Framework (Sep 30, 2026) -->
+          <article class="featured-slide hidden transition-opacity duration-500 ease-in-out block bg-white border border-borderGray rounded-3xl overflow-hidden shadow-xl border-l-8 border-l-brandRed"
+                   data-published="2026-09-30T06:00:00-04:00"
+                   data-index="2">
+            <div class="grid grid-cols-1 lg:grid-cols-12">
+              <div class="lg:col-span-4 bg-brandYellow/15 border-b lg:border-b-0 lg:border-r border-borderGray p-8 sm:p-12 flex flex-col items-center justify-center text-center">
+                <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden ring-4 ring-white shadow-xl mb-4 group-hover:scale-105 transition-transform">
+                  <img src="/logo.png" alt="Haitian Dollar" class="w-full h-full object-cover" />
+                </div>
+                <span class="font-display font-black text-ink text-base sm:text-lg tracking-tight">Haitian Dollar Inc.</span>
+                <span class="text-xs text-ink/60 font-mono mt-1">SEC CIK 0001906040 &bull; Base L2</span>
+                <span class="mt-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 slide-status-pill">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  Active in 24h Window
+                </span>
+              </div>
+              <div class="lg:col-span-8 p-6 sm:p-10 lg:p-12 flex flex-col justify-center">
+                <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-4">
+                  <span class="bg-brandRed text-white text-[10px] sm:text-xs font-display font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                    Product &amp; Architecture
+                  </span>
+                  <span class="bg-ink/5 text-ink text-[10px] sm:text-xs font-mono font-semibold px-2.5 py-1 rounded-full">
+                    PORT-AU-PRINCE
+                  </span>
+                  <span class="text-xs text-ink/60 font-mono">Sep 30, 2026</span>
+                </div>
+                <h2 class="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-ink mb-4 hover:text-brandRed transition-colors leading-tight">
+                  <a href="/htd.html#pilot">
+                    HTD Architecture Migrating to Base Layer 2 with Sub-Cent Settlement &amp; Elastic Parity Engine
+                  </a>
+                </h2>
+                <p class="text-ink/70 leading-relaxed text-sm sm:text-base mb-6">
+                  PORT-AU-PRINCE &amp; BALTIMORE — Protocol framework finalized for partner merchants and diaspora senders. Elastic supply mirrors the Haitian Gourde reserve at the fixed 1 HTD = 5 HTG parity invariant with sub-cent mobile checkout.
+                </p>
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-borderGray/60">
+                  <div class="flex items-center gap-2 text-xs text-ink/60 font-medium">
+                    <span>Base L2</span>
+                    <span>&bull;</span>
+                    <span>Elastic Supply</span>
+                    <span>&bull;</span>
+                    <span>Sub-Cent Fees</span>
+                  </div>
+                  <a href="/htd.html#pilot" class="inline-flex items-center gap-2 text-brandRed font-display font-bold text-sm hover:underline">
+                    Explore Pilot Framework <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Dot Indicators -->
+        <div class="mt-6 flex items-center justify-center gap-2" id="carousel-dots"></div>
+
+      </div>
+    </section>
+
+    <!-- POSTS GRID -->
+    <section class="py-16 border-b border-borderGray bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-12">
+          <span class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest">Chronological Record</span>
+          <h2 class="font-display font-black text-3xl sm:text-4xl text-ink mt-2">Milestones &amp; Development</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <!-- PRESS RELEASE: Automated BRH Engine -->
+          <article class="group flex flex-col bg-white border border-borderGray rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all border-l-4 border-l-brandRed">
+            <div class="flex items-center justify-between gap-3 mb-4">
+              <span class="bg-brandRed/10 text-brandRed text-[10px] font-display font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">
+                Press Release
+              </span>
+              <span class="text-[11px] text-ink/60 font-mono">Sep 30, 2026</span>
+            </div>
+            <h3 class="font-display font-bold text-xl text-ink mb-3 group-hover:text-brandRed transition-colors leading-snug">
+              Haitian Dollar Inc. Launches Automated Daily Market Rate Engine Powered by Central Bank (BRH) Publications
+            </h3>
+            <p class="text-ink/70 text-sm leading-relaxed flex-grow">
+              BALTIMORE, MD — Multi-tier market oracle indexes central bank reference and informal market spreads on Base Layer 2 infrastructure.
+            </p>
+            <div class="pt-4 mt-4 border-t border-borderGray/60 flex items-center justify-between">
+              <span class="text-xs text-ink/50 font-medium font-mono">BALTIMORE, MD</span>
+              <a href="/news/automated-brh-daily-rate-integration.html" class="inline-flex items-center gap-1.5 text-brandRed font-display font-bold text-xs group-hover:underline">
+                Read release <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- PRESS RELEASE CARD: Prior Investor Update -->
+          <article class="group flex flex-col bg-white border border-borderGray rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all border-l-4 border-l-brandRed">
+            <div class="flex items-center justify-between gap-3 mb-4">
+              <span class="bg-brandRed/10 text-brandRed text-[10px] font-display font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">
+                Press Release
+              </span>
+              <span class="text-[11px] text-ink/60 font-mono">Sep 29, 2026</span>
+            </div>
+            <h3 class="font-display font-bold text-xl text-ink mb-3 group-hover:text-brandRed transition-colors leading-snug">
+              Haitian Dollar Inc. Issues Update to Prior Investors and Clarifies Regulatory Status
+            </h3>
+            <p class="text-ink/70 text-sm leading-relaxed flex-grow">
+              BALTIMORE, MD — Haitian Dollar Inc. (CIK 0001906040) issues a formal update to prior investors, confirming closed-offering status, Base L2 migration, and elastic redemption receipt mechanics.
+            </p>
+            <div class="pt-4 mt-4 border-t border-borderGray/60 flex items-center justify-between">
+              <span class="text-xs text-ink/50 font-medium font-mono">BALTIMORE, MD</span>
+              <a href="/news/prior-investor-update.html" class="inline-flex items-center gap-1.5 text-brandRed font-display font-bold text-xs group-hover:underline">
+                Read release <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- Post: Form D/A -->
+          <article class="group flex flex-col bg-offWhite border border-borderGray rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="bg-brandRed/15 text-brandRed text-[10px] font-display font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">Compliance</span>
+              <span class="text-[11px] text-ink/60 font-medium">Jul 25, 2022</span>
+            </div>
+            <h3 class="font-display font-bold text-lg text-ink mb-3 group-hover:text-brandRed transition-colors leading-snug">
+              Form D/A Filed With SEC
+            </h3>
+            <p class="text-ink/70 text-sm leading-relaxed flex-grow">
+              Haitian Dollar Inc filed an amendment to its Form D under Rule 506(b) with the U.S. Securities and Exchange Commission. CIK 0001906040 is publicly available on EDGAR.
+            </p>
+            <div class="pt-4 mt-4 border-t border-borderGray/60 flex items-center justify-between text-xs text-ink/50">
+              <span>CIK 0001906040</span>
+              <span class="font-medium text-brandRed">Rule 506(b)</span>
+            </div>
+          </article>
+
+          <!-- Post 1: First Token Sale -->
+          <article class="group flex flex-col bg-offWhite border border-borderGray rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="bg-ink/10 text-ink text-[10px] font-display font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">Milestone</span>
+              <span class="text-[11px] text-ink/60 font-medium">Jul 19, 2022</span>
+            </div>
+            <h3 class="font-display font-bold text-lg text-ink mb-3 group-hover:text-brandRed transition-colors leading-snug">
+              First Token Sale Completed
+            </h3>
+            <p class="text-ink/70 text-sm leading-relaxed flex-grow">
+              Initial issuance of HTD tokens completed. Form D/A filing confirms the date of first sale as July 19, 2022 conducted under Rule 506(b) private placement.
+            </p>
+          </article>
+
+          <!-- Post 2: Trademark -->
+          <article class="group flex flex-col bg-offWhite border border-borderGray rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="bg-brandYellow/40 text-ink text-[10px] font-display font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">Trademark</span>
+              <span class="text-[11px] text-ink/60 font-medium">Feb 9, 2021</span>
+            </div>
+            <h3 class="font-display font-bold text-lg text-ink mb-3 group-hover:text-brandRed transition-colors leading-snug">
+              USPTO Registers Haitian Dollar Trademark
+            </h3>
+            <p class="text-ink/70 text-sm leading-relaxed flex-grow">
+              USPTO Serial 88319997 (Reg. 6267276) registered with the United States Patent and Trademark Office for financial services and cryptocurrency exchange. The mark is a protected asset of Haitian Dollar Inc.
+            </p>
+          </article>
+
+          <!-- Post 3: Incorporation -->
+          <article class="group flex flex-col bg-offWhite border border-borderGray rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="bg-brandRed/15 text-brandRed text-[10px] font-display font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">Corporate</span>
+              <span class="text-[11px] text-ink/60 font-medium">2021</span>
+            </div>
+            <h3 class="font-display font-bold text-lg text-ink mb-3 group-hover:text-brandRed transition-colors leading-snug">
+              Haitian Dollar Inc Incorporated in Maryland
+            </h3>
+            <p class="text-ink/70 text-sm leading-relaxed flex-grow">
+              Haitian Dollar Inc is formally incorporated in the State of Maryland as a Corporation, establishing the corporate structure and legal foundation for operations.
+            </p>
+          </article>
+
+          <!-- Post 4: Whitepaper -->
+          <article class="group flex flex-col bg-offWhite border border-borderGray rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="bg-brandYellow/40 text-ink text-[10px] font-display font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">Announcement</span>
+              <span class="text-[11px] text-ink/60 font-medium">Oct 20, 2020</span>
+            </div>
+            <h3 class="font-display font-bold text-lg text-ink mb-3 group-hover:text-brandRed transition-colors leading-snug">
+              Haitian Dollar Whitepaper Published
+            </h3>
+            <p class="text-ink/70 text-sm leading-relaxed flex-grow">
+              Honson Luma publishes the first Haitian Dollar Whitepaper, establishing the historical foundation of the 1912 5:1 gourde peg and outlining the architecture for the digital Haitian Dollar.
+            </p>
+          </article>
+
+          <!-- Post 5: Modern On-Chain Infrastructure (In Development) -->
+          <article class="group flex flex-col bg-offWhite border border-borderGray rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="bg-brandRed/15 text-brandRed text-[10px] font-display font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">Product</span>
+              <span class="text-[11px] text-brandRed font-semibold">In Development</span>
+            </div>
+            <h3 class="font-display font-bold text-lg text-ink mb-3 group-hover:text-brandRed transition-colors leading-snug">
+              HTD Architecture Migrating to Modern On-Chain Infrastructure
+            </h3>
+            <p class="text-ink/70 text-sm leading-relaxed flex-grow">
+              HTD is being built on a modern on-chain environment with elastic supply — minted on deposit, burned on redemption. No fixed cap. Supply will mirror the Haitian Gourde reserve at a fixed 5:1 convention.
+            </p>
+          </article>
+
+          <!-- Post 6: Pilot Framework (In Development) -->
+          <article class="group flex flex-col bg-offWhite border border-borderGray rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="bg-ink/10 text-ink text-[10px] font-display font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">Development</span>
+              <span class="text-[11px] text-brandRed font-semibold">In Development</span>
+            </div>
+            <h3 class="font-display font-bold text-lg text-ink mb-3 group-hover:text-brandRed transition-colors leading-snug">
+              Pilot Framework in Development for Port-au-Prince
+            </h3>
+            <p class="text-ink/70 text-sm leading-relaxed flex-grow">
+              The Phase 1 pilot framework is being finalized for partner merchants and diaspora senders in Port-au-Prince. The program will allow users to buy, send, and redeem HTD at 1 HTD = 5 HTG.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 bg-brandYellow">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="font-display font-black text-3xl sm:text-4xl text-ink mb-4">Stay Informed</h2>
+        <p class="text-lg text-ink/80 mb-8 max-w-2xl mx-auto">
+          For corporate inquiries, regulatory transparency, or project updates, contact our team.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="/contact.html?type=Press%20/%20Media" class="inline-flex items-center justify-center h-14 px-8 rounded-lg bg-ink text-brandYellow font-display font-bold text-lg hover:bg-ink/90 transition-all shadow-lg">
+            Contact Us
+            <i data-lucide="arrow-right" class="w-5 h-5 ml-2"></i>
+          </a>
+          <a href="/" class="inline-flex items-center justify-center h-14 px-8 rounded-lg border-2 border-ink text-ink font-display font-bold text-lg hover:bg-ink hover:text-brandYellow transition-all">
+            About the Company
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-ink text-white border-t border-white/10 pt-12 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Top: Brand + Links + Contact (single row) -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-10">
+
+                <!-- Brand Column -->
+        <div class="md:col-span-5">
+          <a href="/" class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-brandYellow flex-shrink-0">
+              <img src="/logo.png" alt="Haitian Dollar" class="w-full h-full object-cover" />
+            </div>
+            <span class="font-display font-black text-xl tracking-tight text-white">HAITIAN DOLLAR</span>
+          </a>
+
+          <!-- Bio — indented to align with wordmark -->
+          <div class="pl-[52px] pr-4">
+            <p class="text-white/60 text-xs leading-relaxed mb-1">
+              Digital settlement infrastructure for the Haitian Dollar.
+            </p>
+            <p class="text-brandYellow text-sm font-bold tracking-wide">
+              1 HTD = 5 HTG. Fixed.
+            </p>
+          </div>
+
+          <!-- Social icons -->
+          <div class="pl-[52px] flex items-center gap-3 mt-5">
+            <a href="https://twitter.com/haitiandollar" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-white/10 hover:bg-brandYellow hover:text-ink text-white flex items-center justify-center transition-colors" aria-label="X">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <a href="https://t.me/haitiandollar" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-white/10 hover:bg-brandYellow hover:text-ink text-white flex items-center justify-center transition-colors" aria-label="Telegram">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m20.665 3.717-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701h-.002l-.002.001-.314 4.692c.46 0 .663-.211.921-.46l2.211-2.15 4.599 3.397c.848.467 1.457.227 1.668-.785l3.019-14.228c.309-1.239-.473-1.8-1.282-1.434z"/>
+              </svg>
+            </a>
+            <a href="https://linkedin.com/company/haitian-dollar" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-white/10 hover:bg-brandYellow hover:text-ink text-white flex items-center justify-center transition-colors" aria-label="LinkedIn">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z"/>
+              </svg>
+            </a>
+            <a href="https://facebook.com/haitiandollar" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-white/10 hover:bg-brandYellow hover:text-ink text-white flex items-center justify-center transition-colors" aria-label="Facebook">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.704 0-1.148.064-1.331.191-.322.21-.433.682-.433 1.631v2.163h4.319l-.577 3.667h-3.742v7.98h-5.293z"/>
+              </svg>
+            </a>
+            <a href="https://bitcointalk.org/index.php?topic=5282342.msg56313383#msg56313383" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-white/10 hover:bg-brandYellow hover:text-ink text-white flex items-center justify-center transition-colors" aria-label="BitcoinTalk">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M23.638 14.904c-1.602 6.43-8.113 10.34-14.542 8.736C2.67 22.05-1.244 15.525.362 9.105 1.962 2.67 8.482-1.244 14.91.36 21.34 1.962 25.25 8.48 23.638 14.904zm-7.604-5.068c.245-1.636-.998-2.518-2.7-3.106l.55-2.21-1.344-.336-.536 2.146c-.352-.088-.716-.172-1.077-.255l.54-2.164-1.345-.335-.553 2.216c-.293-.067-.58-.133-.859-.204l.002-.007-1.855-.463-.357 1.435s.998.229.977.243c.545.136.643.498.627.785l-.628 2.518c.038.01.086.024.14.045l-.143-.035-.88 3.529c-.066.166-.236.415-.617.32.02.03-.978-.244-.978-.244l-.668 1.543 1.751.437c.326.082.646.167.962.248l-.558 2.24 1.344.335.552-2.213c.368.1.724.192 1.072.28l-.549 2.203 1.345.336.558-2.235c2.296.435 4.022.26 4.748-1.817.585-1.674-.03-2.64-1.238-3.267.88-.203 1.542-.782 1.72-1.977zm-3.078 4.316c-.417 1.672-3.238.769-4.152.542l.74-2.97c.915.228 3.844.678 3.412 2.428zm.418-4.34c-.38 1.523-2.73.749-3.492.56l.672-2.693c.762.19 3.212.545 2.82 2.133z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Protocol Links -->
+        <div class="md:col-span-2">
+          <p class="text-[11px] font-display font-bold uppercase tracking-wider text-brandYellow mb-3">Protocol</p>
+          <ul class="text-xs space-y-2 text-white/70">
+            <li><a href="/htd.html" class="hover:text-white transition-colors">What is HTD</a></li>
+            <li><a href="/merchants.html" class="hover:text-white transition-colors">Merchants</a></li>
+            <li><a href="/users.html" class="hover:text-white transition-colors">Users</a></li>
+          </ul>
+        </div>
+
+        <!-- Company Links -->
+        <div class="md:col-span-2">
+          <p class="text-[11px] font-display font-bold uppercase tracking-wider text-brandYellow mb-3">Company</p>
+          <ul class="text-xs space-y-2 text-white/70">
+            <li><a href="/about.html" class="hover:text-white transition-colors">About</a></li>
+            <li><a href="/investors.html" class="hover:text-white transition-colors">Investors</a></li>
+            <li><a href="/news.html" class="hover:text-white transition-colors">News</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact (single row) -->
+        <div class="md:col-span-3">
+          <p class="text-[11px] font-display font-bold uppercase tracking-wider text-brandYellow mb-3">
+            <a href="/contact.html" class="hover:underline">Contact</a>
+          </p>
+          <ul class="text-xs space-y-2 text-white/70 font-mono">
+            <li><a href="/contact.html" class="text-brandYellow hover:text-white transition-colors font-sans font-semibold flex items-center gap-1">Online Contact Form &rarr;</a></li>
+            <li><a href="mailto:admin@haitiandollar.com" class="hover:text-white transition-colors">admin@haitiandollar.com</a></li>
+            <li><a href="mailto:legal@haitiandollar.com" class="hover:text-white transition-colors">legal@haitiandollar.com</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Divider -->
+      <div class="border-t border-white/10 pt-6">
+
+        <!-- Privacy / Legal / Copyright row -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-[11px] text-white/40 mb-4">
+          <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <a href="/legal.html" class="hover:text-brandYellow transition-colors">Privacy Policy</a>
+            <span class="text-white/20 hidden sm:inline">·</span>
+            <a href="/legal.html" class="hover:text-brandYellow transition-colors">Terms of Service</a>
+            <span class="text-white/20 hidden sm:inline">·</span>
+            <a href="/legal.html#reg-d" class="hover:text-brandYellow transition-colors">SEC Regulatory Notice</a>
+            <span class="text-white/20 hidden sm:inline">·</span>
+            <a href="/feed.xml" class="hover:text-brandYellow transition-colors">RSS</a>
+            <span class="text-white/20 hidden sm:inline">·</span>
+            <a href="#" onclick="resetCookieConsent(); return false;" class="hover:text-brandYellow transition-colors">Cookie Settings</a>
+          </div>
+          <p>&reg; <span id="year">2026</span> Haitian Dollar Inc.</p>
+        </div>
+
+        <!-- Disclaimer -->
+        <p class="text-[10px] text-white/30 leading-relaxed max-w-4xl">
+          <strong class="text-white/40">DISCLAIMER:</strong> Haitian Dollar Inc. is an SEC CIK-registered entity (CIK 0001906040). HTD operates as a digital unit of account and redemption receipt. Haitian Dollar Inc. is not currently offering or soliciting securities. This website is provided for informational purposes only and does not constitute an offer to sell or a solicitation of an offer to buy any securities. HTD is a redemption receipt, not a stablecoin. Tokens may have no value.
+        </p>
+
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    lucide.createIcons();
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    if (btn && menu) btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+
+    // Featured PR Carousel (24-Hour Active Rotation)
+    (function initFeaturedCarousel() {
+      const section = document.getElementById('featured-section');
+      if (!section) return;
+
+      const track = document.getElementById('carousel-track');
+      const allSlides = Array.from(track.querySelectorAll('.featured-slide'));
+      const counter = document.getElementById('carousel-counter');
+      const prevBtn = document.getElementById('carousel-prev');
+      const nextBtn = document.getElementById('carousel-next');
+      const dotsContainer = document.getElementById('carousel-dots');
+
+      const WINDOW_MS = 24 * 60 * 60 * 1000; // 24-hour expiration window
+      const now = Date.now();
+
+      // Check 24-hour window eligibility for each slide
+      const eligibleSlides = [];
+      allSlides.forEach((slide) => {
+        const publishedIso = slide.getAttribute('data-published');
+        const pubTime = new Date(publishedIso).getTime();
+        const ageMs = now - pubTime;
+        const pill = slide.querySelector('.slide-status-pill');
+
+        if (ageMs <= WINDOW_MS && ageMs >= -3600000) {
+          const remainingHours = Math.max(1, Math.round((WINDOW_MS - Math.max(0, ageMs)) / (60 * 60 * 1000)));
+          if (pill) {
+            pill.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>Featured &bull; ${remainingHours}h remaining`;
+          }
+          eligibleSlides.push(slide);
+        } else {
+          if (pill) {
+            pill.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-ink/40"></span>Archived from 24h Window`;
+            pill.className = 'mt-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono text-ink/60 bg-black/5 border border-borderGray slide-status-pill';
+          }
+        }
+      });
+
+      // Maintain at least 3 slides in rotation as requested by user
+      const activeSlides = eligibleSlides.length >= 3 ? eligibleSlides : allSlides.slice(0, 3);
+
+      // Hide any slides outside the active rotation
+      allSlides.forEach(slide => {
+        if (!activeSlides.includes(slide)) {
+          slide.classList.add('hidden');
+        }
+      });
+
+      let currentIndex = 0;
+      let timer = null;
+
+      function updateDots() {
+        if (!dotsContainer) return;
+        dotsContainer.innerHTML = '';
+        activeSlides.forEach((_, i) => {
+          const dot = document.createElement('button');
+          dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+          dot.className = i === currentIndex 
+            ? 'w-6 h-2 rounded-full bg-brandRed transition-all duration-300' 
+            : 'w-2 h-2 rounded-full bg-ink/20 hover:bg-ink/40 transition-all duration-300';
+          dot.addEventListener('click', () => {
+            goToSlide(i);
+            resetAutoplay();
+          });
+          dotsContainer.appendChild(dot);
+        });
+      }
+
+      function showSlide(index) {
+        activeSlides.forEach((slide, i) => {
+          if (i === index) {
+            slide.classList.remove('hidden');
+            slide.classList.remove('opacity-0');
+            slide.classList.add('opacity-100');
+          } else {
+            slide.classList.add('hidden');
+            slide.classList.add('opacity-0');
+            slide.classList.remove('opacity-100');
+          }
+        });
+
+        if (counter) {
+          counter.textContent = `${index + 1} of ${activeSlides.length}`;
+        }
+        updateDots();
+        if (window.lucide) lucide.createIcons();
+      }
+
+      function goToSlide(index) {
+        currentIndex = (index + activeSlides.length) % activeSlides.length;
+        showSlide(currentIndex);
+      }
+
+      function nextSlide() {
+        goToSlide(currentIndex + 1);
+      }
+
+      function prevSlide() {
+        goToSlide(currentIndex - 1);
+      }
+
+      if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); resetAutoplay(); });
+      if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); resetAutoplay(); });
+
+      function startAutoplay() {
+        if (activeSlides.length > 1) {
+          timer = setInterval(nextSlide, 7000);
+        }
+      }
+
+      function stopAutoplay() {
+        if (timer) clearInterval(timer);
+      }
+
+      function resetAutoplay() {
+        stopAutoplay();
+        startAutoplay();
+      }
+
+      section.addEventListener('mouseenter', stopAutoplay);
+      section.addEventListener('mouseleave', startAutoplay);
+
+      // Touch swipe support for mobile
+      let touchStartX = 0;
+      section.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+      section.addEventListener('touchend', e => {
+        const touchEndX = e.changedTouches[0].screenX;
+        if (touchStartX - touchEndX > 50) nextSlide();
+        if (touchEndX - touchStartX > 50) prevSlide();
+        resetAutoplay();
+      }, { passive: true });
+
+      // Keyboard navigation
+      window.addEventListener('keydown', e => {
+        if (document.activeElement && ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+        if (e.key === 'ArrowRight') nextSlide();
+        if (e.key === 'ArrowLeft') prevSlide();
+      });
+
+      // Initial display
+      showSlide(0);
+      startAutoplay();
+    })();
+  </script>
+  <!-- COOKIE CONSENT BANNER — Compact -->
+  <div 
+    id="cookie-consent-banner" 
+    class="hidden fixed bottom-0 left-0 right-0 z-[100] bg-white border-t border-borderGray shadow-[0_-4px_20px_rgba(0,0,0,0.08)] transition-transform duration-300 transform translate-y-full"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="cookie-title"
+  >
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4">
+      <div class="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-6">
+
+        <!-- Left: Text -->
+        <div class="flex-1 min-w-0">
+          <p class="text-xs sm:text-sm text-ink/80 leading-snug">
+            <strong class="font-display font-bold text-ink">We use cookies.</strong>
+            Essential cookies keep the site working. Analytics cookies help us understand usage. Read our
+            <a href="/legal.html#privacy" class="underline text-brandRed hover:text-ink font-medium">Privacy Policy</a>.
+          </p>
+        </div>
+
+        <!-- Center: Toggles -->
+        <div class="flex items-center gap-3 sm:gap-4 text-[11px] sm:text-xs">
+          <label class="flex items-center gap-2 cursor-not-allowed opacity-70 select-none" title="Required">
+            <input type="checkbox" checked disabled class="w-3.5 h-3.5 rounded cursor-not-allowed" />
+            <span class="font-display font-bold text-ink whitespace-nowrap">Necessary</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer select-none">
+            <input type="checkbox" id="cookie-analytics" checked class="w-3.5 h-3.5 rounded cursor-pointer" />
+            <span class="font-display font-bold text-ink whitespace-nowrap">Analytics</span>
+          </label>
+        </div>
+
+        <!-- Right: Buttons -->
+        <div class="flex items-center gap-2 flex-shrink-0">
+          <button type="button" id="btn-reject-all" class="px-3 py-2 rounded-lg border border-borderGray bg-white text-ink font-display font-bold text-xs hover:border-ink transition-colors whitespace-nowrap">
+            Reject
+          </button>
+          <button type="button" id="btn-allow-analytics" class="px-4 py-2 rounded-lg bg-brandRed text-white font-display font-bold text-xs hover:bg-brandRed/90 transition-colors whitespace-nowrap">
+            Accept
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function initCookieBanner() {
+      const banner = document.getElementById('cookie-consent-banner');
+      const analyticsCheck = document.getElementById('cookie-analytics');
+      const btnReject = document.getElementById('btn-reject-all');
+      const btnAllow = document.getElementById('btn-allow-analytics');
+
+      if (!banner) return;
+
+      const stored = localStorage.getItem('htd_cookie_consent');
+      if (!stored) {
+        banner.classList.remove('hidden');
+        setTimeout(() => banner.classList.remove('translate-y-full'), 50);
+      }
+
+      function dismissBanner() {
+        banner.classList.add('translate-y-full');
+        setTimeout(() => banner.classList.add('hidden'), 300);
+      }
+
+      function applyConsent(settings) {
+        localStorage.setItem('htd_cookie_consent', JSON.stringify(settings));
+        if (typeof gtag === 'function') {
+          gtag('consent', 'update', {
+            'analytics_storage': settings.analytics ? 'granted' : 'denied',
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'functionality_storage': 'denied',
+            'security_storage': 'granted'
+          });
+        }
+        dismissBanner();
+      }
+
+      btnReject.addEventListener('click', () => {
+        applyConsent({ necessary: true, analytics: false });
+      });
+
+      btnAllow.addEventListener('click', () => {
+        applyConsent({ necessary: true, analytics: analyticsCheck ? analyticsCheck.checked : true });
+      });
+    })();
+
+    // Cookie Settings link handler (used in footer)
+    function resetCookieConsent() {
+      localStorage.removeItem('htd_cookie_consent');
+      window.location.reload();
+    }
+  </script>
+</body>
+</html>
