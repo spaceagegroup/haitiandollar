@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -47,6 +49,7 @@ jobs:
             echo "changed=false" >> $GITHUB_OUTPUT
           else
             git commit -m "chore(rates): update BRH daily quotations [skip ci]"
+            git pull --rebase origin main
             git push
             echo "changed=true" >> $GITHUB_OUTPUT
           fi
