@@ -5,8 +5,17 @@
     <link>https://haitiandollar.com/news</link>
     <description>Official announcements, product updates, and pilot milestones from Haitian Dollar Inc — a Reg D 506(b) issuer building digital settlement infrastructure for the Haitian Dollar.</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 29 Sep 2026 12:00:00 EST</lastBuildDate>
+    <lastBuildDate>Wed, 30 Sep 2026 07:30:00 EST</lastBuildDate>
     <atom:link href="https://haitiandollar.com/feed.xml" rel="self" type="application/rss+xml" />
+
+    <item>
+      <title>Haitian Dollar Inc. Launches Automated Daily Market Rate Engine</title>
+      <link>https://haitiandollar.com/news/automated-brh-daily-rate-integration.html</link>
+      <guid isPermaLink="false">htd-pr-2026-003</guid>
+      <pubDate>Wed, 30 Sep 2026 07:30:00 EST</pubDate>
+      <category>Press Release</category>
+      <description><![CDATA[BALTIMORE, MD — Haitian Dollar Inc. launches automated daily market rate engine pulling central bank (BRH) published foreign exchange figures directly into Base L2 infrastructure.]]></description>
+    </item>
 
     <item>
       <title>Haitian Dollar Inc. Issues Update to Prior Investors and Clarifies Regulatory Status</title>

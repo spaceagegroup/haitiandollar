@@ -84,15 +84,29 @@ async function scrapeBRH() {
     usdInHtd: parseFloat((htgRate / 5.0).toFixed(2))
   });
 
-  const displayDate = new Date().toLocaleDateString('en-US', {
+  const now = new Date();
+  const displayDate = now.toLocaleDateString('en-US', {
+    timeZone: 'America/New_York',
     month: 'short', day: 'numeric', year: 'numeric'
   });
+  const dayOfWeek = now.toLocaleDateString('en-US', {
+    timeZone: 'America/New_York',
+    weekday: 'long'
+  });
+  const timeET = now.toLocaleTimeString('en-US', {
+    timeZone: 'America/New_York',
+    hour: 'numeric',
+    minute: '2-digit'
+  });
+  const fetchedAtET = `${dayOfWeek}, ${displayDate} at ${timeET} ET`;
 
   const payload = {
     date: displayDate,
+    day: dayOfWeek,
+    fetchedAtET: fetchedAtET,
     source: "Banque de la République d'Haïti (BRH)",
     sourceUrl: url,
-    updatedAt: new Date().toISOString(),
+    updatedAt: now.toISOString(),
     reference: { ...computeHtd(reference), raw: reference },
     banking: {
       buy: banking.buy,

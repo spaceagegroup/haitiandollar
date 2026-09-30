@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Press Release: Automated BRH Daily Rate Integration | Haitian Dollar Inc.</title>
+  <meta name="description" content="BALTIMORE, MD — Haitian Dollar Inc. launches automated daily market rate engine powered by central bank (BRH) publications on Base Layer 2.">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="alternate" type="application/rss+xml" title="Haitian Dollar (HTD) News" href="/feed.xml">
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://haitiandollar.com/news/automated-brh-daily-rate-integration.html" />
+  <meta property="og:title" content="Haitian Dollar Inc. Launches Automated Daily Market Rate Engine Powered by Central Bank (BRH) Publications" />
+  <meta property="og:description" content="BALTIMORE, MD — Multi-tier market oracle indexes BRH reference, banking, and informal spreads on Base Layer 2 infrastructure." />
+  <meta property="og:image" content="https://haitiandollar.com/banner-wide.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@haitiandollar" />
+  <meta name="twitter:title" content="Press Release: Automated BRH Daily Rate Integration | Haitian Dollar Inc." />
+  <meta name="twitter:description" content="Multi-tier market engine indexes central bank reference and informal market spreads on Base Layer 2." />
+  <meta name="twitter:image" content="https://haitiandollar.com/banner-wide.jpg" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DMBN9HX803"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DMBN9HX803');
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandYellow: '#FCC419',
+            brandRed: '#E03131',
+            ink: '#0A0A0A',
+            offWhite: '#FFFBF0',
+            borderGray: '#E5E5E5',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-offWhite text-ink font-sans antialiased selection:bg-brandYellow selection:text-ink">
+
+  <!-- REGULATORY NOTICE BAR -->
+  <aside aria-label="Regulatory Notice" class="bg-ink text-white/80 text-xs py-2 px-4 border-b border-white/10">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-2 text-center sm:text-left">
+        <img src="/logo.png" alt="HTD" class="w-4 h-4 rounded-full" />
+        <span>Haitian Dollar Inc. | Reg D 506(b) Issuer | CIK 0001906040</span>
+      </div>
+      <a href="/legal.html" class="underline hover:text-brandYellow transition-colors">Offering &amp; Risk Disclosures</a>
+    </div>
+  </aside>
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-50 bg-offWhite/90 backdrop-blur-md border-b border-borderGray">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="/index.html" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-brandRed">
+          <img src="/logo.png" alt="Haitian Dollar" class="w-full h-full object-cover" />
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display font-black text-xl leading-none tracking-tight text-ink">HAITIAN DOLLAR</span>
+          <span class="text-[10px] font-semibold tracking-widest text-ink/60 uppercase">1 HTD = 5 HTG</span>
+        </div>
+      </a>
+
+      <div class="hidden lg:flex items-center gap-7 font-medium text-sm">
+        <a href="/about.html" class="text-ink hover:text-brandRed transition-colors">About</a>
+        <a href="/htd.html" class="text-ink hover:text-brandRed transition-colors">HTD Token</a>
+        <a href="/investors.html" class="text-ink hover:text-brandRed transition-colors">Investors</a>
+        <a href="/merchants.html" class="text-ink hover:text-brandRed transition-colors">Merchants</a>
+        <a href="/users.html" class="text-ink hover:text-brandRed transition-colors">Users</a>
+        <a href="/news.html" class="text-brandRed font-bold transition-colors">News</a>
+        <a href="/contact.html" class="text-ink hover:text-brandRed transition-colors">Contact</a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="/contact.html" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-brandRed text-white font-display font-bold text-sm hover:bg-brandRed/90 transition-all shadow-sm">
+          Contact Us
+        </a>
+        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-ink hover:bg-black/5" aria-label="Toggle Menu">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- PRESS RELEASE CONTENT -->
+  <main class="py-16 sm:py-24 bg-white border-b border-borderGray">
+    <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Breadcrumbs -->
+      <nav class="mb-8 flex items-center gap-2 text-xs font-medium text-ink/50">
+        <a href="/news.html" class="hover:text-brandRed transition-colors">Newsroom</a>
+        <span>/</span>
+        <span class="text-ink/80">Press Release</span>
+      </nav>
+
+      <header class="mb-12 pb-8 border-b border-borderGray">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="bg-brandRed/10 text-brandRed text-xs font-display font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+            Press Release
+          </span>
+          <span class="text-xs text-ink/60 font-mono">September 30, 2026</span>
+          <span class="text-xs text-ink/40 font-mono">FOR IMMEDIATE RELEASE</span>
+        </div>
+        <h1 class="font-display font-black text-3xl sm:text-4xl text-ink leading-tight mb-4">
+          Haitian Dollar Inc. Launches Automated Daily Market Rate Engine Powered by Central Bank (BRH) Publications
+        </h1>
+        <p class="text-lg text-ink/70 leading-relaxed">
+          <strong class="text-ink">BALTIMORE, MD — September 30, 2026</strong> — Haitian Dollar Inc. (SEC CIK 0001906040), the fintech infrastructure developer behind the Haitian Dollar (HTD) digital settlement protocol on Base Layer 2, today announced the launch of its automated daily market rate engine, which pulls the Banque de la République d'Haïti's (BRH) published foreign exchange figures directly into its public infrastructure and internal settlement systems.
+        </p>
+      </header>
+
+      <div class="space-y-6 text-ink/80 leading-relaxed text-base sm:text-lg">
+
+        <p>
+          The rate engine fetches the central bank's official daily bulletin — including the <strong>Taux de Référence (Reference Rate)</strong>, <strong>Banking Market rates (Marché Bancaire)</strong>, and <strong>Informal Market rates (Marché Informel)</strong> — and publishes them across the company's public rate card at <a href="/htd.html" class="text-brandRed underline font-medium">haitiandollar.com/htd</a> and through its automated JSON feed. The data refreshes every business morning, Monday through Saturday, following the BRH's own publication schedule.
+        </p>
+
+        <h2 class="font-display font-black text-2xl text-ink pt-8 pb-2">
+          A Multi-Tier View of the Haitian FX Market
+        </h2>
+
+        <p>
+          Unlike conventional currency trackers that publish a single, flattened exchange rate, Haitian Dollar's rate engine reflects the four distinct tiers the central bank publishes daily:
+        </p>
+
+        <!-- Clean Responsive HTML Table for Multi-Tier Breakdown -->
+        <div class="overflow-x-auto my-6 border border-borderGray rounded-xl shadow-sm">
+          <table class="w-full text-left text-sm font-sans">
+            <thead class="bg-offWhite border-b border-borderGray font-display font-bold text-ink">
+              <tr>
+                <th class="p-3 sm:p-4">Tier</th>
+                <th class="p-3 sm:p-4 font-mono">Value (Sept 30, 2026)</th>
+                <th class="p-3 sm:p-4">Purpose</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-borderGray font-normal">
+              <tr class="hover:bg-black/[0.02]">
+                <td class="p-3 sm:p-4 font-semibold text-ink">Protocol Parity Invariant</td>
+                <td class="p-3 sm:p-4 font-mono text-brandRed font-bold">1 HTD = 5.00 HTG</td>
+                <td class="p-3 sm:p-4 text-ink/70">The fixed 1912 cultural unit of account</td>
+              </tr>
+              <tr class="hover:bg-black/[0.02]">
+                <td class="p-3 sm:p-4 font-semibold text-ink">BRH Reference Rate</td>
+                <td class="p-3 sm:p-4 font-mono text-ink">1 USD = 130.6026 HTG</td>
+                <td class="p-3 sm:p-4 text-ink/70">Legal benchmark for invoices, customs, and tax</td>
+              </tr>
+              <tr class="hover:bg-black/[0.02]">
+                <td class="p-3 sm:p-4 font-semibold text-ink">Banking Market</td>
+                <td class="p-3 sm:p-4 font-mono text-ink">130.4043 – 131.1702 HTG</td>
+                <td class="p-3 sm:p-4 text-ink/70">Commercial bank buy/sell spread</td>
+              </tr>
+              <tr class="hover:bg-black/[0.02]">
+                <td class="p-3 sm:p-4 font-semibold text-ink">Informal Market</td>
+                <td class="p-3 sm:p-4 font-mono text-ink">130.9000 – 135.6000 HTG</td>
+                <td class="p-3 sm:p-4 text-ink/70">Cash and street-level exchange</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>
+          The Informal Market spread currently sits at <strong>4.7000 HTG (~3.5%)</strong>, more than four times wider than the <strong>Banking Market spread of 0.7659 HTG (~0.6%)</strong>.
+        </p>
+
+        <h2 class="font-display font-black text-2xl text-ink pt-8 pb-2">
+          The Structural Cost for Unbanked Haitians
+        </h2>
+
+        <p>
+          For the estimated 60%+ of Haitians who remain unbanked and rely on cash-in-hand exchange counters, the informal market spread represents immediate friction on every incoming transfer. A remittance of $100 USD converted at the informal market sell rate of 135.60 HTG yields approximately 13,560 HTG — while the same transfer converted at the banking market sell rate of 131.17 HTG would yield approximately 13,117 HTG. The structural gap of roughly 450 HTG per $100 transfer compounds across the country's $4.2 billion annual remittance inflow.
+        </p>
+
+        <p class="border-l-4 border-brandRed pl-4 italic text-ink/90 my-6 bg-offWhite py-3 rounded-r-lg">
+          "Publishing the central bank's own figures — including the informal market spread — makes the case for Haitian Dollar self-evident," said <strong>Honson Luma</strong>, Founder of Haitian Dollar Inc. "The 1 HTD = 5 HTG convention has governed Haitian commerce since 1912. The protocol is designed to reduce settlement friction below the informal market spread, eliminate cash-transit insecurity, and settle transactions in seconds. We are in development and working toward the Phase 1 pilot."
+        </p>
+
+        <h2 class="font-display font-black text-2xl text-ink pt-8 pb-2">
+          Built on Public Data, Verified Daily
+        </h2>
+
+        <p>
+          The rate engine's design emphasizes transparency and verifiability:
+        </p>
+
+        <ul class="space-y-3 pl-6 list-disc marker:text-brandRed">
+          <li><strong>Source:</strong> Banque de la République d'Haïti, published daily at <a href="https://www.brh.ht" target="_blank" rel="noopener" class="text-brandRed underline">brh.ht</a>.</li>
+          <li><strong>Update Schedule:</strong> Monday through Saturday, following the central bank's publication calendar.</li>
+          <li><strong>Public Access:</strong> The rate card is live at <a href="/htd.html" class="text-brandRed underline">haitiandollar.com/htd</a>, and the underlying data is available as a JSON feed at <a href="/htd-quote.json" class="text-brandRed underline font-mono">haitiandollar.com/htd-quote.json</a>.</li>
+          <li><strong>Direct Verification:</strong> Every rate is linked back to the source page on the central bank's website.</li>
+        </ul>
+
+        <p>
+          The engine runs on GitHub Actions, an automated build and deploy platform, ensuring the rate card updates continuously without manual intervention.
+        </p>
+
+        <h2 class="font-display font-black text-2xl text-ink pt-8 pb-2">
+          About Haitian Dollar Inc.
+        </h2>
+
+        <p>
+          Haitian Dollar Inc. (SEC CIK 0001906040, USPTO Reg. 6,267,276) is a Maryland corporation incorporated in 2021. The company builds digital settlement infrastructure for the Haitian Dollar — the informal unit of account equal to five Haitian Gourdes — on Base Layer 2. The protocol is designed to enable sub-cent mobile point-of-sale checkout, verified merchant settlement, and friction-reduced remittances for the global Haitian economy. The project is in development and is not currently offering or soliciting securities.
+        </p>
+
+        <h2 class="font-display font-black text-2xl text-ink pt-8 pb-2">
+          Media &amp; Investor Relations
+        </h2>
+
+        <p>
+          <strong class="text-ink">Haitian Dollar Inc.</strong><br />
+          Website: <a href="https://haitiandollar.com" class="text-brandRed underline">https://haitiandollar.com</a><br />
+          Contact: <a href="mailto:legal@haitiandollar.com" class="text-brandRed underline font-mono">legal@haitiandollar.com</a>
+        </p>
+
+        <div class="pt-8 mt-12 border-t border-borderGray">
+          <p class="font-display font-bold text-lg text-ink mb-4">L'Union Fait La Force.</p>
+          <p class="text-ink/70 font-mono text-sm">###</p>
+        </div>
+
+      </div>
+
+      <footer class="mt-16 pt-8 border-t border-borderGray">
+        <div class="bg-offWhite border border-borderGray rounded-2xl p-6 text-xs text-ink/60 leading-relaxed space-y-3">
+          <p>
+            <strong class="text-ink uppercase tracking-wider font-mono">Regulatory Notice:</strong> Haitian Dollar Inc. is an SEC CIK-registered issuer (CIK 0001906040). Haitian Dollar Inc. is not currently offering or soliciting securities. HTD operates as a non-custodial digital unit of account and redemption receipt, not an investment security or USD stablecoin.
+          </p>
+        </div>
+      </footer>
+
+    </article>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-ink text-white border-t border-white/10 pt-16 pb-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+        <div class="md:col-span-5">
+          <a href="/index.html" class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-brandYellow flex-shrink-0">
+              <img src="/logo.png" alt="Haitian Dollar" class="w-full h-full object-cover" />
+            </div>
+            <span class="font-display font-black text-xl tracking-tight text-white">HAITIAN DOLLAR</span>
+          </a>
+          <div class="pl-[52px] pr-4">
+            <p class="text-white/60 text-xs leading-relaxed mb-1">
+              Digital settlement infrastructure for the Haitian Dollar.
+            </p>
+            <p class="text-brandYellow text-sm font-bold tracking-wide">
+              1 HTD = 5 HTG. Fixed.
+            </p>
+          </div>
+        </div>
+
+        <div class="md:col-span-2 space-y-3">
+          <p class="text-xs font-bold uppercase tracking-wider text-brandYellow">Protocol</p>
+          <ul class="text-xs space-y-2 text-white/70">
+            <li><a href="/htd.html" class="hover:text-white transition-colors">HTD Token</a></li>
+            <li><a href="/merchants.html" class="hover:text-white transition-colors">Merchant Portal</a></li>
+            <li><a href="/users.html" class="hover:text-white transition-colors">User Guide</a></li>
+            <li><a href="/whitepaper.html" class="hover:text-white transition-colors">White Paper v2.0</a></li>
+          </ul>
+        </div>
+
+        <div class="md:col-span-2 space-y-3">
+          <p class="text-xs font-bold uppercase tracking-wider text-brandYellow">Company</p>
+          <ul class="text-xs space-y-2 text-white/70">
+            <li><a href="/about.html" class="hover:text-white transition-colors">About Us</a></li>
+            <li><a href="/investors.html" class="hover:text-white transition-colors">Investors</a></li>
+            <li><a href="/news.html" class="hover:text-white transition-colors">Newsroom</a></li>
+            <li><a href="/legal.html" class="hover:text-white transition-colors">Legal &amp; Privacy</a></li>
+          </ul>
+        </div>
+
+        <div class="md:col-span-3 space-y-3">
+          <p class="text-xs font-bold uppercase tracking-wider text-brandYellow">
+            <a href="/contact.html" class="hover:underline">Contact &rarr;</a>
+          </p>
+          <ul class="text-xs space-y-2 text-white/70 font-mono">
+            <li><a href="/contact.html" class="text-brandYellow hover:underline font-sans font-semibold">Online Contact Form &rarr;</a></li>
+            <li>admin@haitiandollar.com</li>
+            <li>legal@haitiandollar.com</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-white/10 pt-8 text-[11px] text-white/40 leading-relaxed">
+        <p>
+          &copy; <span id="year"></span> Haitian Dollar Inc. All rights reserved. Registered trademark USPTO 88319997. SEC CIK 0001906040.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    lucide.createIcons();
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    if (btn && menu) btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+  </script>
+</body>
+</html>

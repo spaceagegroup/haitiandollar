@@ -14,6 +14,7 @@ migrate_working_dir/
 node_modules/
 **/node_modules/
 **/.next/
+.firebase/
 
 # IntelliJ related
 *.iml
