@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <!-- Google Consent Mode v2 + GA4 -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    const savedConsent = JSON.parse(localStorage.getItem('htd_cookie_consent') || 'null');
+
+    if (savedConsent) {
+      gtag('consent', 'default', {
+        'analytics_storage': savedConsent.analytics ? 'granted' : 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'functionality_storage': 'denied',
+        'security_storage': 'granted'
+      });
+    } else {
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'functionality_storage': 'denied',
+        'security_storage': 'granted'
+      });
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'G-DMBN9HX803');
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DMBN9HX803"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <title>White Paper v2.0 | Haitian Dollar Inc</title>
+  <meta name="description" content="Haitian Dollar (HTD) White Paper v2.0 — the digital Haitian Dollar, a redemption receipt for the informal unit of account used in Haiti for over a century.">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="alternate" type="application/rss+xml" title="Haitian Dollar (HTD) News" href="/feed.xml">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandYellow: '#FCC419',
+            brandRed: '#E03131',
+            ink: '#0A0A0A',
+            offWhite: '#FFFBF0',
+            borderGray: '#E5E5E5',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; scroll-padding-top: 120px; }
+    .wp-body p { margin-bottom: 1.25rem; line-height: 1.75; color: #1A1A1A; }
+    .wp-body h3 { margin-top: 2.5rem; margin-bottom: 1rem; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.375rem; color: #0A0A0A; }
+    .wp-body h4 { margin-top: 1.75rem; margin-bottom: 0.75rem; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.125rem; color: #0A0A0A; }
+    .wp-body ul { margin-bottom: 1.25rem; padding-left: 1.5rem; list-style-type: disc; }
+    .wp-body li { margin-bottom: 0.5rem; line-height: 1.7; color: #1A1A1A; }
+    .wp-body strong { color: #0A0A0A; font-weight: 600; }
+    @media print {
+      .no-print { display: none; }
+      body { background: white; }
+    }
+  </style>
+</head>
+
+<body class="bg-offWhite text-ink font-sans antialiased selection:bg-brandYellow selection:text-ink">
+
+  <!-- TOP COMPLIANCE NOTIFICATION BAR -->
+  <aside aria-label="Regulatory Notice" class="bg-ink text-white/80 text-xs py-2 px-4 border-b border-white/10 no-print">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-2 text-center sm:text-left">
+        <img src="/logo.png" alt="HTD" class="w-4 h-4 rounded-full" />
+        <span>Haitian Dollar Inc. (SEC CIK 0001906040) · Not currently offering or soliciting securities</span>
+      </div>
+      <a href="/legal.html" class="underline hover:text-brandYellow transition-colors">Offering &amp; Risk Disclosures</a>
+    </div>
+  </aside>
+
+  <!-- NAVIGATION -->
+  <header class="sticky top-0 z-50 bg-offWhite/90 backdrop-blur-md border-b border-borderGray no-print">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="/index.html" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-brandRed">
+          <img src="/logo.png" alt="Haitian Dollar" class="w-full h-full object-cover" />
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display font-black text-xl leading-none tracking-tight text-ink">HAITIAN DOLLAR</span>
+          <span class="text-[10px] font-semibold tracking-widest text-ink/60 uppercase">1 HTD = 5 HTG</span>
+        </div>
+      </a>
+
+      <div class="hidden lg:flex items-center gap-7 font-medium text-sm">
+        <a href="/about.html" class="text-ink hover:text-brandRed transition-colors">About</a>
+        <a href="/htd.html" class="text-ink hover:text-brandRed transition-colors">HTD Token</a>
+        <a href="/investors.html" class="text-ink hover:text-brandRed transition-colors">Investors</a>
+        <a href="/merchants.html" class="text-ink hover:text-brandRed transition-colors">Merchants</a>
+        <a href="/users.html" class="text-ink hover:text-brandRed transition-colors">Users</a>
+        <a href="/news.html" class="text-ink hover:text-brandRed transition-colors">News</a>
+        <a href="/contact.html" class="text-ink hover:text-brandRed transition-colors">Contact</a>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="/contact.html" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-brandRed text-white font-display font-bold text-sm hover:bg-brandRed/90 transition-all shadow-sm">
+          Contact Us
+        </a>
+        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-ink hover:bg-black/5" aria-label="Toggle Menu">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </nav>
+
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-borderGray bg-offWhite px-4 pt-3 pb-6 space-y-3 font-medium text-base">
+      <!-- Mobile Live Rate Pill -->
+      <a href="/htd.html#official-rates" class="flex items-center justify-between p-3 rounded-xl bg-brandYellow/20 border border-brandYellow/50 hover:bg-brandYellow/30 transition-colors">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="text-xs font-mono font-bold text-ink">1 HTD = 5 HTG</span>
+        </div>
+        <span class="text-xs font-mono font-bold text-brandRed flex items-center gap-1">
+          <span class="mobile-drawer-rate">$0.0382</span> USD &rarr;
+        </span>
+      </a>
+
+      <a href="/about.html" class="block py-2 text-ink hover:text-brandRed">About</a>
+      <a href="/htd.html" class="block py-2 text-ink hover:text-brandRed">HTD Token</a>
+      <a href="/investors.html" class="block py-2 text-ink hover:text-brandRed">Investors</a>
+      <a href="/merchants.html" class="block py-2 text-ink hover:text-brandRed">Merchants</a>
+      <a href="/users.html" class="block py-2 text-ink hover:text-brandRed">Users</a>
+      <a href="/news.html" class="block py-2 text-ink hover:text-brandRed">News</a>
+      <a href="/contact.html" class="block py-2 text-ink hover:text-brandRed">Contact</a>
+      <a href="/contact.html" class="block w-full text-center py-3 rounded-lg bg-brandRed text-white font-display font-bold">Contact Us</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- COVER -->
+    <section class="py-20 sm:py-24 border-b border-borderGray bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="w-32 h-32 rounded-full overflow-hidden ring-8 ring-brandYellow shadow-2xl mx-auto mb-8">
+          <img src="/logo.png" alt="Haitian Dollar" class="w-full h-full object-cover" />
+        </div>
+        <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-4">White Paper · Version 2.0</div>
+        <h1 class="font-display font-black text-4xl sm:text-5xl lg:text-6xl text-ink tracking-tight mb-6">
+          Haitian Dollar (HTD)
+        </h1>
+        <p class="text-lg text-ink/70 leading-relaxed max-w-2xl mx-auto mb-8">
+          A digital redemption receipt for the Haitian Dollar — the informal unit of account used in Haiti for over a century.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-ink/60 font-medium">
+          <span>Honson Luma, Author</span>
+          <span class="text-ink/20">·</span>
+          <span>Haitian Dollar Inc.</span>
+          <span class="text-ink/20">·</span>
+          <span>2026</span>
+        </div>
+        <div class="mt-10 no-print flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md sm:max-w-none mx-auto">
+          <button onclick="window.print()" class="w-full sm:w-auto inline-flex items-center justify-center h-12 px-6 rounded-lg bg-brandRed text-white font-display font-bold text-sm hover:bg-brandRed/90 transition-all shadow-lg">
+            <i data-lucide="printer" class="w-4 h-4 mr-2"></i>
+            Print / Save v2.0
+          </button>
+          <a href="/whitepaper.pdf" target="_blank" rel="noopener" class="w-full sm:w-auto inline-flex items-center justify-center h-12 px-6 rounded-lg border-2 border-ink text-ink font-display font-bold text-sm hover:bg-ink hover:text-brandYellow transition-all">
+            <i data-lucide="download" class="w-4 h-4 mr-2 text-brandRed"></i>
+            Download Original 2020 Whitepaper (PDF)
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TABLE OF CONTENTS -->
+    <section class="py-12 border-b border-borderGray bg-offWhite">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="font-display font-black text-2xl text-ink mb-6">Contents</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-sm">
+          <a href="#executive-summary" class="text-ink/70 hover:text-brandRed transition-colors py-1">1. Executive Summary</a>
+          <a href="#the-problem" class="text-ink/70 hover:text-brandRed transition-colors py-1">2. The Problem</a>
+          <a href="#the-convention" class="text-ink/70 hover:text-brandRed transition-colors py-1">3. The Haitian Dollar Convention</a>
+          <a href="#what-htd-is" class="text-ink/70 hover:text-brandRed transition-colors py-1">4. What HTD Is and Isn't</a>
+          <a href="#architecture" class="text-ink/70 hover:text-brandRed transition-colors py-1">5. Technical Architecture</a>
+          <a href="#supply-model" class="text-ink/70 hover:text-brandRed transition-colors py-1">6. Supply Model</a>
+          <a href="#use-cases" class="text-ink/70 hover:text-brandRed transition-colors py-1">7. Use Cases</a>
+          <a href="#pilot" class="text-ink/70 hover:text-brandRed transition-colors py-1">8. The Pilot Program</a>
+          <a href="#revenue" class="text-ink/70 hover:text-brandRed transition-colors py-1">9. Revenue Model</a>
+          <a href="#regulatory" class="text-ink/70 hover:text-brandRed transition-colors py-1">10. Regulatory &amp; Compliance</a>
+          <a href="#roadmap" class="text-ink/70 hover:text-brandRed transition-colors py-1">11. Roadmap</a>
+          <a href="#team" class="text-ink/70 hover:text-brandRed transition-colors py-1">12. Team</a>
+          <a href="#risk" class="text-ink/70 hover:text-brandRed transition-colors py-1">13. Risk Factors</a>
+          <a href="#references" class="text-ink/70 hover:text-brandRed transition-colors py-1">14. References</a>
+          <a href="#links" class="text-ink/70 hover:text-brandRed transition-colors py-1">15. Important Links</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. EXECUTIVE SUMMARY -->
+    <section id="executive-summary" class="py-16 border-b border-borderGray bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
+        <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 1</div>
+        <h2 class="font-display font-black text-3xl text-ink mb-8">Executive Summary</h2>
+
+        <p>
+          Haitian Dollar (HTD) is a digital redemption receipt for the Haitian Dollar — the informal unit of account that Haitians have used for over a century to quote prices, negotiate wages, and settle trades. It is not a new currency. It is a formalization of a convention that already exists.
+        </p>
+        <p>
+          HTD is built for two specific problems. First, over 60% of Haitians have no bank account, yet they manage complex financial lives through cash and mobile money. Second, Haiti receives over $4.2 billion in annual remittances, and 7 to 10% of that value is lost to fees and foreign exchange margins. HTD addresses both by providing a cheap, fast, and reliable settlement layer that uses the unit Haitians already think in.
+        </p>
+        <p>
+          <strong>1 HTD always equals 5 Haitian Gourdes (HTG).</strong> This is not a price peg. It is a convention — the same convention that has been in use since 1912, when the Haitian Gourde was linked to the US Dollar at 5:1. The convention survived the end of the official peg in 1989 and continues in daily practice today.
+        </p>
+        <p>
+          HTD is issued as an ERC-20 token with an <strong>elastic supply</strong>. There is no fixed cap. Tokens are minted when a user deposits gourdes and burned when a user redeems them. At any moment, the circulating supply of HTD equals the total Haitian Gourde reserve divided by five.
+        </p>
+        <p>
+          Settlement flows through Digicel MonCash, Haiti's most widely used mobile money network. The fiat on-ramp and off-ramp use MonCash's Business API for programmatic deposits and disbursements.
+        </p>
+        <p>
+          Haitian Dollar Inc. is a Maryland Corporation, incorporated in 2021. It operates under an exemption from SEC registration under <strong>Regulation D Rule 506(b)</strong>. Its CIK is <strong>0001906040</strong>. Its registered trademark for "Haitian Dollar" is <strong>USPTO Serial 88319997 (Reg. 6267276)</strong>. It does not publicly solicit investment.
+        </p>
+      </div>
+    </section>
+
+    <!-- 2. THE PROBLEM -->
+    <section id="the-problem" class="py-16 border-b border-borderGray bg-offWhite">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
+        <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 2</div>
+        <h2 class="font-display font-black text-3xl text-ink mb-8">The Problem</h2>
+
+        <h3>The Unbanked Majority</h3>
+        <p>
+          Over 60% of Haitians have no access to a traditional bank account. Without banking, savings are held in cash — under a mattress, in a drawer, or on one's person. Cash is vulnerable to theft, destruction, and loss. It cannot be sent remotely. It cannot be recovered if lost.
+        </p>
+        <p>
+          Mobile money has partially filled this gap. Digicel MonCash provides a wallet accessible by phone number, and its agent network extends across the country. But MonCash is a wallet, not a settlement layer. It does not solve the problem of moving value cheaply across borders or between businesses.
+        </p>
+
+        <h3>The Remittance Tax</h3>
+        <p>
+          Haiti receives over <strong>$4.2 billion in annual remittances</strong>, representing roughly 17% of GDP. About 70% originates from the United States. Over 40% of Haitian households depend on this money.
+        </p>
+        <p>
+          Traditional remittance providers — Western Union, MoneyGram, and their peers — charge between <strong>7 and 10 percent</strong> in total costs, including fees and foreign exchange margins. On $4.2 billion, that is between $294 million and $420 million extracted from Haitian families every year.
+        </p>
+
+        <h3>Cash Transit Risk</h3>
+        <p>
+          Merchants and wholesalers in Haiti routinely transport large amounts of physical cash between cities and neighborhoods. In gang-controlled corridors, this transit is dangerous. Businesses lose money to theft, extortion, and checkpoint delays. Reducing the physical movement of cash has become a matter of operational survival.
+        </p>
+
+        <h3>The Cost of Friction</h3>
+        <p>
+          Every existing option for moving value in Haiti is either expensive (traditional remittance), slow (bank transfers), or dangerous (physical cash transit). A settlement layer that uses the unit Haitians already quote in — the Haitian Dollar — and settles through the mobile money rails they already trust, would reduce cost, time, and risk simultaneously.
+        </p>
+      </div>
+    </section>
+
+    <!-- 3. THE CONVENTION -->
+    <section id="the-convention" class="py-16 border-b border-borderGray bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
+        <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 3</div>
+        <h2 class="font-display font-black text-3xl text-ink mb-8">The Haitian Dollar Convention</h2>
+
+        <h3>Origin: 1881 and 1912</h3>
+        <p>
+          In 1881, the Haitian Gourde was linked to the French franc at a rate of 5 francs to 1 gourde. In 1912, the peg shifted to the US Dollar at 5 gourdes to 1 dollar. During the 77 years that this second peg lasted, five Haitian Gourdes came to be referred to universally as one Haitian Dollar — a shorthand that simplified daily conversions.
+        </p>
+
+        <h3>Survival: 1989 to Present</h3>
+        <p>
+          The official peg ended in 1989. The Haitian Dollar did not. As the anthropologist Dr. Erin B. Taylor documented in her 2014 research on creole economics:
+        </p>
+        <div class="bg-brandYellow/20 border-l-4 border-brandYellow p-5 rounded-r-xl my-6">
+          <p class="italic mb-0">
+            "All informal trade is carried out in Haitian Dollars. Prices are quoted in Haitian Dollars. Money is counted as Haitian Dollars."
+          </p>
+          <div class="text-xs font-semibold uppercase tracking-wider text-ink/60 mt-3">— Dr. Erin B. Taylor, 2014</div>
+        </div>
+        <p>
+          No physical Haitian Dollar banknote has ever been issued by the central bank. The unit exists purely in the minds and daily practice of the Haitian people — which is precisely what makes it resilient. It does not depend on a central authority to function.
+        </p>
+
+        <h3>Why It Matters for HTD</h3>
+        <p>
+          Most fintech projects fail because they try to change user behavior. HTD does the opposite. It adopts a convention that Haitians already use and formalizes it in code.
+        </p>
+        <p>
+          When a merchant says "100 Haitian Dollars," the customer mentally multiplies by five and hands over 500 gourdes. That mental arithmetic is the foundation of every transaction in Haiti's informal economy. HTD makes it explicit: <strong>1 HTD = 5 HTG</strong>, enforced by the smart contract, recognized by every user.
+        </p>
+      </div>
+    </section>
+
+    <!-- 4. WHAT HTD IS -->
+    <section id="what-htd-is" class="py-16 border-b border-borderGray bg-offWhite">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
+        <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 4</div>
+        <h2 class="font-display font-black text-3xl text-ink mb-8">What HTD Is and Isn't</h2>
+
+        <h3>What HTD Is</h3>
+        <ul>
+          <li><strong>A digital redemption receipt.</strong> Each HTD represents a claim on pooled Haitian Gourde liquidity held in reserve. Redeemable on demand through authorized agents.</li>
+          <li><strong>A unit of account.</strong> 1 HTD = 5 HTG, always. The convention is fixed in the contract and recognized by every user.</li>
+          <li><strong>A non-custodial medium of exchange.</strong> Users hold HTD in their own wallets. The company does not custody user funds between transactions.</li>
+          <li><strong>A settlement layer.</strong> HTD transfers in seconds, at fractions of a cent, between any two parties with a phone.</li>
+        </ul>
+
+        <h3>What HTD Is Not</h3>
+        <ul>
+          <li><strong>Not a stablecoin.</strong> HTD is not pegged to the US dollar. It floats in dollar terms with the Haitian Gourde's exchange rate. It does not promise algorithmic stability or reserve backing in USD.</li>
+          <li><strong>Not a security.</strong> HTD is a redemption receipt, not equity. Holders have no ownership, voting rights, or dividend rights in Haitian Dollar Inc.</li>
+          <li><strong>Not a government currency.</strong> HTD is issued by a private company, not a central bank.</li>
+          <li><strong>Not a yield product.</strong> HTD does not generate interest. It is a receipt for gourdes, not an investment.</li>
+        </ul>
+
+        <h3>The Redemption Promise</h3>
+        <p>
+          When a user holds 100 HTD, they hold the right to redeem 500 HTG through any authorized agent. The company maintains the HTG reserve to honor this promise. Redemption is subject to operational availability and compliance with applicable law, but the exchange ratio itself — 1 HTD to 5 HTG — never changes.
+        </p>
+      </div>
+    </section>
+
+    <!-- 5. ARCHITECTURE -->
+    <section id="architecture" class="py-16 border-b border-borderGray bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
+        <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 5</div>
+        <h2 class="font-display font-black text-3xl text-ink mb-8">Technical Architecture</h2>
+
+        <h3>Settlement Layer: Base (Ethereum L2)</h3>
+        <p>
+          HTD is issued as an ERC-20 token on Base, the Ethereum Layer 2 network. Base provides sub-second finality, gas fees under $0.01 per transaction, and native account abstraction that enables gasless transactions for end users.
+        </p>
+        <p>
+          Base was chosen over Bitcoin's Omni Layer (used in the 2020 whitepaper) for three reasons. First, Omni Layer settlement is slow and expensive at scale. Second, Omni lacks the tooling and ecosystem for mobile wallet integration. Third, Base provides the account abstraction primitives necessary for a seamless consumer experience.
+        </p>
+
+        <h3>Fiat Rail: Digicel MonCash</h3>
+        <p>
+          Haitian Gourde deposits and redemptions flow through the MonCash Business API. MonCash is Haiti's most widely used mobile money network, with over two million users and thousands of agent locations.
+        </p>
+
+        <h3>The Two-Step Bridge</h3>
+        <p>
+          Redemption works in two steps:
+        </p>
+        <ul>
+          <li><strong>Step 1 (On-Chain):</strong> The user initiates a burn of their HTD. The transaction confirms on Base in seconds.</li>
+          <li><strong>Step 2 (Off-Chain):</strong> The backend detects the burn event, verifies it against an idempotency database, and calls the MonCash Business API to disburse the equivalent HTG directly to the user's mobile wallet.</li>
+        </ul>
+        <p>
+          This two-step structure eliminates the need for users to visit an agent to redeem. Once HTG is in their MonCash wallet, they can spend it digitally or withdraw cash at any MonCash agent.
+        </p>
+
+        <h3>Reserve Accounting</h3>
+        <p>
+          At any moment, the circulating supply of HTD equals the HTG reserve held in the MonCash merchant account, divided by five. This is not a policy — it is an invariant. Every mint corresponds to a deposit, every burn to a redemption.
+        </p>
+
+        <h3>Why Not Other Chains</h3>
+        <p>
+          Solana, Stellar, and other networks were considered. Base was chosen for its combination of low fees, fast finality, EVM compatibility, and integration with the broader Ethereum tooling ecosystem. Consolidating on a single network also simplifies reserve management and operational oversight.
+        </p>
+      </div>
+    </section>
+
+    <!-- 6. SUPPLY MODEL -->
+    <section id="supply-model" class="py-16 border-b border-borderGray bg-offWhite">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
+        <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 6</div>
+        <h2 class="font-display font-black text-3xl text-ink mb-8">Supply Model</h2>
+
+        <h3>Elastic Supply, No Fixed Cap</h3>
+        <p>
+          HTD has no maximum supply. Tokens are minted when a user deposits Haitian Gourdes and burned when a user redeems them. The circulating supply always reflects the actual demand for HTD as a medium of exchange.
+        </p>
+
+        <h3>Why Elastic Supply</h3>
+        <p>
+          A fixed supply creates a fundamental contradiction with the redemption promise. If HTD had a fixed cap, the system would eventually reach a point where a new user could not acquire HTD because the supply was exhausted. The redemption promise — "always convertible at 5 HTG to 1 HTD" — would break.
+        </p>
+        <p>
+          Elastic supply avoids this. The supply is always exactly equal to the reserve divided by five. It expands and contracts with real user demand, not with a schedule set in advance.
+        </p>
+
+        <h3>The Reserve Invariant</h3>
+        <p>
+          The core invariant is simple: <strong>Total HTD in circulation × 5 = Total HTG in reserve.</strong>
+        </p>
+        <p>
+          If the reserve holds 5,000,000 HTG, then 1,000,000 HTD are in circulation. If a user deposits 500 HTG, the reserve grows to 5,000,500 HTG and the system mints 100 HTD. If a user redeems 100 HTD, the system burns the tokens and sends 485 HTG (after the 3% redemption fee), and the reserve falls to 5,000,015 HTG.
+        </p>
+
+        <h3>Why No Reserved Allocation</h3>
+        <p>
+          There is no pre-mine, no team allocation, no advisor pool, and no treasury reserve of HTD. Every HTD that exists is backed by 5 HTG in reserve. This is what makes the redemption promise credible. The moment an allocation is carved out that is not backed by reserve, the invariant breaks and the system becomes something else — a token with promises it cannot keep.
+        </p>
+      </div>
+    </section>
+
+    <!-- 7. USE CASES -->
+    <section id="use-cases" class="py-16 border-b border-borderGray bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
+        <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 7</div>
+        <h2 class="font-display font-black text-3xl text-ink mb-8">Use Cases</h2>
+
+        <h3>Diaspora Remittances</h3>
+        <p>
+          A family member in Brooklyn or Miami buys HTD and sends it directly to their family in Port-au-Prince. The transfer completes in seconds. The recipient can spend HTD at a merchant, hold it as savings, or redeem it for Haitian Gourdes at any authorized agent. Total cost: under 3%, versus 7 to 10% with traditional providers.
+        </p>
+
+        <h3>B2B Supplier Settlement</h3>
+        <p>
+          Wholesale suppliers and merchants settle with each other without moving physical cash. A merchant in one neighborhood pays a supplier in another by sending HTD. The supplier holds HTD to pay their own suppliers or redeems it when needed. The physical movement of cash is eliminated.
+        </p>
+
+        <h3>Merchant Payments</h3>
+        <p>
+          Customers pay merchants by scanning a QR code or entering a phone number. The merchant sees the amount in Haitian Dollars, confirms the transaction, and receives HTD in seconds. The merchant can hold the balance, re-spend to suppliers, or redeem for cash at any agent.
+        </p>
+
+        <h3>Safe Savings</h3>
+        <p>
+          Users who hold HTD do not need to hold physical cash. Their balance is redeemable, portable, and recoverable. If they lose their phone, they can recover access. If they are robbed, the thief cannot access the funds without their PIN.
+        </p>
+
+        <h3>Payroll and Working Capital</h3>
+        <p>
+          Small businesses pay workers and settle with suppliers in HTD instead of cash. Workers can hold their wages, send them to family, or redeem on demand. Businesses reduce the risk of holding and moving large amounts of cash.
+        </p>
+      </div>
+    </section>
+
+    <!-- 8. PILOT -->
+    <section id="pilot" class="py-16 border-b border-borderGray bg-offWhite">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
+        <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 8</div>
+        <h2 class="font-display font-black text-3xl text-ink mb-8">The Pilot Program</h2>
+
+        <h3>Current Status</h3>
+        <p>
+          The HTD pilot program is currently <strong>in development</strong>. It has not launched. The architecture, contracts, and operational procedures are being built and tested.
+        </p>
+
+        <h3>Phase 1 Scope</h3>
+        <p>
+          When the pilot launches, Phase 1 will be a closed-loop test with a small group of users and merchants. The objectives are:
+        </p>
+        <ul>
+          <li><strong>Active users:</strong> 20 to 50</li>
+          <li><strong>Active merchants:</strong> 2 to 5</li>
+          <li><strong>Monthly transaction volume:</strong> 500,000 to 1,500,000 HTG</li>
+          <li><strong>Average transaction size:</strong> 2,500 to 5,000 HTG</li>
+          <li><strong>Reserve floor:</strong> 400,000 HTG</li>
+        </ul>
+
+        <h3>What Is Being Tested</h3>
+        <ul>
+          <li><strong>HTD velocity:</strong> How long users hold tokens before redeeming. A velocity of over 24 hours suggests savings behavior; under 1 hour suggests pure transfer.</li>
+          <li><strong>Merchant-to-merchant settlement:</strong> Whether merchants transact with each other in HTD or immediately redeem.</li>
+          <li><strong>Redemption behavior:</strong> Average size, frequency, and pressure on the reserve.</li>
+          <li><strong>Unit economics:</strong> Actual cost per redemption, net revenue per transaction, and reserve turnover.</li>
+        </ul>
+
+        <h3>What Is Not Yet Live</h3>
+        <ul>
+          <li>Public launch (Phase 2)</li>
+          <li>Decentralized exchange listing (Phase 3)</li>
+          <li>Secondary market with floating price discovery (Phase 3)</li>
+          <li>Yield products on the reserve (Phase 4)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 9. REVENUE MODEL -->
+    <section id="revenue" class="py-16 border-b border-borderGray bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
+        <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 9</div>
+        <h2 class="font-display font-black text-3xl text-ink mb-8">Revenue Model</h2>
+
+        <h3>Revenue From the Flow, Not the Float</h3>
+        <p>
+          Most stablecoin issuers make their money from the interest earned on the reserves they hold. HTD does not follow this model. The HTG reserve is held in MonCash as operational liquidity, where it earns nothing. Instead, Haitian Dollar Inc. earns revenue from the flow of transactions.
+        </p>
+
+        <h3>The 3% Redemption Fee</h3>
+        <p>
+          Every time a user redeems HTD for Haitian Gourdes through the MonCash bridge, a 3% fee is applied. If a user redeems 100 HTD (worth 500 HTG), they receive 485 HTG and the company retains 15 HTG. This fee covers API disbursement costs, protects the operational reserve float, and funds ongoing bridge maintenance.
+        </p>
+
+        <h3>Merchant Commission Spread</h3>
+        <p>
+          Merchants who accept HTD receive a 0.5% commission on each transaction. Of this, the company retains a portion as its service fee and passes the remainder to the merchant as their incentive. The exact split will be finalized during the pilot.
+        </p>
+
+        <h3>Free P2P and B2B Transfers</h3>
+        <p>
+          Peer-to-peer and B2B supplier transfers within the network carry no protocol fee. This keeps velocity high and reduces pressure on the MonCash reserve.
+        </p>
+
+        <h3>Future: Float Yield on Idle Reserve</h3>
+        <p>
+          Once the pilot validates the model and a stable reserve buffer exists beyond operational requirements, a portion of the excess reserve may be deployed into dollar-denominated yield instruments to supplement operational costs. This is a future addition, not a current revenue source.
+        </p>
+
+        <h3>Balance Sheet Structure</h3>
+        <p>
+          On the balance sheet, the HTG reserve is an asset. Circulating HTD is a liability. Revenue from redemption fees and merchant spreads is recognized as income when transactions occur. The company's profit is the difference between the fees collected and the operational costs of running the system.
+        </p>
+      </div>
+    </section>
+
+    <!-- 10. REGULATORY & COMPLIANCE -->
+    <section id="regulatory" class="py-16 border-b border-borderGray bg-offWhite">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
+        <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 10</div>
+        <h2 class="font-display font-black text-3xl text-ink mb-8">Regulatory &amp; Compliance</h2>
+
+        <h3>Corporate Structure</h3>
+        <p>
+          Haitian Dollar Inc. is formally incorporated in the State of Maryland as a C-Corporation (incorporated in 2021). The corporate structure was established to provide institutional transparency, enduring corporate governance, and clear regulatory standing for digital asset operations.
+        </p>
+
+        <h3>SEC Exemption Framework</h3>
+        <p>
+          Haitian Dollar Inc. operates under formal statutory exemptions from registration with the U.S. Securities and Exchange Commission:
+        </p>
+        <ul>
+          <li><strong>Regulation D Rule 506(b):</strong> Form D Notice of Exempt Offering filed under CIK <strong>0001906040</strong> (date of first sale: July 19, 2022). Offerings are conducted strictly without general solicitation or advertising to verified accredited investors.</li>
+          <li><strong>Regulation S:</strong> Authorizes token distribution and offerings conducted offshore to non-U.S. persons in compliance with federal cross-border investment standards.</li>
+        </ul>
+
+        <h3>USPTO Federal Trademark Protection</h3>
+        <p>
+          The trademark "Haitian Dollar" is registered on the Principal Register of the United States Patent and Trademark Office under <strong>Serial 88319997 (Registration No. 6,267,276)</strong>, officially granted on February 9, 2021. The registration protects the mark across cryptocurrency exchange, mobile financial services, and decentralized settlement categories.
+        </p>
+
+        <h3>Anti-Money Laundering &amp; Identity Verification</h3>
+        <p>
+          HTD's mobile bridge interfaces with Digicel MonCash, leveraging its established KYC/AML infrastructure. Deposits and withdrawals comply with tiered mobile wallet limits and transaction monitoring standards to prevent illicit activity.
+        </p>
+      </div>
+    </section>
+
+    <!-- 11. ROADMAP -->
+    <section id="roadmap" class="py-16 border-b border-borderGray bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
+        <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 11</div>
+        <h2 class="font-display font-black text-3xl text-ink mb-8">Roadmap</h2>
+
+        <h3>Phase 1: Architecture &amp; Closed Pilot (Current — In Development)</h3>
+        <ul>
+          <li>Finalize Base L2 smart contract deployment and reserve accounting tests.</li>
+          <li>Closed-loop pilot with 20 to 50 active users and 2 to 5 anchor merchant depots.</li>
+          <li>Zero-fee B2B supplier restock trials and MonCash Business API automated payout testing.</li>
+        </ul>
+
+        <h3>Phase 2: Merchant Network Expansion &amp; Mobile Client</h3>
+        <ul>
+          <li>Launch merchant POS application with native QR-code invoicing.</li>
+          <li>Deploy account-abstracted consumer mobile wallet with gasless paymaster sponsorship.</li>
+          <li>Scale authorized cash-in / cash-out agent kiosks across metropolitan commercial corridors.</li>
+        </ul>
+
+        <h3>Phase 3: Diaspora Corridor Integration</h3>
+        <ul>
+          <li>Launch direct remittance rails connecting New York, Miami, and Boston diaspora hubs to Haiti.</li>
+          <li>Establish secondary decentralized liquidity pairs on Base with automated reserve monitoring.</li>
+          <li>Reduce end-to-end remittance friction below 2.5% total cost.</li>
+        </ul>
+
+        <h3>Phase 4: Institutional Float Optimization</h3>
+        <ul>
+          <li>Real-time cryptographic proof-of-reserve publication on-chain.</li>
+          <li>Diversification of idle reserve buffers into insured yield instruments to subsidize user gas.</li>
+          <li>Full multi-chain interoperability across Caribbean fintech corridors.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 12. TEAM -->
+    <section id="team" class="py-16 border-b border-borderGray bg-offWhite">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
+        <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 12</div>
+        <h2 class="font-display font-black text-3xl text-ink mb-8">Executive Leadership &amp; Governance</h2>
+
+        <div class="space-y-8 my-8">
+          <!-- Honson Luma -->
+          <div class="bg-white border-2 border-ink rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row gap-6 items-center sm:items-start shadow-[4px_4px_0px_0px_rgba(10,10,10,1)]">
+            <div class="w-28 h-28 rounded-full overflow-hidden ring-4 ring-brandYellow shadow-md shrink-0 bg-offWhite">
+              <img src="/honson.jpg?v=2" alt="Honson Luma" class="w-full h-full object-cover" />
+            </div>
+            <div class="space-y-2 text-center sm:text-left">
+              <h3 class="font-display font-black text-xl text-ink m-0">Honson Luma</h3>
+              <p class="text-brandRed font-mono font-semibold text-xs tracking-wider uppercase">Founder &amp; Chief Executive Officer</p>
+              <p class="text-xs sm:text-sm text-ink/80 leading-relaxed pt-1">
+                Author of the foundational <em>Haitian Dollar White Paper</em> (October 2020), applicant of the registered USPTO Haitian Dollar trademark (Serial 88319997), and executive sponsor of Haitian Dollar Inc.'s SEC Form D filings. Dedicated to diaspora economic mobilization and Caribbean fintech architecture.
+              </p>
+              <div class="pt-2 flex flex-wrap gap-2 text-[11px] font-semibold justify-center sm:justify-start">
+                <span class="px-2.5 py-1 rounded bg-offWhite border border-borderGray">Form D Filer</span>
+                <span class="px-2.5 py-1 rounded bg-offWhite border border-borderGray">USPTO 88319997</span>
+                <span class="px-2.5 py-1 rounded bg-offWhite border border-borderGray">Whitepaper Author</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Percy L. Square -->
+          <div class="bg-white border-2 border-ink rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row gap-6 items-center sm:items-start shadow-[4px_4px_0px_0px_rgba(10,10,10,1)]">
+            <div class="w-28 h-28 rounded-full overflow-hidden ring-4 ring-brandYellow shadow-md shrink-0 bg-offWhite">
+              <img src="/percy-l-square.jpg?v=2" alt="Percy L. Square" class="w-full h-full object-cover" />
+            </div>
+            <div class="space-y-2 text-center sm:text-left">
+              <h3 class="font-display font-black text-xl text-ink m-0">Percy L. Square, Esq.</h3>
+              <p class="text-brandRed font-mono font-semibold text-xs tracking-wider uppercase">Director &amp; General Counsel</p>
+              <p class="text-xs sm:text-sm text-ink/80 leading-relaxed pt-1">
+                Director and General Counsel to Haitian Dollar Inc. Oversees legal structure, IP defense, and regulatory governance. Licensed patent attorney admitted before the USPTO and the State Bars of Georgia and Virginia. Holds degrees in Electronics Engineering (B.S.) and Law (J.D.) from Southern University. Directed trademark prosecution for Reg. 6,267,276.
+              </p>
+              <div class="pt-2 flex flex-wrap gap-2 text-[11px] font-semibold justify-center sm:justify-start">
+                <span class="px-2.5 py-1 rounded bg-offWhite border border-borderGray">USPTO Registered Attorney</span>
+                <span class="px-2.5 py-1 rounded bg-offWhite border border-borderGray">GA &amp; VA State Bar</span>
+                <span class="px-2.5 py-1 rounded bg-offWhite border border-borderGray">IP &amp; Trademark Counsel</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. RISK FACTORS -->
+    <section id="risk" class="py-16 border-b border-borderGray bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
+        <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 13</div>
+        <h2 class="font-display font-black text-3xl text-ink mb-8">Risk Factors</h2>
+
+        <div class="bg-brandRed/10 border-l-4 border-brandRed p-5 rounded-r-xl my-6">
+          <p class="font-bold text-ink mb-1">Important Disclosure</p>
+          <p class="text-xs sm:text-sm text-ink/80 mb-0">Participation in pilot networks and digital asset systems carries inherent risks. Prospective participants and holders must carefully review these factors.</p>
+        </div>
+
+        <h3>Foreign Exchange &amp; Purchasing Power Risk</h3>
+        <p>
+          HTD is pegged strictly to the Haitian Gourde at 1:5, <strong>not the US Dollar</strong>. If the Haitian Gourde depreciates against the USD or other currencies, the purchasing power of HTD in foreign exchange terms will decline accordingly.
+        </p>
+
+        <h3>Regulatory Risk</h3>
+        <p>
+          Digital assets and private settlement networks operate in a rapidly evolving legal and regulatory environment across both the United States and the Republic of Haiti. Changes in statutes, administrative classifications, money transmission licensing frameworks, tax policies, or banking restrictions may affect the operation, availability, or legal treatment of the network. Haitian Dollar Inc. maintains compliance with applicable exemptions under SEC Regulation D Rule 506(b) and Regulation S, but future regulatory developments could impose new compliance burdens.
+        </p>
+
+        <h3>Liquidity &amp; Secondary Market Risk</h3>
+        <p>
+          HTD is designed exclusively as a digital redemption receipt and transactional unit of account for use within authorized network channels. It is neither intended nor promoted for speculative trading on secondary exchanges. Haitian Dollar Inc. does not operate, sponsor, or guarantee the existence, continuation, or liquidity of any secondary market for HTD. Value realization outside authorized redemption rails may be limited, illiquid, or impossible.
+        </p>
+
+        <h3>Redemption Dependency &amp; Operational Reserve Float</h3>
+        <p>
+          Redemption of HTD for cash is dependent on the uninterrupted operation of the MonCash settlement bridge, local agent network liquidity, and correspondent banking partner stability. While every unit of HTD in circulation is backed 100% by fiat reserves at 5 HTG per 1 HTD, system-wide telecommunications outages, banking holidays, or mobile money partner API suspensions could temporarily delay cash-out disbursements. The 3% redemption fee is assessed specifically to maintain this operational float and protect the protocol against liquidity shocks.
+        </p>
+
+        <h3>Third-Party Infrastructure &amp; Telecom Rails</h3>
+        <p>
+          The fiat settlement bridge relies on telecommunications networks, mobile money APIs (including Digicel MonCash), and banking partners. Network outages, API maintenance, or policy modifications by telecom partners could temporarily disrupt automated cash-out capabilities.
+        </p>
+
+        <h3>Smart Contract &amp; Blockchain Risks</h3>
+        <p>
+          HTD operates on Base (Layer 2 of Ethereum). While smart contracts undergo rigorous testing and security reviews, risks related to underlying consensus mechanisms, node availability, layer-2 sequencers, or smart contract bugs cannot be entirely eliminated.
+        </p>
+
+        <h3>Pilot Stage Limitations</h3>
+        <p>
+          The system is currently in development. Phase 1 operations are closed-loop and subject to strict volume limits, reserve ceilings, and controlled operational hours.
+        </p>
+
+        <h3>No Investment Advice</h3>
+        <p>
+          HTD is a utility token and digital redemption receipt for the historical Haitian Dollar convention, not an investment contract, security, equity interest, or profit-generating vehicle. HTD does not pay interest, dividends, yields, or appreciation rights. Nothing contained in this whitepaper constitutes financial, investment, legal, or tax advice. Prospective users, merchants, and participants are advised to conduct independent due diligence.
+        </p>
+      </div>
+    </section>
+
+    <!-- 14. REFERENCES -->
+    <section id="references" class="py-16 border-b border-borderGray bg-offWhite">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
+        <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 14</div>
+        <h2 class="font-display font-black text-3xl text-ink mb-8">References</h2>
+
+        <ul>
+          <li><strong>Taylor, Dr. Erin B. (2014):</strong> <em>Creole Economics and Informal Market Conventions in Haiti.</em> Research on the anthropology of money and persistent pricing units in Port-au-Prince.</li>
+          <li><strong>The New York Times (2022):</strong> <em>The Ransom: How Democracy Was Stifled by Compound Debt.</em> Investigative historical analysis of the 1825 French indemnity and its multi-billion-dollar economic toll.</li>
+          <li><strong>Banque de la République d'Haïti (BRH):</strong> Official historical records regarding the 1912 monetary peg linking 5 Gourdes to 1 US Dollar and its formal dissolution in 1989.</li>
+          <li><strong>United States Patent and Trademark Office:</strong> Registered Trademark "Haitian Dollar", Serial 88319997, Registration No. 6,267,276 (Issued February 9, 2021).</li>
+          <li><strong>U.S. Securities and Exchange Commission:</strong> Form D Notice of Exempt Offering under Rule 506(b), CIK 0001906040 (Filed July 2022).</li>
+          <li><strong>World Bank Group:</strong> <em>Remittance Prices Worldwide Database</em> (Caribbean and Latin American Corridor Analysis, 2023–2025).</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 15. IMPORTANT LINKS -->
+    <section id="links" class="py-16 border-b border-borderGray bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
+        <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 15</div>
+        <h2 class="font-display font-black text-3xl text-ink mb-8">Important Links &amp; Resources</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 not-prose my-6">
+          <a href="/whitepaper.pdf" target="_blank" rel="noopener" class="p-4 rounded-xl border border-borderGray bg-offWhite hover:border-ink transition-colors flex items-center gap-3">
+            <i data-lucide="file-text" class="w-5 h-5 text-brandRed shrink-0"></i>
+            <div>
+              <div class="font-bold text-ink text-sm">Original 2020 Whitepaper (PDF)</div>
+              <div class="text-xs text-ink/60">Historical 16-page paper by Honson Luma</div>
+            </div>
+          </a>
+          <a href="/legal.html" class="p-4 rounded-xl border border-borderGray bg-offWhite hover:border-ink transition-colors flex items-center gap-3">
+            <i data-lucide="scale" class="w-5 h-5 text-brandRed shrink-0"></i>
+            <div>
+              <div class="font-bold text-ink text-sm">Legal &amp; Privacy Disclosures</div>
+              <div class="text-xs text-ink/60">Reg D 506(b) Notice &amp; Terms</div>
+            </div>
+          </a>
+          <a href="/htd.html" class="p-4 rounded-xl border border-borderGray bg-offWhite hover:border-ink transition-colors flex items-center gap-3">
+            <i data-lucide="coins" class="w-5 h-5 text-brandYellow shrink-0"></i>
+            <div>
+              <div class="font-bold text-ink text-sm">HTD Token Mechanics</div>
+              <div class="text-xs text-ink/60">Elastic Supply &amp; Architecture</div>
+            </div>
+          </a>
+          <a href="/feed.xml" class="p-4 rounded-xl border border-borderGray bg-offWhite hover:border-ink transition-colors flex items-center gap-3">
+            <i data-lucide="rss" class="w-5 h-5 text-brandRed shrink-0"></i>
+            <div>
+              <div class="font-bold text-ink text-sm">Protocol RSS Feed</div>
+              <div class="text-xs text-ink/60">Official Releases &amp; Milestones</div>
+            </div>
+          </a>
+          <a href="/contact.html" class="p-4 rounded-xl border border-borderGray bg-offWhite hover:border-ink transition-colors flex items-center gap-3">
+            <i data-lucide="mail" class="w-5 h-5 text-ink shrink-0"></i>
+            <div>
+              <div class="font-bold text-ink text-sm">Executive Correspondence</div>
+              <div class="text-xs text-brandRed font-semibold">Online Contact Form &rarr;</div>
+            </div>
+          </a>
+        </div>
+        <p class="text-sm text-ink/60 mt-8">
+          <a href="/whitepaper-v1.pdf" target="_blank" class="underline hover:text-brandRed">Download the 2020 White Paper (v1.0) — Archive</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section class="py-16 bg-brandYellow no-print">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+        <h2 class="font-display font-black text-3xl sm:text-4xl text-ink">
+          The Haitian Dollar Has Always Existed. Now It Lives On-Chain.
+        </h2>
+        <p class="text-sm sm:text-base text-ink/80 max-w-xl mx-auto">
+          Review our legal filings, examine our technical rails, or register your terminal for the pilot network.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+          <a href="/merchants.html" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-ink text-white font-semibold text-sm hover:bg-black/80 transition-colors shadow-lg">
+            <span>Register Merchant Terminal</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+          <a href="/contact.html" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border-2 border-ink text-ink font-semibold text-sm hover:bg-ink hover:text-brandYellow transition-colors">
+            <span>Contact Governance</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-ink text-white border-t border-white/10 pt-12 pb-8 no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Top: Brand + Links + Contact (single row) -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-10">
+
+                <!-- Brand Column -->
+        <div class="md:col-span-5">
+          <a href="/" class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-brandYellow flex-shrink-0">
+              <img src="/logo.png" alt="Haitian Dollar" class="w-full h-full object-cover" />
+            </div>
+            <span class="font-display font-black text-xl tracking-tight text-white">HAITIAN DOLLAR</span>
+          </a>
+
+          <!-- Bio — indented to align with wordmark -->
+          <div class="pl-[52px] pr-4">
+            <p class="text-white/60 text-xs leading-relaxed mb-1">
+              Digital settlement infrastructure for the Haitian Dollar.
+            </p>
+            <p class="text-brandYellow text-sm font-bold tracking-wide">
+              1 HTD = 5 HTG. Fixed.
+            </p>
+          </div>
+
+          <!-- Social icons -->
+          <div class="pl-[52px] flex items-center gap-3 mt-5">
+            <a href="https://twitter.com/haitiandollar" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-white/10 hover:bg-brandYellow hover:text-ink text-white flex items-center justify-center transition-colors" aria-label="X">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <a href="https://t.me/haitiandollar" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-white/10 hover:bg-brandYellow hover:text-ink text-white flex items-center justify-center transition-colors" aria-label="Telegram">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m20.665 3.717-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701h-.002l-.002.001-.314 4.692c.46 0 .663-.211.921-.46l2.211-2.15 4.599 3.397c.848.467 1.457.227 1.668-.785l3.019-14.228c.309-1.239-.473-1.8-1.282-1.434z"/>
+              </svg>
+            </a>
+            <a href="https://linkedin.com/company/haitian-dollar" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-white/10 hover:bg-brandYellow hover:text-ink text-white flex items-center justify-center transition-colors" aria-label="LinkedIn">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z"/>
+              </svg>
+            </a>
+            <a href="https://facebook.com/haitiandollar" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-white/10 hover:bg-brandYellow hover:text-ink text-white flex items-center justify-center transition-colors" aria-label="Facebook">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.704 0-1.148.064-1.331.191-.322.21-.433.682-.433 1.631v2.163h4.319l-.577 3.667h-3.742v7.98h-5.293z"/>
+              </svg>
+            </a>
+            <a href="https://bitcointalk.org/index.php?topic=5282342.msg56313383#msg56313383" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-white/10 hover:bg-brandYellow hover:text-ink text-white flex items-center justify-center transition-colors" aria-label="BitcoinTalk">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M23.638 14.904c-1.602 6.43-8.113 10.34-14.542 8.736C2.67 22.05-1.244 15.525.362 9.105 1.962 2.67 8.482-1.244 14.91.36 21.34 1.962 25.25 8.48 23.638 14.904zm-7.604-5.068c.245-1.636-.998-2.518-2.7-3.106l.55-2.21-1.344-.336-.536 2.146c-.352-.088-.716-.172-1.077-.255l.54-2.164-1.345-.335-.553 2.216c-.293-.067-.58-.133-.859-.204l.002-.007-1.855-.463-.357 1.435s.998.229.977.243c.545.136.643.498.627.785l-.628 2.518c.038.01.086.024.14.045l-.143-.035-.88 3.529c-.066.166-.236.415-.617.32.02.03-.978-.244-.978-.244l-.668 1.543 1.751.437c.326.082.646.167.962.248l-.558 2.24 1.344.335.552-2.213c.368.1.724.192 1.072.28l-.549 2.203 1.345.336.558-2.235c2.296.435 4.022.26 4.748-1.817.585-1.674-.03-2.64-1.238-3.267.88-.203 1.542-.782 1.72-1.977zm-3.078 4.316c-.417 1.672-3.238.769-4.152.542l.74-2.97c.915.228 3.844.678 3.412 2.428zm.418-4.34c-.38 1.523-2.73.749-3.492.56l.672-2.693c.762.19 3.212.545 2.82 2.133z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Protocol Links -->
+        <div class="md:col-span-2">
+          <p class="text-[11px] font-display font-bold uppercase tracking-wider text-brandYellow mb-3">Protocol</p>
+          <ul class="text-xs space-y-2 text-white/70">
+            <li><a href="/htd.html" class="hover:text-white transition-colors">What is HTD</a></li>
+            <li><a href="/merchants.html" class="hover:text-white transition-colors">Merchants</a></li>
+            <li><a href="/users.html" class="hover:text-white transition-colors">Users</a></li>
+          </ul>
+        </div>
+
+        <!-- Company Links -->
+        <div class="md:col-span-2">
+          <p class="text-[11px] font-display font-bold uppercase tracking-wider text-brandYellow mb-3">Company</p>
+          <ul class="text-xs space-y-2 text-white/70">
+            <li><a href="/about.html" class="hover:text-white transition-colors">About</a></li>
+            <li><a href="/investors.html" class="hover:text-white transition-colors">Investors</a></li>
+            <li><a href="/news.html" class="hover:text-white transition-colors">News</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact (single row) -->
+        <div class="md:col-span-3">
+          <p class="text-[11px] font-display font-bold uppercase tracking-wider text-brandYellow mb-3">
+            <a href="/contact.html" class="hover:underline">Contact</a>
+          </p>
+          <ul class="text-xs space-y-2 text-white/70 font-mono">
+            <li><a href="/contact.html" class="text-brandYellow hover:text-white transition-colors font-sans font-semibold flex items-center gap-1">Online Contact Form &rarr;</a></li>
+            <li><a href="mailto:admin@haitiandollar.com" class="hover:text-white transition-colors">admin@haitiandollar.com</a></li>
+            <li><a href="mailto:legal@haitiandollar.com" class="hover:text-white transition-colors">legal@haitiandollar.com</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Divider -->
+      <div class="border-t border-white/10 pt-6">
+
+        <!-- Privacy / Legal / Copyright row -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-[11px] text-white/40 mb-4">
+          <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <a href="/legal.html" class="hover:text-brandYellow transition-colors">Privacy Policy</a>
+            <span class="text-white/20 hidden sm:inline">·</span>
+            <a href="/legal.html" class="hover:text-brandYellow transition-colors">Terms of Service</a>
+            <span class="text-white/20 hidden sm:inline">·</span>
+            <a href="/legal.html#reg-d" class="hover:text-brandYellow transition-colors">SEC Regulatory Notice</a>
+            <span class="text-white/20 hidden sm:inline">·</span>
+            <a href="/feed.xml" class="hover:text-brandYellow transition-colors">RSS</a>
+            <span class="text-white/20 hidden sm:inline">·</span>
+            <a href="#" onclick="resetCookieConsent(); return false;" class="hover:text-brandYellow transition-colors">Cookie Settings</a>
+          </div>
+          <p>&reg; <span id="year">2026</span> Haitian Dollar Inc.</p>
+        </div>
+
+        <!-- Disclaimer -->
+        <p class="text-[10px] text-white/30 leading-relaxed max-w-4xl">
+          <strong class="text-white/40">DISCLAIMER:</strong> Haitian Dollar Inc. is an SEC CIK-registered entity (CIK 0001906040). HTD operates as a digital unit of account and redemption receipt. Haitian Dollar Inc. is not currently offering or soliciting securities. This website is provided for informational purposes only and does not constitute an offer to sell or a solicitation of an offer to buy any securities. HTD is a redemption receipt, not a stablecoin. Tokens may have no value.
+        </p>
+
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+  </script>
+  <!-- COOKIE CONSENT BANNER — Compact -->
+  <div 
+    id="cookie-consent-banner" 
+    class="hidden fixed bottom-0 left-0 right-0 z-[100] bg-white border-t border-borderGray shadow-[0_-4px_20px_rgba(0,0,0,0.08)] transition-transform duration-300 transform translate-y-full"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="cookie-title"
+  >
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4">
+      <div class="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-6">
+
+        <!-- Left: Text -->
+        <div class="flex-1 min-w-0">
+          <p class="text-xs sm:text-sm text-ink/80 leading-snug">
+            <strong class="font-display font-bold text-ink">We use cookies.</strong>
+            Essential cookies keep the site working. Analytics cookies help us understand usage. Read our
+            <a href="/legal.html#privacy" class="underline text-brandRed hover:text-ink font-medium">Privacy Policy</a>.
+          </p>
+        </div>
+
+        <!-- Center: Toggles -->
+        <div class="flex items-center gap-3 sm:gap-4 text-[11px] sm:text-xs">
+          <label class="flex items-center gap-2 cursor-not-allowed opacity-70 select-none" title="Required">
+            <input type="checkbox" checked disabled class="w-3.5 h-3.5 rounded cursor-not-allowed" />
+            <span class="font-display font-bold text-ink whitespace-nowrap">Necessary</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer select-none">
+            <input type="checkbox" id="cookie-analytics" checked class="w-3.5 h-3.5 rounded cursor-pointer" />
+            <span class="font-display font-bold text-ink whitespace-nowrap">Analytics</span>
+          </label>
+        </div>
+
+        <!-- Right: Buttons -->
+        <div class="flex items-center gap-2 flex-shrink-0">
+          <button type="button" id="btn-reject-all" class="px-3 py-2 rounded-lg border border-borderGray bg-white text-ink font-display font-bold text-xs hover:border-ink transition-colors whitespace-nowrap">
+            Reject
+          </button>
+          <button type="button" id="btn-allow-analytics" class="px-4 py-2 rounded-lg bg-brandRed text-white font-display font-bold text-xs hover:bg-brandRed/90 transition-colors whitespace-nowrap">
+            Accept
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function initCookieBanner() {
+      const banner = document.getElementById('cookie-consent-banner');
+      const analyticsCheck = document.getElementById('cookie-analytics');
+      const btnReject = document.getElementById('btn-reject-all');
+      const btnAllow = document.getElementById('btn-allow-analytics');
+
+      if (!banner) return;
+
+      const stored = localStorage.getItem('htd_cookie_consent');
+      if (!stored) {
+        banner.classList.remove('hidden');
+        setTimeout(() => banner.classList.remove('translate-y-full'), 50);
+      }
+
+      function dismissBanner() {
+        banner.classList.add('translate-y-full');
+        setTimeout(() => banner.classList.add('hidden'), 300);
+      }
+
+      function applyConsent(settings) {
+        localStorage.setItem('htd_cookie_consent', JSON.stringify(settings));
+        if (typeof gtag === 'function') {
+          gtag('consent', 'update', {
+            'analytics_storage': settings.analytics ? 'granted' : 'denied',
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'functionality_storage': 'denied',
+            'security_storage': 'granted'
+          });
+        }
+        dismissBanner();
+      }
+
+      btnReject.addEventListener('click', () => {
+        applyConsent({ necessary: true, analytics: false });
+      });
+
+      btnAllow.addEventListener('click', () => {
+        applyConsent({ necessary: true, analytics: analyticsCheck ? analyticsCheck.checked : true });
+      });
+    })();
+
+    // Cookie Settings link handler (used in footer)
+    function resetCookieConsent() {
+      localStorage.removeItem('htd_cookie_consent');
+      window.location.reload();
+    }
+  </script>
+</body>
+</html>

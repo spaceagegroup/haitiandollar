@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "fetch-rates": "node scripts/fetch-brh-direct.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.2.0"
+  }
+}

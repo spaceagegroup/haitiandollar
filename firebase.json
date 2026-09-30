@@ -1,0 +1,70 @@
+{
+  "hosting": {
+    "site": "haitian-dollar-connect",
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "android/**",
+      "ios/**",
+      "lib/**",
+      "test/**",
+      "windows/**",
+      "linux/**",
+      "macos/**",
+      "build/**",
+      "htd-website/**"
+    ],
+    "cleanUrls": true,
+    "redirects": [
+      { "source": "/about-htd", "destination": "/about", "type": 301 },
+      { "source": "/about-htd/**", "destination": "/about", "type": 301 },
+      { "source": "/contact-us", "destination": "/contact", "type": 301 },
+      { "source": "/contact-us/**", "destination": "/contact", "type": 301 },
+      { "source": "/privacy-policy", "destination": "/legal", "type": 301 },
+      { "source": "/privacy-policy/**", "destination": "/legal", "type": 301 },
+      { "source": "/terms", "destination": "/legal", "type": 301 },
+      { "source": "/terms/**", "destination": "/legal", "type": 301 },
+      { "source": "/terms-conditions", "destination": "/legal", "type": 301 },
+      { "source": "/terms-conditions/**", "destination": "/legal", "type": 301 },
+      { "source": "/learning-center", "destination": "/htd", "type": 301 },
+      { "source": "/learning-center/**", "destination": "/htd", "type": 301 },
+      { "source": "/ieo", "destination": "/htd", "type": 301 },
+      { "source": "/ieo/**", "destination": "/htd", "type": 301 },
+      { "source": "/ieo-htd", "destination": "/htd", "type": 301 },
+      { "source": "/ieo-htd/**", "destination": "/htd", "type": 301 },
+      { "source": "/merch", "destination": "/", "type": 301 },
+      { "source": "/merch/**", "destination": "/", "type": 301 },
+      { "source": "/staff/**", "destination": "/about", "type": 301 },
+      { "source": "/roadmap/**", "destination": "/whitepaper", "type": 301 },
+      { "source": "/category/**", "destination": "/news", "type": 301 },
+      { "source": "/feed", "destination": "/feed.xml", "type": 301 }
+    ],
+    "rewrites": [
+      {
+        "source": "/googleaad7d53267bd2aad.html",
+        "destination": "/googleaad7d53267bd2aad.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "**",
+        "headers": [
+          {
+            "key": "Strict-Transport-Security",
+            "value": "max-age=31536000; includeSubDomains; preload"
+          },
+          {
+            "key": "X-Content-Type-Options",
+            "value": "nosniff"
+          },
+          {
+            "key": "X-Frame-Options",
+            "value": "SAMEORIGIN"
+          }
+        ]
+      }
+    ]
+  }
+}

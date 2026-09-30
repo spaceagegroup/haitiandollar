@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <!-- Google Consent Mode v2 + GA4 -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    const savedConsent = JSON.parse(localStorage.getItem('htd_cookie_consent') || 'null');
+
+    if (savedConsent) {
+      gtag('consent', 'default', {
+        'analytics_storage': savedConsent.analytics ? 'granted' : 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'functionality_storage': 'denied',
+        'security_storage': 'granted'
+      });
+    } else {
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'functionality_storage': 'denied',
+        'security_storage': 'granted'
+      });
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'G-DMBN9HX803');
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DMBN9HX803"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <title>Merchant Solutions | Haitian Dollar (HTD)</title>
+  <meta name="description" content="Accept Haitian Dollar (HTD) for B2B supplier payments and retail commerce. Eliminate cash transit risk, settle instantly, and redeem for cash anytime.">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="alternate" type="application/rss+xml" title="Haitian Dollar (HTD) News" href="/feed.xml">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Inter & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandYellow: '#FCC419',
+            brandRed: '#E03131',
+            ink: '#0A0A0A',
+            offWhite: '#FFFBF0',
+            borderGray: '#E5E5E5',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-offWhite text-ink font-sans antialiased selection:bg-brandYellow selection:text-ink">
+
+  <!-- TOP COMPLIANCE NOTIFICATION BAR -->
+  <aside aria-label="Regulatory Notice" class="bg-ink text-white/80 text-xs py-2 px-4 border-b border-white/10">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-2 text-center sm:text-left">
+        <img src="/logo.png" alt="HTD" class="w-4 h-4 rounded-full" />
+        <span>Haitian Dollar Inc. (SEC CIK 0001906040) · Not currently offering or soliciting securities</span>
+      </div>
+      <a href="/legal.html" class="underline hover:text-brandYellow transition-colors">Offering &amp; Risk Disclosures</a>
+    </div>
+  </aside>
+
+  <!-- NAVIGATION -->
+  <header class="sticky top-0 z-50 bg-offWhite/90 backdrop-blur-md border-b border-borderGray">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-brandRed">
+          <img src="/logo.png" alt="Haitian Dollar" class="w-full h-full object-cover" />
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display font-black text-xl leading-none tracking-tight text-ink">HAITIAN DOLLAR</span>
+          <span class="text-[10px] font-semibold tracking-widest text-ink/60 uppercase">1 HTD = 5 HTG</span>
+        </div>
+      </a>
+
+      <!-- Desktop Links -->
+      <div class="hidden md:flex items-center gap-8 font-medium text-sm">
+        <a href="/about.html" class="hover:text-brandRed transition-colors">About</a>
+        <a href="/htd.html" class="hover:text-brandRed transition-colors">HTD Token</a>
+        <a href="/merchants.html" class="text-brandRed font-bold">Merchants</a>
+        <a href="/users.html" class="hover:text-brandRed transition-colors">Users</a>
+        <a href="/investors.html" class="hover:text-brandRed transition-colors">Investors</a>
+        <a href="/news.html" class="hover:text-brandRed transition-colors">News</a>
+        <a href="/contact.html" class="hover:text-brandRed transition-colors">Contact</a>
+      </div>
+
+      <!-- Action Button -->
+      <div class="flex items-center gap-3">
+        <a href="#onboard" class="hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-brandRed text-white font-semibold text-sm hover:bg-brandRed/90 shadow-sm transition-all">
+          Accept HTD
+        </a>
+        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-ink hover:bg-black/5" aria-label="Toggle Menu">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden border-b border-borderGray bg-offWhite px-4 pt-3 pb-6 space-y-3 font-medium text-base">
+      <!-- Mobile Live Rate Pill -->
+      <a href="/htd.html#official-rates" class="flex items-center justify-between p-3 rounded-xl bg-brandYellow/20 border border-brandYellow/50 hover:bg-brandYellow/30 transition-colors">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="text-xs font-mono font-bold text-ink">1 HTD = 5 HTG</span>
+        </div>
+        <span class="text-xs font-mono font-bold text-brandRed flex items-center gap-1">
+          <span class="mobile-drawer-rate">$0.0382</span> USD &rarr;
+        </span>
+      </a>
+
+      <a href="/about.html" class="block py-2 text-ink hover:text-brandRed">About</a>
+      <a href="/htd.html" class="block py-2 text-ink hover:text-brandRed">HTD Token</a>
+      <a href="/merchants.html" class="block py-2 text-brandRed font-bold">Merchants</a>
+      <a href="/users.html" class="block py-2 text-ink hover:text-brandRed">Users</a>
+      <a href="/investors.html" class="block py-2 text-ink hover:text-brandRed">Investors</a>
+      <a href="/news.html" class="block py-2 text-ink hover:text-brandRed">News</a>
+      <a href="/contact.html" class="block py-2 text-ink hover:text-brandRed">Contact</a>
+      <a href="#onboard" class="block w-full text-center py-3 rounded-lg bg-brandRed text-white font-semibold">Accept HTD</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="py-16 sm:py-24 border-b border-borderGray bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <div class="lg:col-span-7 space-y-6">
+            <div class="inline-flex items-center gap-2 bg-brandYellow/30 border border-brandYellow text-ink px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
+              B2B Commerce &amp; Supply Chain Settlement
+            </div>
+            <h1 class="font-display font-black text-4xl sm:text-6xl text-ink tracking-tight leading-[1.1]">
+              Settle Inventory Instantly.<br>
+              <span class="text-brandRed">Zero Paper Cash Risk.</span>
+            </h1>
+            <p class="text-base sm:text-lg text-ink/70 max-w-xl font-normal leading-relaxed">
+              Transporting physical paper gourdes across urban transit corridors carries severe extortion and security liabilities. HTD enables wholesale distributors and neighborhood shops to settle invoices phone-to-phone in seconds, using the 5:1 Haitian Dollar pricing you already use.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
+              <a href="#onboard" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-ink text-white font-semibold hover:bg-black/80 transition-all shadow-md">
+                <span>Register Merchant Terminal</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </a>
+              <a href="#how-it-works" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-offWhite border-2 border-borderGray text-ink font-semibold hover:border-ink transition-all">
+                <span>Review Flow &amp; Fees</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Feature Matrix Box -->
+          <div class="lg:col-span-5 bg-offWhite border-2 border-ink rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-[5px_5px_0px_0px_rgba(10,10,10,1)] sm:shadow-[6px_6px_0px_0px_rgba(10,10,10,1)] space-y-5 sm:space-y-6">
+            <h3 class="font-display font-bold text-xl text-ink border-b border-borderGray pb-3">Operational Advantages</h3>
+            
+            <div class="space-y-4">
+              <div class="flex items-start gap-4">
+                <div class="w-9 h-9 rounded-lg bg-brandRed text-white flex items-center justify-center shrink-0">
+                  <i data-lucide="shield-check" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-sm text-ink">Eliminate Highway Transit Risk</h4>
+                  <p class="text-xs text-ink/70 leading-relaxed">No need to carry physical sacks of gourdes between warehouses and retail depots.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="w-9 h-9 rounded-lg bg-brandYellow text-ink flex items-center justify-center shrink-0">
+                  <i data-lucide="zap" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-sm text-ink">Zero Cost P2P Transfers</h4>
+                  <p class="text-xs text-ink/70 leading-relaxed">Transactions between merchant wallets are instant and fee-free, avoiding tiered mobile cash-out fees.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-4">
+                <div class="w-9 h-9 rounded-lg bg-ink text-white flex items-center justify-center shrink-0">
+                  <i data-lucide="banknote" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-sm text-ink">Instant Cash-Out On-Demand</h4>
+                  <p class="text-xs text-ink/70 leading-relaxed">Cash out directly into your local business balance whenever physical working capital is needed.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-4 border border-borderGray text-xs text-ink/80">
+              <strong>Native Haitian Accounting:</strong> Balances always display nominal <strong>H$</strong> with the exact <strong>5 HTG</strong> equivalent beneath.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS FOR MERCHANTS -->
+    <section id="how-it-works" class="py-16 border-b border-borderGray">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+          <span class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest">Workflow</span>
+          <h2 class="font-display font-black text-3xl sm:text-4xl text-ink">From Delivery to Settlement</h2>
+          <p class="text-ink/70 text-sm sm:text-base">Accept payments and pay suppliers without banking delays or handling paper cash.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Step 1 -->
+          <div class="bg-white border-2 border-borderGray rounded-2xl p-8 space-y-4">
+            <span class="w-8 h-8 rounded-full bg-ink text-white font-mono text-sm font-bold flex items-center justify-center">1</span>
+            <h3 class="font-display font-bold text-xl text-ink">Accept HTD via Dynamic QR</h3>
+            <p class="text-xs sm:text-sm text-ink/70 leading-relaxed">
+              Generate an instant invoice in Haitian Dollars (H$). Customers or retail partners scan your dynamic merchant QR code from their mobile device to settle invoices in seconds.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="bg-white border-2 border-borderGray rounded-2xl p-8 space-y-4">
+            <span class="w-8 h-8 rounded-full bg-brandRed text-white font-mono text-sm font-bold flex items-center justify-center">2</span>
+            <h3 class="font-display font-bold text-xl text-ink">Restock Wholesalers Directly</h3>
+            <p class="text-xs sm:text-sm text-ink/70 leading-relaxed">
+              Keep value digital. Re-spend your accumulated HTD directly to your wholesale suppliers and distributors within the merchant network with zero transaction fees.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="bg-white border-2 border-borderGray rounded-2xl p-8 space-y-4">
+            <span class="w-8 h-8 rounded-full bg-brandYellow text-ink font-mono text-sm font-bold flex items-center justify-center">3</span>
+            <h3 class="font-display font-bold text-xl text-ink">Redeem for Cash On-Demand</h3>
+            <p class="text-xs sm:text-sm text-ink/70 leading-relaxed">
+              When paper payroll or operational expenses require cash, trigger a redemption to receive gourdes on your phone or at local agents in minutes.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEE COMPARISON TABLE -->
+    <section class="py-16 border-b border-borderGray bg-offWhite">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <div class="text-center space-y-2">
+          <h2 class="font-display font-black text-3xl text-ink">Transparent Commercial Fee Structure</h2>
+          <p class="text-ink/70 text-sm">Compare B2B supplier transactions through HTD against traditional cash handling and mobile agent fees.</p>
+        </div>
+
+        <div class="overflow-x-auto bg-white rounded-2xl border-2 border-ink shadow-[4px_4px_0px_0px_rgba(10,10,10,1)]">
+          <table class="w-full text-left text-sm min-w-[500px]">
+            <thead class="bg-ink text-white text-xs uppercase font-mono">
+              <tr>
+                <th class="py-3.5 px-4 sm:py-4 sm:px-6">Transaction Type</th>
+                <th class="py-3.5 px-4 sm:py-4 sm:px-6">HTD Merchant Network</th>
+                <th class="py-3.5 px-4 sm:py-4 sm:px-6">Traditional Mobile Cash</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y border-borderGray text-ink/80 text-xs sm:text-sm">
+              <tr>
+                <td class="py-3.5 px-4 sm:py-4 sm:px-6 font-semibold">Customer pays merchant with HTD</td>
+                <td class="py-3.5 px-4 sm:py-4 sm:px-6 text-brandRed font-bold">0.5% (paid by merchant)</td>
+                <td class="py-3.5 px-4 sm:py-4 sm:px-6">1.5% – 3.5% Card / Mobile Fees</td>
+              </tr>
+              <tr>
+                <td class="py-3.5 px-4 sm:py-4 sm:px-6 font-semibold">Merchant pays supplier with HTD (B2B restock)</td>
+                <td class="py-3.5 px-4 sm:py-4 sm:px-6 text-emerald-700 font-bold">0% (free)</td>
+                <td class="py-3.5 px-4 sm:py-4 sm:px-6">Tiered Transfer Fees</td>
+              </tr>
+              <tr>
+                <td class="py-3.5 px-4 sm:py-4 sm:px-6 font-semibold">Merchant redeems HTD for cash via MonCash</td>
+                <td class="py-3.5 px-4 sm:py-4 sm:px-6 font-bold text-ink">3% bridge fee</td>
+                <td class="py-3.5 px-4 sm:py-4 sm:px-6">Up to 4% – 6% Tiered Street Fees</td>
+              </tr>
+              <tr>
+                <td class="py-3.5 px-4 sm:py-4 sm:px-6 font-semibold">Settlement Speed</td>
+                <td class="py-3.5 px-4 sm:py-4 sm:px-6 text-emerald-700 font-bold">&lt; 2 Seconds (Instant)</td>
+                <td class="py-3.5 px-4 sm:py-4 sm:px-6">Hours to Days (Physical Delivery)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs sm:text-sm text-ink/60 text-center font-medium">
+          <em>B2B supplier restock transfers are always free. Only MonCash fiat redemptions carry the 3% bridge fee.</em>
+        </p>
+      </div>
+    </section>
+
+    <!-- MERCHANT ONBOARDING FORM -->
+    <section id="onboard" class="py-16 bg-white">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <div class="text-center space-y-2">
+          <h2 class="font-display font-black text-3xl sm:text-4xl text-ink">Register Your Business for the Pilot</h2>
+          <p class="text-ink/70 text-sm sm:text-base">Join the closed pilot network for wholesale suppliers, depots, and high-volume retail merchants.</p>
+        </div>
+
+        <form 
+          id="merchant-form"
+          action="https://formspree.io/f/xqpagjqz" 
+          method="POST"
+          class="space-y-4 bg-offWhite p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-borderGray shadow-sm"
+        >
+          <!-- Custom Subject Header for Formspree Notifications -->
+          <input type="hidden" name="_subject" value="New Pilot Merchant Application (HTD)" />
+
+          <!-- Row 1: Business Name & Business Type -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="business_name" class="block text-xs font-display font-bold uppercase tracking-wider text-ink mb-1">Business Name</label>
+              <input 
+                type="text" 
+                id="business_name" 
+                name="business_name" 
+                required 
+                class="w-full px-4 py-2.5 rounded-lg border border-borderGray bg-white text-ink text-sm focus:outline-none focus:border-ink" 
+                placeholder="Depot, Quincaillerie, Store..."
+              />
+            </div>
+            <div>
+              <label for="business_type" class="block text-xs font-display font-bold uppercase tracking-wider text-ink mb-1">Business Type</label>
+              <select 
+                id="business_type" 
+                name="business_type" 
+                class="w-full px-4 py-2.5 rounded-lg border border-borderGray bg-white text-ink text-sm focus:outline-none focus:border-ink"
+              >
+                <option value="Wholesale Distributor / Depot">Wholesale Distributor / Depot</option>
+                <option value="Retail Shop / Grocery / Hardware">Retail Shop / Grocery / Hardware</option>
+                <option value="Pharmacy / Healthcare">Pharmacy / Healthcare</option>
+                <option value="Transport / Logistics Provider">Transport / Logistics Provider</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Row 2: Phone & Location -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="business_phone" class="block text-xs font-display font-bold uppercase tracking-wider text-ink mb-1">Mobile Money / Business Phone</label>
+              <input 
+                type="tel" 
+                id="business_phone" 
+                name="business_phone" 
+                required 
+                class="w-full px-4 py-2.5 rounded-lg border border-borderGray bg-white text-ink text-sm focus:outline-none focus:border-ink" 
+                placeholder="+509 3X XX XXXX"
+              />
+            </div>
+            <div>
+              <label for="location" class="block text-xs font-display font-bold uppercase tracking-wider text-ink mb-1">Location / Commune</label>
+              <input 
+                type="text" 
+                id="location" 
+                name="location" 
+                required 
+                class="w-full px-4 py-2.5 rounded-lg border border-borderGray bg-white text-ink text-sm focus:outline-none focus:border-ink" 
+                placeholder="Port-au-Prince, Delmas, Pétion-Ville..."
+              />
+            </div>
+          </div>
+
+          <!-- Row 3: Estimated Volume -->
+          <div>
+            <label for="weekly_volume" class="block text-xs font-display font-bold uppercase tracking-wider text-ink mb-1">Estimated Weekly Inventory Volume</label>
+            <select 
+              id="weekly_volume" 
+              name="weekly_volume" 
+              class="w-full px-4 py-2.5 rounded-lg border border-borderGray bg-white text-ink text-sm focus:outline-none focus:border-ink"
+            >
+              <option value="Under 50,000 HTG (H$ 10,000)">Under 50,000 HTG (H$ 10,000)</option>
+              <option value="50,000 - 250,000 HTG (H$ 10,000 - H$ 50,000)">50,000 - 250,000 HTG (H$ 10,000 - H$ 50,000)</option>
+              <option value="250,000+ HTG (H$ 50,000+)">250,000+ HTG (H$ 50,000+)</option>
+            </select>
+          </div>
+
+          <!-- Row 4: Contact Email -->
+          <div>
+            <label for="email" class="block text-xs font-display font-bold uppercase tracking-wider text-ink mb-1">Contact Email</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              required 
+              class="w-full px-4 py-2.5 rounded-lg border border-borderGray bg-white text-ink text-sm focus:outline-none focus:border-ink" 
+              placeholder="yourname@gmail.com"
+            />
+          </div>
+
+          <!-- Submit Button -->
+          <button 
+            type="submit" 
+            id="merchant-submit-btn" 
+            class="w-full py-3.5 px-4 rounded-xl bg-brandRed text-white font-display font-bold text-xs sm:text-sm hover:bg-brandRed/90 transition-colors shadow-sm"
+          >
+            Submit Merchant Application
+          </button>
+
+          <!-- Status Feedback Message -->
+          <div id="merchant-status" class="hidden text-xs font-semibold p-4 rounded-lg"></div>
+
+          <!-- General Contact Fallback Link -->
+          <div class="text-center pt-2">
+            <p class="text-xs text-ink/70">
+              Have questions first? <a href="/contact.html" class="underline font-semibold text-ink hover:text-brandRed">Use our general contact form &rarr;</a>
+            </p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-ink text-white border-t border-white/10 pt-12 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Top: Brand + Links + Contact (single row) -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-10">
+
+                <!-- Brand Column -->
+        <div class="md:col-span-5">
+          <a href="/" class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-brandYellow flex-shrink-0">
+              <img src="/logo.png" alt="Haitian Dollar" class="w-full h-full object-cover" />
+            </div>
+            <span class="font-display font-black text-xl tracking-tight text-white">HAITIAN DOLLAR</span>
+          </a>
+
+          <!-- Bio — indented to align with wordmark -->
+          <div class="pl-[52px] pr-4">
+            <p class="text-white/60 text-xs leading-relaxed mb-1">
+              Digital settlement infrastructure for the Haitian Dollar.
+            </p>
+            <p class="text-brandYellow text-sm font-bold tracking-wide">
+              1 HTD = 5 HTG. Fixed.
+            </p>
+          </div>
+
+          <!-- Social icons -->
+          <div class="pl-[52px] flex items-center gap-3 mt-5">
+            <a href="https://twitter.com/haitiandollar" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-white/10 hover:bg-brandYellow hover:text-ink text-white flex items-center justify-center transition-colors" aria-label="X">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <a href="https://t.me/haitiandollar" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-white/10 hover:bg-brandYellow hover:text-ink text-white flex items-center justify-center transition-colors" aria-label="Telegram">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m20.665 3.717-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701h-.002l-.002.001-.314 4.692c.46 0 .663-.211.921-.46l2.211-2.15 4.599 3.397c.848.467 1.457.227 1.668-.785l3.019-14.228c.309-1.239-.473-1.8-1.282-1.434z"/>
+              </svg>
+            </a>
+            <a href="https://linkedin.com/company/haitian-dollar" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-white/10 hover:bg-brandYellow hover:text-ink text-white flex items-center justify-center transition-colors" aria-label="LinkedIn">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z"/>
+              </svg>
+            </a>
+            <a href="https://facebook.com/haitiandollar" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-white/10 hover:bg-brandYellow hover:text-ink text-white flex items-center justify-center transition-colors" aria-label="Facebook">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.704 0-1.148.064-1.331.191-.322.21-.433.682-.433 1.631v2.163h4.319l-.577 3.667h-3.742v7.98h-5.293z"/>
+              </svg>
+            </a>
+            <a href="https://bitcointalk.org/index.php?topic=5282342.msg56313383#msg56313383" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-white/10 hover:bg-brandYellow hover:text-ink text-white flex items-center justify-center transition-colors" aria-label="BitcoinTalk">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M23.638 14.904c-1.602 6.43-8.113 10.34-14.542 8.736C2.67 22.05-1.244 15.525.362 9.105 1.962 2.67 8.482-1.244 14.91.36 21.34 1.962 25.25 8.48 23.638 14.904zm-7.604-5.068c.245-1.636-.998-2.518-2.7-3.106l.55-2.21-1.344-.336-.536 2.146c-.352-.088-.716-.172-1.077-.255l.54-2.164-1.345-.335-.553 2.216c-.293-.067-.58-.133-.859-.204l.002-.007-1.855-.463-.357 1.435s.998.229.977.243c.545.136.643.498.627.785l-.628 2.518c.038.01.086.024.14.045l-.143-.035-.88 3.529c-.066.166-.236.415-.617.32.02.03-.978-.244-.978-.244l-.668 1.543 1.751.437c.326.082.646.167.962.248l-.558 2.24 1.344.335.552-2.213c.368.1.724.192 1.072.28l-.549 2.203 1.345.336.558-2.235c2.296.435 4.022.26 4.748-1.817.585-1.674-.03-2.64-1.238-3.267.88-.203 1.542-.782 1.72-1.977zm-3.078 4.316c-.417 1.672-3.238.769-4.152.542l.74-2.97c.915.228 3.844.678 3.412 2.428zm.418-4.34c-.38 1.523-2.73.749-3.492.56l.672-2.693c.762.19 3.212.545 2.82 2.133z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Protocol Links -->
+        <div class="md:col-span-2">
+          <p class="text-[11px] font-display font-bold uppercase tracking-wider text-brandYellow mb-3">Protocol</p>
+          <ul class="text-xs space-y-2 text-white/70">
+            <li><a href="/htd.html" class="hover:text-white transition-colors">What is HTD</a></li>
+            <li><a href="/merchants.html" class="hover:text-white transition-colors">Merchants</a></li>
+            <li><a href="/users.html" class="hover:text-white transition-colors">Users</a></li>
+          </ul>
+        </div>
+
+        <!-- Company Links -->
+        <div class="md:col-span-2">
+          <p class="text-[11px] font-display font-bold uppercase tracking-wider text-brandYellow mb-3">Company</p>
+          <ul class="text-xs space-y-2 text-white/70">
+            <li><a href="/about.html" class="hover:text-white transition-colors">About</a></li>
+            <li><a href="/investors.html" class="hover:text-white transition-colors">Investors</a></li>
+            <li><a href="/news.html" class="hover:text-white transition-colors">News</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact (single row) -->
+        <div class="md:col-span-3">
+          <p class="text-[11px] font-display font-bold uppercase tracking-wider text-brandYellow mb-3">
+            <a href="/contact.html" class="hover:underline">Contact</a>
+          </p>
+          <ul class="text-xs space-y-2 text-white/70 font-mono">
+            <li><a href="/contact.html" class="text-brandYellow hover:text-white transition-colors font-sans font-semibold flex items-center gap-1">Online Contact Form &rarr;</a></li>
+            <li><a href="mailto:admin@haitiandollar.com" class="hover:text-white transition-colors">admin@haitiandollar.com</a></li>
+            <li><a href="mailto:legal@haitiandollar.com" class="hover:text-white transition-colors">legal@haitiandollar.com</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Divider -->
+      <div class="border-t border-white/10 pt-6">
+
+        <!-- Privacy / Legal / Copyright row -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-[11px] text-white/40 mb-4">
+          <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <a href="/legal.html" class="hover:text-brandYellow transition-colors">Privacy Policy</a>
+            <span class="text-white/20 hidden sm:inline">·</span>
+            <a href="/legal.html" class="hover:text-brandYellow transition-colors">Terms of Service</a>
+            <span class="text-white/20 hidden sm:inline">·</span>
+            <a href="/legal.html#reg-d" class="hover:text-brandYellow transition-colors">SEC Regulatory Notice</a>
+            <span class="text-white/20 hidden sm:inline">·</span>
+            <a href="/feed.xml" class="hover:text-brandYellow transition-colors">RSS</a>
+            <span class="text-white/20 hidden sm:inline">·</span>
+            <a href="#" onclick="resetCookieConsent(); return false;" class="hover:text-brandYellow transition-colors">Cookie Settings</a>
+          </div>
+          <p>&reg; <span id="year">2026</span> Haitian Dollar Inc.</p>
+        </div>
+
+        <!-- Disclaimer -->
+        <p class="text-[10px] text-white/30 leading-relaxed max-w-4xl">
+          <strong class="text-white/40">DISCLAIMER:</strong> Haitian Dollar Inc. is an SEC CIK-registered entity (CIK 0001906040). HTD operates as a digital unit of account and redemption receipt. Haitian Dollar Inc. is not currently offering or soliciting securities. This website is provided for informational purposes only and does not constitute an offer to sell or a solicitation of an offer to buy any securities. HTD is a redemption receipt, not a stablecoin. Tokens may have no value.
+        </p>
+
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+  </script>
+
+  <!-- ASYNC FORMSPREE SCRIPT -->
+  <script>
+    (function() {
+      const form = document.getElementById('merchant-form');
+      const status = document.getElementById('merchant-status');
+      const btn = document.getElementById('merchant-submit-btn');
+
+      if (!form) return;
+
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        btn.disabled = true;
+        btn.textContent = 'Submitting...';
+
+        try {
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+              'Accept': 'application/json'
+            }
+          });
+
+          if (response.ok) {
+            status.textContent = 'Thank you! Your merchant onboarding request has been submitted. Our team will contact you via Digicel MonCash.';
+            status.className = 'text-xs font-semibold p-4 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 block';
+            form.reset();
+          } else {
+            const data = await response.json();
+            const errorMsg = data.errors ? data.errors.map(err => err.message).join(', ') : 'Submission failed. Please try again.';
+            throw new Error(errorMsg);
+          }
+        } catch (err) {
+          status.textContent = err.message || 'Something went wrong. Please reach out to admin@haitiandollar.com directly.';
+          status.className = 'text-xs font-semibold p-4 rounded-lg bg-brandRed/10 text-brandRed border border-brandRed/30 block';
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'Submit Merchant Onboarding Request';
+        }
+      });
+    })();
+  </script>
+  <!-- COOKIE CONSENT BANNER — Compact -->
+  <div 
+    id="cookie-consent-banner" 
+    class="hidden fixed bottom-0 left-0 right-0 z-[100] bg-white border-t border-borderGray shadow-[0_-4px_20px_rgba(0,0,0,0.08)] transition-transform duration-300 transform translate-y-full"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="cookie-title"
+  >
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4">
+      <div class="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-6">
+
+        <!-- Left: Text -->
+        <div class="flex-1 min-w-0">
+          <p class="text-xs sm:text-sm text-ink/80 leading-snug">
+            <strong class="font-display font-bold text-ink">We use cookies.</strong>
+            Essential cookies keep the site working. Analytics cookies help us understand usage. Read our
+            <a href="/legal.html#privacy" class="underline text-brandRed hover:text-ink font-medium">Privacy Policy</a>.
+          </p>
+        </div>
+
+        <!-- Center: Toggles -->
+        <div class="flex items-center gap-3 sm:gap-4 text-[11px] sm:text-xs">
+          <label class="flex items-center gap-2 cursor-not-allowed opacity-70 select-none" title="Required">
+            <input type="checkbox" checked disabled class="w-3.5 h-3.5 rounded cursor-not-allowed" />
+            <span class="font-display font-bold text-ink whitespace-nowrap">Necessary</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer select-none">
+            <input type="checkbox" id="cookie-analytics" checked class="w-3.5 h-3.5 rounded cursor-pointer" />
+            <span class="font-display font-bold text-ink whitespace-nowrap">Analytics</span>
+          </label>
+        </div>
+
+        <!-- Right: Buttons -->
+        <div class="flex items-center gap-2 flex-shrink-0">
+          <button type="button" id="btn-reject-all" class="px-3 py-2 rounded-lg border border-borderGray bg-white text-ink font-display font-bold text-xs hover:border-ink transition-colors whitespace-nowrap">
+            Reject
+          </button>
+          <button type="button" id="btn-allow-analytics" class="px-4 py-2 rounded-lg bg-brandRed text-white font-display font-bold text-xs hover:bg-brandRed/90 transition-colors whitespace-nowrap">
+            Accept
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function initCookieBanner() {
+      const banner = document.getElementById('cookie-consent-banner');
+      const analyticsCheck = document.getElementById('cookie-analytics');
+      const btnReject = document.getElementById('btn-reject-all');
+      const btnAllow = document.getElementById('btn-allow-analytics');
+
+      if (!banner) return;
+
+      const stored = localStorage.getItem('htd_cookie_consent');
+      if (!stored) {
+        banner.classList.remove('hidden');
+        setTimeout(() => banner.classList.remove('translate-y-full'), 50);
+      }
+
+      function dismissBanner() {
+        banner.classList.add('translate-y-full');
+        setTimeout(() => banner.classList.add('hidden'), 300);
+      }
+
+      function applyConsent(settings) {
+        localStorage.setItem('htd_cookie_consent', JSON.stringify(settings));
+        if (typeof gtag === 'function') {
+          gtag('consent', 'update', {
+            'analytics_storage': settings.analytics ? 'granted' : 'denied',
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'functionality_storage': 'denied',
+            'security_storage': 'granted'
+          });
+        }
+        dismissBanner();
+      }
+
+      btnReject.addEventListener('click', () => {
+        applyConsent({ necessary: true, analytics: false });
+      });
+
+      btnAllow.addEventListener('click', () => {
+        applyConsent({ necessary: true, analytics: analyticsCheck ? analyticsCheck.checked : true });
+      });
+    })();
+
+    // Cookie Settings link handler (used in footer)
+    function resetCookieConsent() {
+      localStorage.removeItem('htd_cookie_consent');
+      window.location.reload();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+name: Update BRH Daily Rates
+
+on:
+  schedule:
+    # 13:00 UTC = 9:00 AM EDT / 8:00 AM EST (Monday - Saturday)
+    - cron: '0 13 * * 1-6'
+    # 15:30 UTC = 11:30 AM EDT / 10:30 AM EST (Monday - Saturday backup run)
+    - cron: '30 15 * * 1-6'
+  workflow_dispatch: # Allows manual one-click trigger from the GitHub Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-and-update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run BRH rate scraper
+        run: npm run fetch-rates
+
+      - name: Sync to public folder
+        run: |
+          mkdir -p public
+          cp htd-quote.json public/htd-quote.json
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add htd-quote.json public/htd-quote.json
+          if git diff --staged --quiet; then
+            echo "No rate changes detected today."
+          else
+            git commit -m "chore(rates): update BRH daily quotations [skip ci]"
+            git push
+          fi

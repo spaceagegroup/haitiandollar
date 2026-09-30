@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Haitian Dollar (HTD) | News &amp; Updates</title>
+    <link>https://haitiandollar.com/news</link>
+    <description>Official announcements, product updates, and pilot milestones from Haitian Dollar Inc — a Reg D 506(b) issuer building digital settlement infrastructure for the Haitian Dollar.</description>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 29 Sep 2026 12:00:00 EST</lastBuildDate>
+    <atom:link href="https://haitiandollar.com/feed.xml" rel="self" type="application/rss+xml" />
+
+    <item>
+      <title>Haitian Dollar Inc. Issues Update to Prior Investors and Clarifies Regulatory Status</title>
+      <link>https://haitiandollar.com/news/prior-investor-update.html</link>
+      <guid isPermaLink="false">htd-pr-2026-001</guid>
+      <pubDate>Tue, 29 Sep 2026 12:00:00 EST</pubDate>
+      <category>Press Release</category>
+      <description><![CDATA[BALTIMORE, MD — Haitian Dollar Inc. (CIK 0001906040) today issued a formal update to prior investors, clarifying its closed offering status under Rule 506(b) and outlining architecture migration to Base L2.]]></description>
+    </item>
+
+    <item>
+      <title>Form D/A Filed With SEC</title>
+      <link>https://haitiandollar.com/news</link>
+      <guid isPermaLink="false">htd-news-001</guid>
+      <pubDate>Mon, 25 Jul 2022 12:00:00 EST</pubDate>
+      <category>Compliance</category>
+      <description><![CDATA[Haitian Dollar Inc files an amendment to its Form D under Rule 506(b) with the U.S. Securities and Exchange Commission. CIK 0001906040 is publicly available on EDGAR for independent verification.]]></description>
+    </item>
+
+    <item>
+      <title>USPTO Registers Haitian Dollar Trademark</title>
+      <link>https://haitiandollar.com/news</link>
+      <guid isPermaLink="false">htd-news-002</guid>
+      <pubDate>Tue, 09 Feb 2021 12:00:00 EST</pubDate>
+      <category>Trademark</category>
+      <description><![CDATA[USPTO Serial 88319997 is registered with the United States Patent and Trademark Office for financial services and cryptocurrency exchange. The Haitian Dollar mark is now a protected asset of Haitian Dollar Inc.]]></description>
+    </item>
+
+    <item>
+      <title>First Token Sale Completed</title>
+      <link>https://haitiandollar.com/news</link>
+      <guid isPermaLink="false">htd-news-003</guid>
+      <pubDate>Tue, 19 Jul 2022 12:00:00 EST</pubDate>
+      <category>Milestone</category>
+      <description><![CDATA[Initial issuance of HTD tokens completed. Form D/A reports the date of first sale as July 19, 2022.]]></description>
+    </item>
+
+    <item>
+      <title>Haitian Dollar Inc Incorporated in Maryland</title>
+      <link>https://haitiandollar.com/news</link>
+      <guid isPermaLink="false">htd-news-004</guid>
+      <pubDate>Fri, 01 Jan 2021 12:00:00 EST</pubDate>
+      <category>Corporate</category>
+      <description><![CDATA[Haitian Dollar Inc is incorporated in the State of Maryland as a C-Corporation, establishing the legal foundation for the project.]]></description>
+    </item>
+
+    <item>
+      <title>Haitian Dollar Whitepaper Published</title>
+      <link>https://haitiandollar.com/news</link>
+      <guid isPermaLink="false">htd-news-005</guid>
+      <pubDate>Tue, 20 Oct 2020 12:00:00 EST</pubDate>
+      <category>Announcement</category>
+      <description><![CDATA[Honson Luma publishes the first Haitian Dollar Whitepaper, laying out the historical foundation of the 1912 5:1 gourde peg and outlining the technology vision for the digital Haitian Dollar.]]></description>
+    </item>
+
+    <item>
+      <title>HTD Architecture Migrating to Modern On-Chain Infrastructure</title>
+      <link>https://haitiandollar.com/news</link>
+      <guid isPermaLink="false">htd-news-006</guid>
+      <pubDate>Mon, 01 Jan 2026 12:00:00 EST</pubDate>
+      <category>Product</category>
+      <description><![CDATA[HTD is being built on a modern on-chain environment with elastic supply — minted on deposit, burned on redemption. No fixed cap. Supply will mirror the Haitian Gourde reserve at a fixed 5:1 convention.]]></description>
+    </item>
+
+    <item>
+      <title>Pilot Framework in Development for Port-au-Prince</title>
+      <link>https://haitiandollar.com/news</link>
+      <guid isPermaLink="false">htd-news-007</guid>
+      <pubDate>Mon, 01 Jan 2026 12:00:00 EST</pubDate>
+      <category>Development</category>
+      <description><![CDATA[The Phase 1 pilot framework is being finalized for partner merchants and diaspora senders in Port-au-Prince. The program will allow users to buy, send, and redeem HTD at 1 HTD = 5 HTG.]]></description>
+    </item>
+  </channel>
+</rss>

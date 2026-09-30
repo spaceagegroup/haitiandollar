@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <!-- Google Consent Mode v2 + GA4 -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    const savedConsent = JSON.parse(localStorage.getItem('htd_cookie_consent') || 'null');
+
+    if (savedConsent) {
+      gtag('consent', 'default', {
+        'analytics_storage': savedConsent.analytics ? 'granted' : 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'functionality_storage': 'denied',
+        'security_storage': 'granted'
+      });
+    } else {
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'functionality_storage': 'denied',
+        'security_storage': 'granted'
+      });
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'G-DMBN9HX803');
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DMBN9HX803"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <title>Legal &amp; Disclosures | Haitian Dollar Inc</title>
+  <meta name="description" content="Legal notices, SEC regulatory status, risk factors, terms of service, and privacy policy for Haitian Dollar Inc.">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="alternate" type="application/rss+xml" title="Haitian Dollar (HTD) News" href="/feed.xml">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandYellow: '#FCC419',
+            brandRed: '#E03131',
+            ink: '#0A0A0A',
+            offWhite: '#FFFBF0',
+            borderGray: '#E5E5E5',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; scroll-padding-top: 145px; }
+    .legal-body p { margin-bottom: 1rem; }
+    .legal-body ul { margin-bottom: 1rem; padding-left: 1.5rem; list-style-type: disc; }
+    .legal-body li { margin-bottom: 0.5rem; }
+    .legal-body h3 { margin-top: 2rem; margin-bottom: 1rem; }
+
+    /* In-Page Navigation Styles */
+    .legal-nav-item {
+      transition: color 0.15s ease;
+    }
+    .legal-nav-item:hover {
+      color: #E03131;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+
+<body class="bg-offWhite text-ink font-sans antialiased selection:bg-brandYellow selection:text-ink">
+
+  <!-- TOP COMPLIANCE NOTIFICATION BAR -->
+  <aside aria-label="Regulatory Notice" class="bg-ink text-white/80 text-xs py-2 px-4 border-b border-white/10">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-2 text-center sm:text-left">
+        <img src="/logo.png" alt="HTD" class="w-4 h-4 rounded-full" />
+        <span>Haitian Dollar Inc. (SEC CIK 0001906040) · Not currently offering or soliciting securities</span>
+      </div>
+      <a href="#risk" class="underline hover:text-brandYellow transition-colors">Offering &amp; Risk Disclosures</a>
+    </div>
+  </aside>
+
+  <!-- NAVIGATION -->
+  <header class="sticky top-0 z-50 bg-offWhite/90 backdrop-blur-md border-b border-borderGray">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-brandRed">
+          <img src="/logo.png" alt="Haitian Dollar" class="w-full h-full object-cover" />
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display font-black text-xl leading-none tracking-tight text-ink">HAITIAN DOLLAR</span>
+          <span class="text-[10px] font-semibold tracking-widest text-ink/60 uppercase">1 HTD = 5 HTG</span>
+        </div>
+      </a>
+
+      <!-- Desktop Links -->
+      <div class="hidden md:flex items-center gap-8 font-medium text-sm">
+        <a href="/about.html" class="text-ink hover:text-brandRed transition-colors">About</a>
+        <a href="/htd.html" class="text-ink hover:text-brandRed transition-colors">HTD Token</a>
+        <a href="/merchants.html" class="text-ink hover:text-brandRed transition-colors">Merchants</a>
+        <a href="/users.html" class="text-ink hover:text-brandRed transition-colors">Users</a>
+        <a href="/investors.html" class="text-ink hover:text-brandRed transition-colors">Investors</a>
+        <a href="/news.html" class="text-ink hover:text-brandRed transition-colors">News</a>
+        <a href="/contact.html" class="text-ink hover:text-brandRed transition-colors">Contact</a>
+      </div>
+
+      <!-- Action Button -->
+      <div class="flex items-center gap-3">
+        <a href="/contact.html" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-brandRed text-white font-display font-bold text-sm hover:bg-brandRed/90 transition-all shadow-sm">
+          Contact Us
+        </a>
+        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-ink hover:bg-black/5" aria-label="Toggle Menu">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden border-b border-borderGray bg-offWhite px-4 pt-3 pb-6 space-y-3 font-medium text-base">
+      <!-- Mobile Live Rate Pill -->
+      <a href="/htd.html#official-rates" class="flex items-center justify-between p-3 rounded-xl bg-brandYellow/20 border border-brandYellow/50 hover:bg-brandYellow/30 transition-colors">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="text-xs font-mono font-bold text-ink">1 HTD = 5 HTG</span>
+        </div>
+        <span class="text-xs font-mono font-bold text-brandRed flex items-center gap-1">
+          <span class="mobile-drawer-rate">$0.0382</span> USD &rarr;
+        </span>
+      </a>
+
+      <a href="/about.html" class="block py-2 text-ink hover:text-brandRed">About</a>
+      <a href="/htd.html" class="block py-2 text-ink hover:text-brandRed">HTD Token</a>
+      <a href="/merchants.html" class="block py-2 text-ink hover:text-brandRed">Merchants</a>
+      <a href="/users.html" class="block py-2 text-ink hover:text-brandRed">Users</a>
+      <a href="/investors.html" class="block py-2 text-ink hover:text-brandRed">Investors</a>
+      <a href="/news.html" class="block py-2 text-ink hover:text-brandRed">News</a>
+      <a href="/contact.html" class="block py-2 text-ink hover:text-brandRed">Contact</a>
+      <a href="/contact.html" class="block w-full text-center py-3 rounded-lg bg-brandRed text-white font-display font-bold">Contact Us</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="py-16 sm:py-20 border-b border-borderGray bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+        <div class="inline-flex items-center gap-2 bg-brandRed/10 border border-brandRed/30 text-ink px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
+          <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
+          Legal &amp; Disclosures
+        </div>
+        <h1 class="font-display font-black text-4xl sm:text-5xl text-ink tracking-tight">
+          Legal Notices
+        </h1>
+        <p class="text-base sm:text-lg text-ink/70 leading-relaxed max-w-2xl mx-auto">
+          This page consolidates the legal notices, offering disclosures, terms of service, and privacy policy governing the use of Haitian Dollar Inc's website, applications, and token.
+        </p>
+      </div>
+    </section>
+
+    <!-- IN-PAGE NAVIGATION (STICKY WITH SCROLL-SPY) -->
+    <nav id="legal-subnav" aria-label="Legal document sections" class="sticky top-20 z-40 bg-offWhite/95 backdrop-blur-md border-b border-borderGray shadow-sm transition-all">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center gap-1 sm:gap-2 overflow-x-auto no-scrollbar py-2 text-xs sm:text-sm font-medium">
+          <a href="#risk" class="legal-nav-item flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-ink/70 whitespace-nowrap">
+            <i data-lucide="alert-triangle" class="w-4 h-4 opacity-70"></i>
+            <span>Risk Disclosures</span>
+          </a>
+          <a href="#reg-d" class="legal-nav-item flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-ink/70 whitespace-nowrap">
+            <i data-lucide="file-check" class="w-4 h-4 opacity-70"></i>
+            <span>Reg D 506(b) Notice</span>
+          </a>
+          <a href="#terms" class="legal-nav-item flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-ink/70 whitespace-nowrap">
+            <i data-lucide="scroll-text" class="w-4 h-4 opacity-70"></i>
+            <span>Terms of Service</span>
+          </a>
+          <a href="#privacy" class="legal-nav-item flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-ink/70 whitespace-nowrap">
+            <i data-lucide="shield-check" class="w-4 h-4 opacity-70"></i>
+            <span>Privacy Policy</span>
+          </a>
+          <a href="#contact-legal" class="legal-nav-item flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-ink/70 whitespace-nowrap">
+            <i data-lucide="mail" class="w-4 h-4 opacity-70"></i>
+            <span>Legal Contact</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- 1. RISK DISCLOSURES -->
+    <section id="risk" class="py-16 border-b border-borderGray bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 legal-body">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-lg bg-brandRed/10 flex items-center justify-center">
+            <i data-lucide="alert-triangle" class="w-6 h-6 text-brandRed"></i>
+          </div>
+          <h2 class="font-display font-black text-3xl text-ink">Risk Disclosures</h2>
+        </div>
+
+        <div class="bg-brandRed/5 border-l-4 border-brandRed p-6 rounded-r-xl mb-8">
+          <p class="font-display font-bold text-ink mb-2">TOKENS MAY HAVE NO VALUE. BUYER MAY LOSE ALL AMOUNTS PAID.</p>
+          <p class="text-sm text-ink/70">Any investment in or use of HTD involves significant risk. Read this section carefully before interacting with the HTD token.</p>
+        </div>
+
+        <h3 class="font-display font-bold text-xl text-ink">General Risk Statement</h3>
+        <p class="text-ink/80 leading-relaxed">
+          HTD is a digital token issued by Haitian Dollar Inc. It is not a stablecoin, not a government currency, and not insured or guaranteed by any governmental authority, central bank, or deposit insurance scheme. The value of HTD, if any, may fluctuate and may be zero.
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">Regulatory Risk</h3>
+        <p class="text-ink/80 leading-relaxed">
+          The legal and regulatory treatment of digital assets continues to evolve in the United States and internationally. Future laws, regulations, or enforcement actions could adversely affect the legality, transferability, or value of HTD. Haitian Dollar Inc makes no representation that HTD will be legal or permissible in any particular jurisdiction.
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">Operational Risk</h3>
+        <p class="text-ink/80 leading-relaxed">
+          The functionality of HTD depends on the continued availability of third-party infrastructure, including public blockchain networks and mobile payment providers. Any interruption, failure, or delay in these services may temporarily or permanently prevent the redemption, transfer, or use of HTD.
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">Redemption Risk</h3>
+        <p class="text-ink/80 leading-relaxed">
+          While HTD is designed to be redeemable for Haitian Gourdes at the convention rate of 1 HTD to 5 HTG, redemption is subject to the availability of liquidity, the operational status of our partner network, and compliance with applicable law. Redemption may be temporarily paused if reserve levels fall below operational thresholds.
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">Liquidity Risk</h3>
+        <p class="text-ink/80 leading-relaxed">
+          There is no guarantee that a secondary market for HTD will exist or continue to exist. If a secondary market exists, it may be illiquid, and the price at which HTD trades may be materially different from the convention rate.
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">Technology Risk</h3>
+        <p class="text-ink/80 leading-relaxed">
+          Blockchain-based systems and cryptographic tokens are subject to technological risks including, but not limited to, bugs, exploits, consensus failures, and network congestion. Haitian Dollar Inc does not control the underlying blockchain network and cannot guarantee its ongoing security or availability.
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">No Investment Advice</h3>
+        <p class="text-ink/80 leading-relaxed">
+          Nothing on this website, in any of our documents, or in any communication with Haitian Dollar Inc constitutes investment, financial, legal, tax, or accounting advice. You should consult your own advisors before acquiring, holding, or disposing of HTD.
+        </p>
+      </div>
+    </section>
+
+    <!-- 2. REG D 506(b) NOTICE -->
+    <section id="reg-d" class="py-16 border-b border-borderGray bg-offWhite">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 legal-body">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-lg bg-brandYellow/40 flex items-center justify-center">
+            <i data-lucide="file-check" class="w-6 h-6 text-ink"></i>
+          </div>
+          <h2 class="font-display font-black text-3xl text-ink">SEC Regulatory Notice &amp; Exemption Status</h2>
+        </div>
+
+        <!-- Current Regulatory Status Callout -->
+        <div class="p-5 rounded-2xl bg-amber-50 border-2 border-amber-200 text-ink space-y-2 mb-8">
+          <div class="flex items-center gap-2 text-brandRed font-display font-bold text-sm uppercase tracking-wide">
+            <i data-lucide="shield-alert" class="w-4 h-4"></i>
+            <span>Current Offering Status: No Active Solicitation</span>
+          </div>
+          <p class="text-xs sm:text-sm text-ink/90 leading-relaxed font-semibold">
+            Haitian Dollar Inc. is an SEC CIK-registered entity (CIK 0001906040). HTD operates as a digital unit of account and redemption receipt. Haitian Dollar Inc. is not currently offering or soliciting securities.
+          </p>
+          <p class="text-xs text-ink/70 leading-relaxed">
+            The historical Form D and Form D/A filings on EDGAR document past private placements and remain accessible as public records. The project is focused on protocol development, utility settlement, and merchant ecosystem deployment.
+          </p>
+        </div>
+
+        <h3 class="font-display font-bold text-xl text-ink">Corporate &amp; Regulatory Identity</h3>
+        <ul class="text-ink/80 leading-relaxed">
+          <li><strong>Entity Name:</strong> Haitian Dollar Inc.</li>
+          <li><strong>Jurisdiction of Incorporation:</strong> Maryland, United States</li>
+          <li><strong>Year of Incorporation:</strong> 2021</li>
+          <li><strong>Principal Place of Business:</strong> Baltimore, Maryland</li>
+          <li><strong>SEC Central Index Key (CIK):</strong> 0001906040</li>
+          <li><strong>Offering Status:</strong> Not currently offering or soliciting securities.</li>
+        </ul>
+
+        <h3 class="font-display font-bold text-xl text-ink">Historical Form D Filings</h3>
+        <p class="text-ink/80 leading-relaxed">
+          Haitian Dollar Inc. previously filed a Form D Notice of Exempt Offering of Securities with the U.S. Securities and Exchange Commission under Section 4(a)(2) and Rule 506(b) of Regulation D. Under SEC rules, Form D filings reflect the historical terms of exempt private placements and stand as permanent public records on the SEC's EDGAR system.
+        </p>
+        <p class="text-ink/80 leading-relaxed">
+          <a href="https://www.sec.gov/edgar/browse/?CIK=0001906040" target="_blank" rel="noopener" class="text-brandRed font-semibold underline">View filings on SEC EDGAR &rarr;</a>
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">No General Solicitation &amp; Informational Scope</h3>
+        <p class="text-ink/80 leading-relaxed">
+          This website is provided exclusively for informational, technical, and educational purposes. Nothing on this website constitutes an offer to sell, a solicitation of an offer to buy, or a recommendation of any security or investment product. Haitian Dollar Inc. does not engage in general solicitation or advertising for securities issuance.
+        </p>
+        <p class="text-ink/80 leading-relaxed">
+          HTD is designed and operated as an on-chain digital unit of account and 1:5 redemption receipt for Haitian Gourdes (HTG), engineered to facilitate everyday commerce and diaspora remittance settlement.
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">Restrictions on Transfer</h3>
+        <p class="text-ink/80 leading-relaxed">
+          Any historical securities issued in reliance on Regulation D are "restricted securities" within the meaning of Rule 144 under the Securities Act of 1933 and may not be transferred or resold absent registration or an applicable exemption under federal and state securities laws.
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">Trademark Notice</h3>
+        <p class="text-ink/80 leading-relaxed">
+          "Haitian Dollar" and the associated logo are registered trademarks of Haitian Dollar Inc with the United States Patent and Trademark Office, Serial Number 88319997, in connection with financial services and cryptocurrency exchange services.
+        </p>
+      </div>
+    </section>
+
+    <!-- 3. TERMS OF SERVICE -->
+    <section id="terms" class="py-16 border-b border-borderGray bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 legal-body">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-lg bg-brandYellow/40 flex items-center justify-center">
+            <i data-lucide="scroll-text" class="w-6 h-6 text-ink"></i>
+          </div>
+          <h2 class="font-display font-black text-3xl text-ink">Terms of Service</h2>
+        </div>
+
+        <p class="text-ink/80 leading-relaxed">
+          <em>Last updated: 2026</em>
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">1. Acceptance of Terms</h3>
+        <p class="text-ink/80 leading-relaxed">
+          By accessing or using the Haitian Dollar Inc website, mobile applications, or token services (collectively, the "Services"), you agree to be bound by these Terms of Service. If you do not agree, do not use the Services.
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">2. Eligibility</h3>
+        <p class="text-ink/80 leading-relaxed">
+          You must be at least 18 years of age and legally competent to enter into binding contracts in your jurisdiction. You are responsible for ensuring that your use of the Services complies with all applicable laws.
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">3. Description of Services</h3>
+        <p class="text-ink/80 leading-relaxed">
+          The Services allow users to acquire, hold, transfer, and redeem HTD tokens. HTD is a digital redemption receipt for Haitian Gourde liquidity held in reserve by Haitian Dollar Inc or its designated partners.
+        </p>
+        <p class="text-ink/80 leading-relaxed">
+          The Services are provided on an "as is" and "as available" basis. Haitian Dollar Inc makes no warranty that the Services will be uninterrupted, error-free, or secure.
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">4. No Custody of Private Keys</h3>
+        <p class="text-ink/80 leading-relaxed">
+          Where the Services involve blockchain-based tokens, you may be solely responsible for maintaining the security of your wallet credentials, private keys, or account passwords. Haitian Dollar Inc does not custody your private keys unless expressly stated in a separate written agreement.
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">5. User Conduct</h3>
+        <p class="text-ink/80 leading-relaxed">
+          You agree not to:
+        </p>
+        <ul class="text-ink/80 leading-relaxed">
+          <li>Use the Services for any unlawful purpose, including money laundering, terrorist financing, or sanctions evasion;</li>
+          <li>Attempt to gain unauthorized access to the Services or interfere with their operation;</li>
+          <li>Use the Services in any manner that could damage, disable, or impair the Services;</li>
+          <li>Circumvent any geographic or compliance restrictions placed on the Services.</li>
+        </ul>
+
+        <h3 class="font-display font-bold text-xl text-ink">6. Compliance and Identity Verification</h3>
+        <p class="text-ink/80 leading-relaxed">
+          Haitian Dollar Inc may be required by law to verify your identity and the source of your funds. You agree to cooperate with reasonable requests for identity verification, documentation, and information.
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">7. Fees</h3>
+        <p class="text-ink/80 leading-relaxed">
+          Certain transactions may be subject to fees, including a 3% redemption fee for converting HTD to Haitian Gourdes through the MonCash bridge, and a 0.5% merchant processing fee on commercial transactions. Fees are disclosed in the app and may be updated from time to time. Continued use of the Services after a fee change constitutes acceptance of the new fee.
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">8. Suspension and Termination</h3>
+        <p class="text-ink/80 leading-relaxed">
+          Haitian Dollar Inc reserves the right to suspend or terminate your access to the Services at any time, with or without notice, for any reason, including suspected fraud, violation of these Terms, or compliance requirements.
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">9. Limitation of Liability</h3>
+        <p class="text-ink/80 leading-relaxed">
+          To the maximum extent permitted by law, Haitian Dollar Inc shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or relating to your use of the Services, including but not limited to loss of tokens, loss of data, or loss of profits.
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">10. Governing Law</h3>
+        <p class="text-ink/80 leading-relaxed">
+          These Terms are governed by the laws of the State of Maryland, without regard to conflict-of-law principles. Any dispute shall be resolved in the state or federal courts located in Maryland.
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">11. Amendments</h3>
+        <p class="text-ink/80 leading-relaxed">
+          Haitian Dollar Inc may update these Terms from time to time. Material changes will be posted on this page with an updated "Last updated" date. Continued use of the Services after a change constitutes acceptance of the revised Terms.
+        </p>
+      </div>
+    </section>
+
+    <!-- 4. PRIVACY POLICY -->
+    <section id="privacy" class="py-16 border-b border-borderGray bg-offWhite">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 legal-body">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-lg bg-brandYellow/40 flex items-center justify-center">
+            <i data-lucide="shield-check" class="w-6 h-6 text-ink"></i>
+          </div>
+          <h2 class="font-display font-black text-3xl text-ink">Privacy Policy</h2>
+        </div>
+
+        <p class="text-ink/80 leading-relaxed">
+          <em>Last updated: 2026</em>
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">1. Information We Collect</h3>
+        <p class="text-ink/80 leading-relaxed">
+          We collect information you provide directly to us, including:
+        </p>
+        <ul class="text-ink/80 leading-relaxed">
+          <li>Identity information (name, date of birth, government-issued ID) as required by law;</li>
+          <li>Contact information (phone number, email address, mailing address);</li>
+          <li>Transaction information associated with your use of the Services;</li>
+          <li>Device and technical information (IP address, device type, operating system).</li>
+        </ul>
+
+        <h3 class="font-display font-bold text-xl text-ink">2. How We Use Information</h3>
+        <p class="text-ink/80 leading-relaxed">
+          We use the information we collect to:
+        </p>
+        <ul class="text-ink/80 leading-relaxed">
+          <li>Provide, operate, and maintain the Services;</li>
+          <li>Verify your identity and comply with applicable law;</li>
+          <li>Process transactions and maintain records;</li>
+          <li>Communicate with you regarding your account;</li>
+          <li>Detect, prevent, and address fraud, security, or technical issues;</li>
+          <li>Comply with legal obligations, including responding to lawful requests from authorities.</li>
+        </ul>
+
+        <h3 class="font-display font-bold text-xl text-ink">3. Sharing of Information</h3>
+        <p class="text-ink/80 leading-relaxed">
+          We may share your information with:
+        </p>
+        <ul class="text-ink/80 leading-relaxed">
+          <li>Third-party service providers who assist us in operating the Services, including payment processors, identity verification providers, and cloud hosting providers;</li>
+          <li>Regulatory and law enforcement authorities when required by law or when we believe in good faith that disclosure is necessary to protect rights, property, or safety;</li>
+          <li>Successor entities in the event of a merger, acquisition, or sale of assets.</li>
+        </ul>
+        <p class="text-ink/80 leading-relaxed">
+          We do not sell your personal information to third parties.
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">4. Data Retention</h3>
+        <p class="text-ink/80 leading-relaxed">
+          We retain your information for as long as necessary to fulfill the purposes described in this Privacy Policy, to comply with legal and regulatory obligations, and to resolve disputes. When information is no longer needed, we delete or anonymize it.
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">5. Data Security</h3>
+        <p class="text-ink/80 leading-relaxed">
+          We implement reasonable administrative, technical, and physical safeguards to protect your information. However, no method of transmission or storage is completely secure, and we cannot guarantee absolute security.
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">6. Your Rights</h3>
+        <p class="text-ink/80 leading-relaxed">
+          Depending on your jurisdiction, you may have rights to access, correct, delete, or restrict the processing of your personal information. To exercise these rights, contact us at <a href="mailto:legal@haitiandollar.com" class="text-brandRed font-semibold underline">legal@haitiandollar.com</a>.
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">7. International Transfers</h3>
+        <p class="text-ink/80 leading-relaxed">
+          Your information may be transferred to and processed in countries other than your own, including the United States and Haiti. We take steps to ensure that such transfers comply with applicable data protection laws.
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">8. Children's Privacy</h3>
+        <p class="text-ink/80 leading-relaxed">
+          The Services are not directed to persons under 18. We do not knowingly collect personal information from children.
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">9. Changes to This Policy</h3>
+        <p class="text-ink/80 leading-relaxed">
+          We may update this Privacy Policy from time to time. Material changes will be posted on this page with an updated "Last updated" date.
+        </p>
+      </div>
+    </section>
+
+    <!-- 5. LEGAL CONTACT -->
+    <section id="contact-legal" class="py-16 bg-ink text-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="w-16 h-16 rounded-full bg-brandYellow/20 flex items-center justify-center mx-auto mb-6">
+          <i data-lucide="mail" class="w-8 h-8 text-brandYellow"></i>
+        </div>
+        <h2 class="font-display font-black text-3xl sm:text-4xl text-white mb-4">Legal Contact</h2>
+        <p class="text-white/70 leading-relaxed max-w-2xl mx-auto mb-8">
+          For legal notices, regulatory inquiries, or questions about this page, please contact our legal team.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="/contact.html?type=Legal%20%26%20Compliance" class="inline-flex items-center justify-center h-14 px-8 rounded-lg bg-brandYellow text-ink font-display font-bold text-lg hover:bg-brandYellow/90 transition-all shadow-md">
+            Submit Legal Inquiry Form
+            <i data-lucide="arrow-right" class="w-5 h-5 ml-2"></i>
+          </a>
+          <a href="mailto:legal@haitiandollar.com" class="inline-flex items-center justify-center h-14 px-8 rounded-lg border-2 border-white/30 text-white font-display font-bold text-lg hover:bg-white/10 transition-all">
+            legal@haitiandollar.com
+          </a>
+        </div>
+        <p class="text-xs text-white/40 mt-6">
+          Haitian Dollar Inc &middot; Baltimore, Maryland &middot; CIK 0001906040
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-ink text-white border-t border-white/10 pt-12 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Top: Brand + Links + Contact (single row) -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-10">
+
+                <!-- Brand Column -->
+        <div class="md:col-span-5">
+          <a href="/" class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-brandYellow flex-shrink-0">
+              <img src="/logo.png" alt="Haitian Dollar" class="w-full h-full object-cover" />
+            </div>
+            <span class="font-display font-black text-xl tracking-tight text-white">HAITIAN DOLLAR</span>
+          </a>
+
+          <!-- Bio — indented to align with wordmark -->
+          <div class="pl-[52px] pr-4">
+            <p class="text-white/60 text-xs leading-relaxed mb-1">
+              Digital settlement infrastructure for the Haitian Dollar.
+            </p>
+            <p class="text-brandYellow text-sm font-bold tracking-wide">
+              1 HTD = 5 HTG. Fixed.
+            </p>
+          </div>
+
+          <!-- Social icons -->
+          <div class="pl-[52px] flex items-center gap-3 mt-5">
+            <a href="https://twitter.com/haitiandollar" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-white/10 hover:bg-brandYellow hover:text-ink text-white flex items-center justify-center transition-colors" aria-label="X">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </a>
+            <a href="https://t.me/haitiandollar" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-white/10 hover:bg-brandYellow hover:text-ink text-white flex items-center justify-center transition-colors" aria-label="Telegram">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m20.665 3.717-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701h-.002l-.002.001-.314 4.692c.46 0 .663-.211.921-.46l2.211-2.15 4.599 3.397c.848.467 1.457.227 1.668-.785l3.019-14.228c.309-1.239-.473-1.8-1.282-1.434z"/>
+              </svg>
+            </a>
+            <a href="https://linkedin.com/company/haitian-dollar" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-white/10 hover:bg-brandYellow hover:text-ink text-white flex items-center justify-center transition-colors" aria-label="LinkedIn">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z"/>
+              </svg>
+            </a>
+            <a href="https://facebook.com/haitiandollar" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-white/10 hover:bg-brandYellow hover:text-ink text-white flex items-center justify-center transition-colors" aria-label="Facebook">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.704 0-1.148.064-1.331.191-.322.21-.433.682-.433 1.631v2.163h4.319l-.577 3.667h-3.742v7.98h-5.293z"/>
+              </svg>
+            </a>
+            <a href="https://bitcointalk.org/index.php?topic=5282342.msg56313383#msg56313383" target="_blank" rel="noopener" class="w-9 h-9 rounded-full bg-white/10 hover:bg-brandYellow hover:text-ink text-white flex items-center justify-center transition-colors" aria-label="BitcoinTalk">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M23.638 14.904c-1.602 6.43-8.113 10.34-14.542 8.736C2.67 22.05-1.244 15.525.362 9.105 1.962 2.67 8.482-1.244 14.91.36 21.34 1.962 25.25 8.48 23.638 14.904zm-7.604-5.068c.245-1.636-.998-2.518-2.7-3.106l.55-2.21-1.344-.336-.536 2.146c-.352-.088-.716-.172-1.077-.255l.54-2.164-1.345-.335-.553 2.216c-.293-.067-.58-.133-.859-.204l.002-.007-1.855-.463-.357 1.435s.998.229.977.243c.545.136.643.498.627.785l-.628 2.518c.038.01.086.024.14.045l-.143-.035-.88 3.529c-.066.166-.236.415-.617.32.02.03-.978-.244-.978-.244l-.668 1.543 1.751.437c.326.082.646.167.962.248l-.558 2.24 1.344.335.552-2.213c.368.1.724.192 1.072.28l-.549 2.203 1.345.336.558-2.235c2.296.435 4.022.26 4.748-1.817.585-1.674-.03-2.64-1.238-3.267.88-.203 1.542-.782 1.72-1.977zm-3.078 4.316c-.417 1.672-3.238.769-4.152.542l.74-2.97c.915.228 3.844.678 3.412 2.428zm.418-4.34c-.38 1.523-2.73.749-3.492.56l.672-2.693c.762.19 3.212.545 2.82 2.133z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Protocol Links -->
+        <div class="md:col-span-2">
+          <p class="text-[11px] font-display font-bold uppercase tracking-wider text-brandYellow mb-3">Protocol</p>
+          <ul class="text-xs space-y-2 text-white/70">
+            <li><a href="/htd.html" class="hover:text-white transition-colors">What is HTD</a></li>
+            <li><a href="/merchants.html" class="hover:text-white transition-colors">Merchants</a></li>
+            <li><a href="/users.html" class="hover:text-white transition-colors">Users</a></li>
+          </ul>
+        </div>
+
+        <!-- Company Links -->
+        <div class="md:col-span-2">
+          <p class="text-[11px] font-display font-bold uppercase tracking-wider text-brandYellow mb-3">Company</p>
+          <ul class="text-xs space-y-2 text-white/70">
+            <li><a href="/about.html" class="hover:text-white transition-colors">About</a></li>
+            <li><a href="/investors.html" class="hover:text-white transition-colors">Investors</a></li>
+            <li><a href="/news.html" class="hover:text-white transition-colors">News</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact (single row) -->
+        <div class="md:col-span-3">
+          <p class="text-[11px] font-display font-bold uppercase tracking-wider text-brandYellow mb-3">
+            <a href="/contact.html" class="hover:underline">Contact</a>
+          </p>
+          <ul class="text-xs space-y-2 text-white/70 font-mono">
+            <li><a href="/contact.html" class="text-brandYellow hover:text-white transition-colors font-sans font-semibold flex items-center gap-1">Online Contact Form &rarr;</a></li>
+            <li><a href="mailto:admin@haitiandollar.com" class="hover:text-white transition-colors">admin@haitiandollar.com</a></li>
+            <li><a href="mailto:legal@haitiandollar.com" class="hover:text-white transition-colors">legal@haitiandollar.com</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Divider -->
+      <div class="border-t border-white/10 pt-6">
+
+        <!-- Privacy / Legal / Copyright row -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-[11px] text-white/40 mb-4">
+          <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <a href="/legal.html" class="hover:text-brandYellow transition-colors">Privacy Policy</a>
+            <span class="text-white/20 hidden sm:inline">·</span>
+            <a href="/legal.html" class="hover:text-brandYellow transition-colors">Terms of Service</a>
+            <span class="text-white/20 hidden sm:inline">·</span>
+            <a href="/legal.html#reg-d" class="hover:text-brandYellow transition-colors">SEC Regulatory Notice</a>
+            <span class="text-white/20 hidden sm:inline">·</span>
+            <a href="/feed.xml" class="hover:text-brandYellow transition-colors">RSS</a>
+            <span class="text-white/20 hidden sm:inline">·</span>
+            <a href="#" onclick="resetCookieConsent(); return false;" class="hover:text-brandYellow transition-colors">Cookie Settings</a>
+          </div>
+          <p>&reg; <span id="year">2026</span> Haitian Dollar Inc.</p>
+        </div>
+
+        <!-- Disclaimer -->
+        <p class="text-[10px] text-white/30 leading-relaxed max-w-4xl">
+          <strong class="text-white/40">DISCLAIMER:</strong> Haitian Dollar Inc. is an SEC CIK-registered entity (CIK 0001906040). HTD operates as a digital unit of account and redemption receipt. Haitian Dollar Inc. is not currently offering or soliciting securities. This website is provided for informational purposes only and does not constitute an offer to sell or a solicitation of an offer to buy any securities. HTD is a redemption receipt, not a stablecoin. Tokens may have no value.
+        </p>
+
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    lucide.createIcons();
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    if (btn && menu) btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+  </script>
+  <!-- COOKIE CONSENT BANNER — Compact -->
+  <div 
+    id="cookie-consent-banner" 
+    class="hidden fixed bottom-0 left-0 right-0 z-[100] bg-white border-t border-borderGray shadow-[0_-4px_20px_rgba(0,0,0,0.08)] transition-transform duration-300 transform translate-y-full"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="cookie-title"
+  >
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4">
+      <div class="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-6">
+
+        <!-- Left: Text -->
+        <div class="flex-1 min-w-0">
+          <p class="text-xs sm:text-sm text-ink/80 leading-snug">
+            <strong class="font-display font-bold text-ink">We use cookies.</strong>
+            Essential cookies keep the site working. Analytics cookies help us understand usage. Read our
+            <a href="/legal.html#privacy" class="underline text-brandRed hover:text-ink font-medium">Privacy Policy</a>.
+          </p>
+        </div>
+
+        <!-- Center: Toggles -->
+        <div class="flex items-center gap-3 sm:gap-4 text-[11px] sm:text-xs">
+          <label class="flex items-center gap-2 cursor-not-allowed opacity-70 select-none" title="Required">
+            <input type="checkbox" checked disabled class="w-3.5 h-3.5 rounded cursor-not-allowed" />
+            <span class="font-display font-bold text-ink whitespace-nowrap">Necessary</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer select-none">
+            <input type="checkbox" id="cookie-analytics" checked class="w-3.5 h-3.5 rounded cursor-pointer" />
+            <span class="font-display font-bold text-ink whitespace-nowrap">Analytics</span>
+          </label>
+        </div>
+
+        <!-- Right: Buttons -->
+        <div class="flex items-center gap-2 flex-shrink-0">
+          <button type="button" id="btn-reject-all" class="px-3 py-2 rounded-lg border border-borderGray bg-white text-ink font-display font-bold text-xs hover:border-ink transition-colors whitespace-nowrap">
+            Reject
+          </button>
+          <button type="button" id="btn-allow-analytics" class="px-4 py-2 rounded-lg bg-brandRed text-white font-display font-bold text-xs hover:bg-brandRed/90 transition-colors whitespace-nowrap">
+            Accept
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function initCookieBanner() {
+      const banner = document.getElementById('cookie-consent-banner');
+      const analyticsCheck = document.getElementById('cookie-analytics');
+      const btnReject = document.getElementById('btn-reject-all');
+      const btnAllow = document.getElementById('btn-allow-analytics');
+
+      if (!banner) return;
+
+      const stored = localStorage.getItem('htd_cookie_consent');
+      if (!stored) {
+        banner.classList.remove('hidden');
+        setTimeout(() => banner.classList.remove('translate-y-full'), 50);
+      }
+
+      function dismissBanner() {
+        banner.classList.add('translate-y-full');
+        setTimeout(() => banner.classList.add('hidden'), 300);
+      }
+
+      function applyConsent(settings) {
+        localStorage.setItem('htd_cookie_consent', JSON.stringify(settings));
+        if (typeof gtag === 'function') {
+          gtag('consent', 'update', {
+            'analytics_storage': settings.analytics ? 'granted' : 'denied',
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'functionality_storage': 'denied',
+            'security_storage': 'granted'
+          });
+        }
+        dismissBanner();
+      }
+
+      btnReject.addEventListener('click', () => {
+        applyConsent({ necessary: true, analytics: false });
+      });
+
+      btnAllow.addEventListener('click', () => {
+        applyConsent({ necessary: true, analytics: analyticsCheck ? analyticsCheck.checked : true });
+      });
+    })();
+
+    // Cookie Settings link handler (used in footer)
+    function resetCookieConsent() {
+      localStorage.removeItem('htd_cookie_consent');
+      window.location.reload();
+    }
+  </script>
+</body>
+</html>
