@@ -2,10 +2,12 @@ name: Update BRH Daily Rates
 
 on:
   schedule:
-    # 13:00 UTC = 9:00 AM EDT / 8:00 AM EST (Monday - Saturday)
-    - cron: '0 13 * * 1-6'
-    # 15:30 UTC = 11:30 AM EDT / 10:30 AM EST (Monday - Saturday backup run)
-    - cron: '30 15 * * 1-6'
+    # 7:00 AM ET (11:00 UTC during EDT / 12:00 UTC during EST) - Monday through Saturday
+    - cron: '0 11 * * 1-6'
+    - cron: '0 12 * * 1-6'
+    # 11:00 AM ET Re-check (15:00 UTC during EDT / 16:00 UTC during EST) - Monday through Saturday
+    - cron: '0 15 * * 1-6'
+    - cron: '0 16 * * 1-6'
   workflow_dispatch: # Allows manual one-click trigger from the GitHub Actions tab
 
 permissions:
@@ -14,12 +16,16 @@ permissions:
 jobs:
   fetch-and-update:
     runs-on: ubuntu-latest
+    env:
+      HAS_FIREBASE_SECRET: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_HAITIAN_DOLLAR_CONNECT != '' }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -45,19 +51,17 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add htd-quote.json public/htd-quote.json
           if git diff --staged --quiet; then
-            echo "No rate changes detected today."
+            echo "No rate changes detected."
             echo "changed=false" >> $GITHUB_OUTPUT
           else
-            git commit -m "chore(rates): update BRH daily quotations [skip ci]"
-            git pull --rebase origin main
-            git push
+            git commit -m "chore(rates): update BRH daily quotations"
+            git pull origin main --rebase
+            git push origin main
             echo "changed=true" >> $GITHUB_OUTPUT
           fi
 
       - name: Deploy updated rates to Firebase Hosting
-        if: (steps.commit_step.outputs.changed == 'true' || github.event_name == 'workflow_dispatch') && env.HAS_SECRET == 'true'
-        env:
-          HAS_SECRET: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_HAITIAN_DOLLAR_CONNECT != '' }}
+        if: (steps.commit_step.outputs.changed == 'true' || github.event_name == 'workflow_dispatch') && env.HAS_FIREBASE_SECRET == 'true'
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'

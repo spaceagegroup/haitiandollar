@@ -369,12 +369,12 @@
 
           <div class="flex justify-between items-center text-white/80 gap-2">
             <span>BRH Reference Rate:</span>
-            <strong class="text-white shrink-0" id="official-rate">1 USD = 130.6026 HTG</strong>
+            <strong class="text-white shrink-0" id="official-rate">1 USD = 130.5300 HTG</strong>
           </div>
 
           <div class="flex justify-between items-center text-white/60 text-xs gap-2">
             <span>Banking Market:</span>
-            <span class="font-mono text-white/70 shrink-0" id="banking-range">130.4043 – 131.1702 HTG</span>
+            <span class="font-mono text-white/70 shrink-0" id="banking-range">130.2834 – 131.2205 HTG</span>
           </div>
 
           <div class="flex justify-between items-center text-white/60 text-xs gap-2">
@@ -391,14 +391,14 @@
 
           <div class="flex justify-between items-center text-white/80 gap-2">
             <span>USD / HTD Ratio:</span>
-            <strong class="text-white shrink-0" id="official-inverse">1 USD = 26.12 HTD</strong>
+            <strong class="text-white shrink-0" id="official-inverse">1 USD = 26.11 HTD</strong>
           </div>
 
           <div class="pt-2 border-t border-white/10"></div>
 
           <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-white/60 text-xs gap-1 sm:gap-2">
             <span class="text-white/60">Exchange Rate Fetched:</span>
-            <span class="font-mono text-white/80 shrink-0 text-left sm:text-right" id="exchange-fetched-at">Wednesday, Sep 30, 2026 at 7:29 AM ET</span>
+            <span class="font-mono text-white/80 shrink-0 text-left sm:text-right" id="exchange-fetched-at">Thursday, Oct 1, 2026 at 5:56 PM ET</span>
           </div>
         </div>
 
@@ -478,7 +478,7 @@
         } catch (err) {}
       }
 
-      const officialHtg = fetchedRate && fetchedRate > 50 ? fetchedRate : 130.6026;
+      const officialHtg = fetchedRate && fetchedRate > 50 ? fetchedRate : 130.5300;
       const rateData = {
         officialRate: officialHtg.toFixed(4),
         officialHtdUsd: (5.0 / officialHtg).toFixed(4),
