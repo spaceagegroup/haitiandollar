@@ -2,12 +2,10 @@ name: Update BRH Daily Rates
 
 on:
   schedule:
-    # 7:00 AM ET (11:00 UTC during EDT / 12:00 UTC during EST) - Monday through Saturday
+    # 11:00 UTC = 7:00 AM EDT (Monday - Saturday) — primary run
     - cron: '0 11 * * 1-6'
-    - cron: '0 12 * * 1-6'
-    # 11:00 AM ET Re-check (15:00 UTC during EDT / 16:00 UTC during EST) - Monday through Saturday
-    - cron: '0 15 * * 1-6'
-    - cron: '0 16 * * 1-6'
+    # 13:00 UTC = 9:00 AM EDT (Monday - Saturday) — retry if rates not updated
+    - cron: '0 13 * * 1-6'
   workflow_dispatch: # Allows manual one-click trigger from the GitHub Actions tab
 
 permissions:
@@ -36,33 +34,53 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Capture previous rate before update
+        id: prev
+        run: |
+          if [ -f htd-quote.json ]; then
+            PREV_DATE=$(node -e "console.log(JSON.parse(require('fs').readFileSync('htd-quote.json','utf8')).date || '')")
+            PREV_REF=$(node -e "console.log(JSON.parse(require('fs').readFileSync('htd-quote.json','utf8')).reference?.raw || '')")
+            echo "prev_date=$PREV_DATE" >> $GITHUB_OUTPUT
+            echo "prev_ref=$PREV_REF" >> $GITHUB_OUTPUT
+          fi
+
       - name: Run BRH rate scraper
         run: npm run fetch-rates
 
+      - name: Check if rates actually updated
+        id: check
+        run: |
+          NEW_DATE=$(node -e "console.log(JSON.parse(require('fs').readFileSync('htd-quote.json','utf8')).date || '')")
+          NEW_REF=$(node -e "console.log(JSON.parse(require('fs').readFileSync('htd-quote.json','utf8')).reference?.raw || '')")
+          echo "new_date=$NEW_DATE" >> $GITHUB_OUTPUT
+          echo "new_ref=$NEW_REF" >> $GITHUB_OUTPUT
+          PREV_DATE="${{ steps.prev.outputs.prev_date }}"
+          PREV_REF="${{ steps.prev.outputs.prev_ref }}"
+
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+            echo "Triggered via manual workflow dispatch."
+            echo "status=changed" >> $GITHUB_OUTPUT
+          elif [ "$PREV_DATE" != "$NEW_DATE" ] || [ "$PREV_REF" != "$NEW_REF" ]; then
+            echo "Fresh rate or new date detected ($PREV_DATE/$PREV_REF -> $NEW_DATE/$NEW_REF)."
+            echo "status=changed" >> $GITHUB_OUTPUT
+          else
+            echo "Rates and date unchanged from previous run ($PREV_DATE @ $PREV_REF)."
+            echo "status=unchanged" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Skip posting if rates unchanged
+        if: steps.check.outputs.status == 'unchanged'
+        run: |
+          echo "Rates unchanged from previous run. Skipping X post, commit, and deploy."
+
       - name: Sync to public folder
+        if: steps.check.outputs.status == 'changed'
         run: |
           mkdir -p public
           cp htd-quote.json public/htd-quote.json
 
-      - name: Commit and push changes
-        id: commit_step
-        run: |
-          git config user.name "Honson Luma"
-          git config user.email "legal@haitiandollar.com"
-          git checkout -- package-lock.json 2>/dev/null || true
-          git add htd-quote.json public/htd-quote.json
-          if git diff --staged --quiet; then
-            echo "No rate changes detected."
-            echo "changed=false" >> $GITHUB_OUTPUT
-          else
-            git commit -m "chore(rates): update BRH daily quotations"
-            git pull origin main --rebase --autostash
-            git push origin main
-            echo "changed=true" >> $GITHUB_OUTPUT
-          fi
-
       - name: Post Daily Rate to X
-        if: steps.commit_step.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        if: steps.check.outputs.status == 'changed'
         continue-on-error: true
         env:
           X_CONSUMER_KEY: ${{ secrets.X_CONSUMER_KEY }}
@@ -71,8 +89,24 @@ jobs:
           X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
         run: npm run post-to-x
 
+      - name: Commit and push changes
+        id: commit_step
+        if: steps.check.outputs.status == 'changed'
+        run: |
+          git config user.name "Honson Luma"
+          git config user.email "legal@haitiandollar.com"
+          git checkout -- package-lock.json 2>/dev/null || true
+          git add htd-quote.json public/htd-quote.json
+          if git diff --staged --quiet; then
+            echo "No file changes detected."
+          else
+            git commit -m "chore(rates): update BRH daily quotations"
+            git pull origin main --rebase --autostash
+            git push origin main
+          fi
+
       - name: Deploy updated rates to Firebase Hosting
-        if: (steps.commit_step.outputs.changed == 'true' || github.event_name == 'workflow_dispatch') && env.HAS_FIREBASE_SECRET == 'true'
+        if: steps.check.outputs.status == 'changed' && env.HAS_FIREBASE_SECRET == 'true'
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
