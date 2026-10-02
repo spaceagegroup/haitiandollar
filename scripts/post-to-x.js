@@ -58,10 +58,14 @@ async function postRateToX() {
     }
   } catch (err) {
     // Handle duplicate tweet gracefully if already posted today
-    if (err.data && (
-      (err.data.detail && err.data.detail.toLowerCase().includes('duplicate')) ||
-      (err.data.title && err.data.title.toLowerCase().includes('duplicate'))
-    )) {
+    const errMsg = [
+      err.message || '',
+      err.data?.title || '',
+      err.data?.detail || '',
+      JSON.stringify(err.data || '')
+    ].join(' ').toLowerCase();
+
+    if (errMsg.includes('duplicate')) {
       console.log('ℹ️ Notice: This daily quotation has already been posted to X. Skipping duplicate tweet.');
       return;
     }
