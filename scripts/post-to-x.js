@@ -37,7 +37,7 @@ async function postRateToX() {
     `Reference: 1 USD = ${quote.reference.htgPerUsd} HTG`,
     `Banking: ${quote.banking.buy} – ${quote.banking.sell} HTG`,
     '',
-    '#Haiti #HTD #HaitianDollar'
+    '#Haiti #HTD #HaitianDollar #HTG #G #Gourde'
   ].join('\n');
 
   console.log('📝 Preparing tweet:\n' + tweetText);
@@ -57,6 +57,15 @@ async function postRateToX() {
       console.log(`Tweet ID: ${response.data.id}`);
     }
   } catch (err) {
+    // Handle duplicate tweet gracefully if already posted today
+    if (err.data && (
+      (err.data.detail && err.data.detail.toLowerCase().includes('duplicate')) ||
+      (err.data.title && err.data.title.toLowerCase().includes('duplicate'))
+    )) {
+      console.log('ℹ️ Notice: This daily quotation has already been posted to X. Skipping duplicate tweet.');
+      return;
+    }
+
     console.error('⚠️ Failed to post tweet to X:');
     if (err.data) {
       console.error(JSON.stringify(err.data, null, 2));
@@ -68,7 +77,6 @@ async function postRateToX() {
     } else {
       console.error(err.message || err);
     }
-    // Re-throw so workflow runner can report status
     throw err;
   }
 }
