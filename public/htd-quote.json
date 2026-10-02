@@ -1,10 +1,10 @@
 {
   "date": "Oct 2, 2026",
   "day": "Friday",
-  "fetchedAtET": "Friday, Oct 2, 2026 at 7:26 AM ET",
+  "fetchedAtET": "Friday, Oct 2, 2026 at 7:34 AM ET",
   "source": "Banque de la République d'Haïti (BRH)",
   "sourceUrl": "https://www.brh.ht/taux-du-jour/",
-  "updatedAt": "2026-10-02T11:26:38.902Z",
+  "updatedAt": "2026-10-02T11:34:54.454Z",
   "liveScraped": true,
   "reference": {
     "htgPerUsd": 130.5066,
