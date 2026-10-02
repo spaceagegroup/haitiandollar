@@ -1,9 +1,11 @@
 {
   "scripts": {
-    "fetch-rates": "node scripts/fetch-brh-direct.js"
+    "fetch-rates": "node scripts/fetch-brh-direct.js",
+    "post-to-x": "node scripts/post-to-x.js"
   },
   "dependencies": {
-    "cheerio": "^1.2.0"
+    "cheerio": "^1.2.0",
+    "twitter-api-v2": "^1.29.1"
   },
   "engines": {
     "node": ">=24.0.0"

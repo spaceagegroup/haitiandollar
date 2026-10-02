@@ -44,11 +44,20 @@ jobs:
           mkdir -p public
           cp htd-quote.json public/htd-quote.json
 
+      - name: Post Daily Rate to X
+        continue-on-error: true
+        env:
+          X_CONSUMER_KEY: ${{ secrets.X_CONSUMER_KEY }}
+          X_CONSUMER_SECRET: ${{ secrets.X_CONSUMER_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+        run: npm run post-to-x
+
       - name: Commit and push changes
         id: commit_step
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "Honson Luma"
+          git config user.email "legal@haitiandollar.com"
           git add htd-quote.json public/htd-quote.json
           if git diff --staged --quiet; then
             echo "No rate changes detected."
