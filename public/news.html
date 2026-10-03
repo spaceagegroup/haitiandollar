@@ -181,8 +181,8 @@
       </div>
     </section>
 
-    <!-- FEATURED PRESS RELEASES CAROUSEL -->
-    <section class="py-12 sm:py-16 border-b border-borderGray bg-offWhite relative overflow-hidden" id="featured-section">
+    <!-- FEATURED PRESS RELEASES CAROUSEL (Active for 24 hours after publication) -->
+    <section class="py-12 sm:py-16 border-b border-borderGray bg-offWhite relative overflow-hidden hidden" id="featured-section">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <!-- Top Header & Controls -->
@@ -377,6 +377,28 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <!-- PRESS RELEASE: Base L2 Settlement & Pilot Framework -->
+          <article class="group flex flex-col bg-white border border-borderGray rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all border-l-4 border-l-brandRed">
+            <div class="flex items-center justify-between gap-3 mb-4">
+              <span class="bg-brandRed/10 text-brandRed text-[10px] font-display font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">
+                Product &amp; Architecture
+              </span>
+              <span class="text-[11px] text-ink/60 font-mono">Sep 30, 2026</span>
+            </div>
+            <h3 class="font-display font-bold text-xl text-ink mb-3 group-hover:text-brandRed transition-colors leading-snug">
+              HTD Architecture Migrating to Base Layer 2 with Sub-Cent Settlement &amp; Elastic Parity Engine
+            </h3>
+            <p class="text-ink/70 text-sm leading-relaxed flex-grow">
+              PORT-AU-PRINCE &amp; BALTIMORE — Protocol framework finalized for partner merchants and diaspora senders. Elastic supply mirrors the Haitian Gourde reserve at the fixed 1 HTD = 5 HTG parity invariant with sub-cent mobile checkout.
+            </p>
+            <div class="pt-4 mt-4 border-t border-borderGray/60 flex items-center justify-between">
+              <span class="text-xs text-ink/50 font-medium font-mono">PORT-AU-PRINCE</span>
+              <a href="/htd.html#pilot" class="inline-flex items-center gap-1.5 text-brandRed font-display font-bold text-xs group-hover:underline">
+                Explore framework <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform"></i>
+              </a>
+            </div>
+          </article>
 
           <!-- PRESS RELEASE: Automated BRH Engine -->
           <article class="group flex flex-col bg-white border border-borderGray rounded-2xl p-6 hover:shadow-xl hover:-translate-y-1 transition-all border-l-4 border-l-brandRed">
@@ -691,7 +713,7 @@
       const now = Date.now();
 
       // Check 24-hour window eligibility for each slide
-      const eligibleSlides = [];
+      const activeSlides = [];
       allSlides.forEach((slide) => {
         const publishedIso = slide.getAttribute('data-published');
         const pubTime = new Date(publishedIso).getTime();
@@ -703,24 +725,38 @@
           if (pill) {
             pill.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>Featured &bull; ${remainingHours}h remaining`;
           }
-          eligibleSlides.push(slide);
+          activeSlides.push(slide);
         } else {
-          if (pill) {
-            pill.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-ink/40"></span>Archived from 24h Window`;
-            pill.className = 'mt-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono text-ink/60 bg-black/5 border border-borderGray slide-status-pill';
-          }
+          slide.classList.add('hidden');
         }
       });
 
-      // Maintain at least 3 slides in rotation as requested by user
-      const activeSlides = eligibleSlides.length >= 3 ? eligibleSlides : allSlides.slice(0, 3);
+      // REGULAR MODE TRANSITION:
+      // If no items were published in the last 24 hours, hide the featured carousel completely.
+      // The page cleanly renders in regular mode with all articles in the chronological archive below.
+      if (activeSlides.length === 0) {
+        section.classList.add('hidden');
+        return;
+      }
 
-      // Hide any slides outside the active rotation
+      // If active items exist within 24h, reveal the featured carousel section
+      section.classList.remove('hidden');
+
       allSlides.forEach(slide => {
         if (!activeSlides.includes(slide)) {
           slide.classList.add('hidden');
         }
       });
+
+      // If only 1 slide is active in 24h window, display it cleanly without rotation controls
+      if (activeSlides.length === 1) {
+        if (counter) counter.classList.add('hidden');
+        if (prevBtn && prevBtn.parentElement) prevBtn.parentElement.classList.add('hidden');
+        if (dotsContainer) dotsContainer.classList.add('hidden');
+        activeSlides[0].classList.remove('hidden', 'opacity-0');
+        activeSlides[0].classList.add('opacity-100');
+        return;
+      }
 
       let currentIndex = 0;
       let timer = null;
