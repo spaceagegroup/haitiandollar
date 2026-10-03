@@ -1,10 +1,12 @@
 # Haitian Dollar - Firebase Hosting Continuous Deployment
+# Automatically deploys website updates to Firebase Hosting on push to main.
+
 name: Deploy to Firebase Hosting
 
 on:
   push:
     branches:
-      - main
+      - main # Production deployment branch
 
 concurrency:
   group: firebase-hosting-deploy
@@ -12,17 +14,20 @@ concurrency:
 
 jobs:
   deploy:
-    name: Deploy to Firebase
+    name: Build & Deploy to Firebase Hosting
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repository source
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
 
-      - name: Deploy to Firebase Hosting (Live)
+      - name: Deploy to Firebase Hosting (Live Channel)
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_HAITIAN_DOLLAR_CONNECT }}
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_HAITIAN_DOLLAR_CONNECT }}"
           channelId: live
           projectId: haitian-dollar-connect
