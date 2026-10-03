@@ -79,6 +79,7 @@ Future<LoanPaymentResult?> showLoanSheet(
               // 1. MFI Selector Dropdown
               DropdownButtonFormField<MfiConfig>(
                 initialValue: selectedMfi,
+                isExpanded: true,
                 decoration: const InputDecoration(
                   labelText: 'Participating Institution',
                   border: OutlineInputBorder(),
@@ -91,14 +92,9 @@ Future<LoanPaymentResult?> showLoanSheet(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Flexible(
-                          child: Text(
-                            mfi.name,
-                            style: const TextStyle(fontSize: 13),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        if (!mfi.isLive)
+                        Text(mfi.name, style: const TextStyle(fontSize: 13)),
+                        if (!mfi.isLive) ...[
+                          const SizedBox(width: 8),
                           Container(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 6,
@@ -116,6 +112,7 @@ Future<LoanPaymentResult?> showLoanSheet(
                               ),
                             ),
                           ),
+                        ],
                       ],
                     ),
                   );

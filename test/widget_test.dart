@@ -155,6 +155,32 @@ void main() {
       expect(find.text('Loan repayment'), findsOneWidget);
     });
 
+    testWidgets(
+      'tapping Loan repayment opens loan sheet without render errors',
+      (tester) async {
+        tester.view.physicalSize = const Size(1080, 1920);
+        tester.view.devicePixelRatio = 1.0;
+        addTearDown(() {
+          tester.view.resetPhysicalSize();
+          tester.view.resetDevicePixelRatio();
+        });
+
+        await tester.pumpWidget(
+          ChangeNotifierProvider(
+            create: (_) => WalletState(),
+            child: const HtdApp(),
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        await tester.tap(find.text('Loan repayment'));
+        await tester.pumpAndSettle();
+
+        expect(find.text('Microfinance Loan Repayment'), findsOneWidget);
+        expect(find.text('Participating Institution'), findsOneWidget);
+      },
+    );
+
     testWidgets('switching mode shows the agent terminal', (tester) async {
       tester.view.physicalSize = const Size(1080, 1920);
       tester.view.devicePixelRatio = 1.0;
