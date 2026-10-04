@@ -1,4 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+
+    <!-- Required for release builds. The wallet fetches the daily BRH quotation
+         from https://haitiandollar.com/htd-quote.json and url_launcher opens
+         brh.ht for independent verification. The debug and profile manifests
+         declare INTERNET only so the Flutter tool can attach; without it here,
+         release APKs/AABs cannot reach the network at all and the rate card
+         silently falls back to the bundled snapshot. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:label="haitiandollar"
         android:name="${applicationName}"
@@ -37,6 +48,10 @@
 
          In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin. -->
     <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
         <intent>
             <action android:name="android.intent.action.PROCESS_TEXT"/>
             <data android:mimeType="text/plain"/>

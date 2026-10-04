@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:http/http.dart' as http;
 
 /// Which shell the application is currently presenting.
 enum AppMode { consumer, kiosk }
@@ -33,8 +34,54 @@ const double kPilotReserveFloorHtg = 400000;
 const double kPilotMonthlyVolumeFloorHtg = 500000;
 const double kPilotMonthlyVolumeCeilingHtg = 1500000;
 
-/// Fallback BRH reference used until the bundled quotation is read.
-const double _kFallbackHtgPerUsd = 131.3052;
+/// Plausible band for a gourdes-per-USD reference quotation.
+///
+/// The floor matches the website's own guard (`fetchedRate > 50`). The ceiling is
+/// deliberately wide: it rejects unit errors and typos — a payload published as
+/// `1.313` or `1313052` instead of `131.3052` — while still tolerating an extreme
+/// devaluation. The HTD↔HTG invariant is hard-coded and so is unaffected by a bad
+/// rate; the exposure is the displayed USD valuation and the credibility of the
+/// rate card.
+const double kMinPlausibleHtgPerUsd = 50;
+const double kMaxPlausibleHtgPerUsd = 2000;
+
+/// Whether [rate] can be trusted as a gourdes-per-USD reference.
+bool isPlausibleBrhRate(double rate) =>
+    rate.isFinite &&
+    rate >= kMinPlausibleHtgPerUsd &&
+    rate <= kMaxPlausibleHtgPerUsd;
+
+/// Last-resort gourdes-per-USD value, matching the guarded fallback on the
+/// landing page (`index.html`: `officialHtg = ... : 130.5010`).
+///
+/// `htd.html` uses `130.5300` for the same guard. The two pages disagree; this
+/// follows the landing page.
+const double kOfflineBaselineHtgPerUsd = 130.5010;
+
+/// The quotation the website itself publishes, rewritten daily by
+/// `.github/workflows/fetch-rates.yml`.
+const String _kQuoteUrl = 'https://haitiandollar.com/htd-quote.json';
+
+/// The open forex endpoints the website falls back through, in the same order.
+const List<String> _kForexEndpoints = <String>[
+  'https://open.er-api.com/v6/latest/USD',
+  'https://api.exchangerate-api.com/v4/latest/USD',
+];
+
+/// How long any single rate source may take before the next one is tried.
+const Duration _kFetchTimeout = Duration(seconds: 4);
+
+/// How long a cached quotation stays usable before the open forex fallbacks are
+/// consulted, mirroring the website's `CACHE_TTL_MS` of two hours.
+const Duration kQuoteCacheTtl = Duration(hours: 2);
+
+/// Whether a quotation published at [publishedAt] is still inside that window.
+///
+/// [now] is injectable so the boundary is testable.
+bool isQuoteFresh(DateTime? publishedAt, {DateTime? now}) {
+  if (publishedAt == null) return false;
+  return (now ?? DateTime.now()).difference(publishedAt) < kQuoteCacheTtl;
+}
 
 /// A participating microfinance institution (MFI) and the on-chain wallet that
 /// receives borrower repayments on its behalf.
@@ -157,9 +204,17 @@ class TxnReceipt {
 /// quotation, and the local ledger. Every mutation returns the [TxnReceipt] it
 /// produced so the UI can present proof of settlement.
 class WalletState extends ChangeNotifier {
-  WalletState({double openingBalance = 128.50})
-    : _balance = openingBalance,
-      _htgPerUsd = _kFallbackHtgPerUsd;
+  static const String defaultWalletAddress =
+      '0x71C8394A84e52514d7a9bA7879e604f323B049B2';
+
+  WalletState({
+    double openingBalance = 128.50,
+    this.walletAddress = defaultWalletAddress,
+  }) : _balance = openingBalance,
+       _htgPerUsd = kOfflineBaselineHtgPerUsd;
+
+  /// Active on-chain wallet address for this terminal or user.
+  final String walletAddress;
 
   /// Protocol invariant: 1 HTD is redeemable for 5 HTG (see [kHtgPerHtd]).
   static const double invariantRate = kHtgPerHtd;
@@ -203,7 +258,12 @@ class WalletState extends ChangeNotifier {
 
   double _htgPerUsd;
   bool _isRefreshing = false;
-  bool _quoteIsLive = false;
+  bool _fetchedFromNetwork = false;
+  bool _quoteScrapedLive = false;
+
+  /// Names the fallback that supplied the current figure, or null when it came
+  /// from the published BRH quotation (or nothing has been read yet).
+  String? _rateOriginLabel;
   String _quoteSource = 'Banque de la République d\'Haïti (BRH)';
   DateTime? _ratesUpdatedAt;
   String? _quoteDate;
@@ -260,6 +320,9 @@ class WalletState extends ChangeNotifier {
   /// Daily BRH reference: gourdes per US dollar.
   double get htgPerUsd => _htgPerUsd;
 
+  /// Daily BRH reference rate (alias for [htgPerUsd]).
+  double get brhRate => _htgPerUsd;
+
   /// Derived from the invariant: `5 / htgPerUsd`.
   double get usdPerHtd => kHtgPerHtd / _htgPerUsd;
 
@@ -267,50 +330,218 @@ class WalletState extends ChangeNotifier {
   double usdFor(double htd) => htd * usdPerHtd;
 
   bool get isRefreshing => _isRefreshing;
-  bool get quoteIsLive => _quoteIsLive;
+
+  /// True when the held quote was fetched over the network in this session,
+  /// rather than read from the snapshot bundled with the build.
+  bool get quoteIsLive => _fetchedFromNetwork;
+
+  /// True when the upstream scraper reported a successful BRH read for the
+  /// quotation being held. False means the figure itself is stale.
+  bool get quoteScrapedLive => _quoteScrapedLive;
+
   String get quoteSource => _quoteSource;
+
+  /// When the held quotation was published, or null when nothing has been read.
   DateTime? get ratesUpdatedAt => _ratesUpdatedAt;
+
+  /// Provenance line for the rate card, e.g. `Updated 12 min ago · live`.
+  ///
+  /// Never fabricates a timestamp: a quotation that has not been read reports an
+  /// explicitly unverified state instead of appearing to have just arrived.
+  String get rateStatusLabel {
+    final stamp = _ratesUpdatedAt;
+    if (stamp == null) {
+      final origin = _rateOriginLabel;
+      return origin == null
+          ? 'Not yet read · unverified'
+          : 'Unverified · $origin';
+    }
+    final provenance = _fetchedFromNetwork ? 'live' : 'cached';
+    // Only a BRH-pipeline quotation can be a stale scrape. A freshly fetched
+    // forex rate is current; it is simply not the published BRH figure.
+    final freshness = (_rateOriginLabel == null && !_quoteScrapedLive)
+        ? ' · stale'
+        : '';
+    return 'Updated ${formatRateAge(stamp)} · $provenance$freshness';
+  }
+
+  /// Headline for the rate card. Names the fallback whenever the displayed figure
+  /// did not come from the published BRH quotation, so a forex or offline value
+  /// is never presented as the BRH reference.
+  String get rateCardTitle => _rateOriginLabel ?? 'BRH Reference Rate';
+
+  /// Source label for the terminal panel: the published BRH quotation unless a
+  /// fallback supplied the figure.
+  String get quoteSourceLabel => _rateOriginLabel ?? 'BRH Taux du Jour';
+
   String? get quoteDate => _quoteDate;
 
-  /// Loads the daily BRH quotation bundled with the app.
+  /// Loads the daily BRH quotation through the same source chain the website
+  /// uses, then its own bundled snapshot.
   ///
-  /// The rate-refresh workflow rewrites `htd-quote.json` in this repository, so
-  /// a rebuild always carries the current reference. Failure to read the asset
-  /// falls back to the last hard-coded reference and marks the quote stale.
+  /// The order mirrors `index.html` / `htd.html`: the published
+  /// `/htd-quote.json` first; then the cached figure — for the app, the snapshot
+  /// bundled at build time — while it is still inside the website's two-hour
+  /// window; then the same open forex endpoints (`open.er-api.com`, then
+  /// `exchangerate-api.com`, reading `rates.HTG`); and finally the landing page's
+  /// guarded constant. Every source is parsed and plausibility-checked
+  /// independently, and the origin is recorded so the card can name whatever
+  /// actually supplied the number.
   Future<void> refreshRates() async {
     _isRefreshing = true;
     _safeNotify();
     try {
-      final raw = await rootBundle.loadString('htd-quote.json');
-      final decoded = jsonDecode(raw);
-      if (decoded is! Map<String, dynamic>) {
-        throw const FormatException('Unexpected quotation shape');
+      // 1. The published quotation.
+      _Quote? quote;
+      try {
+        final res = await http
+            .get(Uri.parse(_kQuoteUrl))
+            .timeout(_kFetchTimeout);
+        if (res.statusCode == 200) {
+          quote = _parseQuote(
+            jsonDecode(res.body),
+            _quoteSource,
+            fromNetwork: true,
+          );
+        }
+      } catch (e) {
+        debugPrint('Rate refresh live fetch fallback: $e');
       }
-      final banking = decoded['banking'];
-      final rate = banking is Map<String, dynamic>
-          ? (banking['htgPerUsd'] as num?)?.toDouble()
-          : null;
-      if (rate == null || rate <= 0) {
-        throw const FormatException('Missing banking.htgPerUsd');
+
+      // 2. The snapshot bundled with the build.
+      _Quote? bundled;
+      try {
+        bundled = _parseQuote(
+          jsonDecode(await rootBundle.loadString('htd-quote.json')),
+          _quoteSource,
+          fromNetwork: false,
+        );
+      } catch (e) {
+        debugPrint('Rate refresh bundled asset fallback: $e');
       }
-      _htgPerUsd = rate;
-      _quoteSource = sanitizeText(
-        (decoded['source'] as String?) ?? _quoteSource,
-        maxLength: 96,
-      );
-      _quoteDate = decoded['date'] as String?;
-      _quoteIsLive = decoded['liveScraped'] == true;
-      _ratesUpdatedAt =
-          DateTime.tryParse((decoded['updatedAt'] as String?) ?? '') ??
-          DateTime.now();
-    } catch (_) {
-      _htgPerUsd = _kFallbackHtgPerUsd;
-      _quoteIsLive = false;
-      _ratesUpdatedAt = DateTime.now();
+
+      // 3. Open forex, consulted only once the bundled figure has aged past the
+      //    website's cache window: the site trusts a two-hour-old cache ahead of
+      //    forex, and so does the app.
+      if (quote == null && !isQuoteFresh(bundled?.updatedAt)) {
+        quote = await _fetchForexQuote();
+      }
+      quote ??= bundled;
+
+      if (quote == null) {
+        _applyOfflineBaseline();
+      } else {
+        _htgPerUsd = quote.rate;
+        _quoteSource = quote.source;
+        _quoteDate = quote.date;
+        _rateOriginLabel = quote.origin;
+        _fetchedFromNetwork = quote.fromNetwork;
+        _quoteScrapedLive = quote.scrapedLive;
+        _ratesUpdatedAt = quote.updatedAt;
+      }
+    } catch (e) {
+      debugPrint('Rate refresh fallback: $e');
+      _applyOfflineBaseline();
     } finally {
       _isRefreshing = false;
       _safeNotify();
     }
+  }
+
+  /// Falls back to the constant the landing page uses, recording that nothing was
+  /// actually read so no timestamp is implied.
+  void _applyOfflineBaseline() {
+    _htgPerUsd = kOfflineBaselineHtgPerUsd;
+    _rateOriginLabel = 'Offline baseline';
+    _fetchedFromNetwork = false;
+    _quoteScrapedLive = false;
+    _ratesUpdatedAt = null;
+  }
+
+  /// Tries the website's open forex fallbacks in order and returns the first
+  /// plausible `rates.HTG`.
+  Future<_Quote?> _fetchForexQuote() async {
+    for (final url in _kForexEndpoints) {
+      try {
+        final res = await http.get(Uri.parse(url)).timeout(_kFetchTimeout);
+        if (res.statusCode != 200) continue;
+        final rate = _forexRate(jsonDecode(res.body));
+        if (rate == null || !isPlausibleBrhRate(rate)) continue;
+        final label = 'Forex reference · ${Uri.parse(url).host}';
+        return _Quote(
+          rate: rate,
+          source: label,
+          date: null,
+          // The retrieval time is a real fact for a value fetched just now. Only
+          // an unread or unavailable figure must never carry a fabricated stamp.
+          updatedAt: DateTime.now(),
+          scrapedLive: false,
+          fromNetwork: true,
+          origin: label,
+        );
+      } catch (e) {
+        debugPrint('Rate refresh forex fallback ($url): $e');
+      }
+    }
+    return null;
+  }
+
+  /// `{"rates": {"HTG": 131.3052}}`, as published by the open forex endpoints.
+  static double? _forexRate(Object? decoded) {
+    if (decoded is! Map<String, dynamic>) return null;
+    final rates = decoded['rates'];
+    if (rates is! Map<String, dynamic>) return null;
+    return _asDouble(rates['HTG']);
+  }
+
+  /// Parses one quotation payload, returning null when its shape is wrong or its
+  /// rate is missing or implausible.
+  ///
+  /// Field choice follows the landing page, which displays `reference.raw`; the
+  /// equivalent `reference.htgPerUsd` and `banking.htgPerUsd` are accepted too.
+  /// Numeric fields are read leniently, because a publisher may emit them as
+  /// strings.
+  static _Quote? _parseQuote(
+    Object? decoded,
+    String fallbackSource, {
+    required bool fromNetwork,
+  }) {
+    if (decoded is! Map<String, dynamic>) return null;
+
+    final reference = decoded['reference'];
+    final banking = decoded['banking'];
+    final rate =
+        _asDouble(
+          reference is Map<String, dynamic> ? reference['raw'] : null,
+        ) ??
+        _asDouble(
+          reference is Map<String, dynamic> ? reference['htgPerUsd'] : null,
+        ) ??
+        _asDouble(
+          banking is Map<String, dynamic> ? banking['htgPerUsd'] : null,
+        );
+
+    if (rate == null || !isPlausibleBrhRate(rate)) return null;
+
+    return _Quote(
+      rate: rate,
+      source: sanitizeText(
+        (decoded['source'] as String?) ?? fallbackSource,
+        maxLength: 96,
+      ),
+      date: decoded['date'] as String?,
+      updatedAt: DateTime.tryParse((decoded['updatedAt'] as String?) ?? ''),
+      scrapedLive: decoded['liveScraped'] == true,
+      fromNetwork: fromNetwork,
+      origin: null,
+    );
+  }
+
+  /// Reads a numeric field that a payload may publish as a number or a string.
+  static double? _asDouble(Object? value) {
+    if (value is num) return value.toDouble();
+    if (value is String) return double.tryParse(value.trim());
+    return null;
   }
 
   // ------------------------------------------------------------ mutations
@@ -360,26 +591,35 @@ class WalletState extends ChangeNotifier {
       kind: TxnKind.send,
       title: 'Payment sent',
       htdAmount: amount,
-      counterparty: maskMsisdn(sanitizeText(recipient, maxLength: 24)),
+      // An address is displayed compacted but still passes through sanitizeText,
+      // so directional overrides cannot reorder the one value the payer is asked
+      // to verify.
+      counterparty: recipient.startsWith('0x')
+          ? compactAddress(sanitizeText(recipient, maxLength: 96))
+          : maskMsisdn(sanitizeText(recipient, maxLength: 24)),
       isLive: _settlesLive,
     );
   }
 
   /// Credits a merchant QR charge and returns its receipt.
   ///
-  /// Merchant processing is 0.5%; the fee is reported on the receipt in HTD.
+  /// Merchant processing is 0.5% and is withheld from the credit, so the balance
+  /// rises by exactly the amount the terminal promises under "You receive". The
+  /// receipt keeps the gross charge and the fee, which reconciles all three
+  /// surfaces: gross H$ 100.00, fee H$ 0.50, net H$ 99.50 / 497.50 HTG.
   TxnReceipt applyMerchantCharge({
     required double htdAmount,
     String memo = 'Dynamic QR invoice',
   }) {
     final amount = _requirePositive(htdAmount);
-    _balance += amount;
+    final fee = amount * kMerchantFeeRate;
+    _balance += amount - fee;
     return _record(
       kind: TxnKind.charge,
       title: 'Merchant payment received',
       htdAmount: amount,
       counterparty: sanitizeText(memo, maxLength: 48),
-      feeHtd: amount * kMerchantFeeRate,
+      feeHtd: fee,
       isLive: _settlesLive,
     );
   }
@@ -479,15 +719,24 @@ class WalletState extends ChangeNotifier {
 
 // ------------------------------------------------------------- utilities
 
-/// Strips control characters, collapses runs of whitespace, and truncates.
+/// Strips control characters and directional overrides, collapses runs of
+/// whitespace, and truncates.
 ///
 /// Applied to every user-supplied string that is persisted or displayed, so a
-/// pasted payload cannot break layout or smuggle terminal control codes into a
-/// receipt.
+/// pasted or scanned payload cannot break layout, reorder the characters a user
+/// is asked to verify, or smuggle terminal control codes into a receipt. The set
+/// covers C0/C1 controls plus the bidirectional and zero-width controls a QR
+/// payload can carry: U+200B–U+200F, U+202A–U+202E, U+2066–U+2069, U+FEFF.
 String sanitizeText(String raw, {int maxLength = 64}) {
   if (raw.isEmpty) return '';
   final stripped = raw
-      .replaceAll(RegExp(r'[\u0000-\u001F\u007F-\u009F]'), ' ')
+      .replaceAll(
+        RegExp(
+          r'[\u0000-\u001F\u007F-\u009F\u200B-\u200F\u202A-\u202E'
+          r'\u2066-\u2069\uFEFF]',
+        ),
+        ' ',
+      )
       .replaceAll(RegExp(r'\s+'), ' ')
       .trim();
   if (stripped.length <= maxLength) return stripped;
@@ -544,7 +793,14 @@ String? validateHaitianMsisdn(String raw) {
 
 /// `12,480.00` — grouped to two decimals without pulling in `intl`.
 String formatAmount(double value, {int decimals = 2}) {
+  // toStringAsFixed returns 'Infinity'/'NaN' for non-finite values and switches
+  // to exponential notation for very large magnitudes. Grouping those digits
+  // renders nonsense like `In,fin,ity` or `1e,+25`, so pass them through.
+  if (!value.isFinite) {
+    return value.isNaN ? 'NaN' : (value.isNegative ? '-∞' : '∞');
+  }
   final fixed = value.toStringAsFixed(decimals);
+  if (fixed.contains('e')) return fixed;
   final dot = fixed.indexOf('.');
   final whole = dot == -1 ? fixed : fixed.substring(0, dot);
   final fraction = dot == -1 ? '' : fixed.substring(dot);
@@ -560,3 +816,51 @@ String formatAmount(double value, {int decimals = 2}) {
 /// `H$ 12,480.00`
 String formatHtd(double value, {int decimals = 2}) =>
     'H\$ ${formatAmount(value, decimals: decimals)}';
+
+/// Relative age of a quotation: `just now`, `12 min ago`, `16:12`, or `10/3`.
+String formatRateAge(DateTime timestamp) {
+  final diff = DateTime.now().difference(timestamp);
+  if (diff.inMinutes < 1) return 'just now';
+  if (diff.inMinutes < 60) return '${diff.inMinutes} min ago';
+  if (diff.inHours < 24) {
+    return '${timestamp.hour.toString().padLeft(2, '0')}:'
+        '${timestamp.minute.toString().padLeft(2, '0')}';
+  }
+  return '${timestamp.month}/${timestamp.day}';
+}
+
+/// A parsed, plausibility-checked BRH quotation.
+@immutable
+class _Quote {
+  const _Quote({
+    required this.rate,
+    required this.source,
+    required this.date,
+    required this.updatedAt,
+    required this.scrapedLive,
+    required this.fromNetwork,
+    required this.origin,
+  });
+
+  /// Gourdes per US dollar.
+  final double rate;
+
+  /// Publisher of the figure, as declared by the payload.
+  final String source;
+
+  /// Human-readable publication date from the payload, e.g. `Oct 3, 2026`.
+  final String? date;
+
+  /// When the payload was published; null when it carries no usable timestamp.
+  final DateTime? updatedAt;
+
+  /// Whether the upstream scraper reported a successful BRH read.
+  final bool scrapedLive;
+
+  /// Whether this quotation came from the network rather than the bundle.
+  final bool fromNetwork;
+
+  /// Names the fallback that supplied this figure, or null when it came from the
+  /// published BRH quotation.
+  final String? origin;
+}

@@ -46,10 +46,32 @@ void main() {
 
       final send = wallet.applySend(htdAmount: 10, recipient: '37123456');
       expect(send.feeHtd, 0);
+      expect(wallet.balance, 490);
 
       final charge = wallet.applyMerchantCharge(htdAmount: 100);
       expect(charge.feeHtd, closeTo(0.5, 1e-9));
       expect(charge.feeRateLabel, '0.5%');
+      // The 0.5% is withheld, so the credit matches the terminal's "You receive"
+      // line and the receipt's net payout.
+      expect(wallet.balance, closeTo(589.5, 1e-9));
+      expect(charge.netHtgPayout, closeTo(497.5, 1e-9));
+    });
+
+    test('an address recipient is compacted and stripped of overrides', () {
+      final wallet = WalletState(openingBalance: 500);
+      const address = '0x71C8394A84e52514d7a9bA7879e604f323B049B2';
+
+      final receipt = wallet.applySend(htdAmount: 5, recipient: address);
+      expect(receipt.counterparty, '0x71C839…B049B2');
+      expect(receipt.counterparty, isNot(startsWith('+509')));
+
+      // A right-to-left override must not survive into the value the payer is
+      // asked to verify.
+      final spoofed = wallet.applySend(
+        htdAmount: 5,
+        recipient: '0x71C8\u202E394A84e52514d7a9bA7879e604f323B049B2',
+      );
+      expect(spoofed.counterparty.contains('\u202E'), isFalse);
     });
   });
 
@@ -127,12 +149,21 @@ void main() {
     test('sanitizeText strips control characters and collapses whitespace', () {
       expect(sanitizeText('  Fork\n\tz  '), 'Fork z');
       expect(sanitizeText('aaaaaaaaaaaa', maxLength: 5), 'aaaaa');
+      // Directional overrides are stripped too, so a scanned value cannot be
+      // displayed reordered.
+      expect(sanitizeText('0x1\u202E2'), '0x1 2');
+      expect(sanitizeText('a\u200Bb'), 'a b');
     });
 
     test('amounts are grouped for display', () {
       expect(formatAmount(12480), '12,480.00');
       expect(formatAmount(485), '485.00');
       expect(formatHtd(30), 'H\$ 30.00');
+      // Non-finite and exponential values must not be comma-mangled.
+      expect(formatAmount(double.infinity), '∞');
+      expect(formatAmount(double.negativeInfinity), '-∞');
+      expect(formatAmount(double.nan), 'NaN');
+      expect(formatAmount(1e25), '1e+25');
     });
   });
 

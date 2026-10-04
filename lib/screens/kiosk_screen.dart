@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/wallet_state.dart';
+import '../utils/qr_payload.dart';
+import '../widgets/qr_display.dart';
 import '../widgets/receipt_dialog.dart';
+
+import 'package:url_launcher/url_launcher.dart';
 
 /// Agent / merchant terminal.
 ///
@@ -115,36 +119,56 @@ class _KioskScreenState extends State<KioskScreen> {
                   ),
                   _Line(label: 'You receive', value: formatHtd(net)),
                   const SizedBox(height: 14),
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 20),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: Colors.white.withValues(alpha: 0.10),
+                  if (_invoiceHtd > 0) ...[
+                    Center(
+                      child: QrDisplay(
+                        payload: QrPayload(
+                          walletAddress: wallet.walletAddress,
+                          amount: _invoiceHtd,
+                          reference:
+                              'INV-${DateTime.now().millisecondsSinceEpoch}',
+                        ),
                       ),
                     ),
-                    child: const Column(
-                      children: [
-                        Icon(Icons.qr_code_2, size: 40, color: Colors.white24),
-                        SizedBox(height: 8),
-                        Text(
-                          'Dynamic QR invoice in H\$',
-                          style: TextStyle(
-                            fontSize: 11.5,
-                            color: Colors.white54,
-                          ),
+                    const SizedBox(height: 8),
+                    Center(
+                      child: Text(
+                        'htd:${compactAddress(wallet.walletAddress)} · H\$ ${_invoiceHtd.toStringAsFixed(2)}',
+                        style: const TextStyle(
+                          fontSize: 11,
+                          color: Colors.white38,
+                          fontFamily: 'monospace',
                         ),
-                        SizedBox(height: 2),
-                        Text(
-                          'POS integration pending',
-                          style: TextStyle(
-                            fontSize: 9.5,
+                      ),
+                    ),
+                  ] else ...[
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 24),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: Colors.white.withValues(alpha: 0.10),
+                        ),
+                      ),
+                      child: const Column(
+                        children: [
+                          Icon(
+                            Icons.qr_code_2,
+                            size: 40,
                             color: Colors.white24,
                           ),
-                        ),
-                      ],
+                          SizedBox(height: 8),
+                          Text(
+                            'Enter an amount above to generate QR',
+                            style: TextStyle(
+                              fontSize: 11.5,
+                              color: Colors.white54,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
+                  ],
                   const SizedBox(height: 14),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -177,6 +201,53 @@ class _KioskScreenState extends State<KioskScreen> {
                 ('Redemption / cash-out', '3%'),
                 ('Cash-in', 'no published fee'),
               ],
+            ),
+            const SizedBox(height: 12),
+
+            // Rate source verification
+            _Panel(
+              title: 'Exchange rate source',
+              rows: <(String, String)>[
+                ('Reference', wallet.quoteSourceLabel),
+                ('Current rate', '${formatAmount(wallet.brhRate)} HTG per USD'),
+                (
+                  'Last updated',
+                  wallet.ratesUpdatedAt == null
+                      ? 'Not yet read'
+                      : formatRateAge(wallet.ratesUpdatedAt!),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              child: InkWell(
+                onTap: () => _openBrhSource(context),
+                borderRadius: BorderRadius.circular(4),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 6),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.open_in_new,
+                        size: 13,
+                        color: Color(0xFFFCC419),
+                      ),
+                      SizedBox(width: 6),
+                      Text(
+                        'Verify on brh.ht/taux-du-jour',
+                        style: TextStyle(
+                          fontSize: 11.5,
+                          color: Color(0xFFFCC419),
+                          fontWeight: FontWeight.w600,
+                          decoration: TextDecoration.underline,
+                          decorationColor: Color(0xFFFCC419),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
             const SizedBox(height: 12),
 
@@ -341,5 +412,17 @@ class _Panel extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+Future<void> _openBrhSource(BuildContext context) async {
+  final url = Uri.parse('https://www.brh.ht/taux-du-jour/');
+  if (await canLaunchUrl(url)) {
+    await launchUrl(url, mode: LaunchMode.externalApplication);
+  } else {
+    if (context.mounted) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('Could not open brh.ht')));
+    }
   }
 }

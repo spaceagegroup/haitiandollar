@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/wallet_state.dart';
+import '../utils/qr_payload.dart';
 import '../widgets/buy_sheet.dart';
 import '../widgets/loan_sheet.dart';
 import '../widgets/receipt_dialog.dart';
 import '../widgets/sell_sheet.dart';
 import '../widgets/send_sheet.dart';
+
+import 'package:url_launcher/url_launcher.dart';
+
+import 'scanner_screen.dart';
 
 /// Primary consumer shell.
 ///
@@ -64,6 +69,28 @@ class DashboardScreen extends StatelessWidget {
     await showReceiptDialog(context, receipt: receipt);
   }
 
+  Future<void> _scanAndPay(BuildContext context) async {
+    final payload = await Navigator.push<QrPayload>(
+      context,
+      MaterialPageRoute(builder: (_) => const ScannerScreen()),
+    );
+    if (payload == null || !context.mounted) return;
+
+    final wallet = context.read<WalletState>();
+    final result = await showSendSheet(
+      context,
+      maxBalance: wallet.balance,
+      initialPayload: payload,
+    );
+    if (result == null || !context.mounted) return;
+    final receipt = wallet.applySend(
+      htdAmount: result.htdAmount,
+      recipient: result.recipient,
+    );
+    if (!context.mounted) return;
+    await showReceiptDialog(context, receipt: receipt);
+  }
+
   @override
   Widget build(BuildContext context) {
     final wallet = context.watch<WalletState>();
@@ -78,6 +105,7 @@ class DashboardScreen extends StatelessWidget {
               onSwitchShell: () => wallet.setMode(
                 mode == AppMode.consumer ? AppMode.kiosk : AppMode.consumer,
               ),
+              onScan: () => _scanAndPay(context),
             ),
             const SizedBox(height: 18),
             _BalanceCard(
@@ -143,9 +171,10 @@ class DashboardScreen extends StatelessWidget {
 }
 
 class _Header extends StatelessWidget {
-  const _Header({required this.onSwitchShell});
+  const _Header({required this.onSwitchShell, required this.onScan});
 
   final VoidCallback onSwitchShell;
+  final VoidCallback onScan;
 
   @override
   Widget build(BuildContext context) {
@@ -189,6 +218,15 @@ class _Header extends StatelessWidget {
                 style: TextStyle(fontSize: 10, color: Colors.white38),
               ),
             ],
+          ),
+        ),
+        IconButton(
+          onPressed: onScan,
+          tooltip: 'Scan QR to pay',
+          icon: const Icon(
+            Icons.qr_code_scanner,
+            size: 21,
+            color: Color(0xFFFCC419),
           ),
         ),
         IconButton(
@@ -306,6 +344,18 @@ class _Chip extends StatelessWidget {
   }
 }
 
+Future<void> _openBrhSource(BuildContext context) async {
+  final url = Uri.parse('https://www.brh.ht/taux-du-jour/');
+  if (await canLaunchUrl(url)) {
+    await launchUrl(url, mode: LaunchMode.externalApplication);
+  } else {
+    if (context.mounted) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('Could not open brh.ht')));
+    }
+  }
+}
+
 class _RateBar extends StatelessWidget {
   const _RateBar({required this.wallet});
 
@@ -313,57 +363,88 @@ class _RateBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final updated = wallet.ratesUpdatedAt;
-    final stamp = updated == null
-        ? 'not read yet'
-        : 'updated ${updated.hour.toString().padLeft(2, '0')}:'
-              '${updated.minute.toString().padLeft(2, '0')}';
-
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
       decoration: BoxDecoration(
         color: Colors.white.withValues(alpha: 0.03),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.06)),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.10)),
       ),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(Icons.public, size: 15, color: Colors.white38),
-          const SizedBox(width: 9),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '${wallet.htgPerUsd.toStringAsFixed(4)} HTG / USD',
-                  style: const TextStyle(
-                    fontSize: 12.5,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                const SizedBox(height: 1),
-                Text(
-                  '${wallet.quoteSource} · $stamp'
-                  '${wallet.quoteIsLive ? ' · live' : ' · cached'}',
-                  style: const TextStyle(fontSize: 9.5, color: Colors.white38),
+          Row(
+            children: [
+              const CircleAvatar(radius: 4, backgroundColor: Color(0xFF22C55E)),
+              const SizedBox(width: 8),
+              // Expanded so a larger accessibility font scale ellipsises the
+              // label instead of overflowing the card.
+              Expanded(
+                child: Text(
+                  wallet.rateCardTitle,
+                  style: const TextStyle(fontSize: 11, color: Colors.white60),
                   overflow: TextOverflow.ellipsis,
                 ),
+              ),
+              if (wallet.isRefreshing) ...[
+                const SizedBox(width: 8),
+                const SizedBox(
+                  width: 11,
+                  height: 11,
+                  child: CircularProgressIndicator(strokeWidth: 1.5),
+                ),
               ],
-            ),
+              const SizedBox(width: 8),
+              Flexible(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    '1 USD = ${wallet.brhRate.toStringAsFixed(4)} HTG',
+                    style: const TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'monospace',
+                      color: Color(0xFFFCC419),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-          if (wallet.isRefreshing)
-            const SizedBox(
-              width: 16,
-              height: 16,
-              child: CircularProgressIndicator(strokeWidth: 2),
-            )
-          else
-            IconButton(
-              onPressed: wallet.refreshRates,
-              tooltip: 'Refresh BRH quotation',
-              visualDensity: VisualDensity.compact,
-              icon: const Icon(Icons.refresh, size: 18),
-            ),
+          const SizedBox(height: 6),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Expanded so the provenance line ellipsises rather than pushing
+              // the verification link off the card.
+              Expanded(
+                child: Text(
+                  wallet.rateStatusLabel,
+                  style: const TextStyle(fontSize: 10, color: Colors.white38),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              const SizedBox(width: 8),
+              InkWell(
+                onTap: () => _openBrhSource(context),
+                borderRadius: BorderRadius.circular(4),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                  child: Text(
+                    'Verify on brh.ht →',
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Color(0xFFFCC419),
+                      fontWeight: FontWeight.w600,
+                      decoration: TextDecoration.underline,
+                      decorationColor: Color(0xFFFCC419),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
