@@ -345,13 +345,14 @@ class _Chip extends StatelessWidget {
 }
 
 Future<void> _openBrhSource(BuildContext context) async {
-  final url = Uri.parse('https://www.brh.ht/taux-du-jour/');
+  final url = Uri.parse(kOfficialRatesUrl);
   if (await canLaunchUrl(url)) {
     await launchUrl(url, mode: LaunchMode.externalApplication);
   } else {
     if (context.mounted) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text('Could not open brh.ht')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Could not open haitiandollar.com')),
+      );
     }
   }
 }
@@ -432,7 +433,7 @@ class _RateBar extends StatelessWidget {
                 child: const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
                   child: Text(
-                    'Verify on brh.ht →',
+                    'Verify official rates →',
                     style: TextStyle(
                       fontSize: 10,
                       color: Color(0xFFFCC419),

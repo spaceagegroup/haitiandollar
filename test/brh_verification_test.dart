@@ -24,7 +24,7 @@ void main() {
         find.text('1 USD = ${wallet.brhRate.toStringAsFixed(4)} HTG'),
         findsOneWidget,
       );
-      expect(find.text('Verify on brh.ht →'), findsOneWidget);
+      expect(find.text('Verify official rates →'), findsOneWidget);
     });
 
     testWidgets(
@@ -45,13 +45,17 @@ void main() {
 
         expect(find.text('Exchange rate source'), findsOneWidget);
         expect(find.text('BRH Taux du Jour'), findsOneWidget);
-        expect(find.text('Verify on brh.ht/taux-du-jour'), findsOneWidget);
+        expect(
+          find.text('Verify on haitiandollar.com/htd#official-rates'),
+          findsOneWidget,
+        );
       },
     );
   });
 
   group('BRH quotation integrity', () {
     test('accepts realistic rates and rejects corrupt or mis-unit-ed ones', () {
+      expect(isPlausibleBrhRate(130.5583), isTrue);
       expect(isPlausibleBrhRate(131.3052), isTrue);
       expect(isPlausibleBrhRate(kMinPlausibleHtgPerUsd), isTrue);
       expect(isPlausibleBrhRate(kMaxPlausibleHtgPerUsd), isTrue);
@@ -91,11 +95,11 @@ void main() {
   });
 
   group('rate source alignment with the website', () {
-    test('the plausibility floor and last-resort constant match the site', () {
-      // index.html / htd.html both guard with `fetchedRate > 50`, and the
-      // landing page's final constant is 130.5010.
+    test('the official rates URL and baseline match haitiandollar.com/htd#official-rates', () {
+      expect(kOfficialRatesUrl, 'https://www.haitiandollar.com/htd#official-rates');
+      expect(kOfficialHtgPerUsd, 130.5583);
       expect(kMinPlausibleHtgPerUsd, 50);
-      expect(kOfflineBaselineHtgPerUsd, 130.5010);
+      expect(kOfflineBaselineHtgPerUsd, 130.5583);
     });
 
     test('the cache window mirrors the website two-hour TTL', () {

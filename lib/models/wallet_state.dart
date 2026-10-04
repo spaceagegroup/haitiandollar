@@ -51,16 +51,24 @@ bool isPlausibleBrhRate(double rate) =>
     rate >= kMinPlausibleHtgPerUsd &&
     rate <= kMaxPlausibleHtgPerUsd;
 
-/// Last-resort gourdes-per-USD value, matching the guarded fallback on the
-/// landing page (`index.html`: `officialHtg = ... : 130.5010`).
-///
-/// `htd.html` uses `130.5300` for the same guard. The two pages disagree; this
-/// follows the landing page.
-const double kOfflineBaselineHtgPerUsd = 130.5010;
+/// The authoritative published URL for Bank of Haiti official rates.
+const String kOfficialRatesUrl =
+    'https://www.haitiandollar.com/htd#official-rates';
 
-/// The quotation the website itself publishes, rewritten daily by
+/// Official Bank of Haiti (BRH) reference rate (gourdes per USD),
+/// as published at https://www.haitiandollar.com/htd#official-rates.
+const double kOfficialHtgPerUsd = 130.5583;
+
+/// Last-resort gourdes-per-USD value, matching the official Bank of Haiti
+/// reference rate published at https://www.haitiandollar.com/htd#official-rates.
+const double kOfflineBaselineHtgPerUsd = kOfficialHtgPerUsd;
+
+/// The quotation endpoints the website itself publishes, rewritten daily by
 /// `.github/workflows/fetch-rates.yml`.
-const String _kQuoteUrl = 'https://haitiandollar.com/htd-quote.json';
+const List<String> _kQuoteUrls = <String>[
+  'https://www.haitiandollar.com/htd-quote.json',
+  'https://haitiandollar.com/htd-quote.json',
+];
 
 /// The open forex endpoints the website falls back through, in the same order.
 const List<String> _kForexEndpoints = <String>[
@@ -391,24 +399,27 @@ class WalletState extends ChangeNotifier {
     _isRefreshing = true;
     _safeNotify();
     try {
-      // 1. The published quotation.
+      // 1. The published quotation from official endpoints.
       _Quote? quote;
-      try {
-        final res = await http
-            .get(Uri.parse(_kQuoteUrl))
-            .timeout(_kFetchTimeout);
-        if (res.statusCode == 200) {
-          quote = _parseQuote(
-            jsonDecode(res.body),
-            _quoteSource,
-            fromNetwork: true,
-          );
+      for (final url in _kQuoteUrls) {
+        try {
+          final res = await http
+              .get(Uri.parse(url))
+              .timeout(_kFetchTimeout);
+          if (res.statusCode == 200) {
+            quote = _parseQuote(
+              jsonDecode(res.body),
+              _quoteSource,
+              fromNetwork: true,
+            );
+            if (quote != null) break;
+          }
+        } catch (e) {
+          debugPrint('Rate refresh live fetch fallback ($url): $e');
         }
-      } catch (e) {
-        debugPrint('Rate refresh live fetch fallback: $e');
       }
 
-      // 2. The snapshot bundled with the build.
+      // 2. The official snapshot bundled with the build.
       _Quote? bundled;
       try {
         bundled = _parseQuote(
@@ -420,13 +431,12 @@ class WalletState extends ChangeNotifier {
         debugPrint('Rate refresh bundled asset fallback: $e');
       }
 
-      // 3. Open forex, consulted only once the bundled figure has aged past the
-      //    website's cache window: the site trusts a two-hour-old cache ahead of
-      //    forex, and so does the app.
-      if (quote == null && !isQuoteFresh(bundled?.updatedAt)) {
-        quote = await _fetchForexQuote();
-      }
+      // Prefer the official quotation (live or bundled) over generic forex rates.
       quote ??= bundled;
+
+      // 3. Fallback to open forex endpoints only if no official Bank of Haiti
+      //    quotation is available.
+      quote ??= await _fetchForexQuote();
 
       if (quote == null) {
         _applyOfflineBaseline();
@@ -448,11 +458,10 @@ class WalletState extends ChangeNotifier {
     }
   }
 
-  /// Falls back to the constant the landing page uses, recording that nothing was
-  /// actually read so no timestamp is implied.
+  /// Falls back to the official Bank of Haiti baseline constant.
   void _applyOfflineBaseline() {
     _htgPerUsd = kOfflineBaselineHtgPerUsd;
-    _rateOriginLabel = 'Offline baseline';
+    _rateOriginLabel = 'Official baseline';
     _fetchedFromNetwork = false;
     _quoteScrapedLive = false;
     _ratesUpdatedAt = null;

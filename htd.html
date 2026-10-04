@@ -369,7 +369,7 @@
 
           <div class="flex justify-between items-center text-white/80 gap-2">
             <span>BRH Reference Rate:</span>
-            <strong class="text-white shrink-0" id="official-rate">1 USD = 130.5300 HTG</strong>
+            <strong class="text-white shrink-0" id="official-rate">1 USD = 130.5583 HTG</strong>
           </div>
 
           <div class="flex justify-between items-center text-white/60 text-xs gap-2">
@@ -409,12 +409,10 @@
             Indicative only; not financial advice.
           </span>
           <a
-            href="https://www.brh.ht/taux-du-jour/"
-            target="_blank"
-            rel="noopener"
+            href="https://www.haitiandollar.com/htd#official-rates"
             class="inline-flex items-center gap-1 text-brandYellow hover:underline font-mono font-semibold whitespace-nowrap"
           >
-            Verify on brh.ht/taux-du-jour →
+            Verify official rates →
           </a>
         </div>
 
@@ -477,7 +475,7 @@
         } catch (err) {}
       }
 
-      const officialHtg = fetchedRate && fetchedRate > 50 ? fetchedRate : 130.5300;
+      const officialHtg = fetchedRate && fetchedRate > 50 ? fetchedRate : 130.5583;
       const rateData = {
         officialRate: officialHtg.toFixed(4),
         officialHtdUsd: (5.0 / officialHtg).toFixed(4),

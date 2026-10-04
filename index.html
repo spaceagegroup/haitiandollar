@@ -247,7 +247,7 @@
             </div>
             <p class="text-xs sm:text-sm font-semibold text-ink leading-relaxed text-center sm:text-left">
               Fixed Peg: <strong class="font-mono text-ink">1 HTD = 5.00 HTG</strong> (1 HTG = 0.20 HTD) · 
-              BRH Benchmark: <strong id="official-rate" class="font-mono">1 USD = 130.5010 HTG</strong> · 
+              BRH Benchmark: <strong id="official-rate" class="font-mono">1 USD = 130.5583 HTG</strong> · 
               Implied USD: <span id="official-htd-usd" class="font-bold text-brandRed">$0.0383</span>/HTD
             </p>
           </div>
@@ -316,7 +316,7 @@
         } catch (err) {}
       }
 
-      const officialHtg = fetchedRate && fetchedRate > 50 ? fetchedRate : 130.5010;
+      const officialHtg = fetchedRate && fetchedRate > 50 ? fetchedRate : 130.5583;
       const rateData = {
         officialRate: officialHtg.toFixed(4),
         officialHtdUsd: (5.0 / officialHtg).toFixed(4),

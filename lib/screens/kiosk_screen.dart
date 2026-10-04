@@ -235,7 +235,7 @@ class _KioskScreenState extends State<KioskScreen> {
                       ),
                       SizedBox(width: 6),
                       Text(
-                        'Verify on brh.ht/taux-du-jour',
+                        'Verify on haitiandollar.com/htd#official-rates',
                         style: TextStyle(
                           fontSize: 11.5,
                           color: Color(0xFFFCC419),
@@ -416,13 +416,14 @@ class _Panel extends StatelessWidget {
 }
 
 Future<void> _openBrhSource(BuildContext context) async {
-  final url = Uri.parse('https://www.brh.ht/taux-du-jour/');
+  final url = Uri.parse(kOfficialRatesUrl);
   if (await canLaunchUrl(url)) {
     await launchUrl(url, mode: LaunchMode.externalApplication);
   } else {
     if (context.mounted) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text('Could not open brh.ht')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Could not open haitiandollar.com')),
+      );
     }
   }
 }
