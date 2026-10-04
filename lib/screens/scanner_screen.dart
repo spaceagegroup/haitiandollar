@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
@@ -14,16 +15,25 @@ class ScannerScreen extends StatefulWidget {
 }
 
 class _ScannerScreenState extends State<ScannerScreen> {
-  final MobileScannerController _controller = MobileScannerController(
-    detectionSpeed: DetectionSpeed.noDuplicates,
-    facing: CameraFacing.back,
-  );
-
+  late final MobileScannerController _controller;
   bool _hasScanned = false;
 
   @override
+  void initState() {
+    super.initState();
+    _controller = MobileScannerController(
+      detectionSpeed: DetectionSpeed.noDuplicates,
+      facing: kIsWeb ? CameraFacing.front : CameraFacing.back,
+    );
+  }
+
+  @override
   void dispose() {
-    _controller.dispose();
+    try {
+      _controller.dispose();
+    } catch (e) {
+      debugPrint('MobileScanner dispose error: $e');
+    }
     super.dispose();
   }
 
@@ -129,12 +139,20 @@ class _ScannerScreenState extends State<ScannerScreen> {
           IconButton(
             icon: const Icon(Icons.flash_on),
             tooltip: 'Toggle flash',
-            onPressed: () => _controller.toggleTorch(),
+            onPressed: () async {
+              try {
+                await _controller.toggleTorch();
+              } catch (_) {}
+            },
           ),
           IconButton(
             icon: const Icon(Icons.flip_camera_ios),
             tooltip: 'Switch camera',
-            onPressed: () => _controller.switchCamera(),
+            onPressed: () async {
+              try {
+                await _controller.switchCamera();
+              } catch (_) {}
+            },
           ),
           IconButton(
             icon: const Icon(Icons.keyboard_alt_outlined),

@@ -63,12 +63,9 @@ const double kOfficialHtgPerUsd = 130.5583;
 /// reference rate published at https://www.haitiandollar.com/htd#official-rates.
 const double kOfflineBaselineHtgPerUsd = kOfficialHtgPerUsd;
 
-/// The quotation endpoints the website itself publishes, rewritten daily by
+/// The quotation endpoint the website itself publishes, rewritten daily by
 /// `.github/workflows/fetch-rates.yml`.
-const List<String> _kQuoteUrls = <String>[
-  'https://www.haitiandollar.com/htd-quote.json',
-  'https://haitiandollar.com/htd-quote.json',
-];
+const String _kQuoteUrl = 'https://haitiandollar.com/htd-quote.json';
 
 /// The open forex endpoints the website falls back through, in the same order.
 const List<String> _kForexEndpoints = <String>[
@@ -399,12 +396,34 @@ class WalletState extends ChangeNotifier {
     _isRefreshing = true;
     _safeNotify();
     try {
-      // 1. The published quotation from official endpoints.
       _Quote? quote;
-      for (final url in _kQuoteUrls) {
+
+      // 1. Live fetch from official endpoint.
+      // On web, if served on haitiandollar.com, use same-origin relative path.
+      // In local dev (localhost) or cross-origin on web, browser CORS blocks
+      // requests to haitiandollar.com; in that case, skip network and use the
+      // bundled asset snapshot directly.
+      final bool canFetchNetwork =
+          !kIsWeb || (Uri.base.host != 'localhost' && Uri.base.host != '127.0.0.1');
+
+      if (kIsWeb &&
+          (Uri.base.host == 'haitiandollar.com' ||
+              Uri.base.host == 'www.haitiandollar.com')) {
+        try {
+          final uri = Uri.base.resolve('htd-quote.json');
+          final res = await http.get(uri).timeout(_kFetchTimeout);
+          if (res.statusCode == 200) {
+            quote = _parseQuote(
+              jsonDecode(res.body),
+              _quoteSource,
+              fromNetwork: true,
+            );
+          }
+        } catch (_) {}
+      } else if (canFetchNetwork) {
         try {
           final res = await http
-              .get(Uri.parse(url))
+              .get(Uri.parse(_kQuoteUrl))
               .timeout(_kFetchTimeout);
           if (res.statusCode == 200) {
             quote = _parseQuote(
@@ -412,10 +431,9 @@ class WalletState extends ChangeNotifier {
               _quoteSource,
               fromNetwork: true,
             );
-            if (quote != null) break;
           }
         } catch (e) {
-          debugPrint('Rate refresh live fetch fallback ($url): $e');
+          debugPrint('Rate refresh live fetch fallback: $e');
         }
       }
 
@@ -436,7 +454,9 @@ class WalletState extends ChangeNotifier {
 
       // 3. Fallback to open forex endpoints only if no official Bank of Haiti
       //    quotation is available.
-      quote ??= await _fetchForexQuote();
+      if (canFetchNetwork) {
+        quote ??= await _fetchForexQuote();
+      }
 
       if (quote == null) {
         _applyOfflineBaseline();
