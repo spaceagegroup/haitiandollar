@@ -98,9 +98,14 @@ class DashboardScreen extends StatelessWidget {
 
     return Scaffold(
       body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.fromLTRB(16, 10, 16, 28),
-          children: [
+        child: RefreshIndicator(
+          onRefresh: () => wallet.refreshRates(),
+          color: const Color(0xFFFCC419),
+          backgroundColor: const Color(0xFF141414),
+          child: ListView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            padding: const EdgeInsets.fromLTRB(16, 10, 16, 28),
+            children: [
             _Header(
               onSwitchShell: () => wallet.setMode(
                 mode == AppMode.consumer ? AppMode.kiosk : AppMode.consumer,
@@ -166,8 +171,9 @@ class DashboardScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }
 
 class _Header extends StatelessWidget {
@@ -387,14 +393,26 @@ class _RateBar extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              if (wallet.isRefreshing) ...[
-                const SizedBox(width: 8),
-                const SizedBox(
-                  width: 11,
-                  height: 11,
-                  child: CircularProgressIndicator(strokeWidth: 1.5),
-                ),
-              ],
+              GestureDetector(
+                onTap: wallet.isRefreshing ? null : () => wallet.refreshRates(),
+                child: wallet.isRefreshing
+                    ? const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 4),
+                        child: SizedBox(
+                          width: 11,
+                          height: 11,
+                          child: CircularProgressIndicator(strokeWidth: 1.5),
+                        ),
+                      )
+                    : const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 4),
+                        child: Icon(
+                          Icons.refresh,
+                          size: 13,
+                          color: Colors.white54,
+                        ),
+                      ),
+              ),
               const SizedBox(width: 8),
               Flexible(
                 child: FittedBox(

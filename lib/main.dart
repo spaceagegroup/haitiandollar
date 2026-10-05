@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -22,8 +24,43 @@ void main() {
   );
 }
 
-class HtdApp extends StatelessWidget {
+class HtdApp extends StatefulWidget {
   const HtdApp({super.key});
+
+  @override
+  State<HtdApp> createState() => _HtdAppState();
+}
+
+class _HtdAppState extends State<HtdApp> with WidgetsBindingObserver {
+  Timer? _rateRefreshTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    // Periodically refresh rates while app is active (every 15 minutes)
+    _rateRefreshTimer = Timer.periodic(const Duration(minutes: 15), (_) {
+      if (mounted) {
+        context.read<WalletState>().refreshRates();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _rateRefreshTimer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed && mounted) {
+      // Whenever the user returns to the app from the background or unlocks their phone,
+      // refresh rates to mirror the web's live updates.
+      context.read<WalletState>().refreshRates();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -43,9 +43,14 @@ class _KioskScreenState extends State<KioskScreen> {
 
     return Scaffold(
       body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.fromLTRB(16, 10, 16, 28),
-          children: [
+        child: RefreshIndicator(
+          onRefresh: () => wallet.refreshRates(),
+          color: const Color(0xFFFCC419),
+          backgroundColor: const Color(0xFF141414),
+          child: ListView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            padding: const EdgeInsets.fromLTRB(16, 10, 16, 28),
+            children: [
             Row(
               children: [
                 IconButton(
@@ -316,8 +321,9 @@ class _KioskScreenState extends State<KioskScreen> {
           ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }
 
 class _Line extends StatelessWidget {

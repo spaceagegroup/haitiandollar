@@ -74,7 +74,8 @@ const List<String> _kForexEndpoints = <String>[
 ];
 
 /// How long any single rate source may take before the next one is tried.
-const Duration _kFetchTimeout = Duration(seconds: 4);
+/// Set to 12s to allow reliable TLS handshakes on mobile cellular/Wi-Fi connections.
+const Duration _kFetchTimeout = Duration(seconds: 12);
 
 /// How long a cached quotation stays usable before the open forex fallbacks are
 /// consulted, mirroring the website's `CACHE_TTL_MS` of two hours.
@@ -421,19 +422,35 @@ class WalletState extends ChangeNotifier {
           }
         } catch (_) {}
       } else if (canFetchNetwork) {
-        try {
-          final res = await http
-              .get(Uri.parse(_kQuoteUrl))
-              .timeout(_kFetchTimeout);
-          if (res.statusCode == 200) {
-            quote = _parseQuote(
-              jsonDecode(res.body),
-              _quoteSource,
-              fromNetwork: true,
+        // Mobile / cross-origin fetch with cache-busting and retry for initial connection warmup
+        for (int attempt = 0; attempt < 2; attempt++) {
+          try {
+            final uri = Uri.parse(_kQuoteUrl).replace(
+              queryParameters: <String, String>{
+                't': DateTime.now().millisecondsSinceEpoch.toString(),
+              },
             );
+            final res = await http.get(
+              uri,
+              headers: const <String, String>{
+                'Accept': 'application/json',
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
+              },
+            ).timeout(_kFetchTimeout);
+            if (res.statusCode == 200) {
+              quote = _parseQuote(
+                jsonDecode(res.body),
+                _quoteSource,
+                fromNetwork: true,
+              );
+              if (quote != null) break;
+            }
+          } catch (e) {
+            debugPrint('Rate refresh live fetch attempt $attempt fallback: $e');
+            if (attempt == 0) {
+              await Future<void>.delayed(const Duration(milliseconds: 1500));
+            }
           }
-        } catch (e) {
-          debugPrint('Rate refresh live fetch fallback: $e');
         }
       }
 
@@ -449,18 +466,25 @@ class WalletState extends ChangeNotifier {
         debugPrint('Rate refresh bundled asset fallback: $e');
       }
 
-      // Prefer the official quotation (live or bundled) over generic forex rates.
-      quote ??= bundled;
+      // If network fetch failed, decide whether to use bundled snapshot.
+      // Do not regress if our current in-memory quote is newer than the bundled snapshot.
+      if (quote == null) {
+        if (_ratesUpdatedAt != null && bundled?.updatedAt != null) {
+          if (_ratesUpdatedAt!.isBefore(bundled!.updatedAt!)) {
+            quote = bundled;
+          }
+        } else {
+          quote = bundled;
+        }
 
-      // 3. Fallback to open forex endpoints only if no official Bank of Haiti
-      //    quotation is available.
-      if (canFetchNetwork) {
-        quote ??= await _fetchForexQuote();
+        // 3. Fallback to open forex endpoints only if no official Bank of Haiti
+        //    quotation is available and we have no rate yet.
+        if (quote == null && _ratesUpdatedAt == null && canFetchNetwork) {
+          quote = await _fetchForexQuote();
+        }
       }
 
-      if (quote == null) {
-        _applyOfflineBaseline();
-      } else {
+      if (quote != null) {
         _htgPerUsd = quote.rate;
         _quoteSource = quote.source;
         _quoteDate = quote.date;
@@ -468,10 +492,14 @@ class WalletState extends ChangeNotifier {
         _fetchedFromNetwork = quote.fromNetwork;
         _quoteScrapedLive = quote.scrapedLive;
         _ratesUpdatedAt = quote.updatedAt;
+      } else if (_ratesUpdatedAt == null) {
+        _applyOfflineBaseline();
       }
     } catch (e) {
       debugPrint('Rate refresh fallback: $e');
-      _applyOfflineBaseline();
+      if (_ratesUpdatedAt == null) {
+        _applyOfflineBaseline();
+      }
     } finally {
       _isRefreshing = false;
       _safeNotify();
