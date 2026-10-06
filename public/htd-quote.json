@@ -1,24 +1,24 @@
 {
-  "date": "Oct 5, 2026",
-  "day": "Monday",
-  "fetchedAtET": "Monday, Oct 5, 2026 at 7:27 AM ET",
+  "date": "Oct 6, 2026",
+  "day": "Tuesday",
+  "fetchedAtET": "Tuesday, Oct 6, 2026 at 9:34 AM ET",
   "source": "Banque de la République d'Haïti (BRH)",
   "sourceUrl": "https://www.brh.ht/taux-du-jour/",
-  "updatedAt": "2026-10-05T11:27:22.621Z",
+  "updatedAt": "2026-10-06T13:34:35.470Z",
   "liveScraped": true,
   "reference": {
-    "htgPerUsd": 130.5583,
+    "htgPerUsd": 130.4713,
     "htdInUsd": 0.0383,
-    "usdInHtd": 26.11,
-    "raw": 130.5583
+    "usdInHtd": 26.09,
+    "raw": 130.4713
   },
   "banking": {
-    "buy": 130.3305,
-    "sell": 131.3052,
-    "spread": 0.9747,
-    "htgPerUsd": 131.3052,
+    "buy": 130.1854,
+    "sell": 131.3579,
+    "spread": 1.1725,
+    "htgPerUsd": 131.3579,
     "htdInUsd": 0.0381,
-    "usdInHtd": 26.26
+    "usdInHtd": 26.27
   },
   "informal": {
     "buy": 130.9,
@@ -29,9 +29,9 @@
     "usdInHtd": 27.12
   },
   "aar": {
-    "htgPerUsd": 131.3052,
+    "htgPerUsd": 131.3579,
     "htdInUsd": 0.0381,
-    "usdInHtd": 26.26,
-    "raw": 131.3052
+    "usdInHtd": 26.27,
+    "raw": 131.3579
   }
 }
