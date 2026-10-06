@@ -162,6 +162,8 @@ async function scrapeBRH() {
     sourceUrl: url,
     updatedAt: now.toISOString(),
     liveScraped: isLiveScrape,
+    lastTweetedDate: existingQuote?.lastTweetedDate || null,
+    lastTweetId: existingQuote?.lastTweetId || null,
     reference: { ...computeHtd(reference), raw: reference },
     banking: {
       buy: banking.buy,

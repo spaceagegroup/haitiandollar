@@ -28,6 +28,11 @@ async function postRateToX() {
 
   const quote = JSON.parse(fs.readFileSync(quotePath, 'utf8'));
 
+  if (quote.lastTweetedDate === quote.date) {
+    console.log(`ℹ️ Notice: Daily quotation for ${quote.date} has already been posted to X (Tweet ID: ${quote.lastTweetId || 'recorded'}). Skipping.`);
+    return;
+  }
+
   const tweetText = [
     `🇭🇹 Haitian Dollar Daily (${quote.date})`,
     '',
@@ -49,13 +54,25 @@ async function postRateToX() {
     accessSecret: accessTokenSecret.trim(),
   });
 
+  const saveUpdatedQuote = (tweetId) => {
+    quote.lastTweetedDate = quote.date;
+    if (tweetId) quote.lastTweetId = tweetId;
+    fs.writeFileSync(quotePath, JSON.stringify(quote, null, 2) + '\n');
+    const publicQuotePath = path.join(projectRoot, 'public', 'htd-quote.json');
+    if (fs.existsSync(path.dirname(publicQuotePath))) {
+      fs.writeFileSync(publicQuotePath, JSON.stringify(quote, null, 2) + '\n');
+    }
+  };
+
   try {
     const rwClient = client.readWrite;
     const response = await rwClient.v2.tweet(tweetText);
     console.log('✅ Tweet posted successfully to X!');
-    if (response && response.data) {
-      console.log(`Tweet ID: ${response.data.id}`);
+    const tweetId = response && response.data ? response.data.id : null;
+    if (tweetId) {
+      console.log(`Tweet ID: ${tweetId}`);
     }
+    saveUpdatedQuote(tweetId);
   } catch (err) {
     // Handle duplicate tweet gracefully if already posted today
     const errMsg = [
@@ -67,6 +84,7 @@ async function postRateToX() {
 
     if (errMsg.includes('duplicate')) {
       console.log('ℹ️ Notice: This daily quotation has already been posted to X. Skipping duplicate tweet.');
+      saveUpdatedQuote();
       return;
     }
 

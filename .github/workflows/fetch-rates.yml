@@ -2,10 +2,9 @@ name: Update BRH Daily Rates
 
 on:
   schedule:
-    # 11:00 UTC = 7:00 AM EDT (Monday - Saturday) — primary run
-    - cron: '0 11 * * 1-6'
-    # 13:00 UTC = 9:00 AM EDT (Monday - Saturday) — retry if rates not updated
-    - cron: '0 13 * * 1-6'
+    # Run every 30 minutes at off-peak minutes (:17, :47) from 11:00 UTC (7:17 AM EDT) to 15:00 UTC (11:47 AM EDT), Monday - Saturday
+    # Off-peak minute intervals avoid GitHub Actions top-of-the-hour queue starvation and ensure reliable auto-retries
+    - cron: '17,47 11-15 * * 1-6'
   workflow_dispatch: # Allows manual one-click trigger from the GitHub Actions tab
 
 concurrency:
@@ -18,6 +17,7 @@ permissions:
 jobs:
   fetch-and-update:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     env:
       HAS_FIREBASE_SECRET: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_HAITIAN_DOLLAR_CONNECT != '' }}
 
@@ -56,19 +56,21 @@ jobs:
         run: |
           NEW_DATE=$(node -e "console.log(JSON.parse(require('fs').readFileSync('htd-quote.json','utf8')).date || '')")
           NEW_REF=$(node -e "console.log(JSON.parse(require('fs').readFileSync('htd-quote.json','utf8')).reference?.raw || '')")
+          LAST_TWEETED=$(node -e "console.log(JSON.parse(require('fs').readFileSync('htd-quote.json','utf8')).lastTweetedDate || '')")
           echo "new_date=$NEW_DATE" >> $GITHUB_OUTPUT
           echo "new_ref=$NEW_REF" >> $GITHUB_OUTPUT
+          echo "last_tweeted=$LAST_TWEETED" >> $GITHUB_OUTPUT
           PREV_DATE="${{ steps.prev.outputs.prev_date }}"
           PREV_REF="${{ steps.prev.outputs.prev_ref }}"
 
           if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
             echo "Triggered via manual workflow dispatch."
             echo "status=changed" >> $GITHUB_OUTPUT
-          elif [ "$PREV_DATE" != "$NEW_DATE" ] || [ "$PREV_REF" != "$NEW_REF" ]; then
-            echo "Fresh rate or new date detected ($PREV_DATE/$PREV_REF -> $NEW_DATE/$NEW_REF)."
+          elif [ "$PREV_DATE" != "$NEW_DATE" ] || [ "$PREV_REF" != "$NEW_REF" ] || [ "$LAST_TWEETED" != "$NEW_DATE" ]; then
+            echo "Fresh rate, new date, or pending X post detected ($PREV_DATE/$PREV_REF -> $NEW_DATE/$NEW_REF, tweeted: $LAST_TWEETED)."
             echo "status=changed" >> $GITHUB_OUTPUT
           else
-            echo "Rates and date unchanged from previous run ($PREV_DATE @ $PREV_REF)."
+            echo "Rates and date unchanged and already tweeted ($PREV_DATE @ $PREV_REF)."
             echo "status=unchanged" >> $GITHUB_OUTPUT
           fi
 
