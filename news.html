@@ -204,8 +204,8 @@
               <span class="w-2.5 h-2.5 rounded-full bg-brandRed animate-pulse"></span>
               Featured PR Rotation
             </span>
-            <span class="text-[11px] font-mono text-ink/60 bg-ink/5 px-2.5 py-0.5 rounded-full border border-borderGray">
-              24-Hour Active Window
+            <span id="featured-window-badge" class="text-[11px] font-mono text-ink/60 bg-ink/5 px-2.5 py-0.5 rounded-full border border-borderGray">
+              Active Stories
             </span>
           </div>
 
@@ -215,6 +215,9 @@
             <div class="flex items-center gap-1.5">
               <button id="carousel-prev" aria-label="Previous PR" class="w-8 h-8 rounded-full bg-white border border-borderGray hover:border-ink hover:bg-black/5 flex items-center justify-center text-ink transition-all shadow-sm">
                 <i data-lucide="chevron-left" class="w-4 h-4"></i>
+              </button>
+              <button id="carousel-play-pause" aria-label="Pause slideshow" class="w-8 h-8 rounded-full bg-white border border-borderGray hover:border-ink hover:bg-black/5 flex items-center justify-center text-ink transition-all shadow-sm">
+                <i data-lucide="pause" id="play-pause-icon" class="w-4 h-4"></i>
               </button>
               <button id="carousel-next" aria-label="Next PR" class="w-8 h-8 rounded-full bg-white border border-borderGray hover:border-ink hover:bg-black/5 flex items-center justify-center text-ink transition-all shadow-sm">
                 <i data-lucide="chevron-right" class="w-4 h-4"></i>
@@ -239,7 +242,7 @@
                 <span class="text-xs text-ink/60 font-mono mt-1">SEC CIK 0001906040 &bull; Base L2</span>
                 <span class="mt-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 slide-status-pill">
                   <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                  Active in 24h Window
+                  Featured Announcement
                 </span>
               </div>
               <div class="lg:col-span-8 p-6 sm:p-10 lg:p-12 flex flex-col justify-center">
@@ -287,7 +290,7 @@
                 <span class="text-xs text-ink/60 font-mono mt-1">SEC CIK 0001906040 &bull; Base L2</span>
                 <span class="mt-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 slide-status-pill">
                   <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                  Active in 24h Window
+                  Featured Announcement
                 </span>
               </div>
               <div class="lg:col-span-8 p-6 sm:p-10 lg:p-12 flex flex-col justify-center">
@@ -335,7 +338,7 @@
                 <span class="text-xs text-ink/60 font-mono mt-1">SEC CIK 0001906040 &bull; Base L2</span>
                 <span class="mt-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 slide-status-pill">
                   <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                  Active in 24h Window
+                  Featured Announcement
                 </span>
               </div>
               <div class="lg:col-span-8 p-6 sm:p-10 lg:p-12 flex flex-col justify-center">
@@ -498,7 +501,7 @@
               USPTO Registers Haitian Dollar Trademark
             </h3>
             <p class="text-ink/70 text-sm leading-relaxed flex-grow">
-              USPTO Serial 88319997 (Reg. 6267276) registered with the United States Patent and Trademark Office for financial services and cryptocurrency exchange. The mark is a protected asset of Haitian Dollar Inc.
+              USPTO Reg. No. 6,267,276 (Serial No. 88319997) registered on the Principal Register with the United States Patent and Trademark Office for financial services and digital asset exchange. The mark is a protected asset of Haitian Dollar Inc.
             </p>
           </article>
 
@@ -643,9 +646,9 @@
         <div class="md:col-span-2">
           <p class="text-[11px] font-display font-bold uppercase tracking-wider text-brandYellow mb-3">Protocol</p>
           <ul class="text-xs space-y-2 text-white/70">
-            <li><a href="/htd.html" class="hover:text-white transition-colors">What is HTD</a></li>
-            <li><a href="/merchants.html" class="hover:text-white transition-colors">Merchants</a></li>
-            <li><a href="/users.html" class="hover:text-white transition-colors">Users</a></li>
+            <li><a href="/htd" class="hover:text-white transition-colors">What is HTD</a></li>
+            <li><a href="/merchants" class="hover:text-white transition-colors">Merchants</a></li>
+            <li><a href="/users" class="hover:text-white transition-colors">Users</a></li>
           </ul>
         </div>
 
@@ -653,19 +656,19 @@
         <div class="md:col-span-2">
           <p class="text-[11px] font-display font-bold uppercase tracking-wider text-brandYellow mb-3">Company</p>
           <ul class="text-xs space-y-2 text-white/70">
-            <li><a href="/about.html" class="hover:text-white transition-colors">About</a></li>
-            <li><a href="/investors.html" class="hover:text-white transition-colors">Investors</a></li>
-            <li><a href="/news.html" class="hover:text-white transition-colors">News</a></li>
+            <li><a href="/about" class="hover:text-white transition-colors">About</a></li>
+            <li><a href="/investors" class="hover:text-white transition-colors">Investors</a></li>
+            <li><a href="/news" class="hover:text-white transition-colors">News</a></li>
           </ul>
         </div>
 
         <!-- Contact (single row) -->
         <div class="md:col-span-3">
           <p class="text-[11px] font-display font-bold uppercase tracking-wider text-brandYellow mb-3">
-            <a href="/contact.html" class="hover:underline">Contact</a>
+            <a href="/contact" class="hover:underline">Contact</a>
           </p>
           <ul class="text-xs space-y-2 text-white/70 font-mono">
-            <li><a href="/contact.html" class="text-brandYellow hover:text-white transition-colors font-sans font-semibold flex items-center gap-1">Online Contact Form &rarr;</a></li>
+            <li><a href="/contact" class="text-brandYellow hover:text-white transition-colors font-sans font-semibold flex items-center gap-1">Online Contact Form &rarr;</a></li>
             <li><a href="mailto:admin@haitiandollar.com" class="hover:text-white transition-colors">admin@haitiandollar.com</a></li>
             <li><a href="mailto:legal@haitiandollar.com" class="hover:text-white transition-colors">legal@haitiandollar.com</a></li>
           </ul>
@@ -679,17 +682,17 @@
         <!-- Privacy / Legal / Copyright row -->
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-[11px] text-white/40 mb-4">
           <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
-            <a href="/legal.html" class="hover:text-brandYellow transition-colors">Privacy Policy</a>
+            <a href="/legal" class="hover:text-brandYellow transition-colors">Privacy Policy</a>
             <span class="text-white/20 hidden sm:inline">·</span>
-            <a href="/legal.html" class="hover:text-brandYellow transition-colors">Terms of Service</a>
+            <a href="/legal" class="hover:text-brandYellow transition-colors">Terms of Service</a>
             <span class="text-white/20 hidden sm:inline">·</span>
-            <a href="/legal.html#reg-d" class="hover:text-brandYellow transition-colors">SEC Regulatory Notice</a>
+            <a href="/legal#reg-d" class="hover:text-brandYellow transition-colors">SEC Regulatory Notice</a>
             <span class="text-white/20 hidden sm:inline">·</span>
             <a href="/feed.xml" class="hover:text-brandYellow transition-colors">RSS</a>
             <span class="text-white/20 hidden sm:inline">·</span>
             <a href="#" onclick="resetCookieConsent(); return false;" class="hover:text-brandYellow transition-colors">Cookie Settings</a>
           </div>
-          <p>&reg; <span id="year">2026</span> Haitian Dollar Inc.</p>
+          <p>&copy; <span id="year">2026</span> Haitian Dollar Inc. Registered trademark USPTO Reg. No. 6,267,276 (Serial No. 88319997). SEC CIK 0001906040.</p>
         </div>
 
         <!-- Disclaimer -->
@@ -709,7 +712,7 @@
     const menu = document.getElementById('mobile-menu');
     if (btn && menu) btn.addEventListener('click', () => menu.classList.toggle('hidden'));
 
-    // Featured PR Carousel (24-Hour Active Rotation)
+    // Featured PR Carousel (Active Stories Rotation)
     (function initFeaturedCarousel() {
       const section = document.getElementById('featured-section');
       if (!section) return;
@@ -719,12 +722,15 @@
       const counter = document.getElementById('carousel-counter');
       const prevBtn = document.getElementById('carousel-prev');
       const nextBtn = document.getElementById('carousel-next');
+      const playPauseBtn = document.getElementById('carousel-play-pause');
+      const playPauseIcon = document.getElementById('play-pause-icon');
+      const windowBadge = document.getElementById('featured-window-badge');
       const dotsContainer = document.getElementById('carousel-dots');
 
-      const WINDOW_MS = 24 * 60 * 60 * 1000; // 24-hour expiration window
+      const WINDOW_MS = 14 * 24 * 60 * 60 * 1000; // 14-day window for active stories
       const now = Date.now();
 
-      // Check 24-hour window eligibility for each slide
+      // Check window eligibility for each slide
       const activeSlides = [];
       allSlides.forEach((slide) => {
         const publishedIso = slide.getAttribute('data-published');
@@ -733,9 +739,9 @@
         const pill = slide.querySelector('.slide-status-pill');
 
         if (ageMs <= WINDOW_MS && ageMs >= -3600000) {
-          const remainingHours = Math.max(1, Math.round((WINDOW_MS - Math.max(0, ageMs)) / (60 * 60 * 1000)));
+          const remainingDays = Math.max(1, Math.ceil((WINDOW_MS - Math.max(0, ageMs)) / (24 * 60 * 60 * 1000)));
           if (pill) {
-            pill.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>Featured &bull; ${remainingHours}h remaining`;
+            pill.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>Featured &bull; ${remainingDays}d active`;
           }
           activeSlides.push(slide);
         } else {
@@ -743,15 +749,26 @@
         }
       });
 
-      // REGULAR MODE TRANSITION:
-      // If no items were published in the last 24 hours, hide the featured carousel completely.
-      // The page cleanly renders in regular mode with all articles in the chronological archive below.
+      // FALLBACK PINNING:
+      // If no items fall within the 14-day window, pin the latest announcement (slide 0)
+      if (activeSlides.length === 0 && allSlides.length > 0) {
+        const fallbackSlide = allSlides[0];
+        const pill = fallbackSlide.querySelector('.slide-status-pill');
+        if (pill) {
+          pill.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-brandRed"></span>Latest Announcement';
+        }
+        if (windowBadge) {
+          windowBadge.textContent = 'Featured Story';
+        }
+        activeSlides.push(fallbackSlide);
+      }
+
       if (activeSlides.length === 0) {
         section.classList.add('hidden');
         return;
       }
 
-      // If active items exist within 24h, reveal the featured carousel section
+      // Reveal the featured carousel section
       section.classList.remove('hidden');
 
       allSlides.forEach(slide => {
@@ -760,7 +777,7 @@
         }
       });
 
-      // If only 1 slide is active in 24h window, display it cleanly without rotation controls
+      // If only 1 slide is active, display cleanly without rotation controls
       if (activeSlides.length === 1) {
         if (counter) counter.classList.add('hidden');
         if (prevBtn && prevBtn.parentElement) prevBtn.parentElement.classList.add('hidden');
@@ -772,6 +789,7 @@
 
       let currentIndex = 0;
       let timer = null;
+      let isPlaying = true;
 
       function updateDots() {
         if (!dotsContainer) return;
@@ -827,13 +845,15 @@
       if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); resetAutoplay(); });
 
       function startAutoplay() {
-        if (activeSlides.length > 1) {
-          timer = setInterval(nextSlide, 7000);
+        if (activeSlides.length > 1 && isPlaying) {
+          stopAutoplay();
+          timer = setInterval(nextSlide, 10000);
         }
       }
 
       function stopAutoplay() {
         if (timer) clearInterval(timer);
+        timer = null;
       }
 
       function resetAutoplay() {
@@ -841,8 +861,26 @@
         startAutoplay();
       }
 
-      section.addEventListener('mouseenter', stopAutoplay);
-      section.addEventListener('mouseleave', startAutoplay);
+      function togglePlayPause() {
+        isPlaying = !isPlaying;
+        if (isPlaying) {
+          if (playPauseBtn) playPauseBtn.setAttribute('aria-label', 'Pause slideshow');
+          if (playPauseIcon) playPauseIcon.setAttribute('data-lucide', 'pause');
+          startAutoplay();
+        } else {
+          if (playPauseBtn) playPauseBtn.setAttribute('aria-label', 'Play slideshow');
+          if (playPauseIcon) playPauseIcon.setAttribute('data-lucide', 'play');
+          stopAutoplay();
+        }
+        if (window.lucide) lucide.createIcons();
+      }
+
+      if (playPauseBtn) {
+        playPauseBtn.addEventListener('click', togglePlayPause);
+      }
+
+      section.addEventListener('mouseenter', () => { if (isPlaying) stopAutoplay(); });
+      section.addEventListener('mouseleave', () => { if (isPlaying) startAutoplay(); });
 
       // Touch swipe support for mobile
       let touchStartX = 0;
@@ -859,8 +897,8 @@
       // Keyboard navigation
       window.addEventListener('keydown', e => {
         if (document.activeElement && ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
-        if (e.key === 'ArrowRight') nextSlide();
-        if (e.key === 'ArrowLeft') prevSlide();
+        if (e.key === 'ArrowRight') { nextSlide(); resetAutoplay(); }
+        if (e.key === 'ArrowLeft') { prevSlide(); resetAutoplay(); }
       });
 
       // Initial display
@@ -884,7 +922,7 @@
           <p class="text-xs sm:text-sm text-ink/80 leading-snug">
             <strong class="font-display font-bold text-ink">We use cookies.</strong>
             Essential cookies keep the site working. Analytics cookies help us understand usage. Read our
-            <a href="/legal.html#privacy" class="underline text-brandRed hover:text-ink font-medium">Privacy Policy</a>.
+            <a href="/legal#privacy" class="underline text-brandRed hover:text-ink font-medium">Privacy Policy</a>.
           </p>
         </div>
 
@@ -979,7 +1017,9 @@
         document.querySelectorAll('.mobile-drawer-rate').forEach(el => {
           el.textContent = usdFormatted;
         });
-      } catch (e) {}
+      } catch (e) {
+        console.warn('Failed to fetch live rates:', e);
+      }
     })();
   </script>
 </body>

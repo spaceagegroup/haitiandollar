@@ -3,14 +3,23 @@
   <channel>
     <title>Haitian Dollar (HTD) | News &amp; Updates</title>
     <link>https://haitiandollar.com/news</link>
-    <description>Official announcements, product updates, and pilot milestones from Haitian Dollar Inc — a Reg D 506(b) issuer building digital settlement infrastructure for the Haitian Dollar.</description>
+    <description>Official announcements, product updates, and pilot milestones from Haitian Dollar Inc — an SEC CIK-registered entity (CIK 0001906040) building digital settlement infrastructure for the Haitian Dollar.</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 30 Sep 2026 07:30:00 EST</lastBuildDate>
+    <lastBuildDate>Wed, 07 Oct 2026 08:00:00 EST</lastBuildDate>
     <atom:link href="https://haitiandollar.com/feed.xml" rel="self" type="application/rss+xml" />
 
     <item>
+      <title>HTD Architecture Migrating to Base Layer 2 with Sub-Cent Settlement &amp; Elastic Parity Engine</title>
+      <link>https://haitiandollar.com/htd#pilot</link>
+      <guid isPermaLink="false">htd-pr-2026-002</guid>
+      <pubDate>Wed, 30 Sep 2026 06:00:00 EST</pubDate>
+      <category>Product &amp; Architecture</category>
+      <description><![CDATA[PORT-AU-PRINCE & BALTIMORE — Protocol framework finalized for partner merchants and diaspora senders. Elastic supply mirrors the Haitian Gourde reserve at the fixed 1 HTD = 5 HTG parity invariant with sub-cent mobile checkout.]]></description>
+    </item>
+
+    <item>
       <title>Haitian Dollar Inc. Launches Automated Daily Market Rate Engine</title>
-      <link>https://haitiandollar.com/news/automated-brh-daily-rate-integration.html</link>
+      <link>https://haitiandollar.com/news/automated-brh-daily-rate-integration</link>
       <guid isPermaLink="false">htd-pr-2026-003</guid>
       <pubDate>Wed, 30 Sep 2026 07:30:00 EST</pubDate>
       <category>Press Release</category>
@@ -19,7 +28,7 @@
 
     <item>
       <title>Haitian Dollar Inc. Issues Update to Prior Investors and Clarifies Regulatory Status</title>
-      <link>https://haitiandollar.com/news/prior-investor-update.html</link>
+      <link>https://haitiandollar.com/news/prior-investor-update</link>
       <guid isPermaLink="false">htd-pr-2026-001</guid>
       <pubDate>Tue, 29 Sep 2026 12:00:00 EST</pubDate>
       <category>Press Release</category>
@@ -41,7 +50,7 @@
       <guid isPermaLink="false">htd-news-002</guid>
       <pubDate>Tue, 09 Feb 2021 12:00:00 EST</pubDate>
       <category>Trademark</category>
-      <description><![CDATA[USPTO Serial 88319997 is registered with the United States Patent and Trademark Office for financial services and cryptocurrency exchange. The Haitian Dollar mark is now a protected asset of Haitian Dollar Inc.]]></description>
+      <description><![CDATA[USPTO Reg. No. 6,267,276 (Serial No. 88319997) registered with the United States Patent and Trademark Office on the Principal Register for financial services and digital asset exchange. The Haitian Dollar mark is now a protected asset of Haitian Dollar Inc.]]></description>
     </item>
 
     <item>
