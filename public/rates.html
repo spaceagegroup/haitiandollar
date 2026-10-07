@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <!-- Google Consent Mode v2 + GA4 -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    const savedConsent = JSON.parse(localStorage.getItem('htd_cookie_consent') || 'null');
+
+    if (savedConsent) {
+      gtag('consent', 'default', {
+        'analytics_storage': savedConsent.analytics ? 'granted' : 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'functionality_storage': 'denied',
+        'security_storage': 'granted'
+      });
+    } else {
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'functionality_storage': 'denied',
+        'security_storage': 'granted'
+      });
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'G-DMBN9HX803');
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DMBN9HX803"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="google-site-verification" content="googleaad7d53267bd2aad">
+  <title>BRH Daily Exchange Rates &amp; HTD Conversions | Haitian Dollar</title>
+  <meta name="description" content="Official Banque de la République d'Haïti (BRH) daily market rates, informal vs banking spreads, and Haitian Dollar (1 HTD = 5 HTG) conversion metrics.">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="alternate" type="application/rss+xml" title="Haitian Dollar (HTD) News" href="/feed.xml">
+
+  <!-- Open Graph / Social Tags -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://haitiandollar.com/rates" />
+  <meta property="og:title" content="BRH Daily Rates &amp; HTD Conversions | Haitian Dollar Inc." />
+  <meta property="og:description" content="Live central bank exchange rates, banking &amp; informal spreads, and 1 HTD = 5 HTG parity calculations updated daily." />
+  <meta property="og:image" content="https://haitiandollar.com/banner-wide.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Haitian Dollar Inc." />
+
+  <!-- Twitter / X Card Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@haitiandollar" />
+  <meta name="twitter:title" content="BRH Daily Rates &amp; HTD Conversions | Haitian Dollar Inc." />
+  <meta name="twitter:description" content="Live central bank exchange rates, banking &amp; informal spreads, and 1 HTD = 5 HTG parity calculations updated daily." />
+  <meta name="twitter:image" content="https://haitiandollar.com/banner-wide.jpg" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Inter & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Pinned Lucide Icons (Script only, no duplicate CSS) -->
+  <script src="https://unpkg.com/lucide@0.344.0/dist/umd/lucide.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandYellow: '#FCC419',
+            brandRed: '#E03131',
+            ink: '#0A0A0A',
+            offWhite: '#FFFBF0',
+            borderGray: '#E5E5E5',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-ink text-white font-sans antialiased selection:bg-brandYellow selection:text-ink">
+
+  <!-- TOP COMPLIANCE BAR -->
+  <aside aria-label="Regulatory Notice" class="bg-black text-white/80 text-xs py-2 px-4 border-b border-white/10">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-2 text-center sm:text-left">
+        <img src="/logo.png" alt="HTD" class="w-4 h-4 rounded-full" />
+        <span>Haitian Dollar Inc. (SEC CIK 0001906040) · Official Market Rate Terminal</span>
+      </div>
+      <a href="/legal.html" class="underline hover:text-brandYellow transition-colors">Offering &amp; Risk Disclosures</a>
+    </div>
+  </aside>
+
+  <!-- NAVIGATION -->
+  <header class="sticky top-0 z-50 bg-ink/90 backdrop-blur-md border-b border-white/10">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between" aria-label="Main Navigation">
+      <a href="/" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-brandYellow">
+          <img src="/logo.png" alt="Haitian Dollar" class="w-full h-full object-cover" />
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display font-black text-xl leading-none tracking-tight text-white">HAITIAN DOLLAR</span>
+          <span class="text-[10px] font-semibold tracking-widest text-brandYellow uppercase">1 HTD = 5 HTG</span>
+        </div>
+      </a>
+
+      <!-- Desktop Links -->
+      <div class="hidden md:flex items-center gap-7 font-medium text-sm text-white/80">
+        <a href="/about.html" class="hover:text-white transition-colors">About</a>
+        <a href="/htd.html" class="hover:text-white transition-colors">HTD Token</a>
+        <a href="/merchants.html" class="hover:text-white transition-colors">Merchants</a>
+        <a href="/users.html" class="hover:text-white transition-colors">Users</a>
+        <a href="/investors.html" class="hover:text-white transition-colors">Investors</a>
+        <a href="/news.html" class="hover:text-white transition-colors">News</a>
+        <a href="/rates" class="text-brandYellow font-bold flex items-center gap-1.5" aria-current="page">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          BRH Rates
+        </a>
+        <a href="/contact.html" class="hover:text-white transition-colors">Contact</a>
+      </div>
+
+      <!-- Action Buttons & Language Switcher -->
+      <div class="flex items-center gap-3">
+        <!-- Language Switcher Pill (Accessible aria-pressed) -->
+        <div class="inline-flex items-center p-0.5 rounded-lg bg-white/10 border border-white/10 text-xs font-mono font-bold" role="group" aria-label="Language selection">
+          <button id="lang-btn-en" onclick="setLanguage('en')" aria-pressed="true" class="px-2.5 py-1 rounded-md transition-colors bg-brandYellow text-ink font-bold">
+            EN
+          </button>
+          <button id="lang-btn-ht" onclick="setLanguage('ht')" aria-pressed="false" class="px-2.5 py-1 rounded-md transition-colors text-white/70 hover:text-white">
+            HT
+          </button>
+        </div>
+
+        <a href="/htd.html#official-rates" class="hidden lg:inline-flex items-center justify-center px-4 py-2 rounded-lg bg-brandRed text-white font-semibold text-xs hover:bg-brandRed/90 transition-all">
+          Token Specs &rarr;
+        </a>
+
+        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-white hover:bg-white/10" aria-label="Toggle Menu" aria-expanded="false">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden border-b border-white/10 bg-ink px-4 pt-3 pb-6 space-y-3 font-medium text-base text-white/80">
+      <a href="/about.html" class="block py-1 hover:text-white">About</a>
+      <a href="/htd.html" class="block py-1 hover:text-white">HTD Token</a>
+      <a href="/merchants.html" class="block py-1 hover:text-white">Merchants</a>
+      <a href="/users.html" class="block py-1 hover:text-white">Users</a>
+      <a href="/investors.html" class="block py-1 hover:text-white">Investors</a>
+      <a href="/news.html" class="block py-1 hover:text-white">News</a>
+      <a href="/rates" class="block py-1 text-brandYellow font-bold">BRH Daily Rates &amp; Spreads</a>
+      <a href="/contact.html" class="block py-1 hover:text-white">Contact</a>
+    </div>
+  </header>
+
+  <!-- MAIN TERMINAL CONTENT -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-12">
+
+    <!-- HERO SECTION & FRESHNESS BADGE -->
+    <section class="text-center space-y-6">
+      
+      <!-- Dynamic Status Pill (with role="status") -->
+      <div id="freshness-badge" role="status" aria-live="polite" class="inline-flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono">
+        <span id="freshness-dot" class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+        <span id="freshness-label" class="font-bold text-white uppercase tracking-wider">Live BRH Publication</span>
+        <span class="text-white/40">·</span>
+        <span id="display-date-badge" class="text-brandYellow font-semibold">Today</span>
+      </div>
+
+      <!-- Main Title & Subtitle -->
+      <div class="space-y-3 max-w-3xl mx-auto">
+        <h1 id="page-title" class="font-display font-black text-3xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-tight">
+          Banque de la République d'Haïti (BRH) Daily Rates
+        </h1>
+        <p id="page-subtitle" class="text-sm sm:text-base text-white/60 leading-relaxed">
+          Official foreign exchange benchmark and Haitian Dollar protocol conversion metrics
+        </p>
+      </div>
+
+      <!-- TOP DUAL KPI CARDS: Invariant & Implied Purchasing Power -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto pt-4 text-left">
+        
+        <!-- CARD 1: PROTOCOL PARITY RULE -->
+        <div class="bg-gradient-to-br from-white/10 to-white/5 border border-white/10 rounded-2xl p-6 sm:p-7 relative overflow-hidden shadow-2xl">
+          <div class="absolute -top-10 -right-10 w-32 h-32 bg-brandYellow/10 rounded-full blur-2xl pointer-events-none"></div>
+          <div class="flex items-center justify-between text-xs font-mono text-white/50 uppercase tracking-widest mb-3">
+            <span id="label-invariant-title">Protocol Parity Rule</span>
+            <span class="px-2 py-0.5 rounded bg-brandYellow/20 text-brandYellow text-[11px] font-bold">Fixed Forever</span>
+          </div>
+          <div class="font-display font-black text-4xl sm:text-5xl text-white tracking-tight">
+            1 HTD = <span class="text-brandYellow">5.00</span> <span class="text-lg font-mono text-white/40 font-normal">HTG</span>
+          </div>
+          <p id="label-invariant-explainer" class="text-xs text-white/60 mt-3 leading-relaxed">
+            This is the century-old monetary convention Haitians have used since 1912. It does not change.
+          </p>
+          <div class="mt-4 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono text-white/60">
+            <span>Inverse Rule:</span>
+            <span class="text-white font-bold">1 HTG = 0.20 HTD</span>
+          </div>
+        </div>
+
+        <!-- CARD 2: IMPLIED USD VALUE & BENCHMARK -->
+        <div class="bg-gradient-to-br from-white/10 to-white/5 border border-white/10 rounded-2xl p-6 sm:p-7 relative overflow-hidden shadow-2xl">
+          <div class="absolute -top-10 -right-10 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
+          <div class="flex items-center justify-between text-xs font-mono text-white/50 uppercase tracking-widest mb-3">
+            <span id="label-implied-title">Implied US Dollar Purchasing Power</span>
+            <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[11px] font-bold">BRH Reference</span>
+          </div>
+          <div class="font-display font-black text-4xl sm:text-5xl text-white tracking-tight">
+            1 HTD ≈ <span id="hero-htd-usd" class="text-emerald-400">$0.0383</span> <span class="text-lg font-mono text-white/40 font-normal">USD</span>
+          </div>
+          <div class="text-xs text-white/60 mt-3 flex items-center gap-2">
+            <span>BRH Benchmark:</span>
+            <strong id="hero-ref-rate" class="font-mono text-white font-bold">1 USD = 130.4713 HTG</strong>
+          </div>
+          <div class="mt-4 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono text-white/60">
+            <span>USD in Haitian Dollars:</span>
+            <strong id="hero-usd-htd" class="text-brandYellow font-bold">1 USD = 26.09 HTD</strong>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- PROMINENT SPREAD HIGHLIGHT CARD (Core Economic Thesis) -->
+    <section class="max-w-5xl mx-auto">
+      <div class="bg-gradient-to-r from-red-950/40 via-ink to-amber-950/30 border border-brandRed/30 rounded-2xl p-6 sm:p-8 relative overflow-hidden shadow-2xl">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          
+          <div class="space-y-2 max-w-2xl">
+            <div class="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-brandRed">
+              <i data-lucide="alert-triangle" class="w-4 h-4 text-brandRed shrink-0"></i>
+              <span id="spread-alert-tag">Market Spread Disparity &amp; HTD Value</span>
+            </div>
+            <h2 id="spread-box-title" class="font-display font-black text-xl sm:text-2xl text-white tracking-tight">
+              Informal Cash Market Spread is ~4x Wider Than Commercial Banks
+            </h2>
+            <p id="spread-box-desc" class="text-xs sm:text-sm text-white/70 leading-relaxed">
+              Unbanked individuals exchanging cash in the informal market face an average spread of <strong id="spread-box-inf-htg" class="text-white">4.70 HTG</strong> (~<span id="spread-box-inf-pct">3.5%</span>), compared to <strong id="spread-box-bank-htg" class="text-white">1.17 HTG</strong> (~<span id="spread-box-bank-pct">0.9%</span>) at commercial banks. HTD's 3% reserve redemption window and 0% P2P settlement eliminate predatory street cash friction.
+            </p>
+          </div>
+
+          <!-- Spread Ratio Metric Box -->
+          <div class="shrink-0 w-full md:w-auto bg-black/60 border border-white/10 rounded-xl p-4 sm:p-5 text-center sm:text-right space-y-1">
+            <span class="text-[11px] font-mono text-white/50 uppercase tracking-wider block">Informal / Bank Spread Ratio</span>
+            <div id="spread-ratio-badge" class="font-display font-black text-4xl text-brandYellow">4.0x</div>
+            <span class="text-[11px] font-mono text-emerald-400 block">HTD Protocol Protections</span>
+          </div>
+
+        </div>
+
+        <!-- Tooltip Explainer Note -->
+        <div class="mt-5 pt-4 border-t border-white/10 flex items-start gap-2.5 text-xs text-white/60 leading-relaxed">
+          <i data-lucide="info" class="w-4 h-4 text-brandYellow shrink-0 mt-0.5"></i>
+          <span id="spread-tooltip-text">
+            Spread = Difference between Buy and Sell. The informal market spread is 4x wider than commercial banks.
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINANCIAL TERMINAL RATES: DESKTOP TABLE & MOBILE STACKED CARDS -->
+    <section class="max-w-5xl mx-auto space-y-6">
+      
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div>
+          <h2 id="terminal-title" class="font-display font-black text-2xl text-white tracking-tight">
+            Central Bank &amp; Foreign Exchange Quotations
+          </h2>
+          <p id="terminal-subtitle" class="text-xs text-white/50 font-mono mt-0.5">
+            Published daily by Banque de la République d'Haïti (BRH)
+          </p>
+        </div>
+
+        <!-- Last Updated Stamp -->
+        <div class="text-xs font-mono text-white/60 bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 flex items-center gap-2">
+          <i data-lucide="clock" class="w-3.5 h-3.5 text-brandYellow"></i>
+          <span id="terminal-fetched-stamp">Updated: Today at 9:34 AM ET</span>
+        </div>
+      </div>
+
+      <!-- DESKTOP 5-COLUMN FINANCIAL TABLE (Visible on Desktop >= 768px) -->
+      <div class="hidden md:block overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-2xl">
+        <table class="w-full text-left font-mono text-xs sm:text-sm">
+          <caption class="sr-only">Banque de la République d'Haïti Daily Exchange Rates and HTD Conversions</caption>
+          <thead class="bg-black/50 border-b border-white/10 text-white/50 text-[11px] uppercase tracking-wider">
+            <tr>
+              <th scope="col" class="py-4 px-6 font-semibold">Tier / Market</th>
+              <th scope="col" class="py-4 px-6 font-semibold text-emerald-400">
+                <span id="th-buy">Achte / Buy</span>
+              </th>
+              <th scope="col" class="py-4 px-6 font-semibold text-red-400">
+                <span id="th-sell">Vann / Sell</span>
+              </th>
+              <th scope="col" class="py-4 px-6 font-semibold text-brandYellow">
+                <span id="th-spread">Ekara / Spread</span>
+              </th>
+              <th scope="col" class="py-4 px-6 font-semibold text-white/80">Implied 1 HTD</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/5 text-white/90">
+            
+            <!-- ROW 1: BRH REFERENCE RATE -->
+            <tr class="hover:bg-white/5 transition-colors bg-white/[0.02]">
+              <td class="py-4 px-6 font-sans font-bold flex items-center gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <div>
+                  <div id="row-ref-name" class="text-white text-sm">BRH Reference Rate</div>
+                  <div class="text-[10px] font-mono text-white/40 uppercase">Official Benchmark</div>
+                </div>
+              </td>
+              <td class="py-4 px-6">
+                <span class="px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-bold" id="td-ref-buy">
+                  130.4713 HTG
+                </span>
+              </td>
+              <td class="py-4 px-6">
+                <span class="px-2.5 py-1 rounded-md bg-red-500/10 border border-red-500/30 text-red-400 font-bold" id="td-ref-sell">
+                  130.4713 HTG
+                </span>
+              </td>
+              <td class="py-4 px-6 text-white/50 font-bold">
+                0.0000 HTG (0.00%)
+              </td>
+              <td class="py-4 px-6 font-bold text-brandYellow" id="td-ref-htd">
+                $0.0383 USD
+              </td>
+            </tr>
+
+            <!-- ROW 2: BANKING MARKET -->
+            <tr class="hover:bg-white/5 transition-colors">
+              <td class="py-4 px-6 font-sans font-bold">
+                <div id="row-bank-name" class="text-white text-sm">Commercial Banking Market</div>
+                <div class="text-[10px] font-mono text-white/40 uppercase">Regulated Banks</div>
+              </td>
+              <td class="py-4 px-6">
+                <span class="px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-bold" id="td-bank-buy">
+                  130.1854 HTG
+                </span>
+              </td>
+              <td class="py-4 px-6">
+                <span class="px-2.5 py-1 rounded-md bg-red-500/10 border border-red-500/30 text-red-400 font-bold" id="td-bank-sell">
+                  131.3579 HTG
+                </span>
+              </td>
+              <td class="py-4 px-6 text-brandYellow font-bold" id="td-bank-spread">
+                1.1725 HTG (0.89%)
+              </td>
+              <td class="py-4 px-6 font-bold text-white/70" id="td-bank-htd">
+                $0.0381 USD
+              </td>
+            </tr>
+
+            <!-- ROW 3: INFORMAL MARKET -->
+            <tr class="hover:bg-white/5 transition-colors bg-red-950/10">
+              <td class="py-4 px-6 font-sans font-bold">
+                <div id="row-inf-name" class="text-white text-sm">Unbanked Informal Cash Market (Street)</div>
+                <div class="text-[10px] font-mono text-red-400/80 uppercase">Street Cash Operators</div>
+              </td>
+              <td class="py-4 px-6">
+                <span class="px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-bold" id="td-inf-buy">
+                  130.9000 HTG
+                </span>
+              </td>
+              <td class="py-4 px-6">
+                <span class="px-2.5 py-1 rounded-md bg-red-500/10 border border-red-500/30 text-red-400 font-bold" id="td-inf-sell">
+                  135.6000 HTG
+                </span>
+              </td>
+              <td class="py-4 px-6 text-red-400 font-bold" id="td-inf-spread">
+                4.7000 HTG (3.47%)
+              </td>
+              <td class="py-4 px-6 font-bold text-white/70" id="td-inf-htd">
+                $0.0369 USD
+              </td>
+            </tr>
+
+            <!-- ROW 4: AVERAGE ACQUISITION RATE (AAR/TMA) -->
+            <tr class="hover:bg-white/5 transition-colors">
+              <td class="py-4 px-6 font-sans font-bold">
+                <div id="row-aar-name" class="text-white text-sm">Average Acquisition Rate (AAR / TMA)</div>
+                <div class="text-[10px] font-mono text-white/40 uppercase">Interbank Weighted</div>
+              </td>
+              <td class="py-4 px-6 text-white/40">—</td>
+              <td class="py-4 px-6">
+                <span class="px-2.5 py-1 rounded-md bg-red-500/10 border border-red-500/30 text-red-400 font-bold" id="td-aar-sell">
+                  131.3579 HTG
+                </span>
+              </td>
+              <td class="py-4 px-6 text-white/40">—</td>
+              <td class="py-4 px-6 font-bold text-white/70" id="td-aar-htd">
+                $0.0381 USD
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <!-- MOBILE RESPONSIVE STACKED CARDS (Visible on Mobile < 768px) -->
+      <div class="block md:hidden space-y-4">
+        
+        <!-- CARD 1: BRH REFERENCE -->
+        <div class="bg-white/5 border border-white/10 rounded-xl p-5 space-y-3 font-mono text-xs">
+          <div class="flex items-center justify-between">
+            <span class="font-sans font-bold text-white text-sm flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              BRH Reference Rate
+            </span>
+            <span class="px-2 py-0.5 rounded bg-white/10 text-white/60 text-[10px]">Benchmark</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 pt-2 border-t border-white/10">
+            <div>
+              <span class="text-white/40 text-[10px] block">Achte (Buy)</span>
+              <span class="text-emerald-400 font-bold" id="m-ref-buy">130.4713 HTG</span>
+            </div>
+            <div>
+              <span class="text-white/40 text-[10px] block">Vann (Sell)</span>
+              <span class="text-red-400 font-bold" id="m-ref-sell">130.4713 HTG</span>
+            </div>
+            <div class="col-span-2 pt-1 flex justify-between items-center text-white/60">
+              <span>Implied 1 HTD:</span>
+              <strong class="text-brandYellow text-sm" id="m-ref-htd">$0.0383 USD</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2: BANKING MARKET -->
+        <div class="bg-white/5 border border-white/10 rounded-xl p-5 space-y-3 font-mono text-xs">
+          <div class="flex items-center justify-between">
+            <span class="font-sans font-bold text-white text-sm">Commercial Banking Market</span>
+            <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-[10px]">Spread ~0.9%</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 pt-2 border-t border-white/10">
+            <div>
+              <span class="text-white/40 text-[10px] block">Achte (Buy)</span>
+              <span class="text-emerald-400 font-bold" id="m-bank-buy">130.1854 HTG</span>
+            </div>
+            <div>
+              <span class="text-white/40 text-[10px] block">Vann (Sell)</span>
+              <span class="text-red-400 font-bold" id="m-bank-sell">131.3579 HTG</span>
+            </div>
+            <div>
+              <span class="text-white/40 text-[10px] block">Ekara (Spread)</span>
+              <span class="text-brandYellow font-bold" id="m-bank-spread">1.1725 HTG (0.89%)</span>
+            </div>
+            <div>
+              <span class="text-white/40 text-[10px] block">Implied 1 HTD</span>
+              <span class="text-white/80 font-bold" id="m-bank-htd">$0.0381 USD</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 3: INFORMAL MARKET -->
+        <div class="bg-red-950/20 border border-brandRed/30 rounded-xl p-5 space-y-3 font-mono text-xs">
+          <div class="flex items-center justify-between">
+            <span class="font-sans font-bold text-white text-sm text-red-300">Unbanked Informal Cash Market</span>
+            <span class="px-2 py-0.5 rounded bg-red-500/20 text-red-300 text-[10px] font-bold">Spread ~3.5%</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 pt-2 border-t border-white/10">
+            <div>
+              <span class="text-white/40 text-[10px] block">Achte (Buy)</span>
+              <span class="text-emerald-400 font-bold" id="m-inf-buy">130.9000 HTG</span>
+            </div>
+            <div>
+              <span class="text-white/40 text-[10px] block">Vann (Sell)</span>
+              <span class="text-red-400 font-bold" id="m-inf-sell">135.6000 HTG</span>
+            </div>
+            <div>
+              <span class="text-white/40 text-[10px] block">Ekara (Spread)</span>
+              <span class="text-red-400 font-bold" id="m-inf-spread">4.7000 HTG (3.47%)</span>
+            </div>
+            <div>
+              <span class="text-white/40 text-[10px] block">Implied 1 HTD</span>
+              <span class="text-white/80 font-bold" id="m-inf-htd">$0.0369 USD</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 4: AVERAGE ACQUISITION RATE -->
+        <div class="bg-white/5 border border-white/10 rounded-xl p-5 space-y-3 font-mono text-xs">
+          <div class="flex items-center justify-between">
+            <span class="font-sans font-bold text-white text-sm">Average Acquisition Rate (AAR / TMA)</span>
+            <span class="px-2 py-0.5 rounded bg-white/10 text-white/60 text-[10px]">Interbank</span>
+          </div>
+          <div class="grid grid-cols-2 gap-2 pt-2 border-t border-white/10">
+            <div>
+              <span class="text-white/40 text-[10px] block">Rate</span>
+              <span class="text-red-400 font-bold" id="m-aar-sell">131.3579 HTG</span>
+            </div>
+            <div>
+              <span class="text-white/40 text-[10px] block">Implied 1 HTD</span>
+              <span class="text-white/80 font-bold" id="m-aar-htd">$0.0381 USD</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- CONVERSION TABLE & MENTAL MATH ANCHOR -->
+    <section class="max-w-5xl mx-auto space-y-6">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div>
+          <h2 id="conv-title" class="font-display font-black text-2xl text-white tracking-tight">
+            HTD Mental Math &amp; Conversion Table
+          </h2>
+          <p id="conv-subtitle" class="text-xs text-white/50 font-mono mt-0.5">
+            Real-world purchasing power for street commerce and remittances (5 HTG = 1 HTD)
+          </p>
+        </div>
+        <span class="text-xs font-mono text-brandYellow bg-brandYellow/10 border border-brandYellow/20 rounded-lg px-3 py-1.5">
+          1 HTD = 5 HTG (Fixed)
+        </span>
+      </div>
+
+      <!-- CONVERSION TIERS GRID -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-5 font-mono space-y-2 hover:border-brandYellow/40 transition-colors">
+          <span class="text-[11px] text-white/50 uppercase tracking-wider block">Base Unit</span>
+          <div class="text-2xl font-display font-black text-brandYellow">1 HTD</div>
+          <div class="text-sm text-white/80 font-bold">5.00 HTG</div>
+          <div class="text-xs text-emerald-400 font-bold pt-1 border-t border-white/10" id="tier-1-usd">≈ $0.0383 USD</div>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-5 font-mono space-y-2 hover:border-brandYellow/40 transition-colors">
+          <span class="text-[11px] text-white/50 uppercase tracking-wider block">Pocket Cash</span>
+          <div class="text-2xl font-display font-black text-brandYellow">10 HTD</div>
+          <div class="text-sm text-white/80 font-bold">50.00 HTG</div>
+          <div class="text-xs text-emerald-400 font-bold pt-1 border-t border-white/10" id="tier-10-usd">≈ $0.38 USD</div>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-5 font-mono space-y-2 hover:border-brandYellow/40 transition-colors">
+          <span class="text-[11px] text-white/50 uppercase tracking-wider block">Grocery / Market</span>
+          <div class="text-2xl font-display font-black text-brandYellow">100 HTD</div>
+          <div class="text-sm text-white/80 font-bold">500.00 HTG</div>
+          <div class="text-xs text-emerald-400 font-bold pt-1 border-t border-white/10" id="tier-100-usd">≈ $3.83 USD</div>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-5 font-mono space-y-2 hover:border-brandYellow/40 transition-colors">
+          <span class="text-[11px] text-white/50 uppercase tracking-wider block">Remittance / Rent</span>
+          <div class="text-2xl font-display font-black text-brandYellow">1,000 HTD</div>
+          <div class="text-sm text-white/80 font-bold">5,000.00 HTG</div>
+          <div class="text-xs text-emerald-400 font-bold pt-1 border-t border-white/10" id="tier-1000-usd">≈ $38.32 USD</div>
+        </div>
+
+      </div>
+
+      <!-- INTERACTIVE QUICK CALCULATOR -->
+      <div class="bg-black/40 border border-white/10 rounded-2xl p-6 sm:p-7 space-y-4">
+        <div class="flex items-center gap-2">
+          <i data-lucide="calculator" class="w-5 h-5 text-brandYellow"></i>
+          <h3 id="calc-title" class="font-display font-bold text-base text-white">Live Rate Calculator</h3>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono text-xs">
+          
+          <div class="space-y-1.5">
+            <label for="calc-input-htd" class="text-white/60 text-[11px] uppercase tracking-wider">Haitian Dollars (HTD)</label>
+            <div class="relative">
+              <input type="number" id="calc-input-htd" value="100" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white font-bold text-sm focus:outline-none focus:border-brandYellow">
+              <span class="absolute right-3 top-2.5 text-white/40">HTD</span>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <label for="calc-input-htg" class="text-white/60 text-[11px] uppercase tracking-wider">Gourdes (HTG = HTD &times; 5)</label>
+            <div class="relative">
+              <input type="number" id="calc-input-htg" value="500" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white font-bold text-sm focus:outline-none focus:border-brandYellow">
+              <span class="absolute right-3 top-2.5 text-white/40">HTG</span>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <label for="calc-input-usd" class="text-white/60 text-[11px] uppercase tracking-wider">US Dollars (USD at BRH Rate)</label>
+            <div class="relative">
+              <input type="number" id="calc-input-usd" value="3.83" step="0.01" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-emerald-400 font-bold text-sm focus:outline-none focus:border-emerald-400">
+              <span class="absolute right-3 top-2.5 text-white/40">USD</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- OFFICIAL VERIFICATION & JSON FEED PANEL -->
+    <section class="max-w-5xl mx-auto bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-7 space-y-4">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div class="space-y-1">
+          <div class="flex items-center gap-2">
+            <i data-lucide="shield-check" class="w-5 h-5 text-emerald-400"></i>
+            <h3 id="sources-title" class="font-display font-bold text-base text-white">Official Data Provenance &amp; Verification</h3>
+          </div>
+          <p id="sources-desc" class="text-xs text-white/60">
+            Rates are updated each morning directly from Banque de la République d'Haïti public publications.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3 font-mono text-xs">
+          <a href="https://www.brh.ht/taux-du-jour/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold transition-colors">
+            <span>brh.ht/taux-du-jour</span>
+            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          </a>
+          <a href="/htd-quote.json" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-brandYellow/10 border border-brandYellow/30 hover:bg-brandYellow/20 text-brandYellow font-bold transition-colors">
+            <span>htd-quote.json API</span>
+            <i data-lucide="file-code" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- MANDATORY COMPLIANCE & LEGAL DISCLAIMER -->
+    <section class="max-w-5xl mx-auto pt-4 pb-8 border-t border-white/10 space-y-4">
+      <div class="text-[11px] font-mono text-white/40 uppercase tracking-widest flex items-center gap-2">
+        <i data-lucide="scale" class="w-3.5 h-3.5 text-brandYellow"></i>
+        <span id="disclaimer-header">Legal Disclaimer &amp; Regulatory Notice</span>
+      </div>
+      <p id="disclaimer-text" class="text-xs text-white/50 leading-relaxed max-w-4xl">
+        Foreign exchange data is compiled directly from the Banque de la République d'Haïti (BRH) daily publications for informational purposes only. Haitian Dollar Inc. is an SEC CIK-registered fintech issuer (CIK 0001906040) and is not affiliated with or endorsed by the BRH. HTD is a digital unit of account fixed to 5 HTG by protocol invariant. This does not constitute financial, investment, or banking advice.
+      </p>
+    </section>
+
+  </main>
+
+  <!-- FOOTER COMPONENT -->
+  <footer class="bg-black text-white border-t border-white/10 pt-12 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-10">
+        <div class="md:col-span-5">
+          <a href="/" class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-brandYellow flex-shrink-0">
+              <img src="/logo.png" alt="Haitian Dollar" class="w-full h-full object-cover" />
+            </div>
+            <span class="font-display font-black text-xl tracking-tight text-white">HAITIAN DOLLAR</span>
+          </a>
+          <div class="pl-[52px] pr-4">
+            <p class="text-white/60 text-xs leading-relaxed mb-1">
+              Digital settlement infrastructure for the Haitian Dollar.
+            </p>
+            <p class="text-brandYellow text-sm font-bold tracking-wide">
+              1 HTD = 5 HTG. Fixed.
+            </p>
+          </div>
+        </div>
+
+        <div class="md:col-span-2">
+          <p class="text-[11px] font-display font-bold uppercase tracking-wider text-brandYellow mb-3">Protocol</p>
+          <ul class="text-xs space-y-2 text-white/70">
+            <li><a href="/htd.html" class="hover:text-white transition-colors">What is HTD</a></li>
+            <li><a href="/rates" class="text-brandYellow font-bold">BRH Daily Rates</a></li>
+            <li><a href="/merchants.html" class="hover:text-white transition-colors">Merchants</a></li>
+            <li><a href="/users.html" class="hover:text-white transition-colors">Users</a></li>
+          </ul>
+        </div>
+
+        <div class="md:col-span-2">
+          <p class="text-[11px] font-display font-bold uppercase tracking-wider text-brandYellow mb-3">Company</p>
+          <ul class="text-xs space-y-2 text-white/70">
+            <li><a href="/about.html" class="hover:text-white transition-colors">About</a></li>
+            <li><a href="/investors.html" class="hover:text-white transition-colors">Investors</a></li>
+            <li><a href="/news.html" class="hover:text-white transition-colors">News</a></li>
+            <li><a href="/contact.html" class="hover:text-white transition-colors">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="md:col-span-3">
+          <p class="text-[11px] font-display font-bold uppercase tracking-wider text-brandYellow mb-3">Contact</p>
+          <ul class="text-xs space-y-2 text-white/70 font-mono">
+            <li><a href="/contact.html" class="text-brandYellow hover:text-white transition-colors font-sans font-semibold">Online Contact Form &rarr;</a></li>
+            <li><a href="mailto:admin@haitiandollar.com" class="hover:text-white transition-colors">admin@haitiandollar.com</a></li>
+            <li><a href="mailto:legal@haitiandollar.com" class="hover:text-white transition-colors">legal@haitiandollar.com</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-[11px] text-white/40">
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+          <a href="/legal.html" class="hover:text-brandYellow transition-colors">Privacy Policy</a>
+          <span>·</span>
+          <a href="/legal.html" class="hover:text-brandYellow transition-colors">Terms of Service</a>
+          <span>·</span>
+          <a href="/legal.html" class="hover:text-brandYellow transition-colors">Offering &amp; Risk Disclosures</a>
+        </div>
+        <p>&copy; 2026 Haitian Dollar Inc. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CLIENT-SIDE SCRIPT: Live Data, Stale Fallback, Calculator & Accessible Language Toggle -->
+  <script>
+    let currentQuote = null;
+    
+    // Language detection order: saved preference -> browser locale -> English default
+    function detectInitialLanguage() {
+      const saved = localStorage.getItem('htd_rates_lang');
+      if (saved === 'en' || saved === 'ht') return saved;
+      const navLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+      if (navLang.startsWith('ht') || navLang.includes('ht') || navLang.startsWith('fr')) {
+        return 'ht';
+      }
+      return 'en';
+    }
+
+    let currentLang = detectInitialLanguage();
+
+    async function loadRatesData() {
+      try {
+        const res = await fetch('/htd-quote.json');
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        currentQuote = await res.json();
+        renderQuoteData();
+        applyTranslations(currentLang);
+        setupCalculator();
+      } catch (err) {
+        console.warn('Fallback to baseline rates:', err);
+        // Stale Data Badge Fallback (Issue 5)
+        const badge = document.getElementById('freshness-badge') || document.getElementById('freshness-badge-container');
+        if (badge) {
+          badge.className = "inline-flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2B1E06] border border-[#FCC419]/30 text-[#FCC419] text-xs font-semibold";
+        }
+        const dotEl = document.getElementById('freshness-dot');
+        if (dotEl) dotEl.className = 'w-2.5 h-2.5 rounded-full bg-amber-400 shrink-0';
+        const labelEl = document.getElementById('freshness-label');
+        if (labelEl) {
+          labelEl.textContent = currentLang === 'ht' ? 'Sèvi ak dènye to kach yo' : 'Using last cached rates';
+        }
+        const dateEl = document.getElementById('display-date-badge');
+        if (dateEl) {
+          dateEl.textContent = currentLang === 'ht' ? 'Kach' : 'Cached';
+        }
+      }
+    }
+
+    function renderQuoteData() {
+      if (!currentQuote) return;
+
+      const ref = currentQuote.reference?.htgPerUsd || currentQuote.reference?.raw || 130.4713;
+      const htdUsd = currentQuote.reference?.htdInUsd || currentQuote.reference?.usdPerHtd || (5.0 / ref);
+      const usdHtd = currentQuote.reference?.usdInHtd || currentQuote.reference?.htdPerUsd || (ref / 5.0);
+
+      // Hero Elements
+      document.getElementById('hero-ref-rate').textContent = `1 USD = ${ref.toFixed(4)} HTG`;
+      document.getElementById('hero-htd-usd').textContent = `$${htdUsd.toFixed(4)}`;
+      document.getElementById('hero-usd-htd').textContent = `1 USD = ${usdHtd.toFixed(2)} HTD`;
+      document.getElementById('display-date-badge').textContent = currentQuote.date || 'Today';
+      document.getElementById('terminal-fetched-stamp').textContent = `Updated: ${currentQuote.fetchedAtET || currentQuote.date}`;
+
+      // Spread Highlight Box
+      const infSpread = currentQuote.informal?.spread || 4.7000;
+      const infSpreadPct = currentQuote.informal?.spreadPct || currentQuote.informal?.spreadPercent || ((infSpread / (currentQuote.informal?.sell || 135.6)) * 100).toFixed(2);
+      const bankSpread = currentQuote.banking?.spread || 1.1725;
+      const bankSpreadPct = currentQuote.banking?.spreadPct || currentQuote.banking?.spreadPercent || ((bankSpread / (currentQuote.banking?.sell || 131.35)) * 100).toFixed(2);
+      const ratio = currentQuote.spreadComparison?.informalToBankingRatio || (infSpread / bankSpread).toFixed(1);
+
+      document.getElementById('spread-box-inf-htg').textContent = `${infSpread.toFixed(4)} HTG`;
+      document.getElementById('spread-box-inf-pct').textContent = `${infSpreadPct}%`;
+      document.getElementById('spread-box-bank-htg').textContent = `${bankSpread.toFixed(4)} HTG`;
+      document.getElementById('spread-box-bank-pct').textContent = `${bankSpreadPct}%`;
+      document.getElementById('spread-ratio-badge').textContent = `${ratio}x`;
+
+      // Desktop Table
+      document.getElementById('td-ref-buy').textContent = `${ref.toFixed(4)} HTG`;
+      document.getElementById('td-ref-sell').textContent = `${ref.toFixed(4)} HTG`;
+      document.getElementById('td-ref-htd').textContent = `$${htdUsd.toFixed(4)} USD`;
+
+      const bankBuy = currentQuote.banking?.buy || 130.1854;
+      const bankSell = currentQuote.banking?.sell || 131.3579;
+      document.getElementById('td-bank-buy').textContent = `${bankBuy.toFixed(4)} HTG`;
+      document.getElementById('td-bank-sell').textContent = `${bankSell.toFixed(4)} HTG`;
+      document.getElementById('td-bank-spread').textContent = `${bankSpread.toFixed(4)} HTG (${bankSpreadPct}%)`;
+      document.getElementById('td-bank-htd').textContent = `$${(5.0 / bankSell).toFixed(4)} USD`;
+
+      const infBuy = currentQuote.informal?.buy || 130.9000;
+      const infSell = currentQuote.informal?.sell || 135.6000;
+      document.getElementById('td-inf-buy').textContent = `${infBuy.toFixed(4)} HTG`;
+      document.getElementById('td-inf-sell').textContent = `${infSell.toFixed(4)} HTG`;
+      document.getElementById('td-inf-spread').textContent = `${infSpread.toFixed(4)} HTG (${infSpreadPct}%)`;
+      document.getElementById('td-inf-htd').textContent = `$${(5.0 / infSell).toFixed(4)} USD`;
+
+      const aarSell = currentQuote.tma?.sell || currentQuote.aar?.sell || currentQuote.aar?.raw || 131.3579;
+      document.getElementById('td-aar-sell').textContent = `${aarSell.toFixed(4)} HTG`;
+      document.getElementById('td-aar-htd').textContent = `$${(5.0 / aarSell).toFixed(4)} USD`;
+
+      // Mobile Cards
+      document.getElementById('m-ref-buy').textContent = `${ref.toFixed(4)} HTG`;
+      document.getElementById('m-ref-sell').textContent = `${ref.toFixed(4)} HTG`;
+      document.getElementById('m-ref-htd').textContent = `$${htdUsd.toFixed(4)} USD`;
+
+      document.getElementById('m-bank-buy').textContent = `${bankBuy.toFixed(4)} HTG`;
+      document.getElementById('m-bank-sell').textContent = `${bankSell.toFixed(4)} HTG`;
+      document.getElementById('m-bank-spread').textContent = `${bankSpread.toFixed(4)} HTG (${bankSpreadPct}%)`;
+      document.getElementById('m-bank-htd').textContent = `$${(5.0 / bankSell).toFixed(4)} USD`;
+
+      document.getElementById('m-inf-buy').textContent = `${infBuy.toFixed(4)} HTG`;
+      document.getElementById('m-inf-sell').textContent = `${infSell.toFixed(4)} HTG`;
+      document.getElementById('m-inf-spread').textContent = `${infSpread.toFixed(4)} HTG (${infSpreadPct}%)`;
+      document.getElementById('m-inf-htd').textContent = `$${(5.0 / infSell).toFixed(4)} USD`;
+
+      document.getElementById('m-aar-sell').textContent = `${aarSell.toFixed(4)} HTG`;
+      document.getElementById('m-aar-htd').textContent = `$${(5.0 / aarSell).toFixed(4)} USD`;
+
+      // Conversion Table computed
+      document.getElementById('tier-1-usd').textContent = `≈ $${(5.0 / ref).toFixed(4)} USD`;
+      document.getElementById('tier-10-usd').textContent = `≈ $${(50.0 / ref).toFixed(2)} USD`;
+      document.getElementById('tier-100-usd').textContent = `≈ $${(500.0 / ref).toFixed(2)} USD`;
+      document.getElementById('tier-1000-usd').textContent = `≈ $${(5000.0 / ref).toFixed(2)} USD`;
+
+      // Freshness Dot
+      const isFresh = currentQuote.liveScraped !== false;
+      const dotEl = document.getElementById('freshness-dot');
+      if (dotEl) {
+        dotEl.className = isFresh ? 'w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0' : 'w-2.5 h-2.5 rounded-full bg-amber-400 shrink-0';
+      }
+    }
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('htd_rates_lang', lang);
+
+      // Issue 7: Update document.documentElement.lang for screen readers & SEO
+      document.documentElement.lang = lang === 'ht' ? 'ht' : 'en';
+
+      const btnEn = document.getElementById('lang-btn-en');
+      const btnHt = document.getElementById('lang-btn-ht');
+
+      // Issue 10: Update aria-pressed states
+      if (lang === 'ht') {
+        btnHt.className = 'px-2.5 py-1 rounded-md transition-colors bg-brandYellow text-ink font-bold';
+        btnHt.setAttribute('aria-pressed', 'true');
+        btnEn.className = 'px-2.5 py-1 rounded-md transition-colors text-white/70 hover:text-white';
+        btnEn.setAttribute('aria-pressed', 'false');
+      } else {
+        btnEn.className = 'px-2.5 py-1 rounded-md transition-colors bg-brandYellow text-ink font-bold';
+        btnEn.setAttribute('aria-pressed', 'true');
+        btnHt.className = 'px-2.5 py-1 rounded-md transition-colors text-white/70 hover:text-white';
+        btnHt.setAttribute('aria-pressed', 'false');
+      }
+
+      applyTranslations(lang);
+    }
+
+    function applyTranslations(lang) {
+      if (!currentQuote || !currentQuote.i18n) return;
+      const t = currentQuote.i18n[lang] || currentQuote.i18n['en'];
+
+      document.getElementById('page-title').textContent = t.pageTitle;
+      document.getElementById('page-subtitle').textContent = t.pageSubtitle;
+      document.getElementById('label-invariant-title').textContent = t.invariantTitle;
+      document.getElementById('label-invariant-explainer').textContent = t.invariantExplainer;
+      document.getElementById('label-implied-title').textContent = t.impliedValueTitle;
+
+      document.getElementById('freshness-label').textContent = currentQuote.status?.labels?.[lang] || (lang === 'ht' ? 'Piblikasyon BRH an Dirèk' : 'Live BRH Publication');
+      
+      document.getElementById('spread-tooltip-text').textContent = t.spreadTooltip;
+      document.getElementById('conv-title').textContent = t.conversionTitle;
+      document.getElementById('conv-subtitle').textContent = t.conversionSubtitle;
+      document.getElementById('disclaimer-text').textContent = t.legalDisclaimer;
+
+      // Table headers
+      document.getElementById('th-buy').textContent = `${t.buy} / Buy`;
+      document.getElementById('th-sell').textContent = `${t.sell} / Sell`;
+      document.getElementById('th-spread').textContent = `${t.spread} / Spread`;
+
+      // Market labels
+      document.getElementById('row-ref-name').textContent = t.brhReference;
+      document.getElementById('row-bank-name').textContent = t.bankingMarket;
+      document.getElementById('row-inf-name').textContent = t.informalMarket;
+      document.getElementById('row-aar-name').textContent = t.aar;
+
+      if (lang === 'ht') {
+        document.getElementById('spread-alert-tag').textContent = 'Disparite Ekara nan Mache a & Valè HTD';
+        document.getElementById('spread-box-title').textContent = 'Ekara Mache Lari a Apeprè 4 Fwa Pi Laj Pase Bank Komèsyal Yo';
+        document.getElementById('terminal-title').textContent = 'To Echanj Ofisyèl Bank Santral la';
+        document.getElementById('terminal-subtitle').textContent = 'Pibliye chak jou pa Bank Repiblik Ayiti (BRH)';
+        document.getElementById('calc-title').textContent = 'Kalkilatris Konvèsyon an Dirèk';
+        document.getElementById('sources-title').textContent = 'Sous Ofisyèl & Verifikasyon Done';
+        document.getElementById('sources-desc').textContent = 'Done yo soti dirèkteman nan BRH chak maten pou garanti transparans total.';
+        document.getElementById('disclaimer-header').textContent = 'Avètisman Legal & Avi Regilasyon';
+      } else {
+        document.getElementById('spread-alert-tag').textContent = 'Market Spread Disparity & HTD Value';
+        document.getElementById('spread-box-title').textContent = 'Informal Cash Market Spread is ~4x Wider Than Commercial Banks';
+        document.getElementById('terminal-title').textContent = 'Central Bank & Foreign Exchange Quotations';
+        document.getElementById('terminal-subtitle').textContent = 'Published daily by Banque de la République d\'Haïti (BRH)';
+        document.getElementById('calc-title').textContent = 'Live Rate Calculator';
+        document.getElementById('sources-title').textContent = 'Official Data Provenance & Verification';
+        document.getElementById('sources-desc').textContent = 'Rates are updated each morning directly from Banque de la République d\'Haïti public publications.';
+        document.getElementById('disclaimer-header').textContent = 'Legal Disclaimer & Regulatory Notice';
+      }
+    }
+
+    function setupCalculator() {
+      const inputHtd = document.getElementById('calc-input-htd');
+      const inputHtg = document.getElementById('calc-input-htg');
+      const inputUsd = document.getElementById('calc-input-usd');
+
+      if (!inputHtd || !inputHtg || !inputUsd || !currentQuote) return;
+
+      const ref = currentQuote.reference?.htgPerUsd || currentQuote.reference?.raw || 130.4713;
+
+      // Initialize inputs using live reference rate
+      const initHtd = parseFloat(inputHtd.value) || 100;
+      inputHtd.value = initHtd;
+      inputHtg.value = (initHtd * 5.0).toFixed(2);
+      inputUsd.value = ((initHtd * 5.0) / ref).toFixed(2);
+
+      inputHtd.addEventListener('input', () => {
+        const val = parseFloat(inputHtd.value) || 0;
+        const htg = val * 5.0;
+        const usd = htg / ref;
+        inputHtg.value = htg.toFixed(2);
+        inputUsd.value = usd.toFixed(2);
+      });
+
+      inputHtg.addEventListener('input', () => {
+        const val = parseFloat(inputHtg.value) || 0;
+        const htd = val / 5.0;
+        const usd = val / ref;
+        inputHtd.value = htd.toFixed(2);
+        inputUsd.value = usd.toFixed(2);
+      });
+
+      inputUsd.addEventListener('input', () => {
+        const val = parseFloat(inputUsd.value) || 0;
+        const htg = val * ref;
+        const htd = htg / 5.0;
+        inputHtg.value = htg.toFixed(2);
+        inputHtd.value = htd.toFixed(2);
+      });
+    }
+
+    // Initialize Menu and Icons
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      setLanguage(currentLang);
+      loadRatesData();
+
+      const menuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+          const isExpanded = !mobileMenu.classList.contains('hidden');
+          mobileMenu.classList.toggle('hidden');
+          menuBtn.setAttribute('aria-expanded', String(!isExpanded));
+        });
+      }
+    });
+  </script>
+</body>
+</html>

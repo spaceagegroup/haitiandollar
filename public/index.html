@@ -120,22 +120,26 @@
       </a>
 
       <!-- Desktop Links -->
-      <div class="hidden md:flex items-center gap-8 font-medium text-sm">
+      <div class="hidden md:flex items-center gap-7 font-medium text-sm">
         <a href="/about.html" class="hover:text-brandRed transition-colors">About</a>
         <a href="/htd.html" class="hover:text-brandRed transition-colors">HTD Token</a>
         <a href="/merchants.html" class="hover:text-brandRed transition-colors">Merchants</a>
         <a href="/users.html" class="hover:text-brandRed transition-colors">Users</a>
         <a href="/investors.html" class="hover:text-brandRed transition-colors">Investors</a>
         <a href="/news.html" class="hover:text-brandRed transition-colors">News</a>
+        <a href="/rates" class="hover:text-brandRed transition-colors font-bold text-ink flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          BRH Rates
+        </a>
         <a href="/contact.html" class="hover:text-brandRed transition-colors">Contact</a>
       </div>
 
       <!-- Action Button -->
       <div class="flex items-center gap-3">
-        <a href="/htd.html#official-rates" class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brandYellow/10 border border-brandYellow/30 hover:bg-brandYellow/20 transition-colors" title="View today's HTD rate">
+        <a href="/rates" class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brandYellow/10 border border-brandYellow/30 hover:bg-brandYellow/20 transition-colors" title="View today's HTD rate">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
           <span class="text-[11px] font-mono font-bold text-ink">
-            1 HTD = 5 HTG · <span id="appbar-htd-usd">$0.0382</span>
+            1 HTD = 5 HTG · <span id="appbar-htd-usd">$0.0383</span>
           </span>
         </a>
         <a href="/contact.html" class="hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-brandRed text-white font-semibold text-sm hover:bg-brandRed/90 shadow-sm transition-all">
@@ -150,18 +154,19 @@
     <!-- Mobile Drawer -->
     <div id="mobile-menu" class="hidden md:hidden border-b border-borderGray bg-offWhite px-4 pt-3 pb-6 space-y-3 font-medium text-base">
       <!-- Mobile Live Rate Pill -->
-      <a href="/htd.html#official-rates" class="flex items-center justify-between p-3 rounded-xl bg-brandYellow/20 border border-brandYellow/50 hover:bg-brandYellow/30 transition-colors">
+      <a href="/rates" class="flex items-center justify-between p-3 rounded-xl bg-brandYellow/20 border border-brandYellow/50 hover:bg-brandYellow/30 transition-colors">
         <div class="flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
           <span class="text-xs font-mono font-bold text-ink">1 HTD = 5 HTG</span>
         </div>
         <span class="text-xs font-mono font-bold text-brandRed flex items-center gap-1">
-          <span class="mobile-drawer-rate">$0.0382</span> USD &rarr;
+          <span class="mobile-drawer-rate">$0.0383</span> USD &rarr;
         </span>
       </a>
 
       <a href="/about.html" class="block py-2 text-ink hover:text-brandRed">About</a>
       <a href="/htd.html" class="block py-2 text-ink hover:text-brandRed">HTD Token</a>
+      <a href="/rates" class="block py-2 text-brandRed font-bold">BRH Daily Rates &amp; Spreads</a>
       <a href="/merchants.html" class="block py-2 text-ink hover:text-brandRed">Merchants</a>
       <a href="/users.html" class="block py-2 text-ink hover:text-brandRed">Users</a>
       <a href="/investors.html" class="block py-2 text-ink hover:text-brandRed">Investors</a>
@@ -232,28 +237,31 @@
           </div>
         </div>
 
-        <!-- Live Market Rate Strip -->
-        <div class="mt-8 p-4 sm:p-5 bg-offWhite rounded-2xl border border-borderGray flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 text-center sm:text-left">
+        <!-- Live Market Rate Strip (BRH Benchmark + HTD Invariant) -->
+        <div class="mt-8 p-4 sm:p-5 bg-offWhite rounded-2xl border border-borderGray flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 text-center sm:text-left shadow-sm">
           <div class="flex-1 min-w-0">
-            <!-- Header: Title and Date centered on mobile -->
-            <div class="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-1 sm:gap-2 mb-2 sm:mb-1">
+            <!-- Header: Status and Date -->
+            <div class="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-1 sm:gap-2 mb-2 sm:mb-1.5">
               <div class="inline-flex items-center justify-center gap-1.5 sm:gap-2">
                 <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
-                <span class="text-[10px] xs:text-[11px] sm:text-xs font-mono font-bold uppercase tracking-normal sm:tracking-wider text-ink/70">Official Market Quotations</span>
+                <span class="text-[10px] xs:text-[11px] sm:text-xs font-mono font-bold uppercase tracking-normal sm:tracking-wider text-ink/70">BRH Official Live Benchmark</span>
               </div>
               <span class="text-[10px] xs:text-[11px] sm:text-xs font-mono font-bold uppercase tracking-normal sm:tracking-wider text-ink/60 whitespace-nowrap block sm:inline text-center">
-                (<span id="quote-display-date">Live Index</span>)
+                (<span id="quote-display-date">Live</span>)
               </span>
             </div>
+            <!-- Dual metrics: BRH Reference Rate + HTD Invariant Rule -->
             <p class="text-xs sm:text-sm font-semibold text-ink leading-relaxed text-center sm:text-left">
-              Fixed Peg: <strong class="font-mono text-ink">1 HTD = 5.00 HTG</strong> (1 HTG = 0.20 HTD) · 
-              BRH Benchmark: <strong id="official-rate" class="font-mono">1 USD = 130.5583 HTG</strong> · 
-              Implied USD: <span id="official-htd-usd" class="font-bold text-brandRed">$0.0383</span>/HTD
+              BRH Benchmark: <strong id="official-rate" class="font-mono text-ink">1 USD = 130.4713 HTG</strong>
+              <span class="text-ink/30 mx-1 hidden sm:inline">|</span>
+              <span class="block sm:inline mt-1 sm:mt-0">
+                Fixed Parity: <strong class="font-mono text-ink">1 HTD = 5.00 HTG</strong> (<span id="official-htd-usd" class="font-bold text-brandRed">$0.0383</span> USD)
+              </span>
             </p>
           </div>
-          <a href="/htd.html#official-rates" class="w-full sm:w-auto shrink-0 inline-flex items-center justify-center gap-1.5 px-4 py-2 sm:py-1.5 rounded-lg bg-white border border-borderGray hover:border-ink text-ink font-display font-bold text-xs transition-colors">
-            <span>Exchange Rates</span>
-            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          <a href="/rates" class="w-full lg:w-auto shrink-0 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-ink hover:bg-black/90 text-white font-display font-bold text-xs shadow-sm transition-all">
+            <span>View Full Rates Table &amp; Spreads</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-brandYellow"></i>
           </a>
         </div>
 
@@ -772,6 +780,38 @@
     btn.addEventListener('click', () => {
       menu.classList.toggle('hidden');
     });
+
+    // Dynamic Live BRH Rates Fetcher (Issue 1 Fix)
+    (async function fetchLiveHeroRates() {
+      try {
+        const res = await fetch('/htd-quote.json');
+        if (!res.ok) return;
+        const data = await res.json();
+        if (!data || !data.reference) return;
+
+        const ref = data.reference.htgPerUsd || data.reference.raw || 130.4713;
+        const htdUsd = data.reference.usdPerHtd || data.reference.htdInUsd || (5.0 / ref);
+        const usdFormatted = '$' + htdUsd.toFixed(4);
+
+        const officialRateEl = document.getElementById('official-rate');
+        if (officialRateEl) officialRateEl.textContent = '1 USD = ' + ref.toFixed(4) + ' HTG';
+
+        const officialHtdUsdEl = document.getElementById('official-htd-usd');
+        if (officialHtdUsdEl) officialHtdUsdEl.textContent = usdFormatted;
+
+        const appbarEl = document.getElementById('appbar-htd-usd');
+        if (appbarEl) appbarEl.textContent = usdFormatted;
+
+        const dateEl = document.getElementById('quote-display-date');
+        if (dateEl && data.date) dateEl.textContent = data.date;
+
+        document.querySelectorAll('.mobile-drawer-rate').forEach(el => {
+          el.textContent = usdFormatted;
+        });
+      } catch (e) {
+        console.debug('Unable to refresh live hero rates, using baseline values:', e);
+      }
+    })();
   </script>
   <!-- COOKIE CONSENT BANNER — Compact -->
   <div 

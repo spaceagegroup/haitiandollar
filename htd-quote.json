@@ -1,23 +1,42 @@
 {
   "date": "Oct 6, 2026",
   "day": "Tuesday",
-  "fetchedAtET": "Tuesday, Oct 6, 2026 at 10:09 AM ET",
+  "fetchedAtET": "Tuesday, Oct 6, 2026 at 11:48 PM ET",
   "source": "Banque de la République d'Haïti (BRH)",
   "sourceUrl": "https://www.brh.ht/taux-du-jour/",
-  "updatedAt": "2026-10-06T14:09:34.145Z",
+  "updatedAt": "2026-10-07T03:48:23.003Z",
   "liveScraped": true,
-  "lastTweetedDate": "Oct 6, 2026",
-  "lastTweetId": "2107473344383930705",
+  "lastTweetedDate": null,
+  "lastTweetId": null,
+  "status": {
+    "isFresh": true,
+    "badge": "fresh",
+    "labels": {
+      "en": "Live BRH Publication",
+      "ht": "Piblikasyon BRH an Dirèk"
+    }
+  },
   "reference": {
     "htgPerUsd": 130.4713,
     "htdInUsd": 0.0383,
     "usdInHtd": 26.09,
-    "raw": 130.4713
+    "raw": 130.4713,
+    "usdPerHtd": 0.0383,
+    "htdPerUsd": 26.09
+  },
+  "htdInvariant": {
+    "peg": 5,
+    "htgPerHtd": 5,
+    "htdPerHtg": 0.2,
+    "usdPerHtd": 0.0383,
+    "htdPerUsd": 26.09
   },
   "banking": {
     "buy": 130.1854,
     "sell": 131.3579,
     "spread": 1.1725,
+    "spreadPct": 0.89,
+    "spreadPercent": 0.89,
     "htgPerUsd": 131.3579,
     "htdInUsd": 0.0381,
     "usdInHtd": 26.27
@@ -26,6 +45,8 @@
     "buy": 130.9,
     "sell": 135.6,
     "spread": 4.7,
+    "spreadPct": 3.47,
+    "spreadPercent": 3.47,
     "htgPerUsd": 135.6,
     "htdInUsd": 0.0369,
     "usdInHtd": 27.12
@@ -34,6 +55,112 @@
     "htgPerUsd": 131.3579,
     "htdInUsd": 0.0381,
     "usdInHtd": 26.27,
-    "raw": 131.3579
+    "raw": 131.3579,
+    "sell": 131.3579,
+    "buy": null
+  },
+  "tma": {
+    "htgPerUsd": 131.3579,
+    "htdInUsd": 0.0381,
+    "usdInHtd": 26.27,
+    "raw": 131.3579,
+    "sell": 131.3579,
+    "buy": null
+  },
+  "spreadComparison": {
+    "informalToBankingRatio": 4,
+    "ratioLabel": "4x",
+    "bankingSpreadHtg": 1.1725,
+    "bankingSpreadPercent": 0.89,
+    "informalSpreadHtg": 4.7,
+    "informalSpreadPercent": 3.47
+  },
+  "conversionTable": [
+    {
+      "htd": 1,
+      "htg": 5,
+      "usd": 0.0383,
+      "htdLabel": "1 HTD",
+      "htgLabel": "5 HTG",
+      "usdLabel": "$0.0383 USD"
+    },
+    {
+      "htd": 10,
+      "htg": 50,
+      "usd": 0.38,
+      "htdLabel": "10 HTD",
+      "htgLabel": "50 HTG",
+      "usdLabel": "$0.38 USD"
+    },
+    {
+      "htd": 100,
+      "htg": 500,
+      "usd": 3.83,
+      "htdLabel": "100 HTD",
+      "htgLabel": "500 HTG",
+      "usdLabel": "$3.83 USD"
+    },
+    {
+      "htd": 1000,
+      "htg": 5000,
+      "usd": 38.32,
+      "htdLabel": "1,000 HTD",
+      "htgLabel": "5,000 HTG",
+      "usdLabel": "$38.32 USD"
+    }
+  ],
+  "i18n": {
+    "en": {
+      "badgeLive": "Live BRH Publication",
+      "badgeBulletin": "Latest Bulletin (Weekend/Holiday)",
+      "badgeCached": "Using last cached rates",
+      "pageTitle": "Banque de la République d'Haïti (BRH) Daily Rates",
+      "pageSubtitle": "Official foreign exchange benchmark and Haitian Dollar protocol conversion metrics",
+      "invariantTitle": "Protocol Parity Rule — Fixed Forever",
+      "invariantRule": "1 HTD = 5.00 HTG (Fixed)",
+      "invariantExplainer": "This is the century-old monetary convention Haitians have used since 1912. It does not change.",
+      "impliedValueTitle": "Implied US Dollar Purchasing Power",
+      "brhReference": "BRH Reference Rate",
+      "bankingMarket": "Commercial Banking Market",
+      "informalMarket": "Unbanked Informal Cash Market (Street)",
+      "aar": "Average Acquisition Rate (AAR / TMA)",
+      "buy": "Buy",
+      "sell": "Sell",
+      "spread": "Spread",
+      "spreadNotice": "The informal cash market spread (4.70 HTG) is 4x wider than commercial banks.",
+      "spreadTooltip": "Spread = Difference between Buy and Sell. The informal market spread is 4x wider than commercial banks.",
+      "conversionTitle": "HTD Mental Math & Conversion Table",
+      "conversionSubtitle": "Real-world purchasing power for street commerce and remittances (5 HTG = 1 HTD)",
+      "showConversionTable": "Show conversion table",
+      "dataProvidedBy": "Data provided by BRH",
+      "sources": "Official Sources",
+      "legalDisclaimer": "Foreign exchange data is compiled directly from the Banque de la République d'Haïti (BRH) daily publications for informational purposes only. Haitian Dollar Inc. is an SEC CIK-registered fintech issuer (CIK 0001906040) and is not affiliated with or endorsed by the BRH. HTD is a digital unit of account fixed to 5 HTG by protocol invariant. This does not constitute financial, investment, or banking advice."
+    },
+    "ht": {
+      "badgeLive": "Piblikasyon BRH an Dirèk",
+      "badgeBulletin": "Dènye Bilten (Wikenn/Ferye)",
+      "badgeCached": "Sèvi ak dènye to kach yo",
+      "pageTitle": "To Echanj Chak Jou Bank Repiblik Ayiti (BRH)",
+      "pageSubtitle": "To referans ofisyèl ak metrik konvèsyon pwotokòl Dola Ayisyen (HTD)",
+      "invariantTitle": "Règ Parite Pwotokòl la — Fikse pou Tout Tan",
+      "invariantRule": "1 HTD = 5.00 HTG (Fikse)",
+      "invariantExplainer": "Sa se konvansyon monetè Ayisyen ap itilize depi 1912. Li pa janm chanje.",
+      "impliedValueTitle": "Valè an Dola Ameriken",
+      "brhReference": "To Referans BRH",
+      "bankingMarket": "Mache Bank Komèsyal",
+      "informalMarket": "Mache Enfòmèl (Lari)",
+      "aar": "To Mwayen Akizisyon (TMA)",
+      "buy": "Achte",
+      "sell": "Vann",
+      "spread": "Ekara",
+      "spreadNotice": "Ekara mache enfòmèl la (4.70 HTG) se 4 fwa pi laj pase bank komèsyal yo.",
+      "spreadTooltip": "Ekara = Diferans ant Achte ak Vann. Ekara mache enfòmèl la 4 fwa pi laj pase bank komèsyal yo.",
+      "conversionTitle": "Kalkil Rapid & Tab Konvèsyon HTD",
+      "conversionSubtitle": "Pouvwa acha reyèl pou komès nan lari ak transfè lajan (5 HTG = 1 HTD)",
+      "showConversionTable": "Gade tab konvèsyon an",
+      "dataProvidedBy": "Done yo soti dirèkteman nan BRH",
+      "sources": "Sous ofisyèl",
+      "legalDisclaimer": "Done tochanj sa yo rasanble dirèkteman nan piblikasyon chak jou Bank Repiblik Ayiti (BRH) pou rezon enfòmasyon sèlman. Haitian Dollar Inc. se yon konpayi fintech ki anrejistre nan SEC (CIK 0001906040) epi li pa afilye ak BRH. HTD se yon inite kont dijital ki fikse a 5 HTG pa règ pwotokòl la. Sa a pa reprezante konsèy finansye, envestisman, oswa sèvis bankè."
+    }
   }
 }
