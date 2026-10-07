@@ -993,6 +993,24 @@
       localStorage.removeItem('htd_cookie_consent');
       window.location.reload();
     }
+
+    // Dynamic Live BRH Rates Fetcher
+    (async function autoUpdateAppbarRates() {
+      try {
+        const res = await fetch('/htd-quote.json');
+        if (!res.ok) return;
+        const data = await res.json();
+        if (!data || !data.reference) return;
+        const ref = data.reference.htgPerUsd || data.reference.raw || 130.4713;
+        const htdUsd = data.reference.usdPerHtd || data.reference.htdInUsd || (5.0 / ref);
+        const usdFormatted = '$' + htdUsd.toFixed(4);
+        const appbarEl = document.getElementById('appbar-htd-usd');
+        if (appbarEl) appbarEl.textContent = usdFormatted;
+        document.querySelectorAll('.mobile-drawer-rate').forEach(el => {
+          el.textContent = usdFormatted;
+        });
+      } catch (e) {}
+    })();
   </script>
 </body>
 </html>

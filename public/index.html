@@ -178,8 +178,37 @@
 
   <main>
     <!-- HERO SECTION -->
-    <section class="py-16 sm:py-24 border-b border-borderGray bg-white">
+    <section class="py-12 sm:py-20 border-b border-borderGray bg-white">
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+
+        <!-- Live Market Rate Strip (BRH Benchmark + HTD Invariant) — Top Hero Widget -->
+        <div class="p-4 sm:p-5 bg-offWhite rounded-2xl border border-borderGray flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 text-center sm:text-left shadow-sm">
+          <div class="flex-1 min-w-0">
+            <!-- Header: Status and Date -->
+            <div class="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-1 sm:gap-2 mb-2 sm:mb-1.5">
+              <div class="inline-flex items-center justify-center gap-1.5 sm:gap-2">
+                <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+                <span class="text-[10px] xs:text-[11px] sm:text-xs font-mono font-bold uppercase tracking-normal sm:tracking-wider text-ink/70">BRH Official Live Benchmark</span>
+              </div>
+              <span class="text-[10px] xs:text-[11px] sm:text-xs font-mono font-bold uppercase tracking-normal sm:tracking-wider text-ink/60 whitespace-nowrap block sm:inline text-center">
+                (<span id="quote-display-date">Live</span>)
+              </span>
+            </div>
+            <!-- Dual metrics: BRH Reference Rate + HTD Invariant Rule -->
+            <p class="text-xs sm:text-sm font-semibold text-ink leading-relaxed text-center sm:text-left">
+              BRH Benchmark: <strong id="official-rate" class="font-mono text-ink">1 USD = 130.4713 HTG</strong>
+              <span class="text-ink/30 mx-1 hidden sm:inline">|</span>
+              <span class="block sm:inline mt-1 sm:mt-0">
+                Fixed Parity: <strong class="font-mono text-ink">1 HTD = 5.00 HTG</strong> (<span id="official-htd-usd" class="font-bold text-brandRed">$0.0383</span> USD)
+              </span>
+            </p>
+          </div>
+          <a href="/rates" class="w-full lg:w-auto shrink-0 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-ink hover:bg-black/90 text-white font-display font-bold text-xs shadow-sm transition-all">
+            <span>View Full Rates Table &amp; Spreads</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-brandYellow"></i>
+          </a>
+        </div>
+
         <div class="inline-flex items-center gap-2 bg-brandYellow/30 border border-brandYellow text-ink px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
           <i data-lucide="zap" class="w-3.5 h-3.5 text-brandRed"></i>
           <span>Digital Settlement Infrastructure for Haiti</span>
@@ -235,34 +264,6 @@
               <span class="text-ink/60">1 HTD = 5.00 HTG</span>
             </div>
           </div>
-        </div>
-
-        <!-- Live Market Rate Strip (BRH Benchmark + HTD Invariant) -->
-        <div class="mt-8 p-4 sm:p-5 bg-offWhite rounded-2xl border border-borderGray flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 text-center sm:text-left shadow-sm">
-          <div class="flex-1 min-w-0">
-            <!-- Header: Status and Date -->
-            <div class="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-1 sm:gap-2 mb-2 sm:mb-1.5">
-              <div class="inline-flex items-center justify-center gap-1.5 sm:gap-2">
-                <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
-                <span class="text-[10px] xs:text-[11px] sm:text-xs font-mono font-bold uppercase tracking-normal sm:tracking-wider text-ink/70">BRH Official Live Benchmark</span>
-              </div>
-              <span class="text-[10px] xs:text-[11px] sm:text-xs font-mono font-bold uppercase tracking-normal sm:tracking-wider text-ink/60 whitespace-nowrap block sm:inline text-center">
-                (<span id="quote-display-date">Live</span>)
-              </span>
-            </div>
-            <!-- Dual metrics: BRH Reference Rate + HTD Invariant Rule -->
-            <p class="text-xs sm:text-sm font-semibold text-ink leading-relaxed text-center sm:text-left">
-              BRH Benchmark: <strong id="official-rate" class="font-mono text-ink">1 USD = 130.4713 HTG</strong>
-              <span class="text-ink/30 mx-1 hidden sm:inline">|</span>
-              <span class="block sm:inline mt-1 sm:mt-0">
-                Fixed Parity: <strong class="font-mono text-ink">1 HTD = 5.00 HTG</strong> (<span id="official-htd-usd" class="font-bold text-brandRed">$0.0383</span> USD)
-              </span>
-            </p>
-          </div>
-          <a href="/rates" class="w-full lg:w-auto shrink-0 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-ink hover:bg-black/90 text-white font-display font-bold text-xs shadow-sm transition-all">
-            <span>View Full Rates Table &amp; Spreads</span>
-            <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-brandYellow"></i>
-          </a>
         </div>
 
       </div>
