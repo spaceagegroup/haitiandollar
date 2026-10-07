@@ -33,7 +33,7 @@
   </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DMBN9HX803"></script>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <title>News &amp; Updates | Haitian Dollar Inc</title>
   <meta name="description" content="News, regulatory filings, and milestone updates from Haitian Dollar Inc (SEC CIK 0001906040) building digital settlement infrastructure for the Haitian Dollar.">
@@ -87,10 +87,10 @@
   </script>
 </head>
 
-<body class="bg-offWhite text-ink font-sans antialiased selection:bg-brandYellow selection:text-ink">
+<body class="bg-offWhite text-ink font-sans antialiased selection:bg-brandYellow selection:text-ink overflow-x-hidden">
 
   <!-- TOP COMPLIANCE NOTIFICATION BAR -->
-  <aside aria-label="Regulatory Notice" class="bg-ink text-white/80 text-xs py-2 px-4 border-b border-white/10">
+  <aside aria-label="Regulatory Notice" class="hidden sm:block bg-ink text-white/80 text-xs py-2 px-4 border-b border-white/10">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
       <div class="flex items-center gap-2 text-center sm:text-left">
         <img src="/logo.png" alt="HTD" class="w-4 h-4 rounded-full" />
@@ -102,16 +102,18 @@
 
   <!-- NAVIGATION -->
   <header class="sticky top-0 z-50 bg-offWhite/90 backdrop-blur-md border-b border-borderGray">
-    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-brandRed">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-16 lg:h-20 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2.5 sm:gap-3">
+        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden ring-2 ring-brandRed flex-shrink-0">
           <img src="/logo.png" alt="Haitian Dollar" class="w-full h-full object-cover" />
         </div>
         <div class="flex flex-col">
-          <span class="font-display font-black text-xl leading-none tracking-tight text-ink">HAITIAN DOLLAR</span>
-          <span class="text-[10px] font-semibold tracking-widest text-ink/60 uppercase">1 HTD = 5 HTG</span>
+          <span class="font-display font-black text-base sm:text-xl leading-none tracking-tight text-ink">HAITIAN DOLLAR</span>
+          <span class="text-[9px] sm:text-[10px] font-semibold tracking-widest text-ink/60 uppercase">1 HTD = 5 HTG</span>
         </div>
-      </a>      <!-- Desktop Links (Contact in footer for clean spacing) -->
+      </a>
+
+      <!-- Desktop Links (Contact in footer for clean spacing) -->
       <div class="hidden lg:flex items-center gap-6 xl:gap-8 font-medium text-sm whitespace-nowrap">
         <a href="/about" class="text-ink hover:text-brandRed transition-colors">About</a>
         <a href="/htd" class="text-ink hover:text-brandRed transition-colors">HTD Token</a>
@@ -126,14 +128,14 @@
       </div>
 
       <!-- Action Button -->
-      <div class="flex items-center gap-3">
-        <a href="/htd" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brandYellow/10 border border-brandYellow/30 hover:bg-brandYellow/20 transition-colors" title="View HTD Token specifications & rates">
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="/htd" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brandYellow/10 border border-brandYellow/30 hover:bg-brandYellow/20 transition-colors" title="View HTD Token specifications & rates">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
           <span class="text-[11px] font-mono font-bold text-ink">
             1 HTD = 5 HTG · <span id="appbar-htd-usd">$0.0383</span>
           </span>
         </a>
-        <a href="/contact" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-brandRed text-white font-display font-bold text-sm hover:bg-brandRed/90 transition-all shadow-sm">
+        <a href="/contact" class="hidden sm:inline-flex items-center justify-center px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg bg-brandRed text-white font-display font-bold text-xs sm:text-sm hover:bg-brandRed/90 transition-all shadow-sm">
           Contact Us
         </a>
         <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-ink hover:bg-black/5" aria-label="Toggle Menu">
@@ -143,7 +145,7 @@
     </nav>
 
     <!-- Mobile Drawer -->
-    <div id="mobile-menu" class="hidden lg:hidden border-b border-borderGray bg-offWhite px-4 pt-3 pb-6 space-y-3 font-medium text-base">
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-borderGray bg-offWhite px-4 pt-3 pb-6 space-y-3 font-medium text-base">
       <!-- Mobile Live Rate Pill -->
       <a href="/htd" class="flex items-center justify-between p-3 rounded-xl bg-brandYellow/20 border border-brandYellow/50 hover:bg-brandYellow/30 transition-colors">
         <div class="flex items-center gap-2">
@@ -170,9 +172,9 @@
   <main>
 
     <!-- HERO -->
-    <section class="py-16 sm:py-20 border-b border-borderGray bg-white">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
-        <div class="flex items-center justify-center gap-3">
+    <section class="py-12 sm:py-16 md:py-20 border-b border-borderGray bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3 sm:space-y-4">
+        <div class="flex items-center justify-center gap-2 sm:gap-3 flex-wrap">
           <div class="inline-flex items-center gap-2 bg-brandYellow/30 border border-brandYellow text-ink px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
             <i data-lucide="newspaper" class="w-3.5 h-3.5"></i>
             News &amp; Updates
@@ -182,10 +184,10 @@
             <span>RSS Feed</span>
           </a>
         </div>
-        <h1 class="font-display font-black text-4xl sm:text-5xl text-ink tracking-tight">
+        <h1 class="font-display font-black text-2xl sm:text-4xl md:text-5xl text-ink tracking-tight leading-tight">
           From the Newsroom
         </h1>
-        <p class="text-base sm:text-lg text-ink/70 leading-relaxed max-w-2xl mx-auto">
+        <p class="text-sm sm:text-base md:text-lg text-ink/70 leading-relaxed max-w-2xl mx-auto">
           Verified regulatory filings, intellectual property milestones, and technical development updates from Haitian Dollar Inc.
         </p>
       </div>

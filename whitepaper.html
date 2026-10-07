@@ -33,7 +33,7 @@
   </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DMBN9HX803"></script>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <title>White Paper v2.0 | Haitian Dollar Inc</title>
   <meta name="description" content="Haitian Dollar (HTD) White Paper v2.0 — the digital Haitian Dollar, a redemption receipt for the informal unit of account used in Haiti for over a century.">
@@ -81,10 +81,10 @@
   </style>
 </head>
 
-<body class="bg-offWhite text-ink font-sans antialiased selection:bg-brandYellow selection:text-ink">
+<body class="bg-offWhite text-ink font-sans antialiased selection:bg-brandYellow selection:text-ink overflow-x-hidden">
 
   <!-- TOP COMPLIANCE NOTIFICATION BAR -->
-  <aside aria-label="Regulatory Notice" class="bg-ink text-white/80 text-xs py-2 px-4 border-b border-white/10 no-print">
+  <aside aria-label="Regulatory Notice" class="hidden sm:block bg-ink text-white/80 text-xs py-2 px-4 border-b border-white/10 no-print">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
       <div class="flex items-center gap-2 text-center sm:text-left">
         <img src="/logo.png" alt="HTD" class="w-4 h-4 rounded-full" />
@@ -96,14 +96,14 @@
 
   <!-- NAVIGATION -->
   <header class="sticky top-0 z-50 bg-offWhite/90 backdrop-blur-md border-b border-borderGray no-print">
-    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      <a href="/index.html" class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-brandRed">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-16 lg:h-20 flex items-center justify-between">
+      <a href="/index.html" class="flex items-center gap-2.5 sm:gap-3">
+        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden ring-2 ring-brandRed flex-shrink-0">
           <img src="/logo.png" alt="Haitian Dollar" class="w-full h-full object-cover" />
         </div>
         <div class="flex flex-col">
-          <span class="font-display font-black text-xl leading-none tracking-tight text-ink">HAITIAN DOLLAR</span>
-          <span class="text-[10px] font-semibold tracking-widest text-ink/60 uppercase">1 HTD = 5 HTG</span>
+          <span class="font-display font-black text-base sm:text-xl leading-none tracking-tight text-ink">HAITIAN DOLLAR</span>
+          <span class="text-[9px] sm:text-[10px] font-semibold tracking-widest text-ink/60 uppercase">1 HTD = 5 HTG</span>
         </div>
       </a>
 
@@ -122,14 +122,14 @@
       </div>
 
       <!-- Action Button -->
-      <div class="flex items-center gap-3">
-        <a href="/htd" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brandYellow/10 border border-brandYellow/30 hover:bg-brandYellow/20 transition-colors" title="View HTD Token specifications & rates">
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="/htd" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brandYellow/10 border border-brandYellow/30 hover:bg-brandYellow/20 transition-colors" title="View HTD Token specifications & rates">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
           <span class="text-[11px] font-mono font-bold text-ink">
             1 HTD = 5 HTG · <span id="appbar-htd-usd">$0.0383</span>
           </span>
         </a>
-        <a href="/contact" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-brandRed text-white font-display font-bold text-sm hover:bg-brandRed/90 transition-all shadow-sm">
+        <a href="/contact" class="hidden sm:inline-flex items-center justify-center px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg bg-brandRed text-white font-display font-bold text-xs sm:text-sm hover:bg-brandRed/90 transition-all shadow-sm">
           Contact Us
         </a>
         <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-ink hover:bg-black/5" aria-label="Toggle Menu">
@@ -166,31 +166,31 @@
   <main>
 
     <!-- COVER -->
-    <section class="py-20 sm:py-24 border-b border-borderGray bg-white">
+    <section class="py-12 sm:py-20 lg:py-24 border-b border-borderGray bg-white">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div class="w-32 h-32 rounded-full overflow-hidden ring-8 ring-brandYellow shadow-2xl mx-auto mb-8">
+        <div class="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden ring-4 sm:ring-8 ring-brandYellow shadow-2xl mx-auto mb-6 sm:mb-8">
           <img src="/logo.png" alt="Haitian Dollar" class="w-full h-full object-cover" />
         </div>
-        <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-4">White Paper · Version 2.0</div>
-        <h1 class="font-display font-black text-4xl sm:text-5xl lg:text-6xl text-ink tracking-tight mb-6">
+        <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-3 sm:mb-4">White Paper · Version 2.0</div>
+        <h1 class="font-display font-black text-3xl sm:text-5xl lg:text-6xl text-ink tracking-tight mb-4 sm:mb-6 leading-tight">
           Haitian Dollar (HTD)
         </h1>
-        <p class="text-lg text-ink/70 leading-relaxed max-w-2xl mx-auto mb-8">
+        <p class="text-base sm:text-lg text-ink/70 leading-relaxed max-w-2xl mx-auto mb-6 sm:mb-8">
           A digital redemption receipt for the Haitian Dollar — the informal unit of account used in Haiti for over a century.
         </p>
-        <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-ink/60 font-medium">
+        <div class="flex flex-wrap items-center justify-center gap-x-4 sm:gap-x-6 gap-y-2 text-xs sm:text-sm text-ink/60 font-medium">
           <span>Honson Luma, Author</span>
           <span class="text-ink/20">·</span>
           <span>Haitian Dollar Inc.</span>
           <span class="text-ink/20">·</span>
           <span>2026</span>
         </div>
-        <div class="mt-10 no-print flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md sm:max-w-none mx-auto">
-          <button onclick="window.print()" class="w-full sm:w-auto inline-flex items-center justify-center h-12 px-6 rounded-lg bg-brandRed text-white font-display font-bold text-sm hover:bg-brandRed/90 transition-all shadow-lg">
+        <div class="mt-8 sm:mt-10 no-print flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md sm:max-w-none mx-auto">
+          <button onclick="window.print()" class="w-full sm:w-auto inline-flex items-center justify-center h-11 sm:h-12 px-6 rounded-lg bg-brandRed text-white font-display font-bold text-sm hover:bg-brandRed/90 transition-all shadow-lg">
             <i data-lucide="printer" class="w-4 h-4 mr-2"></i>
             Print / Save v2.0
           </button>
-          <a href="/whitepaper.pdf" target="_blank" rel="noopener" class="w-full sm:w-auto inline-flex items-center justify-center h-12 px-6 rounded-lg border-2 border-ink text-ink font-display font-bold text-sm hover:bg-ink hover:text-brandYellow transition-all">
+          <a href="/whitepaper.pdf" target="_blank" rel="noopener" class="w-full sm:w-auto inline-flex items-center justify-center h-11 sm:h-12 px-6 rounded-lg border-2 border-ink text-ink font-display font-bold text-sm hover:bg-ink hover:text-brandYellow transition-all">
             <i data-lucide="download" class="w-4 h-4 mr-2 text-brandRed"></i>
             Download Original 2020 Whitepaper (PDF)
           </a>
@@ -226,7 +226,7 @@
     <section id="executive-summary" class="py-16 border-b border-borderGray bg-white">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
         <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 1</div>
-        <h2 class="font-display font-black text-3xl text-ink mb-8">Executive Summary</h2>
+        <h2 class="font-display font-black text-2xl sm:text-3xl text-ink mb-6 sm:mb-8">Executive Summary</h2>
 
         <p>
           Haitian Dollar (HTD) is a digital redemption receipt for the Haitian Dollar — the informal unit of account that Haitians have used for over a century to quote prices, negotiate wages, and settle trades. It is not a new currency. It is a formalization of a convention that already exists.
@@ -253,7 +253,7 @@
     <section id="the-problem" class="py-16 border-b border-borderGray bg-offWhite">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
         <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 2</div>
-        <h2 class="font-display font-black text-3xl text-ink mb-8">The Problem</h2>
+        <h2 class="font-display font-black text-2xl sm:text-3xl text-ink mb-6 sm:mb-8">The Problem</h2>
 
         <h3>The Unbanked Majority</h3>
         <p>
@@ -287,7 +287,7 @@
     <section id="the-convention" class="py-16 border-b border-borderGray bg-white">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
         <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 3</div>
-        <h2 class="font-display font-black text-3xl text-ink mb-8">The Haitian Dollar Convention</h2>
+        <h2 class="font-display font-black text-2xl sm:text-3xl text-ink mb-6 sm:mb-8">The Haitian Dollar Convention</h2>
 
         <h3>Origin: 1881 and 1912</h3>
         <p>
@@ -322,7 +322,7 @@
     <section id="what-htd-is" class="py-16 border-b border-borderGray bg-offWhite">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
         <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 4</div>
-        <h2 class="font-display font-black text-3xl text-ink mb-8">What HTD Is and Isn't</h2>
+        <h2 class="font-display font-black text-2xl sm:text-3xl text-ink mb-6 sm:mb-8">What HTD Is and Isn't</h2>
 
         <h3>What HTD Is</h3>
         <ul>
@@ -351,7 +351,7 @@
     <section id="architecture" class="py-16 border-b border-borderGray bg-white">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
         <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 5</div>
-        <h2 class="font-display font-black text-3xl text-ink mb-8">Technical Architecture</h2>
+        <h2 class="font-display font-black text-2xl sm:text-3xl text-ink mb-6 sm:mb-8">Technical Architecture</h2>
 
         <h3>Settlement Layer: Base (Ethereum L2)</h3>
         <p>
@@ -394,7 +394,7 @@
     <section id="supply-model" class="py-16 border-b border-borderGray bg-offWhite">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
         <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 6</div>
-        <h2 class="font-display font-black text-3xl text-ink mb-8">Supply Model</h2>
+        <h2 class="font-display font-black text-2xl sm:text-3xl text-ink mb-6 sm:mb-8">Supply Model</h2>
 
         <h3>Elastic Supply, No Fixed Cap</h3>
         <p>
@@ -428,7 +428,7 @@
     <section id="use-cases" class="py-16 border-b border-borderGray bg-white">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
         <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 7</div>
-        <h2 class="font-display font-black text-3xl text-ink mb-8">Use Cases</h2>
+        <h2 class="font-display font-black text-2xl sm:text-3xl text-ink mb-6 sm:mb-8">Use Cases</h2>
 
         <h3>Diaspora Remittances</h3>
         <p>
@@ -461,7 +461,7 @@
     <section id="pilot" class="py-16 border-b border-borderGray bg-offWhite">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
         <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 8</div>
-        <h2 class="font-display font-black text-3xl text-ink mb-8">The Pilot Program</h2>
+        <h2 class="font-display font-black text-2xl sm:text-3xl text-ink mb-6 sm:mb-8">The Pilot Program</h2>
 
         <h3>Current Status</h3>
         <p>
@@ -502,7 +502,7 @@
     <section id="revenue" class="py-16 border-b border-borderGray bg-white">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
         <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 9</div>
-        <h2 class="font-display font-black text-3xl text-ink mb-8">Revenue Model</h2>
+        <h2 class="font-display font-black text-2xl sm:text-3xl text-ink mb-6 sm:mb-8">Revenue Model</h2>
 
         <h3>Revenue From the Flow, Not the Float</h3>
         <p>
@@ -540,7 +540,7 @@
     <section id="regulatory" class="py-16 border-b border-borderGray bg-offWhite">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
         <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 10</div>
-        <h2 class="font-display font-black text-3xl text-ink mb-8">Regulatory &amp; Compliance</h2>
+        <h2 class="font-display font-black text-2xl sm:text-3xl text-ink mb-6 sm:mb-8">Regulatory &amp; Compliance</h2>
 
         <h3>Corporate Structure</h3>
         <p>
@@ -572,7 +572,7 @@
     <section id="roadmap" class="py-16 border-b border-borderGray bg-white">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
         <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 11</div>
-        <h2 class="font-display font-black text-3xl text-ink mb-8">Roadmap</h2>
+        <h2 class="font-display font-black text-2xl sm:text-3xl text-ink mb-6 sm:mb-8">Roadmap</h2>
 
         <h3>Phase 1: Architecture &amp; Closed Pilot (Current — In Development)</h3>
         <ul>
@@ -608,7 +608,7 @@
     <section id="team" class="py-16 border-b border-borderGray bg-offWhite">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
         <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 12</div>
-        <h2 class="font-display font-black text-3xl text-ink mb-8">Executive Leadership &amp; Governance</h2>
+        <h2 class="font-display font-black text-2xl sm:text-3xl text-ink mb-6 sm:mb-8">Executive Leadership &amp; Governance</h2>
 
         <div class="space-y-8 my-8">
           <!-- Honson Luma -->
@@ -656,7 +656,7 @@
     <section id="risk" class="py-16 border-b border-borderGray bg-white">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
         <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 13</div>
-        <h2 class="font-display font-black text-3xl text-ink mb-8">Risk Factors</h2>
+        <h2 class="font-display font-black text-2xl sm:text-3xl text-ink mb-6 sm:mb-8">Risk Factors</h2>
 
         <div class="bg-brandRed/10 border-l-4 border-brandRed p-5 rounded-r-xl my-6">
           <p class="font-bold text-ink mb-1">Important Disclosure</p>
@@ -709,7 +709,7 @@
     <section id="references" class="py-16 border-b border-borderGray bg-offWhite">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
         <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 14</div>
-        <h2 class="font-display font-black text-3xl text-ink mb-8">References</h2>
+        <h2 class="font-display font-black text-2xl sm:text-3xl text-ink mb-6 sm:mb-8">References</h2>
 
         <ul>
           <li><strong>Taylor, Dr. Erin B. (2014):</strong> <em>Creole Economics and Informal Market Conventions in Haiti.</em> Research on the anthropology of money and persistent pricing units in Port-au-Prince.</li>
@@ -726,7 +726,7 @@
     <section id="links" class="py-16 border-b border-borderGray bg-white">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 wp-body">
         <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Section 15</div>
-        <h2 class="font-display font-black text-3xl text-ink mb-8">Important Links &amp; Resources</h2>
+        <h2 class="font-display font-black text-2xl sm:text-3xl text-ink mb-6 sm:mb-8">Important Links &amp; Resources</h2>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 not-prose my-6">
           <a href="/whitepaper.pdf" target="_blank" rel="noopener" class="p-4 rounded-xl border border-borderGray bg-offWhite hover:border-ink transition-colors flex items-center gap-3">

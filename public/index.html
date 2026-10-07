@@ -33,7 +33,7 @@
   </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DMBN9HX803"></script>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <meta name="google-site-verification" content="googleaad7d53267bd2aad">
   <title>Haitian Dollar (HTD) | Digital Settlement Infrastructure for Haiti</title>
@@ -93,29 +93,29 @@
   </script>
 </head>
 
-<body class="bg-offWhite text-ink font-sans antialiased selection:bg-brandYellow selection:text-ink">
+<body class="bg-offWhite text-ink font-sans antialiased selection:bg-brandYellow selection:text-ink overflow-x-hidden">
 
-  <!-- TOP COMPLIANCE NOTIFICATION BAR -->
-  <aside aria-label="Regulatory Notice" class="bg-ink text-white/80 text-xs py-2 px-4 border-b border-white/10">
+  <!-- TOP COMPLIANCE NOTIFICATION BAR: hidden on mobile (<sm) to preserve critical above-the-fold space -->
+  <aside aria-label="Regulatory Notice" class="hidden sm:block bg-ink text-white/80 text-xs py-1.5 px-4 border-b border-white/10">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
-      <div class="flex items-center gap-2 text-center sm:text-left">
-        <img src="/logo.png" alt="HTD" class="w-4 h-4 rounded-full" />
+      <div class="flex items-center gap-2 text-center sm:text-left text-[11px]">
+        <img src="/logo.png" alt="HTD" class="w-3.5 h-3.5 rounded-full" />
         <span>Haitian Dollar Inc. (SEC CIK 0001906040) · Not currently offering or soliciting securities</span>
       </div>
-      <a href="/legal.html" class="underline hover:text-brandYellow transition-colors">Offering &amp; Risk Disclosures</a>
+      <a href="/legal.html" class="underline hover:text-brandYellow transition-colors text-[11px]">Offering &amp; Risk Disclosures</a>
     </div>
   </aside>
 
   <!-- NAVIGATION -->
-  <header class="sticky top-0 z-50 bg-offWhite/90 backdrop-blur-md border-b border-borderGray">
-    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-brandRed">
+  <header class="sticky top-0 z-50 bg-offWhite/95 backdrop-blur-md border-b border-borderGray">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-16 lg:h-20 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2 sm:gap-3">
+        <div class="w-7 h-7 sm:w-9 sm:h-9 rounded-full overflow-hidden ring-2 ring-brandRed shrink-0">
           <img src="/logo.png" alt="Haitian Dollar" class="w-full h-full object-cover" />
         </div>
-        <div class="flex flex-col">
-          <span class="font-display font-black text-xl leading-none tracking-tight text-ink">HAITIAN DOLLAR</span>
-          <span class="text-[10px] font-semibold tracking-widest text-ink/60 uppercase">1 HTD = 5 HTG</span>
+        <div class="leading-none">
+          <span class="font-display font-black text-sm sm:text-xl tracking-tight text-ink block">HAITIAN DOLLAR</span>
+          <span class="text-[9px] sm:text-[10px] font-bold tracking-widest text-brandRed uppercase">1 HTD = 5 HTG</span>
         </div>
       </a>
 
@@ -134,18 +134,18 @@
       </div>
 
       <!-- Action Button -->
-      <div class="flex items-center gap-3">
-        <a href="/htd" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brandYellow/10 border border-brandYellow/30 hover:bg-brandYellow/20 transition-colors" title="View HTD Token specifications & rates">
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="/htd" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brandYellow/15 border border-brandYellow/40 hover:bg-brandYellow/25 transition-colors" title="View HTD Token specifications & rates">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span class="text-[11px] font-mono font-bold text-ink">
+          <span class="text-[11px] font-mono font-bold text-ink whitespace-nowrap">
             1 HTD = 5 HTG · <span id="appbar-htd-usd">$0.0383</span>
           </span>
         </a>
-        <a href="/contact" class="hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-brandRed text-white font-semibold text-sm hover:bg-brandRed/90 shadow-sm transition-all">
+        <a href="/contact" class="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-lg bg-brandRed text-white font-semibold text-xs hover:bg-brandRed/90 shadow-sm transition-all">
           Contact Us
         </a>
-        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-ink hover:bg-black/5" aria-label="Toggle Menu">
-          <i data-lucide="menu" class="w-6 h-6"></i>
+        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-ink hover:bg-black/5 focus:outline-none" aria-label="Toggle Menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
         </button>
       </div>
     </nav>
@@ -165,31 +165,34 @@
 
       <a href="/about" class="block py-2 text-ink hover:text-brandRed">About</a>
       <a href="/htd" class="block py-2 text-ink hover:text-brandRed">HTD Token</a>
-      <a href="/rates" class="block py-2 text-ink hover:text-brandRed">BRH Daily Rates &amp; Spreads</a>
+      <a href="/rates" class="block py-2 text-ink hover:text-brandRed font-semibold text-brandRed">BRH Daily Rates &amp; Spreads</a>
       <a href="/merchants" class="block py-2 text-ink hover:text-brandRed">Merchants</a>
       <a href="/users" class="block py-2 text-ink hover:text-brandRed">Users</a>
       <a href="/investors" class="block py-2 text-ink hover:text-brandRed">Investors</a>
       <a href="/news" class="block py-2 text-ink hover:text-brandRed">News</a>
       <a href="/contact" class="block py-2 text-ink hover:text-brandRed">Contact</a>
-      <a href="/contact" class="block w-full text-center py-3 rounded-lg bg-brandRed text-white font-semibold">Contact Us</a>
+      <a href="/contact" class="block w-full text-center py-2.5 rounded-lg bg-brandRed text-white font-semibold">Contact Us</a>
+      <div class="pt-2 border-t border-borderGray text-xs text-ink/60">
+        <a href="/legal.html" class="block py-1 hover:text-brandRed">Offering &amp; Risk Disclosures (SEC CIK 0001906040)</a>
+      </div>
     </div>
   </header>
 
   <main>
     <!-- HERO SECTION -->
-    <section class="py-12 sm:py-20 border-b border-borderGray bg-white">
-      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+    <section class="py-8 sm:py-16 md:py-20 border-b border-borderGray bg-white">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4 sm:space-y-6">
 
         <!-- Live Market Rate Strip (BRH Benchmark + HTD Invariant) — Top Hero Widget -->
-        <div class="p-4 sm:p-5 bg-offWhite rounded-2xl border border-borderGray flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 text-center sm:text-left shadow-sm">
+        <div class="p-3.5 sm:p-5 bg-offWhite rounded-2xl border border-borderGray flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 sm:gap-4 text-center sm:text-left shadow-sm">
           <div class="flex-1 min-w-0">
             <!-- Header: Status and Date -->
-            <div class="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-1 sm:gap-2 mb-2 sm:mb-1.5">
+            <div class="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-1 sm:gap-2 mb-1.5">
               <div class="inline-flex items-center justify-center gap-1.5 sm:gap-2">
                 <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
-                <span class="text-[10px] xs:text-[11px] sm:text-xs font-mono font-bold uppercase tracking-normal sm:tracking-wider text-ink/70">BRH Official Live Benchmark</span>
+                <span class="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider text-ink/70">BRH Official Live Benchmark</span>
               </div>
-              <span class="text-[10px] xs:text-[11px] sm:text-xs font-mono font-bold uppercase tracking-normal sm:tracking-wider text-ink/60 whitespace-nowrap block sm:inline text-center">
+              <span class="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider text-ink/60 whitespace-nowrap">
                 (<span id="quote-display-date">Live</span>)
               </span>
             </div>
@@ -197,39 +200,40 @@
             <p class="text-xs sm:text-sm font-semibold text-ink leading-relaxed text-center sm:text-left">
               BRH Benchmark: <strong id="official-rate" class="font-mono text-ink">1 USD = 130.4713 HTG</strong>
               <span class="text-ink/30 mx-1 hidden sm:inline">|</span>
-              <span class="block sm:inline mt-1 sm:mt-0">
+              <span class="block sm:inline mt-0.5 sm:mt-0">
                 Fixed Parity: <strong class="font-mono text-ink">1 HTD = 5.00 HTG</strong> (<span id="official-htd-usd" class="font-bold text-brandRed">$0.0383</span> USD)
               </span>
             </p>
           </div>
-          <a href="/rates" class="w-full lg:w-auto shrink-0 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-ink hover:bg-black/90 text-white font-display font-bold text-xs shadow-sm transition-all">
+          <a href="/rates" class="w-full lg:w-auto shrink-0 inline-flex items-center justify-center gap-1.5 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl bg-ink hover:bg-black/90 text-white font-display font-bold text-xs shadow-sm transition-all">
             <span>View Full Rates Table &amp; Spreads</span>
             <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-brandYellow"></i>
           </a>
         </div>
 
-        <div class="inline-flex items-center gap-2 bg-brandYellow/30 border border-brandYellow text-ink px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
-          <i data-lucide="zap" class="w-3.5 h-3.5 text-brandRed"></i>
+        <div class="inline-flex items-center gap-1.5 sm:gap-2 bg-brandYellow/30 border border-brandYellow text-ink px-3 py-1 rounded-full text-[11px] sm:text-xs font-semibold uppercase tracking-wider">
+          <i data-lucide="zap" class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-brandRed shrink-0"></i>
           <span>Digital Settlement Infrastructure for Haiti</span>
         </div>
         
-        <h1 class="font-display font-black text-4xl sm:text-6xl text-ink tracking-tight leading-[1.1]">
+        <!-- Responsive headline scale: avoids 4-line crowding on 360px viewports -->
+        <h1 class="font-display font-black text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-ink tracking-tight leading-tight sm:leading-[1.15]">
           The Currency of Haitian Markets, Now on the Blockchain.
         </h1>
         
-        <p class="text-base sm:text-xl text-ink/70 leading-relaxed max-w-3xl mx-auto font-normal">
+        <p class="text-sm sm:text-lg md:text-xl text-ink/75 leading-relaxed max-w-3xl mx-auto font-normal">
           For over 110 years, everyday trade in Haiti has been priced in "Haitian Dollars" (1 HTD = 5 HTG) — an informal unit of account without physical bank notes. Haitian Dollar Inc. provides sovereign, low-fee digital rails for instant mobile checkout, merchant terminals, and diaspora remittances.
         </p>
 
         <!-- Two Button Hero CTA -->
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-4 max-w-md sm:max-w-none mx-auto">
-          <a href="/whitepaper.html" class="w-full sm:w-auto inline-flex items-center justify-center h-14 px-8 rounded-lg bg-ink text-brandYellow font-display font-bold text-base sm:text-lg hover:bg-ink/90 transition-all shadow-lg">
-            <i data-lucide="book-open" class="w-5 h-5 mr-2"></i>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-2 sm:pt-4 max-w-md sm:max-w-none mx-auto">
+          <a href="/whitepaper.html" class="w-full sm:w-auto inline-flex items-center justify-center h-12 sm:h-14 px-6 sm:px-8 rounded-lg bg-ink text-brandYellow font-display font-bold text-sm sm:text-lg hover:bg-ink/90 transition-all shadow-lg">
+            <i data-lucide="book-open" class="w-4 h-4 sm:w-5 sm:h-5 mr-2"></i>
             Read White Paper v2.0
           </a>
-          <a href="/htd.html" class="w-full sm:w-auto inline-flex items-center justify-center h-14 px-8 rounded-lg border-2 border-ink text-ink font-display font-bold text-base sm:text-lg hover:bg-ink hover:text-brandYellow transition-all">
+          <a href="/htd.html" class="w-full sm:w-auto inline-flex items-center justify-center h-12 sm:h-14 px-6 sm:px-8 rounded-lg border-2 border-ink text-ink font-display font-bold text-sm sm:text-lg hover:bg-ink hover:text-brandYellow transition-all">
             Explore HTD Token
-            <i data-lucide="arrow-right" class="w-5 h-5 ml-2"></i>
+            <i data-lucide="arrow-right" class="w-4 h-4 sm:w-5 sm:h-5 ml-2"></i>
           </a>
         </div>
 

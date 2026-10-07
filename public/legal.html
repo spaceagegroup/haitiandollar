@@ -33,7 +33,7 @@
   </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DMBN9HX803"></script>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <title>Legal &amp; Disclosures | Haitian Dollar Inc</title>
   <meta name="description" content="Legal notices, SEC regulatory status, risk factors, terms of service, and privacy policy for Haitian Dollar Inc.">
@@ -85,29 +85,29 @@
   </style>
 </head>
 
-<body class="bg-offWhite text-ink font-sans antialiased selection:bg-brandYellow selection:text-ink">
+<body class="bg-offWhite text-ink font-sans antialiased selection:bg-brandYellow selection:text-ink overflow-x-hidden">
 
-  <!-- TOP COMPLIANCE NOTIFICATION BAR -->
-  <aside aria-label="Regulatory Notice" class="bg-ink text-white/80 text-xs py-2 px-4 border-b border-white/10">
+  <!-- TOP COMPLIANCE NOTIFICATION BAR: hidden on mobile (<sm) to preserve critical above-the-fold space -->
+  <aside aria-label="Regulatory Notice" class="hidden sm:block bg-ink text-white/80 text-xs py-1.5 px-4 border-b border-white/10">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
-      <div class="flex items-center gap-2 text-center sm:text-left">
-        <img src="/logo.png" alt="HTD" class="w-4 h-4 rounded-full" />
+      <div class="flex items-center gap-2 text-center sm:text-left text-[11px]">
+        <img src="/logo.png" alt="HTD" class="w-3.5 h-3.5 rounded-full" />
         <span>Haitian Dollar Inc. (SEC CIK 0001906040) · Not currently offering or soliciting securities</span>
       </div>
-      <a href="#risk" class="underline hover:text-brandYellow transition-colors">Offering &amp; Risk Disclosures</a>
+      <a href="#risk" class="underline hover:text-brandYellow transition-colors text-[11px]">Offering &amp; Risk Disclosures</a>
     </div>
   </aside>
 
   <!-- NAVIGATION -->
-  <header class="sticky top-0 z-50 bg-offWhite/90 backdrop-blur-md border-b border-borderGray">
-    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-brandRed">
+  <header class="sticky top-0 z-50 bg-offWhite/95 backdrop-blur-md border-b border-borderGray">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-16 lg:h-20 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2 sm:gap-3">
+        <div class="w-7 h-7 sm:w-9 sm:h-9 rounded-full overflow-hidden ring-2 ring-brandRed shrink-0">
           <img src="/logo.png" alt="Haitian Dollar" class="w-full h-full object-cover" />
         </div>
-        <div class="flex flex-col">
-          <span class="font-display font-black text-xl leading-none tracking-tight text-ink">HAITIAN DOLLAR</span>
-          <span class="text-[10px] font-semibold tracking-widest text-ink/60 uppercase">1 HTD = 5 HTG</span>
+        <div class="leading-none">
+          <span class="font-display font-black text-sm sm:text-xl tracking-tight text-ink block">HAITIAN DOLLAR</span>
+          <span class="text-[9px] sm:text-[10px] font-bold tracking-widest text-brandRed uppercase">1 HTD = 5 HTG</span>
         </div>
       </a>
 
@@ -126,18 +126,18 @@
       </div>
 
       <!-- Action Button -->
-      <div class="flex items-center gap-3">
-        <a href="/htd" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brandYellow/10 border border-brandYellow/30 hover:bg-brandYellow/20 transition-colors" title="View HTD Token specifications & rates">
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="/htd" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brandYellow/15 border border-brandYellow/40 hover:bg-brandYellow/25 transition-colors" title="View HTD Token specifications & rates">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span class="text-[11px] font-mono font-bold text-ink">
+          <span class="text-[11px] font-mono font-bold text-ink whitespace-nowrap">
             1 HTD = 5 HTG · <span id="appbar-htd-usd">$0.0383</span>
           </span>
         </a>
-        <a href="/contact" class="hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-brandRed text-white font-semibold text-sm hover:bg-brandRed/90 shadow-sm transition-all">
+        <a href="/contact" class="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-lg bg-brandRed text-white font-semibold text-xs hover:bg-brandRed/90 shadow-sm transition-all">
           Contact Us
         </a>
-        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-ink hover:bg-black/5" aria-label="Toggle Menu">
-          <i data-lucide="menu" class="w-6 h-6"></i>
+        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-ink hover:bg-black/5 focus:outline-none" aria-label="Toggle Menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
         </button>
       </div>
     </nav>
@@ -163,23 +163,26 @@
       <a href="/investors" class="block py-2 text-ink hover:text-brandRed">Investors</a>
       <a href="/news" class="block py-2 text-ink hover:text-brandRed">News</a>
       <a href="/contact" class="block py-2 text-ink hover:text-brandRed">Contact</a>
-      <a href="/contact" class="block w-full text-center py-3 rounded-lg bg-brandRed text-white font-semibold">Contact Us</a>
+      <a href="/contact" class="block w-full text-center py-2.5 rounded-lg bg-brandRed text-white font-semibold">Contact Us</a>
+      <div class="pt-2 border-t border-borderGray text-xs text-ink/60">
+        <a href="/legal.html" class="block py-1 hover:text-brandRed">Offering &amp; Risk Disclosures (SEC CIK 0001906040)</a>
+      </div>
     </div>
   </header>
 
   <main>
 
     <!-- HERO -->
-    <section class="py-16 sm:py-20 border-b border-borderGray bg-white">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+    <section class="py-10 sm:py-16 md:py-20 border-b border-borderGray bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3 sm:space-y-4">
         <div class="inline-flex items-center gap-2 bg-brandRed/10 border border-brandRed/30 text-ink px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
           <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
           Legal &amp; Disclosures
         </div>
-        <h1 class="font-display font-black text-4xl sm:text-5xl text-ink tracking-tight">
+        <h1 class="font-display font-black text-2xl sm:text-4xl md:text-5xl text-ink tracking-tight leading-tight">
           Legal Notices
         </h1>
-        <p class="text-base sm:text-lg text-ink/70 leading-relaxed max-w-2xl mx-auto">
+        <p class="text-sm sm:text-lg text-ink/70 leading-relaxed max-w-2xl mx-auto">
           This page consolidates the legal notices, offering disclosures, terms of service, and privacy policy governing the use of Haitian Dollar Inc's website, applications, and token.
         </p>
       </div>

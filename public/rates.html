@@ -33,7 +33,7 @@
   </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DMBN9HX803"></script>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <meta name="google-site-verification" content="googleaad7d53267bd2aad">
   <title>BRH Daily Exchange Rates &amp; HTD Conversions | Haitian Dollar</title>
@@ -90,29 +90,28 @@
   </script>
 </head>
 
-<body class="bg-ink text-white font-sans antialiased selection:bg-brandYellow selection:text-ink">
+<body class="bg-ink text-white font-sans antialiased selection:bg-brandYellow selection:text-ink overflow-x-hidden">
 
-  <!-- TOP COMPLIANCE BAR -->
-  <aside aria-label="Regulatory Notice" class="bg-black text-white/80 text-xs py-2 px-4 border-b border-white/10">
+  <!-- TOP COMPLIANCE BAR: hidden on mobile (<sm) to preserve fold space, visible on tablet+ -->
+  <aside aria-label="Regulatory Notice" class="hidden sm:block bg-black text-white/80 text-xs py-1.5 px-4 border-b border-white/10">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
-      <div class="flex items-center gap-2 text-center sm:text-left">
-        <img src="/logo.png" alt="HTD" class="w-4 h-4 rounded-full" />
+      <div class="flex items-center gap-2 text-center sm:text-left text-[11px]">
+        <img src="/logo.png" alt="HTD" class="w-3.5 h-3.5 rounded-full" />
         <span>Haitian Dollar Inc. (SEC CIK 0001906040) · Official Market Rate Terminal</span>
       </div>
-      <a href="/legal.html" class="underline hover:text-brandYellow transition-colors">Offering &amp; Risk Disclosures</a>
+      <a href="/legal.html" class="underline hover:text-brandYellow transition-colors text-[11px]">Offering &amp; Risk Disclosures</a>
     </div>
   </aside>
 
   <!-- NAVIGATION -->
-  <header class="sticky top-0 z-50 bg-ink/90 backdrop-blur-md border-b border-white/10">
-    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between" aria-label="Main Navigation">
-      <a href="/" class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-brandYellow">
-          <img src="/logo.png" alt="Haitian Dollar" class="w-full h-full object-cover" />
-        </div>
-        <div class="flex flex-col">
-          <span class="font-display font-black text-xl leading-none tracking-tight text-white">HAITIAN DOLLAR</span>
-          <span class="text-[10px] font-semibold tracking-widest text-brandYellow uppercase">1 HTD = 5 HTG</span>
+  <header class="border-b border-white/10 bg-[#0F0F0F]/95 backdrop-blur-md sticky top-0 z-50">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-16 lg:h-20 flex items-center justify-between" aria-label="Main Navigation">
+      <!-- Brand -->
+      <a href="/" class="flex items-center gap-2 sm:gap-3">
+        <img src="/logo.png" alt="HTD" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full ring-1 ring-brandYellow shrink-0" />
+        <div class="leading-none">
+          <span class="font-display font-black text-sm sm:text-lg tracking-tight text-white block">HAITIAN DOLLAR</span>
+          <span class="text-[9px] text-[#FCC419] font-bold tracking-wider">1 HTD = 5 HTG</span>
         </div>
       </a>
 
@@ -130,24 +129,24 @@
         </a>
       </div>
 
-      <!-- Action Buttons & Language Switcher -->
-      <div class="flex items-center gap-3">
-        <!-- Language Switcher Pill (Accessible aria-pressed) -->
-        <div class="inline-flex items-center p-0.5 rounded-lg bg-white/10 border border-white/10 text-xs font-mono font-bold" role="group" aria-label="Language selection">
-          <button id="lang-btn-en" onclick="setLanguage('en')" aria-pressed="true" class="px-2.5 py-1 rounded-md transition-colors bg-brandYellow text-ink font-bold">
+      <!-- Controls: Language + Menu -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Language Switcher Pill (Accessible aria-pressed, minimum touch target) -->
+        <div class="flex items-center bg-[#1A1A1A] border border-white/10 rounded-full p-0.5 text-xs font-bold" role="group" aria-label="Language selection">
+          <button id="lang-btn-en" onclick="setLanguage('en')" aria-pressed="true" class="px-2.5 py-1 rounded-full text-[11px] bg-[#FCC419] text-black font-extrabold transition-colors">
             EN
           </button>
-          <button id="lang-btn-ht" onclick="setLanguage('ht')" aria-pressed="false" class="px-2.5 py-1 rounded-md transition-colors text-white/70 hover:text-white">
+          <button id="lang-btn-ht" onclick="setLanguage('ht')" aria-pressed="false" class="px-2.5 py-1 rounded-full text-[11px] text-white/70 hover:text-white transition-colors">
             HT
           </button>
         </div>
 
-        <a href="/htd" class="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-lg bg-brandRed text-white font-semibold text-xs hover:bg-brandRed/90 transition-all">
+        <a href="/htd" class="hidden sm:inline-flex items-center justify-center px-3.5 py-1.5 rounded-lg bg-brandRed text-white font-semibold text-xs hover:bg-brandRed/90 transition-all">
           Token Specs &rarr;
         </a>
 
-        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-white hover:bg-white/10" aria-label="Toggle Menu" aria-expanded="false">
-          <i data-lucide="menu" class="w-6 h-6"></i>
+        <button id="mobile-menu-btn" class="lg:hidden p-2 text-white/80 hover:text-white focus:outline-none rounded-lg" aria-label="Toggle Menu" aria-expanded="false">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
         </button>
       </div>
     </nav>
@@ -162,70 +161,73 @@
       <a href="/news" class="block py-1 hover:text-white">News</a>
       <a href="/rates" class="block py-1 text-brandYellow font-bold">BRH Daily Rates &amp; Spreads</a>
       <a href="/contact" class="block py-1 hover:text-white">Contact</a>
+      <div class="pt-2 border-t border-white/10 text-xs text-white/50">
+        <a href="/legal.html" class="block py-1 hover:text-brandYellow">Offering &amp; Risk Disclosures (SEC CIK 0001906040)</a>
+      </div>
     </div>
   </header>
 
   <!-- MAIN TERMINAL CONTENT -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-12">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-14 space-y-10 sm:space-y-12">
 
     <!-- HERO SECTION & FRESHNESS BADGE -->
-    <section class="text-center space-y-6">
+    <section class="text-center space-y-4 sm:space-y-6">
       
       <!-- Dynamic Status Pill (with role="status") -->
-      <div id="freshness-badge" role="status" aria-live="polite" class="inline-flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono">
-        <span id="freshness-dot" class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+      <div id="freshness-badge" role="status" aria-live="polite" class="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-white/5 border border-white/10 text-[11px] sm:text-xs font-mono">
+        <span id="freshness-dot" class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
         <span id="freshness-label" class="font-bold text-white uppercase tracking-wider">Live BRH Publication</span>
         <span class="text-white/40">·</span>
         <span id="display-date-badge" class="text-brandYellow font-semibold">Today</span>
       </div>
 
-      <!-- Main Title & Subtitle -->
-      <div class="space-y-3 max-w-3xl mx-auto">
-        <h1 id="page-title" class="font-display font-black text-3xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-tight">
+      <!-- Main Title & Subtitle (Responsive Typography Scale) -->
+      <div class="space-y-2 sm:space-y-3 max-w-3xl mx-auto">
+        <h1 id="page-title" class="text-2xl sm:text-3xl md:text-5xl font-black tracking-tight text-white leading-tight font-display">
           Banque de la République d'Haïti (BRH) Daily Rates
         </h1>
-        <p id="page-subtitle" class="text-sm sm:text-base text-white/60 leading-relaxed">
+        <p id="page-subtitle" class="text-xs sm:text-sm text-white/60 mt-2 max-w-lg mx-auto leading-relaxed">
           Official foreign exchange benchmark and Haitian Dollar protocol conversion metrics
         </p>
       </div>
 
       <!-- TOP DUAL KPI CARDS: Invariant & Implied Purchasing Power -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto pt-4 text-left">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto pt-2 sm:pt-4 text-left">
         
         <!-- CARD 1: PROTOCOL PARITY RULE -->
-        <div class="bg-gradient-to-br from-white/10 to-white/5 border border-white/10 rounded-2xl p-6 sm:p-7 relative overflow-hidden shadow-2xl">
+        <div class="bg-gradient-to-br from-white/10 to-white/5 border border-white/10 rounded-2xl p-5 sm:p-7 relative overflow-hidden shadow-2xl">
           <div class="absolute -top-10 -right-10 w-32 h-32 bg-brandYellow/10 rounded-full blur-2xl pointer-events-none"></div>
-          <div class="flex items-center justify-between text-xs font-mono text-white/50 uppercase tracking-widest mb-3">
-            <span id="label-invariant-title">Protocol Parity Rule</span>
-            <span class="px-2 py-0.5 rounded bg-brandYellow/20 text-brandYellow text-[11px] font-bold">Fixed Forever</span>
+          <div class="flex items-center justify-between gap-2 text-xs font-mono text-white/50 uppercase tracking-wider mb-2.5 sm:mb-3">
+            <span id="label-invariant-title" class="text-[11px] sm:text-xs">Protocol Parity Rule</span>
+            <span class="px-2 py-0.5 rounded bg-brandYellow/20 text-brandYellow text-[10px] sm:text-[11px] font-bold whitespace-nowrap">Fixed Forever</span>
           </div>
-          <div class="font-display font-black text-4xl sm:text-5xl text-white tracking-tight">
-            1 HTD = <span class="text-brandYellow">5.00</span> <span class="text-lg font-mono text-white/40 font-normal">HTG</span>
+          <div class="font-display font-black text-3xl sm:text-4xl md:text-5xl text-white tracking-tight">
+            1 HTD = <span class="text-brandYellow">5.00</span> <span class="text-base sm:text-lg font-mono text-white/40 font-normal">HTG</span>
           </div>
-          <p id="label-invariant-explainer" class="text-xs text-white/60 mt-3 leading-relaxed">
+          <p id="label-invariant-explainer" class="text-xs text-white/60 mt-2 sm:mt-3 leading-relaxed">
             This is the century-old monetary convention Haitians have used since 1912. It does not change.
           </p>
-          <div class="mt-4 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono text-white/60">
+          <div class="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono text-white/60">
             <span>Inverse Rule:</span>
             <span class="text-white font-bold">1 HTG = 0.20 HTD</span>
           </div>
         </div>
 
         <!-- CARD 2: IMPLIED USD VALUE & BENCHMARK -->
-        <div class="bg-gradient-to-br from-white/10 to-white/5 border border-white/10 rounded-2xl p-6 sm:p-7 relative overflow-hidden shadow-2xl">
+        <div class="bg-gradient-to-br from-white/10 to-white/5 border border-white/10 rounded-2xl p-5 sm:p-7 relative overflow-hidden shadow-2xl">
           <div class="absolute -top-10 -right-10 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
-          <div class="flex items-center justify-between text-xs font-mono text-white/50 uppercase tracking-widest mb-3">
-            <span id="label-implied-title">Implied US Dollar Purchasing Power</span>
-            <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[11px] font-bold">BRH Reference</span>
+          <div class="flex items-center justify-between gap-2 text-xs font-mono text-white/50 uppercase tracking-wider mb-2.5 sm:mb-3">
+            <span id="label-implied-title" class="text-[11px] sm:text-xs">Implied US Dollar Purchasing Power</span>
+            <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[10px] sm:text-[11px] font-bold whitespace-nowrap">BRH Reference</span>
           </div>
-          <div class="font-display font-black text-4xl sm:text-5xl text-white tracking-tight">
-            1 HTD ≈ <span id="hero-htd-usd" class="text-emerald-400">$0.0383</span> <span class="text-lg font-mono text-white/40 font-normal">USD</span>
+          <div class="font-display font-black text-3xl sm:text-4xl md:text-5xl text-white tracking-tight">
+            1 HTD ≈ <span id="hero-htd-usd" class="text-emerald-400">$0.0383</span> <span class="text-base sm:text-lg font-mono text-white/40 font-normal">USD</span>
           </div>
-          <div class="text-xs text-white/60 mt-3 flex items-center gap-2">
+          <div class="text-xs text-white/60 mt-2 sm:mt-3 flex items-center gap-2">
             <span>BRH Benchmark:</span>
             <strong id="hero-ref-rate" class="font-mono text-white font-bold">1 USD = 130.4713 HTG</strong>
           </div>
-          <div class="mt-4 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono text-white/60">
+          <div class="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono text-white/60">
             <span>USD in Haitian Dollars:</span>
             <strong id="hero-usd-htd" class="text-brandYellow font-bold">1 USD = 26.09 HTD</strong>
           </div>
@@ -835,20 +837,22 @@
       // Issue 7: Update document.documentElement.lang for screen readers & SEO
       document.documentElement.lang = lang === 'ht' ? 'ht' : 'en';
 
-      const btnEn = document.getElementById('lang-btn-en');
-      const btnHt = document.getElementById('lang-btn-ht');
+      const btnEn = document.getElementById('lang-btn-en') || document.getElementById('btn-en');
+      const btnHt = document.getElementById('lang-btn-ht') || document.getElementById('btn-ht');
 
-      // Issue 10: Update aria-pressed states
-      if (lang === 'ht') {
-        btnHt.className = 'px-2.5 py-1 rounded-md transition-colors bg-brandYellow text-ink font-bold';
-        btnHt.setAttribute('aria-pressed', 'true');
-        btnEn.className = 'px-2.5 py-1 rounded-md transition-colors text-white/70 hover:text-white';
-        btnEn.setAttribute('aria-pressed', 'false');
-      } else {
-        btnEn.className = 'px-2.5 py-1 rounded-md transition-colors bg-brandYellow text-ink font-bold';
-        btnEn.setAttribute('aria-pressed', 'true');
-        btnHt.className = 'px-2.5 py-1 rounded-md transition-colors text-white/70 hover:text-white';
-        btnHt.setAttribute('aria-pressed', 'false');
+      // Update aria-pressed states and button styles
+      if (btnEn && btnHt) {
+        if (lang === 'ht') {
+          btnHt.className = 'px-2.5 py-1 rounded-full text-[11px] bg-brandYellow text-ink font-extrabold transition-colors';
+          btnHt.setAttribute('aria-pressed', 'true');
+          btnEn.className = 'px-2.5 py-1 rounded-full text-[11px] text-white/70 hover:text-white transition-colors';
+          btnEn.setAttribute('aria-pressed', 'false');
+        } else {
+          btnEn.className = 'px-2.5 py-1 rounded-full text-[11px] bg-brandYellow text-ink font-extrabold transition-colors';
+          btnEn.setAttribute('aria-pressed', 'true');
+          btnHt.className = 'px-2.5 py-1 rounded-full text-[11px] text-white/70 hover:text-white transition-colors';
+          btnHt.setAttribute('aria-pressed', 'false');
+        }
       }
 
       applyTranslations(lang);

@@ -1,0 +1,30 @@
+# HAITIAN DOLLAR PROJECT INSTRUCTIONS (MANDATORY)
+
+## Core Audience & Environment Constraint
+- Over 90% of end-users in Haiti access haitiandollar.com on budget-to-midrange mobile Android devices (360px - 412px viewport width) on 3G/4G connections.
+- EVERY web page, component, and HTML template MUST be built MOBILE-FIRST.
+
+## Frontend & Responsive Design Rules
+1. Base Viewport Standard:
+   - Always design and test against 360px width first. Desktop is secondary.
+   - Every `<head>` must include: `<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">`.
+
+2. Headers & Navigation:
+   - Never allow header items to wrap or collide on screens <= 400px.
+   - On mobile, hide secondary badges/SEC banners from the sticky header bar (move disclosures to the footer or inside the hamburger menu).
+   - Language toggles (EN | HT) and brand logos must maintain minimum touch targets (44px x 44px) without breaking layout.
+
+3. Typography & Fluid Scaling:
+   - Never hardcode desktop headline sizes (`text-4xl` without responsive modifiers).
+   - Use Tailwind responsive typography: `text-2xl sm:text-3xl md:text-5xl`.
+   - Prevent awkward multi-line orphan words on hero headlines.
+
+4. Tables & Data Layouts:
+   - Never render raw multi-column horizontal tables on screens < 768px.
+   - On screens < 768px (`hidden md:block`), collapse rows into stacked touch-friendly cards (`block md:hidden`).
+   - Tables must never cause horizontal window scrollbars (`overflow-x: hidden` on body).
+
+5. Verification Checklist before Any Commit:
+   - Check rendered layout at 360px width (Samsung Galaxy A-series standard).
+   - Ensure zero horizontal scrolling on body.
+   - Ensure primary Call-To-Action (CTA) and rate values appear above the fold.

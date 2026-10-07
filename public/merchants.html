@@ -33,7 +33,7 @@
   </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DMBN9HX803"></script>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <title>Merchant Solutions | Haitian Dollar (HTD)</title>
   <meta name="description" content="Accept Haitian Dollar (HTD) for B2B supplier payments and retail commerce. Eliminate cash transit risk, settle instantly, and redeem for cash anytime.">
@@ -72,29 +72,29 @@
   </script>
 </head>
 
-<body class="bg-offWhite text-ink font-sans antialiased selection:bg-brandYellow selection:text-ink">
+<body class="bg-offWhite text-ink font-sans antialiased selection:bg-brandYellow selection:text-ink overflow-x-hidden">
 
-  <!-- TOP COMPLIANCE NOTIFICATION BAR -->
-  <aside aria-label="Regulatory Notice" class="bg-ink text-white/80 text-xs py-2 px-4 border-b border-white/10">
+  <!-- TOP COMPLIANCE NOTIFICATION BAR: hidden on mobile (<sm) to preserve critical above-the-fold space -->
+  <aside aria-label="Regulatory Notice" class="hidden sm:block bg-ink text-white/80 text-xs py-1.5 px-4 border-b border-white/10">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
-      <div class="flex items-center gap-2 text-center sm:text-left">
-        <img src="/logo.png" alt="HTD" class="w-4 h-4 rounded-full" />
+      <div class="flex items-center gap-2 text-center sm:text-left text-[11px]">
+        <img src="/logo.png" alt="HTD" class="w-3.5 h-3.5 rounded-full" />
         <span>Haitian Dollar Inc. (SEC CIK 0001906040) · Not currently offering or soliciting securities</span>
       </div>
-      <a href="/legal.html" class="underline hover:text-brandYellow transition-colors">Offering &amp; Risk Disclosures</a>
+      <a href="/legal.html" class="underline hover:text-brandYellow transition-colors text-[11px]">Offering &amp; Risk Disclosures</a>
     </div>
   </aside>
 
   <!-- NAVIGATION -->
-  <header class="sticky top-0 z-50 bg-offWhite/90 backdrop-blur-md border-b border-borderGray">
-    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-brandRed">
+  <header class="sticky top-0 z-50 bg-offWhite/95 backdrop-blur-md border-b border-borderGray">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-16 lg:h-20 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2 sm:gap-3">
+        <div class="w-7 h-7 sm:w-9 sm:h-9 rounded-full overflow-hidden ring-2 ring-brandRed shrink-0">
           <img src="/logo.png" alt="Haitian Dollar" class="w-full h-full object-cover" />
         </div>
-        <div class="flex flex-col">
-          <span class="font-display font-black text-xl leading-none tracking-tight text-ink">HAITIAN DOLLAR</span>
-          <span class="text-[10px] font-semibold tracking-widest text-ink/60 uppercase">1 HTD = 5 HTG</span>
+        <div class="leading-none">
+          <span class="font-display font-black text-sm sm:text-xl tracking-tight text-ink block">HAITIAN DOLLAR</span>
+          <span class="text-[9px] sm:text-[10px] font-bold tracking-widest text-brandRed uppercase">1 HTD = 5 HTG</span>
         </div>
       </a>
 
@@ -113,18 +113,18 @@
       </div>
 
       <!-- Action Button -->
-      <div class="flex items-center gap-3">
-        <a href="/htd" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brandYellow/10 border border-brandYellow/30 hover:bg-brandYellow/20 transition-colors" title="View HTD Token specifications & rates">
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="/htd" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brandYellow/15 border border-brandYellow/40 hover:bg-brandYellow/25 transition-colors" title="View HTD Token specifications & rates">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span class="text-[11px] font-mono font-bold text-ink">
+          <span class="text-[11px] font-mono font-bold text-ink whitespace-nowrap">
             1 HTD = 5 HTG · <span id="appbar-htd-usd">$0.0383</span>
           </span>
         </a>
-        <a href="#onboard" class="hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-brandRed text-white font-semibold text-sm hover:bg-brandRed/90 shadow-sm transition-all">
+        <a href="#onboard" class="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-lg bg-brandRed text-white font-semibold text-xs hover:bg-brandRed/90 shadow-sm transition-all">
           Accept HTD
         </a>
-        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-ink hover:bg-black/5" aria-label="Toggle Menu">
-          <i data-lucide="menu" class="w-6 h-6"></i>
+        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-ink hover:bg-black/5 focus:outline-none" aria-label="Toggle Menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
         </button>
       </div>
     </nav>
@@ -150,33 +150,36 @@
       <a href="/investors" class="block py-2 text-ink hover:text-brandRed">Investors</a>
       <a href="/news" class="block py-2 text-ink hover:text-brandRed">News</a>
       <a href="/contact" class="block py-2 text-ink hover:text-brandRed">Contact</a>
-      <a href="#onboard" class="block w-full text-center py-3 rounded-lg bg-brandRed text-white font-semibold">Accept HTD</a>
+      <a href="#onboard" class="block w-full text-center py-2.5 rounded-lg bg-brandRed text-white font-semibold">Accept HTD</a>
+      <div class="pt-2 border-t border-borderGray text-xs text-ink/60">
+        <a href="/legal.html" class="block py-1 hover:text-brandRed">Offering &amp; Risk Disclosures (SEC CIK 0001906040)</a>
+      </div>
     </div>
   </header>
 
   <main>
     <!-- HERO SECTION -->
-    <section class="py-16 sm:py-24 border-b border-borderGray bg-white">
+    <section class="py-10 sm:py-16 md:py-24 border-b border-borderGray bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          <div class="lg:col-span-7 space-y-6">
+          <div class="lg:col-span-7 space-y-4 sm:space-y-6 text-center lg:text-left">
             <div class="inline-flex items-center gap-2 bg-brandYellow/30 border border-brandYellow text-ink px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
               B2B Commerce &amp; Supply Chain Settlement
             </div>
-            <h1 class="font-display font-black text-4xl sm:text-6xl text-ink tracking-tight leading-[1.1]">
+            <h1 class="font-display font-black text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-ink tracking-tight leading-tight sm:leading-[1.15]">
               Settle Inventory Instantly.<br>
               <span class="text-brandRed">Zero Paper Cash Risk.</span>
             </h1>
-            <p class="text-base sm:text-lg text-ink/70 max-w-xl font-normal leading-relaxed">
+            <p class="text-sm sm:text-lg text-ink/70 max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed">
               Transporting physical paper gourdes across urban transit corridors carries severe extortion and security liabilities. HTD enables wholesale distributors and neighborhood shops to settle invoices phone-to-phone in seconds, using the 5:1 Haitian Dollar pricing you already use.
             </p>
-            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
-              <a href="#onboard" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-ink text-white font-semibold hover:bg-black/80 transition-all shadow-md">
+            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 justify-center lg:justify-start">
+              <a href="#onboard" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-ink text-white font-semibold text-sm hover:bg-black/80 transition-all shadow-md">
                 <span>Register Merchant Terminal</span>
                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
               </a>
-              <a href="#how-it-works" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-offWhite border-2 border-borderGray text-ink font-semibold hover:border-ink transition-all">
+              <a href="#how-it-works" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-offWhite border-2 border-borderGray text-ink font-semibold text-sm hover:border-ink transition-all">
                 <span>Review Flow &amp; Fees</span>
               </a>
             </div>
@@ -275,7 +278,8 @@
           <p class="text-ink/70 text-sm">Compare B2B supplier transactions through HTD against traditional cash handling and mobile agent fees.</p>
         </div>
 
-        <div class="overflow-x-auto bg-white rounded-2xl border-2 border-ink shadow-[4px_4px_0px_0px_rgba(10,10,10,1)]">
+        <!-- Desktop Table (>= 768px) -->
+        <div class="hidden md:block overflow-x-auto bg-white rounded-2xl border-2 border-ink shadow-[4px_4px_0px_0px_rgba(10,10,10,1)]">
           <table class="w-full text-left text-sm min-w-[500px]">
             <thead class="bg-ink text-white text-xs uppercase font-mono">
               <tr>
@@ -307,6 +311,57 @@
               </tr>
             </tbody>
           </table>
+        </div>
+
+        <!-- Mobile Stacked Fee Cards (< 768px) -->
+        <div class="block md:hidden space-y-3">
+          <div class="p-4 bg-white rounded-xl border border-borderGray shadow-sm space-y-2">
+            <h3 class="font-bold text-sm text-ink">Customer pays merchant with HTD</h3>
+            <div class="flex justify-between items-center text-xs pt-1 border-t border-borderGray">
+              <span class="text-ink/60">HTD Network:</span>
+              <strong class="text-brandRed font-bold">0.5% (paid by merchant)</strong>
+            </div>
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-ink/60">Traditional Cash:</span>
+              <span class="text-ink/80">1.5% – 3.5% Card / Mobile</span>
+            </div>
+          </div>
+
+          <div class="p-4 bg-white rounded-xl border border-borderGray shadow-sm space-y-2">
+            <h3 class="font-bold text-sm text-ink">Merchant pays supplier with HTD (B2B)</h3>
+            <div class="flex justify-between items-center text-xs pt-1 border-t border-borderGray">
+              <span class="text-ink/60">HTD Network:</span>
+              <strong class="text-emerald-700 font-bold">0% (free)</strong>
+            </div>
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-ink/60">Traditional Cash:</span>
+              <span class="text-ink/80">Tiered Transfer Fees</span>
+            </div>
+          </div>
+
+          <div class="p-4 bg-white rounded-xl border border-borderGray shadow-sm space-y-2">
+            <h3 class="font-bold text-sm text-ink">Merchant redeems HTD via MonCash</h3>
+            <div class="flex justify-between items-center text-xs pt-1 border-t border-borderGray">
+              <span class="text-ink/60">HTD Network:</span>
+              <strong class="text-ink font-bold">3% bridge fee</strong>
+            </div>
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-ink/60">Traditional Cash:</span>
+              <span class="text-ink/80">Up to 4% – 6% Tiered Street</span>
+            </div>
+          </div>
+
+          <div class="p-4 bg-white rounded-xl border border-borderGray shadow-sm space-y-2">
+            <h3 class="font-bold text-sm text-ink">Settlement Speed</h3>
+            <div class="flex justify-between items-center text-xs pt-1 border-t border-borderGray">
+              <span class="text-ink/60">HTD Network:</span>
+              <strong class="text-emerald-700 font-bold">&lt; 2 Seconds (Instant)</strong>
+            </div>
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-ink/60">Traditional Cash:</span>
+              <span class="text-ink/80">Hours to Days</span>
+            </div>
+          </div>
         </div>
         <p class="text-xs sm:text-sm text-ink/60 text-center font-medium">
           <em>B2B supplier restock transfers are always free. Only MonCash fiat redemptions carry the 3% bridge fee.</em>

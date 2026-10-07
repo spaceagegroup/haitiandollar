@@ -2,7 +2,7 @@
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>Press Release: Haitian Dollar Inc. Issues Update to Prior Investors | Haitian Dollar</title>
   <meta name="description" content="BALTIMORE, MD — Haitian Dollar Inc. issues update to prior investors and clarifies regulatory posture.">
   <link rel="icon" type="image/png" href="/logo.png">
@@ -64,10 +64,10 @@
   </script>
 </head>
 
-<body class="bg-offWhite text-ink font-sans antialiased selection:bg-brandYellow selection:text-ink">
+<body class="bg-offWhite text-ink font-sans antialiased selection:bg-brandYellow selection:text-ink overflow-x-hidden">
 
   <!-- REGULATORY NOTICE BAR -->
-  <aside aria-label="Regulatory Notice" class="bg-ink text-white/80 text-xs py-2 px-4 border-b border-white/10">
+  <aside aria-label="Regulatory Notice" class="hidden sm:block bg-ink text-white/80 text-xs py-2 px-4 border-b border-white/10">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
       <div class="flex items-center gap-2 text-center sm:text-left">
         <img src="/logo.png" alt="HTD" class="w-4 h-4 rounded-full" />
@@ -79,14 +79,14 @@
 
   <!-- HEADER -->
   <header class="sticky top-0 z-50 bg-offWhite/90 backdrop-blur-md border-b border-borderGray">
-    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-full overflow-hidden ring-2 ring-brandRed">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-16 lg:h-20 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2.5 sm:gap-3">
+        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden ring-2 ring-brandRed flex-shrink-0">
           <img src="/logo.png" alt="Haitian Dollar" class="w-full h-full object-cover" />
         </div>
         <div class="flex flex-col">
-          <span class="font-display font-black text-xl leading-none tracking-tight text-ink">HAITIAN DOLLAR</span>
-          <span class="text-[10px] font-semibold tracking-widest text-ink/60 uppercase">1 HTD = 5 HTG</span>
+          <span class="font-display font-black text-base sm:text-xl leading-none tracking-tight text-ink">HAITIAN DOLLAR</span>
+          <span class="text-[9px] sm:text-[10px] font-semibold tracking-widest text-ink/60 uppercase">1 HTD = 5 HTG</span>
         </div>
       </a>
 
@@ -105,14 +105,14 @@
       </div>
 
       <!-- Action Button & Rate Pill -->
-      <div class="flex items-center gap-3">
-        <a href="/htd" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brandYellow/10 border border-brandYellow/30 hover:bg-brandYellow/20 transition-colors" title="View HTD Token specifications & rates">
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="/htd" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brandYellow/10 border border-brandYellow/30 hover:bg-brandYellow/20 transition-colors" title="View HTD Token specifications & rates">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
           <span class="text-[11px] font-mono font-bold text-ink">
             1 HTD = 5 HTG · <span id="appbar-htd-usd">$0.0383</span>
           </span>
         </a>
-        <a href="/contact" class="hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-brandRed text-white font-semibold text-sm hover:bg-brandRed/90 shadow-sm transition-all">
+        <a href="/contact" class="hidden sm:inline-flex items-center justify-center px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg bg-brandRed text-white font-semibold text-xs sm:text-sm hover:bg-brandRed/90 shadow-sm transition-all">
           Contact Us
         </a>
         <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-ink hover:bg-black/5" aria-label="Toggle Menu">
@@ -122,7 +122,7 @@
     </nav>
 
     <!-- Mobile Drawer -->
-    <div id="mobile-menu" class="hidden lg:hidden border-b border-borderGray bg-offWhite px-4 pt-3 pb-6 space-y-3 font-medium text-base">
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-borderGray bg-offWhite px-4 pt-3 pb-6 space-y-3 font-medium text-base">
       <!-- Mobile Live Rate Pill -->
       <a href="/htd" class="flex items-center justify-between p-3 rounded-xl bg-brandYellow/20 border border-brandYellow/50 hover:bg-brandYellow/30 transition-colors">
         <div class="flex items-center gap-2">
@@ -157,14 +157,14 @@
         <span class="text-ink/80">Press Release</span>
       </nav>
 
-      <header class="mb-10 sm:mb-12 pb-8 border-b border-borderGray">
-        <div class="flex items-center gap-3 mb-4">
+      <header class="mb-8 sm:mb-12 pb-6 sm:pb-8 border-b border-borderGray">
+        <div class="flex items-center gap-2 sm:gap-3 mb-4 flex-wrap">
           <span class="bg-brandRed/10 text-brandRed text-xs font-display font-bold uppercase tracking-wider px-3 py-1 rounded-full">
             Press Release
           </span>
           <span class="text-xs text-ink/60 font-mono">September 29, 2026</span>
         </div>
-        <h1 class="font-display font-black text-3xl sm:text-4xl lg:text-5xl text-ink leading-tight tracking-tight mb-4 sm:mb-6">
+        <h1 class="font-display font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-ink leading-tight tracking-tight mb-4 sm:mb-6">
           Haitian Dollar Inc. Issues Update to Prior Investors and Clarifies Regulatory Status
         </h1>
         <p class="text-base sm:text-lg text-ink/70 leading-relaxed font-normal">
