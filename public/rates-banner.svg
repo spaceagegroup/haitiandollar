@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080808"/>
+      <stop offset="50%" stop-color="#121212"/>
+      <stop offset="100%" stop-color="#070707"/>
+    </linearGradient>
+
+    <!-- Gold Accent Card Glow -->
+    <linearGradient id="gold-glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#241B05"/>
+      <stop offset="50%" stop-color="#18140A"/>
+      <stop offset="100%" stop-color="#111111"/>
+    </linearGradient>
+
+    <!-- Oracle Card Subtle Gradient -->
+    <linearGradient id="oracle-card" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#171717"/>
+      <stop offset="100%" stop-color="#0F0F0F"/>
+    </linearGradient>
+
+    <!-- Ambient Radial Glow -->
+    <radialGradient id="ambient-gold" cx="80%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#FCC419" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Base Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Subtle Radial Glow in Top Right -->
+  <rect width="1200" height="630" fill="url(#ambient-gold)"/>
+
+  <!-- Subtle Outer Border Frame -->
+  <rect x="24" y="24" width="1152" height="582" rx="16" fill="none" stroke="#FFFFFF" stroke-opacity="0.06" stroke-width="1.5"/>
+
+  <!-- TOP BAR: Brand, Entity & Live Status -->
+  <g transform="translate(70, 65)">
+    <!-- Brand Logo Circle -->
+    <circle cx="22" cy="22" r="22" fill="#FCC419"/>
+    <text x="22" y="29" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif" font-weight="900" font-size="19" fill="#000000" text-anchor="middle">H$</text>
+
+    <!-- Brand Name -->
+    <text x="60" y="29" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif" font-weight="900" font-size="22" fill="#FFFFFF" letter-spacing="1.2">HAITIAN DOLLAR</text>
+    <text x="272" y="28" font-family="'SF Mono', 'Roboto Mono', Menlo, monospace" font-weight="600" font-size="12" fill="#71717A" letter-spacing="0.5">SEC CIK 0001906040 · BASE L2</text>
+
+    <!-- Live BRH Oracle Badge -->
+    <g transform="translate(860, 5)">
+      <rect width="200" height="34" rx="17" fill="#142617" stroke="#22C55E" stroke-opacity="0.4" stroke-width="1.2"/>
+      <circle cx="20" cy="17" r="5" fill="#22C55E"/>
+      <text x="36" y="22" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif" font-weight="700" font-size="12" fill="#22C55E" letter-spacing="0.6">DAILY BRH ORACLE</text>
+    </g>
+  </g>
+
+  <!-- MAIN HEADLINE & SUBTITLE -->
+  <g transform="translate(70, 160)">
+    <text x="0" y="38" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Montserrat', sans-serif" font-weight="900" font-size="44" fill="#FFFFFF" letter-spacing="-0.5">
+      BRH Daily Rates &amp; Parity Terminal
+    </text>
+    <text x="0" y="74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif" font-weight="500" font-size="19" fill="#9CA3AF">
+      Official Banque de la République d'Haïti Daily Benchmark &amp; Multi-Tier Market Spreads
+    </text>
+  </g>
+
+  <!-- LEFT CARD: Central Bank & Multi-Tier FX Oracle -->
+  <g transform="translate(70, 270)">
+    <rect width="515" height="235" rx="20" fill="url(#oracle-card)" stroke="#FFFFFF" stroke-opacity="0.12" stroke-width="1.5"/>
+    
+    <!-- Top Card Badge -->
+    <text x="32" y="44" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif" font-weight="800" font-size="12" fill="#FCC419" letter-spacing="1.5">CENTRAL BANK BENCHMARK</text>
+    
+    <!-- Main Headline: USD / HTG ORACLE -->
+    <text x="32" y="112" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif" font-weight="900" font-size="40" fill="#FFFFFF" letter-spacing="-0.5">USD / HTG </text>
+    <text x="255" y="112" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif" font-weight="900" font-size="40" fill="#FCC419" letter-spacing="-0.5">ORACLE</text>
+
+    <!-- Subtle Divider Line -->
+    <line x1="32" y1="145" x2="483" y2="145" stroke="#FFFFFF" stroke-opacity="0.08" stroke-width="1"/>
+
+    <!-- Explanatory Lines (Timeless / Evergreen) -->
+    <text x="32" y="180" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif" font-weight="600" font-size="15" fill="#E5E7EB">
+      BRH Reference Rate · Commercial Banks · Informal Market
+    </text>
+    <text x="32" y="206" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif" font-weight="500" font-size="13" fill="#9CA3AF">
+      Automated Daily Feed · 365-Day Auditable Historical Archive
+    </text>
+  </g>
+
+  <!-- RIGHT CARD: Protocol Parity Invariant -->
+  <g transform="translate(615, 270)">
+    <rect width="515" height="235" rx="20" fill="url(#gold-glow)" stroke="#FCC419" stroke-opacity="0.4" stroke-width="1.5"/>
+    
+    <!-- Top Card Badge -->
+    <text x="32" y="44" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif" font-weight="800" font-size="12" fill="#FCC419" letter-spacing="1.5">PROTOCOL PARITY INVARIANT</text>
+    
+    <!-- Main Invariant: 1 HTD = 5.00 HTG (Fixed Forever) -->
+    <text x="32" y="112" font-family="'SF Mono', 'Roboto Mono', Menlo, monospace" font-weight="900" font-size="46" fill="#FFFFFF">1 HTD = </text>
+    <text x="236" y="112" font-family="'SF Mono', 'Roboto Mono', Menlo, monospace" font-weight="900" font-size="46" fill="#FCC419">5.00</text>
+    <text x="360" y="112" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif" font-weight="700" font-size="22" fill="#D1D5DB"> HTG</text>
+
+    <!-- Subtle Divider Line -->
+    <line x1="32" y1="145" x2="483" y2="145" stroke="#FCC419" stroke-opacity="0.15" stroke-width="1"/>
+
+    <!-- Explanatory Lines (Timeless / Evergreen) -->
+    <text x="32" y="180" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif" font-weight="600" font-size="15" fill="#FCC419">
+      Permanent 1:5 Convention · Elastic Reserve Invariant
+    </text>
+    <text x="32" y="206" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif" font-weight="500" font-size="13" fill="#E5E7EB">
+      Non-Custodial Unit of Account · Architected for Base Layer 2
+    </text>
+  </g>
+
+  <!-- FOOTER BAR: Canonical Link & Feature Tags -->
+  <g transform="translate(70, 565)">
+    <text x="0" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif" font-weight="800" font-size="15" fill="#FCC419" letter-spacing="0.5">
+      haitiandollar.com/rates
+    </text>
+    <text x="1060" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif" font-weight="500" font-size="14" fill="#71717A" text-anchor="end">
+      Commercial Banks · Informal Spread · Real-Time FX Calculator
+    </text>
+  </g>
+</svg>
