@@ -118,59 +118,59 @@
         </div>
       </a>
 
-      <!-- Desktop Links -->
-      <div class="hidden md:flex items-center gap-7 font-medium text-sm">
-        <a href="/about.html" class="hover:text-brandRed transition-colors">About</a>
-        <a href="/htd.html" class="text-brandRed font-bold">HTD Token</a>
-        <a href="/merchants.html" class="hover:text-brandRed transition-colors">Merchants</a>
-        <a href="/users.html" class="hover:text-brandRed transition-colors">Users</a>
-        <a href="/investors.html" class="hover:text-brandRed transition-colors">Investors</a>
-        <a href="/news.html" class="hover:text-brandRed transition-colors">News</a>
-        <a href="/rates" class="hover:text-brandRed transition-colors font-bold text-ink flex items-center gap-1.5">
+      <!-- Desktop Links (Contact in footer for clean spacing) -->
+      <div class="hidden lg:flex items-center gap-6 xl:gap-8 font-medium text-sm whitespace-nowrap">
+        <a href="/about" class="hover:text-brandRed transition-colors">About</a>
+        <a href="/htd" class="text-brandRed font-bold">HTD Token</a>
+        <a href="/merchants" class="hover:text-brandRed transition-colors">Merchants</a>
+        <a href="/users" class="hover:text-brandRed transition-colors">Users</a>
+        <a href="/investors" class="hover:text-brandRed transition-colors">Investors</a>
+        <a href="/news" class="hover:text-brandRed transition-colors">News</a>
+        <a href="/rates" class="hover:text-brandRed transition-colors text-ink flex items-center gap-1.5">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
           BRH Rates
         </a>
-        <a href="/contact.html" class="hover:text-brandRed transition-colors">Contact</a>
       </div>
 
       <!-- Action Button -->
       <div class="flex items-center gap-3">
-        <a href="/rates" class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brandYellow/10 border border-brandYellow/30 hover:bg-brandYellow/20 transition-colors" title="View today's HTD rate">
+        <a href="/htd" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brandYellow/10 border border-brandYellow/30 hover:bg-brandYellow/20 transition-colors" title="View HTD Token specifications & rates">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
           <span class="text-[11px] font-mono font-bold text-ink">
             1 HTD = 5 HTG · <span id="appbar-htd-usd">$0.0383</span>
           </span>
         </a>
-        <a href="/contact.html" class="hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-brandRed text-white font-semibold text-sm hover:bg-brandRed/90 shadow-sm transition-all">
+        <a href="/contact" class="hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-brandRed text-white font-semibold text-sm hover:bg-brandRed/90 shadow-sm transition-all">
           Contact Us
         </a>
-        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-ink hover:bg-black/5" aria-label="Toggle Menu">
+        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-ink hover:bg-black/5" aria-label="Toggle Menu">
           <i data-lucide="menu" class="w-6 h-6"></i>
         </button>
       </div>
     </nav>
 
     <!-- Mobile Drawer -->
-    <div id="mobile-menu" class="hidden md:hidden border-b border-borderGray bg-offWhite px-4 pt-3 pb-6 space-y-3 font-medium text-base">
+    <div id="mobile-menu" class="hidden lg:hidden border-b border-borderGray bg-offWhite px-4 pt-3 pb-6 space-y-3 font-medium text-base">
       <!-- Mobile Live Rate Pill -->
-      <a href="/htd.html#official-rates" class="flex items-center justify-between p-3 rounded-xl bg-brandYellow/20 border border-brandYellow/50 hover:bg-brandYellow/30 transition-colors">
+      <a href="/htd" class="flex items-center justify-between p-3 rounded-xl bg-brandYellow/20 border border-brandYellow/50 hover:bg-brandYellow/30 transition-colors">
         <div class="flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
           <span class="text-xs font-mono font-bold text-ink">1 HTD = 5 HTG</span>
         </div>
         <span class="text-xs font-mono font-bold text-brandRed flex items-center gap-1">
-          <span class="mobile-drawer-rate">$0.0382</span> USD &rarr;
+          <span class="mobile-drawer-rate">$0.0383</span> USD &rarr;
         </span>
       </a>
 
-      <a href="/about.html" class="block py-2 text-ink hover:text-brandRed">About</a>
-      <a href="/htd.html" class="block py-2 text-brandRed font-bold">HTD Token</a>
-      <a href="/merchants.html" class="block py-2 text-ink hover:text-brandRed">Merchants</a>
-      <a href="/users.html" class="block py-2 text-ink hover:text-brandRed">Users</a>
-      <a href="/investors.html" class="block py-2 text-ink hover:text-brandRed">Investors</a>
-      <a href="/news.html" class="block py-2 text-ink hover:text-brandRed">News</a>
-      <a href="/contact.html" class="block py-2 text-ink hover:text-brandRed">Contact</a>
-      <a href="/contact.html" class="block w-full text-center py-3 rounded-lg bg-brandRed text-white font-semibold">Contact Us</a>
+      <a href="/about" class="block py-2 text-ink hover:text-brandRed">About</a>
+      <a href="/htd" class="block py-2 text-brandRed font-bold">HTD Token</a>
+      <a href="/rates" class="block py-2 text-ink hover:text-brandRed">BRH Daily Rates &amp; Spreads</a>
+      <a href="/merchants" class="block py-2 text-ink hover:text-brandRed">Merchants</a>
+      <a href="/users" class="block py-2 text-ink hover:text-brandRed">Users</a>
+      <a href="/investors" class="block py-2 text-ink hover:text-brandRed">Investors</a>
+      <a href="/news" class="block py-2 text-ink hover:text-brandRed">News</a>
+      <a href="/contact" class="block py-2 text-ink hover:text-brandRed">Contact</a>
+      <a href="/contact" class="block w-full text-center py-3 rounded-lg bg-brandRed text-white font-semibold">Contact Us</a>
     </div>
   </header>
 
@@ -212,7 +212,7 @@
           </div>
 
           <!-- Formula Box -->
-          <div class="lg:col-span-5 bg-white border-2 border-ink rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-[5px_5px_0px_0px_rgba(10,10,10,1)] sm:shadow-[6px_6px_0px_0px_rgba(10,10,10,1)] space-y-5 sm:space-y-6">
+          <div class="lg:col-span-5 bg-white border border-borderGray rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-sm space-y-5 sm:space-y-6">
             <h3 class="font-display font-bold text-xl text-ink border-b border-borderGray pb-3">The Conversion Standard</h3>
             <div class="space-y-3 sm:space-y-4">
               <div class="flex items-center justify-between p-3.5 sm:p-4 bg-offWhite rounded-xl sm:rounded-2xl border border-borderGray">
@@ -239,7 +239,7 @@
     <section class="py-16 border-b border-borderGray bg-white">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <div class="bg-offWhite border-2 border-ink rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12 shadow-[5px_5px_0px_0px_rgba(10,10,10,1)] sm:shadow-[8px_8px_0px_0px_rgba(10,10,10,1)]">
+        <div class="bg-offWhite border border-borderGray rounded-2xl sm:rounded-3xl p-6 sm:p-10 md:p-12 shadow-sm">
 
           <div class="text-center mb-8 sm:mb-10">
             <div class="text-brandRed font-mono font-bold text-xs uppercase tracking-widest mb-2">Interactive Calculator</div>
@@ -263,7 +263,7 @@
                   min="0"
                   step="any"
                   value="100"
-                  class="w-full h-14 sm:h-16 px-4 sm:px-5 pr-14 sm:pr-16 rounded-xl border-2 border-ink bg-white text-xl sm:text-2xl font-display font-bold text-ink focus:outline-none focus:ring-2 focus:ring-brandRed"
+                  class="w-full h-14 sm:h-16 px-4 sm:px-5 pr-14 sm:pr-16 rounded-xl border border-borderGray bg-white text-xl sm:text-2xl font-display font-bold text-ink focus:outline-none focus:ring-2 focus:ring-brandRed focus:border-brandRed"
                 />
                 <span class="absolute right-4 sm:right-5 top-1/2 -translate-y-1/2 text-sm font-bold text-ink/40">H$</span>
               </div>
@@ -280,7 +280,7 @@
                   id="htg-output"
                   readonly
                   value="500.00"
-                  class="w-full h-14 sm:h-16 px-4 sm:px-5 pr-14 sm:pr-16 rounded-xl border-2 border-borderGray bg-white text-xl sm:text-2xl font-display font-bold text-ink/80 focus:outline-none cursor-default"
+                  class="w-full h-14 sm:h-16 px-4 sm:px-5 pr-14 sm:pr-16 rounded-xl border border-borderGray bg-white text-xl sm:text-2xl font-display font-bold text-ink/80 focus:outline-none cursor-default"
                 />
                 <span class="absolute right-4 sm:right-5 top-1/2 -translate-y-1/2 text-sm font-bold text-ink/40">HTG</span>
               </div>
@@ -321,105 +321,103 @@
       </div>
     </section>
 
-    <!-- VERIFIED BRH REFERENCE RATE -->
-    <section id="official-rates" class="py-12 bg-ink text-white border-y border-white/10 scroll-mt-24">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+    <!-- VERIFIED BRH REFERENCE RATE CARD -->
+    <section id="official-rates" class="py-16 border-b border-borderGray bg-offWhite scroll-mt-24">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white border border-borderGray rounded-2xl sm:rounded-3xl p-6 sm:p-10 shadow-sm text-center space-y-6">
 
         <div class="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 text-center">
           <div class="inline-flex items-center justify-center gap-1.5 sm:gap-2">
-            <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
-            <span class="text-[10px] xs:text-[11px] sm:text-xs font-mono font-bold uppercase tracking-normal sm:tracking-wider text-brandYellow">
+            <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+            <span class="text-[10px] xs:text-[11px] sm:text-xs font-mono font-bold uppercase tracking-normal sm:tracking-wider text-ink/70">
               BRH Daily Rates
             </span>
           </div>
-          <span class="text-[10px] xs:text-[11px] sm:text-xs font-mono font-bold uppercase tracking-normal sm:tracking-wider text-brandYellow/80 whitespace-nowrap block sm:inline text-center">
+          <span class="text-[10px] xs:text-[11px] sm:text-xs font-mono font-bold uppercase tracking-normal sm:tracking-wider text-ink/60 whitespace-nowrap block sm:inline text-center">
             (<span id="quote-display-date">Live</span>)
           </span>
         </div>
 
         <!-- PRIMARY QUOTE: HTD/HTG (the convention) -->
         <div>
-          <div class="text-xs text-white/50 uppercase tracking-widest font-mono mb-2">
+          <div class="text-xs text-ink/50 uppercase tracking-widest font-mono mb-2">
             Protocol Parity Rule — Fixed Forever
           </div>
-          <div class="font-display font-black text-4xl xs:text-5xl sm:text-6xl lg:text-7xl text-white tracking-tight">
-            1 HTD = <span class="text-brandYellow">5.00</span>
-            <span class="text-sm sm:text-lg font-mono font-normal text-white/40">HTG</span>
+          <div class="font-display font-black text-4xl xs:text-5xl sm:text-6xl text-ink tracking-tight">
+            1 HTD = <span class="text-brandRed">5.00</span>
+            <span class="text-sm sm:text-lg font-mono font-normal text-ink/40">HTG</span>
           </div>
-          <p class="text-xs text-white/40 mt-3 max-w-md mx-auto">
+          <p class="text-xs text-ink/60 mt-3 max-w-md mx-auto">
             This is the convention Haitians have used since 1912. It does not change.
           </p>
         </div>
 
         <!-- SECONDARY QUOTE: HTD/USD (implied value) -->
-        <div class="pt-4">
-          <div class="text-xs text-white/50 uppercase tracking-widest font-mono mb-1">
+        <div class="pt-2">
+          <div class="text-xs text-ink/50 uppercase tracking-widest font-mono mb-1">
             Implied Haitian Dollar Purchasing Power
           </div>
-          <div class="font-display font-black text-3xl sm:text-4xl text-white tracking-tight">
-            1 HTD = <span id="official-htd-usd" class="text-brandYellow">$0.0383</span>
-            <span class="text-sm font-mono font-normal text-white/40">USD</span>
+          <div class="font-display font-black text-2xl sm:text-3xl text-ink tracking-tight">
+            1 HTD = <span id="official-htd-usd" class="text-brandRed">$0.0383</span>
+            <span class="text-sm font-mono font-normal text-ink/40">USD</span>
           </div>
         </div>
 
         <!-- RATE TABLE: All 4 BRH Categories -->
-        <div class="max-w-xl mx-auto bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5 space-y-3 font-mono text-xs sm:text-sm mt-6">
-          <div class="flex justify-between items-center text-white/80 gap-2">
+        <div class="max-w-xl mx-auto bg-offWhite border border-borderGray rounded-2xl p-4 sm:p-5 space-y-3 font-mono text-xs sm:text-sm mt-4 text-left shadow-sm">
+          <div class="flex justify-between items-center text-ink/80 gap-2">
             <span>HTD / HTG (Fixed):</span>
-            <strong class="text-brandYellow shrink-0">1 HTD = 5.00 HTG</strong>
+            <strong class="text-brandRed shrink-0">1 HTD = 5.00 HTG</strong>
           </div>
 
-          <div class="pt-2 border-t border-white/10"></div>
+          <div class="pt-2 border-t border-borderGray"></div>
 
-          <div class="flex justify-between items-center text-white/80 gap-2">
+          <div class="flex justify-between items-center text-ink/80 gap-2">
             <span>BRH Reference Rate:</span>
-            <strong class="text-white shrink-0" id="official-rate">1 USD = 130.5583 HTG</strong>
+            <strong class="text-ink shrink-0" id="official-rate">1 USD = 130.5583 HTG</strong>
           </div>
 
-          <div class="flex justify-between items-center text-white/60 text-xs gap-2">
+          <div class="flex justify-between items-center text-ink/60 text-xs gap-2">
             <span>Banking Market:</span>
-            <span class="font-mono text-white/70 shrink-0" id="banking-range">130.2834 – 131.2205 HTG</span>
+            <span class="font-mono text-ink/70 shrink-0" id="banking-range">130.2834 – 131.2205 HTG</span>
           </div>
 
-          <div class="flex justify-between items-center text-white/60 text-xs gap-2">
+          <div class="flex justify-between items-center text-ink/60 text-xs gap-2">
             <span>Informal Market:</span>
-            <span class="font-mono text-white/70 shrink-0" id="informal-range">130.9000 – 135.6000 HTG</span>
+            <span class="font-mono text-ink/70 shrink-0" id="informal-range">130.9000 – 135.6000 HTG</span>
           </div>
 
-          <div class="flex justify-between items-center text-white/60 text-xs gap-2">
+          <div class="flex justify-between items-center text-ink/60 text-xs gap-2">
             <span>Informal Spread:</span>
-            <span class="font-mono text-white/70 shrink-0" id="informal-spread">4.7000 HTG</span>
+            <span class="font-mono text-ink/70 shrink-0" id="informal-spread">4.7000 HTG</span>
           </div>
 
-          <div class="pt-2 border-t border-white/10"></div>
+          <div class="pt-2 border-t border-borderGray"></div>
 
-          <div class="flex justify-between items-center text-white/80 gap-2">
+          <div class="flex justify-between items-center text-ink/80 gap-2">
             <span>USD / HTD Ratio:</span>
-            <strong class="text-white shrink-0" id="official-inverse">1 USD = 26.11 HTD</strong>
+            <strong class="text-ink shrink-0" id="official-inverse">1 USD = 26.11 HTD</strong>
           </div>
 
-          <div class="pt-2 border-t border-white/10"></div>
+          <div class="pt-2 border-t border-borderGray"></div>
 
-          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-white/60 text-xs gap-1 sm:gap-2">
-            <span class="text-white/60">Exchange Rate Fetched:</span>
-            <span class="font-mono text-white/80 shrink-0 text-left sm:text-right" id="exchange-fetched-at">Thursday, Oct 1, 2026 at 5:56 PM ET</span>
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-ink/60 text-xs gap-1 sm:gap-2">
+            <span class="text-ink/60">Exchange Rate Fetched:</span>
+            <span class="font-mono text-ink/80 shrink-0 text-left sm:text-right" id="exchange-fetched-at">Thursday, Oct 1, 2026 at 5:56 PM ET</span>
           </div>
         </div>
 
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-xs text-white/40 max-w-lg mx-auto leading-relaxed">
-          <span>
-            Source: Banque de la République d'Haïti, published daily.
-            1 HTD = 5 HTG is a permanent protocol rule.
-            Indicative only; not financial advice.
-          </span>
+        <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
             href="/rates"
-            class="inline-flex items-center gap-1 text-brandYellow hover:underline font-mono font-semibold whitespace-nowrap"
+            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-ink text-white font-display font-bold text-xs hover:bg-black/90 transition-all shadow-sm"
           >
-            View Full Rates Terminal &amp; Spreads →
+            <span>View Full Central Bank Rates &amp; Spreads Terminal</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 text-brandYellow"></i>
           </a>
         </div>
 
+        </div>
       </div>
     </section>
 

@@ -98,24 +98,23 @@
         </div>
       </a>
 
-      <!-- Desktop Links -->
-      <div class="hidden md:flex items-center gap-7 font-medium text-sm">
-        <a href="/about.html" class="hover:text-brandRed transition-colors">About</a>
-        <a href="/htd.html" class="hover:text-brandRed transition-colors">HTD Token</a>
-        <a href="/merchants.html" class="text-brandRed font-bold">Merchants</a>
-        <a href="/users.html" class="hover:text-brandRed transition-colors">Users</a>
-        <a href="/investors.html" class="hover:text-brandRed transition-colors">Investors</a>
-        <a href="/news.html" class="hover:text-brandRed transition-colors">News</a>
-        <a href="/rates" class="hover:text-brandRed transition-colors font-bold text-ink flex items-center gap-1.5">
+      <!-- Desktop Links (Contact in footer for clean spacing) -->
+      <div class="hidden lg:flex items-center gap-6 xl:gap-8 font-medium text-sm whitespace-nowrap">
+        <a href="/about" class="hover:text-brandRed transition-colors">About</a>
+        <a href="/htd" class="hover:text-brandRed transition-colors">HTD Token</a>
+        <a href="/merchants" class="text-brandRed font-bold">Merchants</a>
+        <a href="/users" class="hover:text-brandRed transition-colors">Users</a>
+        <a href="/investors" class="hover:text-brandRed transition-colors">Investors</a>
+        <a href="/news" class="hover:text-brandRed transition-colors">News</a>
+        <a href="/rates" class="hover:text-brandRed transition-colors text-ink flex items-center gap-1.5">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
           BRH Rates
         </a>
-        <a href="/contact.html" class="hover:text-brandRed transition-colors">Contact</a>
       </div>
 
       <!-- Action Button -->
       <div class="flex items-center gap-3">
-        <a href="/rates" class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brandYellow/10 border border-brandYellow/30 hover:bg-brandYellow/20 transition-colors" title="View today's HTD rate">
+        <a href="/htd" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brandYellow/10 border border-brandYellow/30 hover:bg-brandYellow/20 transition-colors" title="View HTD Token specifications & rates">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
           <span class="text-[11px] font-mono font-bold text-ink">
             1 HTD = 5 HTG · <span id="appbar-htd-usd">$0.0383</span>
@@ -124,16 +123,16 @@
         <a href="#onboard" class="hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-brandRed text-white font-semibold text-sm hover:bg-brandRed/90 shadow-sm transition-all">
           Accept HTD
         </a>
-        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-ink hover:bg-black/5" aria-label="Toggle Menu">
+        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-ink hover:bg-black/5" aria-label="Toggle Menu">
           <i data-lucide="menu" class="w-6 h-6"></i>
         </button>
       </div>
     </nav>
 
     <!-- Mobile Drawer -->
-    <div id="mobile-menu" class="hidden md:hidden border-b border-borderGray bg-offWhite px-4 pt-3 pb-6 space-y-3 font-medium text-base">
+    <div id="mobile-menu" class="hidden lg:hidden border-b border-borderGray bg-offWhite px-4 pt-3 pb-6 space-y-3 font-medium text-base">
       <!-- Mobile Live Rate Pill -->
-      <a href="/rates" class="flex items-center justify-between p-3 rounded-xl bg-brandYellow/20 border border-brandYellow/50 hover:bg-brandYellow/30 transition-colors">
+      <a href="/htd" class="flex items-center justify-between p-3 rounded-xl bg-brandYellow/20 border border-brandYellow/50 hover:bg-brandYellow/30 transition-colors">
         <div class="flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
           <span class="text-xs font-mono font-bold text-ink">1 HTD = 5 HTG</span>
@@ -143,14 +142,14 @@
         </span>
       </a>
 
-      <a href="/about.html" class="block py-2 text-ink hover:text-brandRed">About</a>
-      <a href="/htd.html" class="block py-2 text-ink hover:text-brandRed">HTD Token</a>
-      <a href="/rates" class="block py-2 text-brandRed font-bold">BRH Daily Rates &amp; Spreads</a>
-      <a href="/merchants.html" class="block py-2 text-brandRed font-bold">Merchants</a>
-      <a href="/users.html" class="block py-2 text-ink hover:text-brandRed">Users</a>
-      <a href="/investors.html" class="block py-2 text-ink hover:text-brandRed">Investors</a>
-      <a href="/news.html" class="block py-2 text-ink hover:text-brandRed">News</a>
-      <a href="/contact.html" class="block py-2 text-ink hover:text-brandRed">Contact</a>
+      <a href="/about" class="block py-2 text-ink hover:text-brandRed">About</a>
+      <a href="/htd" class="block py-2 text-ink hover:text-brandRed">HTD Token</a>
+      <a href="/rates" class="block py-2 text-ink hover:text-brandRed">BRH Daily Rates &amp; Spreads</a>
+      <a href="/merchants" class="block py-2 text-brandRed font-bold">Merchants</a>
+      <a href="/users" class="block py-2 text-ink hover:text-brandRed">Users</a>
+      <a href="/investors" class="block py-2 text-ink hover:text-brandRed">Investors</a>
+      <a href="/news" class="block py-2 text-ink hover:text-brandRed">News</a>
+      <a href="/contact" class="block py-2 text-ink hover:text-brandRed">Contact</a>
       <a href="#onboard" class="block w-full text-center py-3 rounded-lg bg-brandRed text-white font-semibold">Accept HTD</a>
     </div>
   </header>
