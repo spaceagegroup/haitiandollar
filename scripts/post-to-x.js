@@ -42,6 +42,8 @@ async function postRateToX() {
     `Reference: 1 USD = ${quote.reference.htgPerUsd} HTG`,
     `Banking: ${quote.banking.buy} – ${quote.banking.sell} HTG`,
     '',
+    'https://haitiandollar.com/rates',
+    '',
     '#Haiti #HTD #HaitianDollar #HTG #G #Gourde'
   ].join('\n');
 
