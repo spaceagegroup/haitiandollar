@@ -193,7 +193,7 @@
       </div>
     </section>
 
-    <!-- FEATURED PRESS RELEASES CAROUSEL (Active for 24 hours after publication) -->
+    <!-- FEATURED PRESS RELEASES CAROUSEL (Active for 48 hours after publication) -->
     <section class="py-12 sm:py-16 border-b border-borderGray bg-offWhite relative overflow-hidden hidden" id="featured-section">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -727,7 +727,8 @@
       const windowBadge = document.getElementById('featured-window-badge');
       const dotsContainer = document.getElementById('carousel-dots');
 
-      const WINDOW_MS = 14 * 24 * 60 * 60 * 1000; // 14-day window for active stories
+      // Featured items only last for 48 hours after publication, then return to regular post grid
+      const WINDOW_MS = 48 * 60 * 60 * 1000; // 48-hour active window
       const now = Date.now();
 
       // Check window eligibility for each slide
@@ -739,9 +740,12 @@
         const pill = slide.querySelector('.slide-status-pill');
 
         if (ageMs <= WINDOW_MS && ageMs >= -3600000) {
-          const remainingDays = Math.max(1, Math.ceil((WINDOW_MS - Math.max(0, ageMs)) / (24 * 60 * 60 * 1000)));
+          const remainingHours = Math.max(1, Math.ceil((WINDOW_MS - Math.max(0, ageMs)) / (60 * 60 * 1000)));
+          const timeText = remainingHours > 24 
+            ? `${Math.ceil(remainingHours / 24)}d active` 
+            : `${remainingHours}h active`;
           if (pill) {
-            pill.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>Featured &bull; ${remainingDays}d active`;
+            pill.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>Featured &bull; ${timeText}`;
           }
           activeSlides.push(slide);
         } else {
@@ -749,20 +753,7 @@
         }
       });
 
-      // FALLBACK PINNING:
-      // If no items fall within the 14-day window, pin the latest announcement (slide 0)
-      if (activeSlides.length === 0 && allSlides.length > 0) {
-        const fallbackSlide = allSlides[0];
-        const pill = fallbackSlide.querySelector('.slide-status-pill');
-        if (pill) {
-          pill.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-brandRed"></span>Latest Announcement';
-        }
-        if (windowBadge) {
-          windowBadge.textContent = 'Featured Story';
-        }
-        activeSlides.push(fallbackSlide);
-      }
-
+      // If no items fall within the 48-hour window, hide featured section so items display in regular post grid
       if (activeSlides.length === 0) {
         section.classList.add('hidden');
         return;

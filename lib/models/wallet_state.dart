@@ -260,6 +260,9 @@ class WalletState extends ChangeNotifier {
 
   AppMode _mode = AppMode.consumer;
   double _balance;
+
+  /// In-memory ledger of receipts produced in this session.
+  /// TODO(persist): Cap at N entries or move to durable local storage / server-side index.
   final List<TxnReceipt> _ledger = <TxnReceipt>[];
 
   double _htgPerUsd;
@@ -397,7 +400,7 @@ class WalletState extends ChangeNotifier {
     _isRefreshing = true;
     _safeNotify();
     try {
-      _Quote? quote;
+      Quote? quote;
 
       // 1. Live fetch from official endpoint.
       // On web, if served on haitiandollar.com, use same-origin relative path.
@@ -447,15 +450,16 @@ class WalletState extends ChangeNotifier {
             }
           } catch (e) {
             debugPrint('Rate refresh live fetch attempt $attempt fallback: $e');
-            if (attempt == 0) {
-              await Future<void>.delayed(const Duration(milliseconds: 1500));
-            }
+          }
+          // Delay before retrying on either network error or unparseable payload
+          if (attempt == 0 && quote == null) {
+            await Future<void>.delayed(const Duration(milliseconds: 1500));
           }
         }
       }
 
       // 2. The official snapshot bundled with the build.
-      _Quote? bundled;
+      Quote? bundled;
       try {
         bundled = _parseQuote(
           jsonDecode(await rootBundle.loadString('htd-quote.json')),
@@ -517,7 +521,7 @@ class WalletState extends ChangeNotifier {
 
   /// Tries the website's open forex fallbacks in order and returns the first
   /// plausible `rates.HTG`.
-  Future<_Quote?> _fetchForexQuote() async {
+  Future<Quote?> _fetchForexQuote() async {
     for (final url in _kForexEndpoints) {
       try {
         final res = await http.get(Uri.parse(url)).timeout(_kFetchTimeout);
@@ -525,7 +529,7 @@ class WalletState extends ChangeNotifier {
         final rate = _forexRate(jsonDecode(res.body));
         if (rate == null || !isPlausibleBrhRate(rate)) continue;
         final label = 'Forex reference · ${Uri.parse(url).host}';
-        return _Quote(
+        return Quote(
           rate: rate,
           source: label,
           date: null,
@@ -557,8 +561,13 @@ class WalletState extends ChangeNotifier {
   /// Field choice follows the landing page, which displays `reference.raw`; the
   /// equivalent `reference.htgPerUsd` and `banking.htgPerUsd` are accepted too.
   /// Numeric fields are read leniently, because a publisher may emit them as
+  /// Parses the website's `/htd-quote.json` payload, accepting numbers or
   /// strings.
-  static _Quote? _parseQuote(
+  ///
+  /// Note on schema: `reference.raw` is checked first for backward compatibility
+  /// with earlier scraper releases, falling through to `reference.htgPerUsd`
+  /// or `banking.htgPerUsd`.
+  static Quote? parseQuote(
     Object? decoded,
     String fallbackSource, {
     required bool fromNetwork,
@@ -580,7 +589,7 @@ class WalletState extends ChangeNotifier {
 
     if (rate == null || !isPlausibleBrhRate(rate)) return null;
 
-    return _Quote(
+    return Quote(
       rate: rate,
       source: sanitizeText(
         (decoded['source'] as String?) ?? fallbackSource,
@@ -593,6 +602,12 @@ class WalletState extends ChangeNotifier {
       origin: null,
     );
   }
+
+  static Quote? _parseQuote(
+    Object? decoded,
+    String fallbackSource, {
+    required bool fromNetwork,
+  }) => parseQuote(decoded, fallbackSource, fromNetwork: fromNetwork);
 
   /// Reads a numeric field that a payload may publish as a number or a string.
   static double? _asDouble(Object? value) {
@@ -766,8 +781,11 @@ class WalletState extends ChangeNotifier {
 
   /// Deterministic-length hash for sandbox settlement; a live build swaps this
   /// for the hash returned by the settlement service.
+  ///
+  /// TODO(base-mainnet): Replace with the hash returned by the ERC-4337
+  /// settlement service when [kSandboxSettlement] is false.
   String _mockTxHash() {
-    final random = Random();
+    final random = Random.secure();
     final bytes = List<int>.generate(32, (_) => random.nextInt(256));
     final hex = bytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
     return '0x$hex';
@@ -888,8 +906,8 @@ String formatRateAge(DateTime timestamp) {
 
 /// A parsed, plausibility-checked BRH quotation.
 @immutable
-class _Quote {
-  const _Quote({
+class Quote {
+  const Quote({
     required this.rate,
     required this.source,
     required this.date,
@@ -918,6 +936,19 @@ class _Quote {
   final bool fromNetwork;
 
   /// Names the fallback that supplied this figure, or null when it came from the
-  /// published BRH quotation.
+  /// published BRH quotation. Only non-null for [Quote]s constructed by
+  /// [_fetchForexQuote].
   final String? origin;
+
+  /// Parses a raw decoded JSON payload into a [Quote].
+  /// Returns null if the rate is missing, unparseable, or fails plausibility checks.
+  static Quote? parse(
+    Object? decoded,
+    String fallbackSource, {
+    required bool fromNetwork,
+  }) => WalletState.parseQuote(
+    decoded,
+    fallbackSource,
+    fromNetwork: fromNetwork,
+  );
 }

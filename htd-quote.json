@@ -1,10 +1,10 @@
 {
-  "date": "Oct 7, 2026",
-  "day": "Wednesday",
-  "fetchedAtET": "Wednesday, Oct 7, 2026 at 7:35 AM ET",
+  "date": "Oct 8, 2026",
+  "day": "Thursday",
+  "fetchedAtET": "Thursday, Oct 8, 2026 at 7:30 AM ET",
   "source": "Banque de la République d'Haïti (BRH)",
   "sourceUrl": "https://www.brh.ht/taux-du-jour/",
-  "updatedAt": "2026-10-07T11:35:14.357Z",
+  "updatedAt": "2026-10-08T11:30:00.071Z",
   "liveScraped": true,
   "lastTweetedDate": "Oct 7, 2026",
   "lastTweetId": "2107796892839203100",
@@ -17,29 +17,29 @@
     }
   },
   "reference": {
-    "htgPerUsd": 130.5337,
+    "htgPerUsd": 130.5102,
     "htdInUsd": 0.0383,
-    "usdInHtd": 26.11,
-    "raw": 130.5337,
+    "usdInHtd": 26.1,
+    "raw": 130.5102,
     "usdPerHtd": 0.0383,
-    "htdPerUsd": 26.11
+    "htdPerUsd": 26.1
   },
   "htdInvariant": {
     "peg": 5,
     "htgPerHtd": 5,
     "htdPerHtg": 0.2,
     "usdPerHtd": 0.0383,
-    "htdPerUsd": 26.11
+    "htdPerUsd": 26.1
   },
   "banking": {
-    "buy": 130.2895,
-    "sell": 131.2784,
-    "spread": 0.9889,
-    "spreadPct": 0.75,
-    "spreadPercent": 0.75,
-    "htgPerUsd": 131.2784,
+    "buy": 130.2504,
+    "sell": 131.3703,
+    "spread": 1.1199,
+    "spreadPct": 0.85,
+    "spreadPercent": 0.85,
+    "htgPerUsd": 131.3703,
     "htdInUsd": 0.0381,
-    "usdInHtd": 26.26
+    "usdInHtd": 26.27
   },
   "informal": {
     "buy": 130.9,
@@ -52,26 +52,26 @@
     "usdInHtd": 27.12
   },
   "aar": {
-    "htgPerUsd": 131.2784,
+    "htgPerUsd": 131.3703,
     "htdInUsd": 0.0381,
-    "usdInHtd": 26.26,
-    "raw": 131.2784,
-    "sell": 131.2784,
+    "usdInHtd": 26.27,
+    "raw": 131.3703,
+    "sell": 131.3703,
     "buy": null
   },
   "tma": {
-    "htgPerUsd": 131.2784,
+    "htgPerUsd": 131.3703,
     "htdInUsd": 0.0381,
-    "usdInHtd": 26.26,
-    "raw": 131.2784,
-    "sell": 131.2784,
+    "usdInHtd": 26.27,
+    "raw": 131.3703,
+    "sell": 131.3703,
     "buy": null
   },
   "spreadComparison": {
-    "informalToBankingRatio": 4.8,
-    "ratioLabel": "4.8x",
-    "bankingSpreadHtg": 0.9889,
-    "bankingSpreadPercent": 0.75,
+    "informalToBankingRatio": 4.2,
+    "ratioLabel": "4.2x",
+    "bankingSpreadHtg": 1.1199,
+    "bankingSpreadPercent": 0.85,
     "informalSpreadHtg": 4.7,
     "informalSpreadPercent": 3.47
   },
@@ -103,10 +103,10 @@
     {
       "htd": 1000,
       "htg": 5000,
-      "usd": 38.3,
+      "usd": 38.31,
       "htdLabel": "1,000 HTD",
       "htgLabel": "5,000 HTG",
-      "usdLabel": "$38.30 USD"
+      "usdLabel": "$38.31 USD"
     }
   ],
   "i18n": {
@@ -127,7 +127,7 @@
       "buy": "Buy",
       "sell": "Sell",
       "spread": "Spread",
-      "spreadNotice": "The informal cash market spread (4.70 HTG) is 4.8x wider than commercial banks.",
+      "spreadNotice": "The informal cash market spread (4.70 HTG) is 4.2x wider than commercial banks.",
       "spreadTooltip": "Spread = Difference between Buy and Sell. The informal market spread is 4x wider than commercial banks.",
       "conversionTitle": "HTD Mental Math & Conversion Table",
       "conversionSubtitle": "Real-world purchasing power for street commerce and remittances (5 HTG = 1 HTD)",
@@ -153,7 +153,7 @@
       "buy": "Achte",
       "sell": "Vann",
       "spread": "Ekara",
-      "spreadNotice": "Ekara mache enfòmèl la (4.70 HTG) se 4.8 fwa pi laj pase bank komèsyal yo.",
+      "spreadNotice": "Ekara mache enfòmèl la (4.70 HTG) se 4.2 fwa pi laj pase bank komèsyal yo.",
       "spreadTooltip": "Ekara = Diferans ant Achte ak Vann. Ekara mache enfòmèl la 4 fwa pi laj pase bank komèsyal yo.",
       "conversionTitle": "Kalkil Rapid & Tab Konvèsyon HTD",
       "conversionSubtitle": "Pouvwa acha reyèl pou komès nan lari ak transfè lajan (5 HTG = 1 HTD)",

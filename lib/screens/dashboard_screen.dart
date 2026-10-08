@@ -9,9 +9,9 @@ import '../widgets/receipt_dialog.dart';
 import '../widgets/sell_sheet.dart';
 import '../widgets/send_sheet.dart';
 
-import 'package:url_launcher/url_launcher.dart';
 
 import 'scanner_screen.dart';
+import 'rates_screen.dart';
 
 /// Primary consumer shell.
 ///
@@ -350,18 +350,6 @@ class _Chip extends StatelessWidget {
   }
 }
 
-Future<void> _openBrhSource(BuildContext context) async {
-  final url = Uri.parse(kOfficialRatesUrl);
-  if (await canLaunchUrl(url)) {
-    await launchUrl(url, mode: LaunchMode.externalApplication);
-  } else {
-    if (context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Could not open haitiandollar.com')),
-      );
-    }
-  }
-}
 
 class _RateBar extends StatelessWidget {
   const _RateBar({required this.wallet});
@@ -370,101 +358,114 @@ class _RateBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-      decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.03),
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const RatesScreen()),
+        ),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.10)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+          decoration: BoxDecoration(
+            color: Colors.white.withValues(alpha: 0.03),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.white.withValues(alpha: 0.10)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CircleAvatar(radius: 4, backgroundColor: Color(0xFF22C55E)),
-              const SizedBox(width: 8),
-              // Expanded so a larger accessibility font scale ellipsises the
-              // label instead of overflowing the card.
-              Expanded(
-                child: Text(
-                  wallet.rateCardTitle,
-                  style: const TextStyle(fontSize: 11, color: Colors.white60),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              GestureDetector(
-                onTap: wallet.isRefreshing ? null : () => wallet.refreshRates(),
-                child: wallet.isRefreshing
-                    ? const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 4),
-                        child: SizedBox(
-                          width: 11,
-                          height: 11,
-                          child: CircularProgressIndicator(strokeWidth: 1.5),
-                        ),
-                      )
-                    : const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 4),
-                        child: Icon(
-                          Icons.refresh,
-                          size: 13,
-                          color: Colors.white54,
+              Row(
+                children: [
+                  const CircleAvatar(radius: 4, backgroundColor: Color(0xFF22C55E)),
+                  const SizedBox(width: 8),
+                  // Expanded so a larger accessibility font scale ellipsises the
+                  // label instead of overflowing the card.
+                  Expanded(
+                    child: Text(
+                      wallet.rateCardTitle,
+                      style: const TextStyle(fontSize: 11, color: Colors.white60),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: wallet.isRefreshing ? null : () => wallet.refreshRates(),
+                    child: wallet.isRefreshing
+                        ? const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 4),
+                            child: SizedBox(
+                              width: 11,
+                              height: 11,
+                              child: CircularProgressIndicator(strokeWidth: 1.5),
+                            ),
+                          )
+                        : const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 4),
+                            child: Icon(
+                              Icons.refresh,
+                              size: 13,
+                              color: Colors.white54,
+                            ),
+                          ),
+                  ),
+                  const SizedBox(width: 8),
+                  Flexible(
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        '1 USD = ${wallet.brhRate.toStringAsFixed(4)} HTG',
+                        style: const TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'monospace',
+                          color: Color(0xFFFCC419),
                         ),
                       ),
-              ),
-              const SizedBox(width: 8),
-              Flexible(
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    '1 USD = ${wallet.brhRate.toStringAsFixed(4)} HTG',
-                    style: const TextStyle(
-                      fontSize: 11,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'monospace',
-                      color: Color(0xFFFCC419),
                     ),
                   ),
-                ),
+                ],
+              ),
+              const SizedBox(height: 6),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Expanded so the provenance line ellipsises rather than pushing
+                  // the verification link off the card.
+                  Expanded(
+                    child: Text(
+                      wallet.rateStatusLabel,
+                      style: const TextStyle(fontSize: 10, color: Colors.white38),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  InkWell(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const RatesScreen()),
+                    ),
+                    borderRadius: BorderRadius.circular(4),
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                      child: Text(
+                        'Verify official rates →',
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: Color(0xFFFCC419),
+                          fontWeight: FontWeight.w600,
+                          decoration: TextDecoration.underline,
+                          decorationColor: Color(0xFFFCC419),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
-          const SizedBox(height: 6),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              // Expanded so the provenance line ellipsises rather than pushing
-              // the verification link off the card.
-              Expanded(
-                child: Text(
-                  wallet.rateStatusLabel,
-                  style: const TextStyle(fontSize: 10, color: Colors.white38),
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              const SizedBox(width: 8),
-              InkWell(
-                onTap: () => _openBrhSource(context),
-                borderRadius: BorderRadius.circular(4),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                  child: Text(
-                    'Verify official rates →',
-                    style: TextStyle(
-                      fontSize: 10,
-                      color: Color(0xFFFCC419),
-                      fontWeight: FontWeight.w600,
-                      decoration: TextDecoration.underline,
-                      decorationColor: Color(0xFFFCC419),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
+        ),
       ),
     );
   }

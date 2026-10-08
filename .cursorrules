@@ -28,3 +28,9 @@
    - Check rendered layout at 360px width (Samsung Galaxy A-series standard).
    - Ensure zero horizontal scrolling on body.
    - Ensure primary Call-To-Action (CTA) and rate values appear above the fold.
+
+## Newsroom & Content Rules (/news)
+- **Featured Window Duration**: Featured items / press release rotation slides only remain active in the featured section for **48 hours** after publication (`data-published`).
+- **Post-Expiration Grid**: Once an item exceeds 48 hours, it must NOT be kept pinned in the featured section. It returns exclusively to the regular chronological post grid (`Milestones & Development`).
+- **Featured Section Visibility**: If no posts were published within the last 48 hours, the `#featured-section` is hidden entirely (`hidden`), displaying only the hero and regular post grid.
+
