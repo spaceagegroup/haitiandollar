@@ -289,6 +289,29 @@ void main() {
       expect(materialApp.themeMode, ThemeMode.light);
     });
 
+    testWidgets('header sun/moon button toggles outdoor sun mode', (tester) async {
+      final wallet = WalletState(initialOutdoor: false, initialLocale: 'ht');
+      await tester.pumpWidget(
+        ChangeNotifierProvider.value(
+          value: wallet,
+          child: const HtdApp(),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // In Night mode, button displays sun icon with tooltip Mòd Solèy
+      expect(find.byIcon(Icons.wb_sunny_outlined), findsOneWidget);
+      expect(find.byTooltip('Mòd Solèy'), findsOneWidget);
+
+      await tester.tap(find.byIcon(Icons.wb_sunny_outlined));
+      await tester.pumpAndSettle();
+
+      expect(wallet.isOutdoorMode, isTrue);
+      // In Sun mode, button displays moon icon with tooltip Mòd Lannwit
+      expect(find.byIcon(Icons.nightlight_round), findsOneWidget);
+      expect(find.byTooltip('Mòd Lannwit'), findsOneWidget);
+    });
+
     testWidgets('switching mode shows the agent terminal', (tester) async {
       tester.view.physicalSize = const Size(1080, 1920);
       tester.view.devicePixelRatio = 1.0;

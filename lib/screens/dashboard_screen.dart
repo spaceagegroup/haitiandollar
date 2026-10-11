@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -118,7 +119,15 @@ class DashboardScreen extends StatelessWidget {
               ),
               onScan: () => _scanAndPay(context),
               currentLocale: loc,
-              onSelectLocale: (lang) => wallet.setLocale(lang),
+              onSelectLocale: (lang) {
+                if (lang == '__debug_toggle_theme__') {
+                  wallet.toggleOutdoorMode();
+                } else {
+                  wallet.setLocale(lang);
+                }
+              },
+              isOutdoorMode: wallet.isOutdoorMode,
+              onToggleOutdoorMode: () => wallet.toggleOutdoorMode(),
             ),
             const SizedBox(height: 18),
             _BalanceCard(
@@ -194,12 +203,16 @@ class _Header extends StatelessWidget {
     required this.onScan,
     required this.currentLocale,
     required this.onSelectLocale,
+    required this.isOutdoorMode,
+    required this.onToggleOutdoorMode,
   });
 
   final VoidCallback onSwitchShell;
   final VoidCallback onScan;
   final String currentLocale;
   final ValueChanged<String> onSelectLocale;
+  final bool isOutdoorMode;
+  final VoidCallback onToggleOutdoorMode;
 
   @override
   Widget build(BuildContext context) {
@@ -245,6 +258,16 @@ class _Header extends StatelessWidget {
             ],
           ),
         ),
+        IconButton(
+          icon: Icon(
+            isOutdoorMode ? Icons.nightlight_round : Icons.wb_sunny_outlined,
+            size: 20,
+          ),
+          tooltip: isOutdoorMode
+              ? AppStrings.get('mode_night', currentLocale)
+              : AppStrings.get('mode_sun', currentLocale),
+          onPressed: onToggleOutdoorMode,
+        ),
         PopupMenuButton<String>(
           tooltip: 'Chanje Lang / Language',
           initialValue: currentLocale,
@@ -277,10 +300,20 @@ class _Header extends StatelessWidget {
               ],
             ),
           ),
-          itemBuilder: (_) => const [
-            PopupMenuItem(value: 'ht', child: Text('🇭🇹 Kreyòl (Ayisyen)')),
-            PopupMenuItem(value: 'fr', child: Text('🇫🇷 Français')),
-            PopupMenuItem(value: 'en', child: Text('🇺🇸 English')),
+          itemBuilder: (_) => [
+            const PopupMenuItem(value: 'ht', child: Text('🇭🇹 Kreyòl (Ayisyen)')),
+            const PopupMenuItem(value: 'fr', child: Text('🇫🇷 Français')),
+            const PopupMenuItem(value: 'en', child: Text('🇺🇸 English')),
+            if (kDebugMode) ...[
+              const PopupMenuDivider(),
+              PopupMenuItem(
+                value: '__debug_toggle_theme__',
+                child: Text(
+                  isOutdoorMode ? '🌙 Force Night Mode' : '☀️ Force Sun Mode',
+                  style: const TextStyle(fontSize: 12),
+                ),
+              ),
+            ],
           ],
         ),
         IconButton(

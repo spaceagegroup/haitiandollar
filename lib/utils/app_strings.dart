@@ -18,6 +18,8 @@ class AppStrings {
       'security_stealth': 'Kache Balans (Sekirite)',
       'consumer_mode': 'Pòtfolyo Konsomatè',
       'agent_mode': 'Tèminal Machann',
+      'mode_sun': 'Mòd Solèy',
+      'mode_night': 'Mòd Lannwit',
     },
     'fr': {
       'app_title': 'Dollar Haïtien (HTD)',
@@ -37,6 +39,8 @@ class AppStrings {
       'security_stealth': 'Masquer Solde (Sécurité)',
       'consumer_mode': 'Portefeuille Client',
       'agent_mode': 'Terminal Marchand',
+      'mode_sun': 'Mode Soleil',
+      'mode_night': 'Mode Nuit',
     },
     'en': {
       'app_title': 'Haitian Dollar (HTD)',
@@ -56,6 +60,8 @@ class AppStrings {
       'security_stealth': 'Hide Balance (Security)',
       'consumer_mode': 'Consumer Wallet',
       'agent_mode': 'Merchant Terminal',
+      'mode_sun': 'Sun Mode',
+      'mode_night': 'Night Mode',
     },
   };
 
