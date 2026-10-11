@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:haitiandollar/services/pin_auth_service.dart';
 import 'package:haitiandollar/theme/htd_theme.dart';
 import 'package:haitiandollar/utils/app_strings.dart';
@@ -227,7 +226,6 @@ class _PinKeypadSheetState extends State<PinKeypadSheet> {
     final bg = isSun ? kSunCardSurface : const Color(0xFF141414);
     final border = isSun ? kSunBorder : const Color(0xFF2A2A2A);
     final textPrimary = isSun ? kSunHeaderText : Colors.white;
-    final textSecondary = isSun ? kSunSecondaryText : Colors.white60;
 
     String title;
     if (widget.titleOverride != null) {

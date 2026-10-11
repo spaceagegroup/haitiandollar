@@ -51,7 +51,7 @@ class PinAuthService {
   int _failCount = 0;
   DateTime? _lockoutUntil;
 
-  bool _biometricsAvailable = true;
+  bool biometricsAvailable = true;
   Future<bool> Function()? biometricAuthHandler;
 
   bool get isPinSet => _pinHash != null && _pinSalt != null;
@@ -68,9 +68,6 @@ class PinAuthService {
     final diff = _lockoutUntil!.difference(DateTime.now()).inSeconds;
     return diff > 0 ? diff : 0;
   }
-
-  bool get biometricsAvailable => _biometricsAvailable;
-  set biometricsAvailable(bool value) => _biometricsAvailable = value;
 
   Future<void> _hydrate() async {
     try {
