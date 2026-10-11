@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'models/wallet_state.dart';
 import 'screens/dashboard_screen.dart';
 import 'screens/kiosk_screen.dart';
+import 'theme/htd_theme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -71,26 +72,8 @@ class _HtdAppState extends State<HtdApp> with WidgetsBindingObserver {
       title: 'Haitian Dollar Wallet',
       debugShowCheckedModeBanner: false,
       themeMode: isOutdoor ? ThemeMode.light : ThemeMode.dark,
-      theme: ThemeData(
-        brightness: Brightness.light,
-        scaffoldBackgroundColor: const Color(0xFFFFFFFF),
-        fontFamily: 'sans-serif',
-        colorScheme: const ColorScheme.light(
-          primary: Color(0xFFFCC419),
-          secondary: Color(0xFFE03131),
-          surface: Color(0xFFFFFFFF),
-        ),
-      ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: const Color(0xFF0A0A0A),
-        fontFamily: 'sans-serif',
-        colorScheme: const ColorScheme.dark(
-          primary: Color(0xFFFCC419),
-          secondary: Color(0xFFE03131),
-          surface: Color(0xFF141414),
-        ),
-      ),
+      theme: buildSunTheme(),
+      darkTheme: buildNightTheme(),
       home: mode == AppMode.consumer
           ? const DashboardScreen()
           : const KioskScreen(),
