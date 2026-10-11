@@ -68,15 +68,34 @@ class _HtdAppState extends State<HtdApp> with WidgetsBindingObserver {
     final mode = context.select<WalletState, AppMode>((w) => w.mode);
     final isOutdoor = context.select<WalletState, bool>((w) => w.isOutdoorMode);
 
-    return MaterialApp(
-      title: 'Haitian Dollar Wallet',
-      debugShowCheckedModeBanner: false,
-      themeMode: isOutdoor ? ThemeMode.light : ThemeMode.dark,
-      theme: buildSunTheme(),
-      darkTheme: buildNightTheme(),
-      home: mode == AppMode.consumer
-          ? const DashboardScreen()
-          : const KioskScreen(),
+    final overlayStyle = isOutdoor
+        ? SystemUiOverlayStyle.dark.copyWith(
+            statusBarColor: Colors.transparent,
+            statusBarIconBrightness: Brightness.dark,
+            systemNavigationBarColor: Colors.white,
+            systemNavigationBarIconBrightness: Brightness.dark,
+          )
+        : SystemUiOverlayStyle.light.copyWith(
+            statusBarColor: Colors.transparent,
+            statusBarIconBrightness: Brightness.light,
+            systemNavigationBarColor: const Color(0xFF0A0A0A),
+            systemNavigationBarIconBrightness: Brightness.light,
+          );
+
+    SystemChrome.setSystemUIOverlayStyle(overlayStyle);
+
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: overlayStyle,
+      child: MaterialApp(
+        title: 'Haitian Dollar Wallet',
+        debugShowCheckedModeBanner: false,
+        themeMode: isOutdoor ? ThemeMode.light : ThemeMode.dark,
+        theme: buildSunTheme(),
+        darkTheme: buildNightTheme(),
+        home: mode == AppMode.consumer
+            ? const DashboardScreen()
+            : const KioskScreen(),
+      ),
     );
   }
 }
