@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import 'package:haitiandollar/main.dart';
 import 'package:haitiandollar/models/wallet_state.dart';
+import 'package:haitiandollar/services/settlement_sound.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -394,6 +395,75 @@ void main() {
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull);
     });
+
+    test('settlement chime fires on successful buy, sell, and send', () {
+      int chimes = 0;
+      SettlementSound.instance.onPlay = () => chimes++;
+      SettlementSound.instance.playOverride = () async {};
+      addTearDown(() {
+        SettlementSound.instance.onPlay = null;
+        SettlementSound.instance.playOverride = null;
+      });
+
+      final wallet = WalletState(openingBalance: 100);
+      wallet.applyBuy(50);
+      expect(chimes, 1);
+
+      wallet.applySell(htdAmount: 20, msisdn: '50937123456');
+      expect(chimes, 2);
+
+      wallet.applySend(htdAmount: 10, recipient: '50938123456');
+      expect(chimes, 3);
+    });
+
+    test('chime respects isAudioEnabled toggle in consumer mode', () {
+      int chimes = 0;
+      SettlementSound.instance.onPlay = () => chimes++;
+      SettlementSound.instance.playOverride = () async {};
+      addTearDown(() {
+        SettlementSound.instance.onPlay = null;
+        SettlementSound.instance.playOverride = null;
+      });
+
+      final wallet = WalletState(openingBalance: 100, initialAudio: false);
+      expect(wallet.isAudioEnabled, isFalse);
+
+      wallet.applyBuy(25);
+      expect(chimes, 0);
+
+      wallet.setAudioEnabled(true);
+      expect(wallet.isAudioEnabled, isTrue);
+
+      wallet.applyBuy(25);
+      expect(chimes, 1);
+    });
+
+    test('chime is always active in Kiosk mode even if audio is disabled in consumer mode', () {
+      int chimes = 0;
+      SettlementSound.instance.onPlay = () => chimes++;
+      SettlementSound.instance.playOverride = () async {};
+      addTearDown(() {
+        SettlementSound.instance.onPlay = null;
+        SettlementSound.instance.playOverride = null;
+      });
+
+      final wallet = WalletState(openingBalance: 100, initialAudio: false);
+      wallet.setMode(AppMode.kiosk);
+
+      wallet.applyMerchantCharge(htdAmount: 50);
+      expect(chimes, 1);
+    });
+
+    test('audio setting persists to SharedPreferences', () async {
+      final wallet = WalletState(openingBalance: 100);
+      wallet.toggleAudio();
+      expect(wallet.isAudioEnabled, isFalse);
+      await wallet.persist();
+
+      final prefs = await SharedPreferences.getInstance();
+      expect(prefs.getBool('htd_audio_enabled_v1'), isFalse);
+    });
   });
 }
+
 

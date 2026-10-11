@@ -7,6 +7,7 @@ import 'package:flutter/services.dart' show HapticFeedback, rootBundle;
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:haitiandollar/services/settlement_sound.dart';
 
 /// Which shell the application is currently presenting.
 enum AppMode { consumer, kiosk }
@@ -260,6 +261,7 @@ class WalletState extends ChangeNotifier {
   static const String _kPrefLocale = 'htd_user_locale_v1';
   static const String _kPrefStealth = 'htd_stealth_mode_v1';
   static const String _kPrefOutdoorTheme = 'htd_outdoor_theme_v1';
+  static const String _kPrefAudio = 'htd_audio_enabled_v1';
 
   WalletState({
     double openingBalance = 128.50,
@@ -267,10 +269,12 @@ class WalletState extends ChangeNotifier {
     String? initialLocale,
     bool? initialMasked,
     bool? initialOutdoor,
+    bool? initialAudio,
   }) : _balance = openingBalance,
        _currentLocale = initialLocale ?? 'ht',
        _isBalanceMasked = initialMasked ?? true,
        _isOutdoorMode = initialOutdoor ?? false,
+       _isAudioEnabled = initialAudio ?? true,
        _htgPerUsd = kOfflineBaselineHtgPerUsd {
     _hydrateState();
   }
@@ -323,6 +327,7 @@ class WalletState extends ChangeNotifier {
   String _currentLocale = 'ht'; // Kreyòl Ayisyen default
   bool _isBalanceMasked = true; // Street security default
   bool _isOutdoorMode = false; // Sun Mode / Mòd Solèy vs Night Mode
+  bool _isAudioEnabled = true; // Audio chime (machann soundbox)
   Timer? _unmaskTimer;
 
   // ---------------------------------------------------------------- persistence
@@ -341,6 +346,9 @@ class WalletState extends ChangeNotifier {
       }
       if (prefs.containsKey(_kPrefOutdoorTheme)) {
         _isOutdoorMode = prefs.getBool(_kPrefOutdoorTheme) ?? false;
+      }
+      if (prefs.containsKey(_kPrefAudio)) {
+        _isAudioEnabled = prefs.getBool(_kPrefAudio) ?? true;
       }
       if (prefs.containsKey(_kPrefLedger)) {
         final raw = prefs.getString(_kPrefLedger);
@@ -375,6 +383,7 @@ class WalletState extends ChangeNotifier {
       await prefs.setString(_kPrefLocale, _currentLocale);
       await prefs.setBool(_kPrefStealth, _isBalanceMasked);
       await prefs.setBool(_kPrefOutdoorTheme, _isOutdoorMode);
+      await prefs.setBool(_kPrefAudio, _isAudioEnabled);
     } catch (e) {
       debugPrint('SharedPreferences persist error: $e');
     }
@@ -398,6 +407,31 @@ class WalletState extends ChangeNotifier {
     _isOutdoorMode = value;
     _safeNotify();
     _persist();
+  }
+
+  // ---------------------------------------------------------------- audio chime
+
+  bool get isAudioEnabled => _isAudioEnabled;
+
+  void toggleAudio() {
+    _isAudioEnabled = !_isAudioEnabled;
+    _safeNotify();
+    _persist();
+  }
+
+  void setAudioEnabled(bool value) {
+    if (_isAudioEnabled == value) return;
+    _isAudioEnabled = value;
+    _safeNotify();
+    _persist();
+  }
+
+  void _playSettlementFeedback() {
+    triggerMerchantHaptic();
+    // In Kiosk mode: always on (machann soundbox). In Consumer mode: respects setting.
+    if (_mode == AppMode.kiosk || _isAudioEnabled) {
+      SettlementSound.instance.play();
+    }
   }
 
   // ---------------------------------------------------------------- street privacy
@@ -932,7 +966,7 @@ class WalletState extends ChangeNotifier {
     );
     _ledger.insert(0, receipt);
     _safeNotify();
-    triggerMerchantHaptic();
+    _playSettlementFeedback();
     _persist();
     return receipt;
   }
@@ -945,7 +979,7 @@ class WalletState extends ChangeNotifier {
       _balance -= receipt.htdAmount;
     }
     _ledger.insert(0, receipt);
-    triggerMerchantHaptic();
+    _playSettlementFeedback();
     _safeNotify();
     await _persist();
   }
