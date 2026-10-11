@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:haitiandollar/services/settlement_sound.dart';
+import 'package:haitiandollar/services/pin_auth_service.dart';
 
 /// Which shell the application is currently presenting.
 enum AppMode { consumer, kiosk }
@@ -270,13 +271,31 @@ class WalletState extends ChangeNotifier {
     bool? initialMasked,
     bool? initialOutdoor,
     bool? initialAudio,
+    PinAuthService? pinAuthService,
   }) : _balance = openingBalance,
        _currentLocale = initialLocale ?? 'ht',
        _isBalanceMasked = initialMasked ?? true,
        _isOutdoorMode = initialOutdoor ?? false,
        _isAudioEnabled = initialAudio ?? true,
+       pinAuth = pinAuthService ?? PinAuthService(),
        _htgPerUsd = kOfflineBaselineHtgPerUsd {
     _hydrateState();
+  }
+
+  /// Local PIN security & authentication service.
+  final PinAuthService pinAuth;
+
+  bool _isDuressActive = false;
+  bool get isDuressActive => _isDuressActive;
+
+  void activateDuressMode() {
+    _isDuressActive = true;
+    _safeNotify();
+  }
+
+  void clearDuressMode() {
+    _isDuressActive = false;
+    _safeNotify();
   }
 
   /// Active on-chain wallet address for this terminal or user.
@@ -482,7 +501,7 @@ class WalletState extends ChangeNotifier {
   }
 
   // Invariant Purchasing Power
-  double get balanceInHtg => _balance * kHtgPerHtd;
+  double get balanceInHtg => balance * kHtgPerHtd;
   double get balanceInUsd => _htgPerUsd > 0 ? balanceInHtg / _htgPerUsd : 0.0;
 
   // ---------------------------------------------------------------- shell
@@ -515,8 +534,8 @@ class WalletState extends ChangeNotifier {
 
   // ------------------------------------------------------------- balances
 
-  /// Spendable HTD balance.
-  double get balance => _balance;
+  /// Spendable HTD balance (returns decoy 25.0 HTD under duress).
+  double get balance => _isDuressActive ? 25.0 : _balance;
 
   /// Newest-first transaction history.
   List<TxnReceipt> get ledger => List<TxnReceipt>.unmodifiable(_ledger);

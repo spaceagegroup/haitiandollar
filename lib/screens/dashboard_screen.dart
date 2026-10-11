@@ -11,6 +11,8 @@ import '../widgets/sell_sheet.dart';
 import '../widgets/send_sheet.dart';
 
 
+import '../widgets/pin_keypad_sheet.dart';
+
 import 'scanner_screen.dart';
 import 'rates_screen.dart';
 import '../theme/htd_theme.dart';
@@ -23,6 +25,20 @@ import '../utils/app_strings.dart';
 /// sheet has closed), then presents the shared receipt modal.
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
+
+  Future<bool> _requireOutflowAuth(BuildContext context) async {
+    final wallet = context.read<WalletState>();
+    if (!wallet.pinAuth.isPinSet) {
+      return true; // Progressive security: guest mode allows outflow until PIN is set
+    }
+    final authenticated = await PinKeypadSheet.show(
+      context,
+      authService: wallet.pinAuth,
+      locale: wallet.currentLocale,
+      onDuressDetected: (_) => wallet.activateDuressMode(),
+    );
+    return authenticated == true;
+  }
 
   Future<void> _buy(BuildContext context) async {
     final wallet = context.read<WalletState>();
@@ -37,6 +53,7 @@ class DashboardScreen extends StatelessWidget {
     final wallet = context.read<WalletState>();
     final result = await showSellSheet(context, maxBalance: wallet.balance);
     if (result == null || !context.mounted) return;
+    if (!await _requireOutflowAuth(context) || !context.mounted) return;
     final receipt = wallet.applySell(
       htdAmount: result.htdAmount,
       msisdn: result.msisdn,
@@ -50,6 +67,7 @@ class DashboardScreen extends StatelessWidget {
     final wallet = context.read<WalletState>();
     final result = await showSendSheet(context, maxBalance: wallet.balance);
     if (result == null || !context.mounted) return;
+    if (!await _requireOutflowAuth(context) || !context.mounted) return;
     final receipt = wallet.applySend(
       htdAmount: result.htdAmount,
       recipient: result.recipient,
@@ -62,6 +80,7 @@ class DashboardScreen extends StatelessWidget {
     final wallet = context.read<WalletState>();
     final result = await showLoanSheet(context, maxBalance: wallet.balance);
     if (result == null || !context.mounted) return;
+    if (!await _requireOutflowAuth(context) || !context.mounted) return;
     final receipt = wallet.applyLoanRepayment(
       htdAmount: result.htdAmount,
       mfiName: result.mfiName,
@@ -86,6 +105,7 @@ class DashboardScreen extends StatelessWidget {
       initialPayload: payload,
     );
     if (result == null || !context.mounted) return;
+    if (!await _requireOutflowAuth(context) || !context.mounted) return;
     final receipt = wallet.applySend(
       htdAmount: result.htdAmount,
       recipient: result.recipient,
@@ -125,6 +145,13 @@ class DashboardScreen extends StatelessWidget {
               onSelectLocale: (lang) {
                 if (lang == '__debug_toggle_theme__') {
                   wallet.toggleOutdoorMode();
+                } else if (lang == '__manage_pin__') {
+                  PinKeypadSheet.show(
+                    context,
+                    authService: wallet.pinAuth,
+                    locale: loc,
+                    isSettingNewPin: true,
+                  );
                 } else {
                   wallet.setLocale(lang);
                 }
@@ -323,6 +350,17 @@ class _Header extends StatelessWidget {
             const PopupMenuItem(value: 'ht', child: Text('🇭🇹 Kreyòl (Ayisyen)')),
             const PopupMenuItem(value: 'fr', child: Text('🇫🇷 Français')),
             const PopupMenuItem(value: 'en', child: Text('🇺🇸 English')),
+            const PopupMenuDivider(),
+            const PopupMenuItem(
+              value: '__manage_pin__',
+              child: Row(
+                children: [
+                  Icon(Icons.lock_outline, size: 16),
+                  SizedBox(width: 8),
+                  Text('Kòd Sekrè PIN', style: TextStyle(fontSize: 12)),
+                ],
+              ),
+            ),
             if (kDebugMode) ...[
               const PopupMenuDivider(),
               PopupMenuItem(
