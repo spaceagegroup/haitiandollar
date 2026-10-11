@@ -13,6 +13,7 @@ import '../widgets/send_sheet.dart';
 
 import 'scanner_screen.dart';
 import 'rates_screen.dart';
+import '../theme/htd_theme.dart';
 import '../utils/app_strings.dart';
 
 /// Primary consumer shell.
@@ -99,6 +100,8 @@ class DashboardScreen extends StatelessWidget {
     final mode = wallet.mode;
     final loc = wallet.currentLocale;
 
+    final isSun = Theme.of(context).brightness == Brightness.light;
+
     return Scaffold(
       body: SafeArea(
         child: Listener(
@@ -107,8 +110,8 @@ class DashboardScreen extends StatelessWidget {
           onPointerMove: (_) => wallet.resetUnmaskTimer(),
           child: RefreshIndicator(
             onRefresh: () => wallet.refreshRates(),
-            color: const Color(0xFFFCC419),
-            backgroundColor: const Color(0xFF141414),
+            color: isSun ? kSunYellowText : const Color(0xFFFCC419),
+            backgroundColor: isSun ? kSunCardSurface : const Color(0xFF141414),
             child: ListView(
             physics: const AlwaysScrollableScrollPhysics(),
             padding: const EdgeInsets.fromLTRB(16, 10, 16, 28),
@@ -216,6 +219,8 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isSun = Theme.of(context).brightness == Brightness.light;
+
     return Row(
       children: [
         Container(
@@ -238,7 +243,7 @@ class _Header extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 11),
-        const Expanded(
+        Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -248,12 +253,16 @@ class _Header extends StatelessWidget {
                   fontSize: 13.5,
                   fontWeight: FontWeight.w900,
                   letterSpacing: 1.6,
+                  color: isSun ? kSunHeaderText : Colors.white,
                 ),
               ),
-              SizedBox(height: 2),
+              const SizedBox(height: 2),
               Text(
                 'Digital settlement infrastructure for Haiti',
-                style: TextStyle(fontSize: 10, color: Colors.white38),
+                style: TextStyle(
+                  fontSize: 10,
+                  color: isSun ? kSunSecondaryText : Colors.white38,
+                ),
               ),
             ],
           ),
@@ -262,6 +271,7 @@ class _Header extends StatelessWidget {
           icon: Icon(
             isOutdoorMode ? Icons.nightlight_round : Icons.wb_sunny_outlined,
             size: 20,
+            color: isSun ? kSunHeaderText : Colors.white,
           ),
           tooltip: isOutdoorMode
               ? AppStrings.get('mode_night', currentLocale)
@@ -272,31 +282,40 @@ class _Header extends StatelessWidget {
           tooltip: 'Chanje Lang / Language',
           initialValue: currentLocale,
           onSelected: onSelectLocale,
-          color: const Color(0xFF1E1E1E),
+          color: isSun ? kSunCardSurface : const Color(0xFF1E1E1E),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
-            side: const BorderSide(color: Colors.white12),
+            side: BorderSide(color: isSun ? kSunBorder : Colors.white12),
           ),
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
             margin: const EdgeInsets.only(right: 4),
             decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.08),
+              color: isSun
+                  ? kSunCardSurface
+                  : Colors.white.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: Colors.white.withValues(alpha: 0.12)),
+              border: Border.all(
+                color: isSun ? kSunBorder : Colors.white.withValues(alpha: 0.12),
+                width: isSun ? 1.5 : 1.0,
+              ),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   currentLocale.toUpperCase(),
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 11,
                     fontWeight: FontWeight.w800,
-                    color: Color(0xFFFCC419),
+                    color: isSun ? kSunYellowText : const Color(0xFFFCC419),
                   ),
                 ),
-                const Icon(Icons.arrow_drop_down, size: 14, color: Colors.white70),
+                Icon(
+                  Icons.arrow_drop_down,
+                  size: 14,
+                  color: isSun ? kSunHeaderText : Colors.white70,
+                ),
               ],
             ),
           ),
@@ -319,16 +338,20 @@ class _Header extends StatelessWidget {
         IconButton(
           onPressed: onScan,
           tooltip: 'Scan QR to pay',
-          icon: const Icon(
+          icon: Icon(
             Icons.qr_code_scanner,
             size: 21,
-            color: Color(0xFFFCC419),
+            color: isSun ? kSunYellowText : const Color(0xFFFCC419),
           ),
         ),
         IconButton(
           onPressed: onSwitchShell,
           tooltip: 'Agent terminal',
-          icon: const Icon(Icons.storefront_outlined, size: 20),
+          icon: Icon(
+            Icons.storefront_outlined,
+            size: 20,
+            color: isSun ? kSunHeaderText : Colors.white,
+          ),
         ),
       ],
     );
@@ -354,6 +377,8 @@ class _BalanceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isSun = Theme.of(context).brightness == Brightness.light;
+
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
@@ -363,6 +388,7 @@ class _BalanceCard extends StatelessWidget {
           colors: <Color>[Color(0xFFFCC419), Color(0xFFE8A600)],
         ),
         borderRadius: BorderRadius.circular(18),
+        border: isSun ? Border.all(color: kSunBorder, width: 1.5) : null,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -372,19 +398,19 @@ class _BalanceCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const Icon(
+                  Icon(
                     Icons.account_balance_wallet_outlined,
                     size: 14,
-                    color: Colors.black54,
+                    color: isSun ? kSunHeaderText : Colors.black54,
                   ),
                   const SizedBox(width: 6),
                   Text(
                     AppStrings.get('balance_title', locale),
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.w800,
                       letterSpacing: 1.1,
-                      color: Colors.black54,
+                      color: isSun ? kSunHeaderText : Colors.black54,
                     ),
                   ),
                 ],
@@ -399,15 +425,15 @@ class _BalanceCard extends StatelessWidget {
                       Icon(
                         isMasked ? Icons.visibility_off : Icons.visibility,
                         size: 16,
-                        color: Colors.black87,
+                        color: isSun ? kSunHeaderText : Colors.black87,
                       ),
                       const SizedBox(width: 4),
                       Text(
                         isMasked ? 'Kache' : 'Vizib',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 10,
                           fontWeight: FontWeight.w800,
-                          color: Colors.black87,
+                          color: isSun ? kSunHeaderText : Colors.black87,
                         ),
                       ),
                     ],
@@ -419,10 +445,10 @@ class _BalanceCard extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             isMasked ? 'H\$ ••••••' : formatHtd(balance),
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 33,
               fontWeight: FontWeight.w900,
-              color: Colors.black,
+              color: isSun ? kSunHeaderText : Colors.black,
               letterSpacing: -1,
             ),
           ),
@@ -431,10 +457,10 @@ class _BalanceCard extends StatelessWidget {
             isMasked
                 ? '•••••• HTG   ·   •••• USD'
                 : '≈ ${formatAmount(htgValue)} HTG   ·   ≈ \$${usdValue.toStringAsFixed(2)} USD',
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
-              color: Colors.black87,
+              color: isSun ? kSunBodyText : Colors.black87,
             ),
           ),
           const SizedBox(height: 14),
@@ -460,18 +486,23 @@ class _Chip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isSun = Theme.of(context).brightness == Brightness.light;
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
       decoration: BoxDecoration(
-        color: Colors.black.withValues(alpha: 0.10),
+        color: isSun
+            ? Colors.white.withValues(alpha: 0.60)
+            : Colors.black.withValues(alpha: 0.10),
         borderRadius: BorderRadius.circular(20),
+        border: isSun ? Border.all(color: kSunBorder, width: 1.0) : null,
       ),
       child: Text(
         text,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 10,
           fontWeight: FontWeight.w700,
-          color: Colors.black87,
+          color: isSun ? kSunHeaderText : Colors.black87,
         ),
       ),
     );
@@ -486,6 +517,8 @@ class _RateBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isSun = Theme.of(context).brightness == Brightness.light;
+
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -497,23 +530,32 @@ class _RateBar extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
           decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.03),
+            color: isSun ? kSunCardSurface : Colors.white.withValues(alpha: 0.03),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Colors.white.withValues(alpha: 0.10)),
+            border: Border.all(
+              color: isSun ? kSunBorder : Colors.white.withValues(alpha: 0.10),
+              width: isSun ? 1.5 : 1.0,
+            ),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
-                  const CircleAvatar(radius: 4, backgroundColor: Color(0xFF22C55E)),
+                  CircleAvatar(
+                    radius: 4,
+                    backgroundColor: isSun ? kSunSuccess : const Color(0xFF22C55E),
+                  ),
                   const SizedBox(width: 8),
                   // Expanded so a larger accessibility font scale ellipsises the
                   // label instead of overflowing the card.
                   Expanded(
                     child: Text(
                       wallet.rateCardTitle,
-                      style: const TextStyle(fontSize: 11, color: Colors.white60),
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: isSun ? kSunBodyText : Colors.white60,
+                      ),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -528,12 +570,12 @@ class _RateBar extends StatelessWidget {
                               child: CircularProgressIndicator(strokeWidth: 1.5),
                             ),
                           )
-                        : const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 4),
+                        : Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 4),
                             child: Icon(
                               Icons.refresh,
                               size: 13,
-                              color: Colors.white54,
+                              color: isSun ? kSunSecondaryText : Colors.white54,
                             ),
                           ),
                   ),
@@ -544,11 +586,11 @@ class _RateBar extends StatelessWidget {
                       alignment: Alignment.centerRight,
                       child: Text(
                         '1 USD = ${wallet.brhRate.toStringAsFixed(4)} HTG',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'monospace',
-                          color: Color(0xFFFCC419),
+                          color: isSun ? kSunYellowText : const Color(0xFFFCC419),
                         ),
                       ),
                     ),
@@ -564,7 +606,10 @@ class _RateBar extends StatelessWidget {
                   Expanded(
                     child: Text(
                       wallet.rateStatusLabel,
-                      style: const TextStyle(fontSize: 10, color: Colors.white38),
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: isSun ? kSunSecondaryText : Colors.white38,
+                      ),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -575,16 +620,16 @@ class _RateBar extends StatelessWidget {
                       MaterialPageRoute(builder: (_) => const RatesScreen()),
                     ),
                     borderRadius: BorderRadius.circular(4),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
                       child: Text(
                         'Verify official rates →',
                         style: TextStyle(
                           fontSize: 10,
-                          color: Color(0xFFFCC419),
+                          color: isSun ? kSunYellowText : const Color(0xFFFCC419),
                           fontWeight: FontWeight.w600,
                           decoration: TextDecoration.underline,
-                          decorationColor: Color(0xFFFCC419),
+                          decorationColor: isSun ? kSunYellowText : const Color(0xFFFCC419),
                         ),
                       ),
                     ),
@@ -614,8 +659,10 @@ class _Action extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isSun = Theme.of(context).brightness == Brightness.light;
+
     return Material(
-      color: const Color(0xFF141414),
+      color: isSun ? kSunCardSurface : const Color(0xFF141414),
       borderRadius: BorderRadius.circular(14),
       child: InkWell(
         borderRadius: BorderRadius.circular(14),
@@ -624,7 +671,10 @@ class _Action extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: Colors.white.withValues(alpha: 0.07)),
+            border: Border.all(
+              color: isSun ? kSunBorder : Colors.white.withValues(alpha: 0.07),
+              width: isSun ? 1.5 : 1.0,
+            ),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -634,22 +684,33 @@ class _Action extends StatelessWidget {
                 height: 34,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: const Color(0xFFFCC419).withValues(alpha: 0.12),
+                  color: isSun
+                      ? kBrandYellow.withValues(alpha: 0.22)
+                      : const Color(0xFFFCC419).withValues(alpha: 0.12),
+                  border: isSun ? Border.all(color: kSunBorder, width: 1.0) : null,
                 ),
-                child: Icon(icon, size: 17, color: const Color(0xFFFCC419)),
+                child: Icon(
+                  icon,
+                  size: 17,
+                  color: isSun ? kSunYellowText : const Color(0xFFFCC419),
+                ),
               ),
               const SizedBox(height: 10),
               Text(
                 label,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w700,
+                  color: isSun ? kSunHeaderText : Colors.white,
                 ),
               ),
               const SizedBox(height: 2),
               Text(
                 detail,
-                style: const TextStyle(fontSize: 10, color: Colors.white38),
+                style: TextStyle(
+                  fontSize: 10,
+                  color: isSun ? kSunSecondaryText : Colors.white38,
+                ),
               ),
             ],
           ),
@@ -667,6 +728,8 @@ class _Activity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isSun = Theme.of(context).brightness == Brightness.light;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -675,13 +738,20 @@ class _Activity extends StatelessWidget {
           children: [
             Text(
               AppStrings.get('recent_txns', locale),
-              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w800,
+                color: isSun ? kSunHeaderText : Colors.white,
+              ),
             ),
             Text(
               ledger.isEmpty
                   ? 'no settlements yet'
                   : '${ledger.length} settlement${ledger.length == 1 ? '' : 's'}',
-              style: const TextStyle(fontSize: 10.5, color: Colors.white38),
+              style: TextStyle(
+                fontSize: 10.5,
+                color: isSun ? kSunSecondaryText : Colors.white38,
+              ),
             ),
           ],
         ),
@@ -691,23 +761,28 @@ class _Activity extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 26, horizontal: 16),
             decoration: BoxDecoration(
+              color: isSun ? kSunCardSurface : Colors.transparent,
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: Colors.white.withValues(alpha: 0.08),
+                color: isSun ? kSunBorder : Colors.white.withValues(alpha: 0.08),
+                width: isSun ? 1.5 : 1.0,
                 style: BorderStyle.solid,
               ),
             ),
             child: Column(
               children: [
-                const Icon(
+                Icon(
                   Icons.receipt_long_outlined,
                   size: 22,
-                  color: Colors.white24,
+                  color: isSun ? kSunSecondaryText : Colors.white24,
                 ),
                 const SizedBox(height: 8),
                 Text(
                   AppStrings.get('no_txns', locale),
-                  style: const TextStyle(fontSize: 11.5, color: Colors.white38),
+                  style: TextStyle(
+                    fontSize: 11.5,
+                    color: isSun ? kSunSecondaryText : Colors.white38,
+                  ),
                 ),
               ],
             ),
@@ -737,6 +812,7 @@ class _LedgerTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isCredit = _credits.contains(receipt.kind);
+    final isSun = Theme.of(context).brightness == Brightness.light;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 4),
@@ -747,9 +823,16 @@ class _LedgerTile extends StatelessWidget {
             height: 36,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.white.withValues(alpha: 0.05),
+              color: isSun
+                  ? Colors.black.withValues(alpha: 0.06)
+                  : Colors.white.withValues(alpha: 0.05),
+              border: isSun ? Border.all(color: kSunBorder, width: 1.0) : null,
             ),
-            child: Icon(_icon, size: 16, color: Colors.white70),
+            child: Icon(
+              _icon,
+              size: 16,
+              color: isSun ? kSunHeaderText : Colors.white70,
+            ),
           ),
           const SizedBox(width: 11),
           Expanded(
@@ -758,16 +841,20 @@ class _LedgerTile extends StatelessWidget {
               children: [
                 Text(
                   receipt.title,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 12.5,
                     fontWeight: FontWeight.w600,
+                    color: isSun ? kSunHeaderText : Colors.white,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 1),
                 Text(
                   '${receipt.counterparty} · ${receipt.formattedTimestamp}',
-                  style: const TextStyle(fontSize: 10, color: Colors.white38),
+                  style: TextStyle(
+                    fontSize: 10,
+                    color: isSun ? kSunSecondaryText : Colors.white38,
+                  ),
                   overflow: TextOverflow.ellipsis,
                 ),
               ],
@@ -783,14 +870,17 @@ class _LedgerTile extends StatelessWidget {
                   fontSize: 12.5,
                   fontWeight: FontWeight.w700,
                   color: isCredit
-                      ? const Color(0xFF51CF66)
-                      : const Color(0xFFFFFBF0),
+                      ? (isSun ? kSunSuccess : const Color(0xFF51CF66))
+                      : (isSun ? kSunHeaderText : const Color(0xFFFFFBF0)),
                 ),
               ),
               const SizedBox(height: 1),
               Text(
                 receipt.isLive ? 'on-chain' : 'sandbox',
-                style: const TextStyle(fontSize: 9, color: Colors.white24),
+                style: TextStyle(
+                  fontSize: 9,
+                  color: isSun ? kSunSecondaryText : Colors.white24,
+                ),
               ),
             ],
           ),
@@ -805,24 +895,34 @@ class _Disclaimer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isSun = Theme.of(context).brightness == Brightness.light;
+
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.03),
+        color: isSun ? kSunCardSurface : Colors.white.withValues(alpha: 0.03),
         borderRadius: BorderRadius.circular(10),
+        border: isSun ? Border.all(color: kSunDivider, width: 1.5) : null,
       ),
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'HTD is a redemption receipt, not a stablecoin. Tokens may have no '
             'value. 1 HTD = 5 HTG is a settlement convention, not a market peg.',
-            style: TextStyle(fontSize: 10, color: Colors.white38, height: 1.45),
+            style: TextStyle(
+              fontSize: 10,
+              color: isSun ? kSunSecondaryText : Colors.white38,
+              height: 1.45,
+            ),
           ),
-          SizedBox(height: 6),
+          const SizedBox(height: 6),
           Text(
             'Haitian Dollar Inc. · legal@haitiandollar.com',
-            style: TextStyle(fontSize: 9.5, color: Colors.white24),
+            style: TextStyle(
+              fontSize: 9.5,
+              color: isSun ? kSunSecondaryText : Colors.white24,
+            ),
           ),
         ],
       ),

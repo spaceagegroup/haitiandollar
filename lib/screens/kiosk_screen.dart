@@ -7,6 +7,7 @@ import '../widgets/qr_display.dart';
 import '../widgets/receipt_dialog.dart';
 
 import 'package:url_launcher/url_launcher.dart';
+import '../theme/htd_theme.dart';
 
 /// Agent / merchant terminal.
 ///
@@ -40,13 +41,14 @@ class _KioskScreenState extends State<KioskScreen> {
     final fee = _invoiceHtd * kMerchantFeeRate;
     final net = _invoiceHtd - fee;
     final recent = wallet.ledger.take(3).toList();
+    final isSun = Theme.of(context).brightness == Brightness.light;
 
     return Scaffold(
       body: SafeArea(
         child: RefreshIndicator(
           onRefresh: () => wallet.refreshRates(),
-          color: const Color(0xFFFCC419),
-          backgroundColor: const Color(0xFF141414),
+          color: isSun ? kSunYellowText : const Color(0xFFFCC419),
+          backgroundColor: isSun ? kSunCardSurface : const Color(0xFF141414),
           child: ListView(
             physics: const AlwaysScrollableScrollPhysics(),
             padding: const EdgeInsets.fromLTRB(16, 10, 16, 28),
@@ -56,9 +58,13 @@ class _KioskScreenState extends State<KioskScreen> {
                 IconButton(
                   onPressed: () => wallet.setMode(AppMode.consumer),
                   tooltip: 'Consumer wallet',
-                  icon: const Icon(Icons.swap_horiz, size: 20),
+                  icon: Icon(
+                    Icons.swap_horiz,
+                    size: 20,
+                    color: isSun ? kSunHeaderText : Colors.white,
+                  ),
                 ),
-                const Expanded(
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -68,12 +74,16 @@ class _KioskScreenState extends State<KioskScreen> {
                           fontSize: 13.5,
                           fontWeight: FontWeight.w900,
                           letterSpacing: 1.6,
+                          color: isSun ? kSunHeaderText : Colors.white,
                         ),
                       ),
-                      SizedBox(height: 2),
+                      const SizedBox(height: 2),
                       Text(
                         'Pilot Phase 1 · closed loop, Port-au-Prince',
-                        style: TextStyle(fontSize: 10, color: Colors.white38),
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: isSun ? kSunSecondaryText : Colors.white38,
+                        ),
                       ),
                     ],
                   ),
@@ -86,16 +96,23 @@ class _KioskScreenState extends State<KioskScreen> {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: const Color(0xFF141414),
+                color: isSun ? kSunCardSurface : const Color(0xFF141414),
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Colors.white.withValues(alpha: 0.07)),
+                border: Border.all(
+                  color: isSun ? kSunBorder : Colors.white.withValues(alpha: 0.07),
+                  width: isSun ? 1.5 : 1.0,
+                ),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Text(
+                  Text(
                     'Charge a customer',
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w800,
+                      color: isSun ? kSunHeaderText : Colors.white,
+                    ),
                   ),
                   const SizedBox(height: 12),
                   TextFormField(
@@ -139,9 +156,9 @@ class _KioskScreenState extends State<KioskScreen> {
                     Center(
                       child: Text(
                         'htd:${compactAddress(wallet.walletAddress)} · H\$ ${_invoiceHtd.toStringAsFixed(2)}',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 11,
-                          color: Colors.white38,
+                          color: isSun ? kSunSecondaryText : Colors.white38,
                           fontFamily: 'monospace',
                         ),
                       ),
@@ -150,24 +167,26 @@ class _KioskScreenState extends State<KioskScreen> {
                     Container(
                       padding: const EdgeInsets.symmetric(vertical: 24),
                       decoration: BoxDecoration(
+                        color: isSun ? kSunCardSurface : Colors.transparent,
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
-                          color: Colors.white.withValues(alpha: 0.10),
+                          color: isSun ? kSunBorder : Colors.white.withValues(alpha: 0.10),
+                          width: isSun ? 1.5 : 1.0,
                         ),
                       ),
-                      child: const Column(
+                      child: Column(
                         children: [
                           Icon(
                             Icons.qr_code_2,
                             size: 40,
-                            color: Colors.white24,
+                            color: isSun ? kSunSecondaryText : Colors.white24,
                           ),
-                          SizedBox(height: 8),
+                          const SizedBox(height: 8),
                           Text(
                             'Enter an amount above to generate QR',
                             style: TextStyle(
                               fontSize: 11.5,
-                              color: Colors.white54,
+                              color: isSun ? kSunSecondaryText : Colors.white54,
                             ),
                           ),
                         ],
@@ -229,24 +248,24 @@ class _KioskScreenState extends State<KioskScreen> {
               child: InkWell(
                 onTap: () => _openBrhSource(context),
                 borderRadius: BorderRadius.circular(4),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 6),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 6),
                   child: Row(
                     children: [
                       Icon(
                         Icons.open_in_new,
                         size: 13,
-                        color: Color(0xFFFCC419),
+                        color: isSun ? kSunYellowText : const Color(0xFFFCC419),
                       ),
-                      SizedBox(width: 6),
+                      const SizedBox(width: 6),
                       Text(
                         'Verify on haitiandollar.com/htd#official-rates',
                         style: TextStyle(
                           fontSize: 11.5,
-                          color: Color(0xFFFCC419),
+                          color: isSun ? kSunYellowText : const Color(0xFFFCC419),
                           fontWeight: FontWeight.w600,
                           decoration: TextDecoration.underline,
-                          decorationColor: Color(0xFFFCC419),
+                          decorationColor: isSun ? kSunYellowText : const Color(0xFFFCC419),
                         ),
                       ),
                     ],
@@ -281,15 +300,22 @@ class _KioskScreenState extends State<KioskScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'Recent terminal activity',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w800,
+                    color: isSun ? kSunHeaderText : Colors.white,
+                  ),
                 ),
                 const SizedBox(height: 10),
                 if (recent.isEmpty)
-                  const Text(
+                  Text(
                     'No charges settled on this terminal yet.',
-                    style: TextStyle(fontSize: 11.5, color: Colors.white38),
+                    style: TextStyle(
+                      fontSize: 11.5,
+                      color: isSun ? kSunSecondaryText : Colors.white38,
+                    ),
                   )
                 else
                   ...recent.map(
@@ -301,15 +327,19 @@ class _KioskScreenState extends State<KioskScreen> {
                           Expanded(
                             child: Text(
                               receipt.title,
-                              style: const TextStyle(fontSize: 12),
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: isSun ? kSunHeaderText : Colors.white,
+                              ),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
                           Text(
                             formatHtd(receipt.htdAmount),
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
+                              color: isSun ? kSunHeaderText : Colors.white,
                             ),
                           ),
                         ],
@@ -339,6 +369,8 @@ class _Line extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isSun = Theme.of(context).brightness == Brightness.light;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 3),
       child: Row(
@@ -347,7 +379,10 @@ class _Line extends StatelessWidget {
           Expanded(
             child: Text(
               label,
-              style: const TextStyle(fontSize: 12, color: Colors.white60),
+              style: TextStyle(
+                fontSize: 12,
+                color: isSun ? kSunSecondaryText : Colors.white60,
+              ),
             ),
           ),
           const SizedBox(width: 8),
@@ -356,7 +391,9 @@ class _Line extends StatelessWidget {
             style: TextStyle(
               fontSize: emphasis ? 14 : 12.5,
               fontWeight: FontWeight.bold,
-              color: emphasis ? Colors.white : const Color(0xFFFCC419),
+              color: emphasis
+                  ? (isSun ? kSunHeaderText : Colors.white)
+                  : (isSun ? kSunYellowText : const Color(0xFFFCC419)),
             ),
           ),
         ],
@@ -373,19 +410,28 @@ class _Panel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isSun = Theme.of(context).brightness == Brightness.light;
+
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.03),
+        color: isSun ? kSunCardSurface : Colors.white.withValues(alpha: 0.03),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.06)),
+        border: Border.all(
+          color: isSun ? kSunBorder : Colors.white.withValues(alpha: 0.06),
+          width: isSun ? 1.5 : 1.0,
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             title,
-            style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w800),
+            style: TextStyle(
+              fontSize: 12.5,
+              fontWeight: FontWeight.w800,
+              color: isSun ? kSunHeaderText : Colors.white,
+            ),
           ),
           const SizedBox(height: 8),
           ...rows.map(
@@ -396,18 +442,19 @@ class _Panel extends StatelessWidget {
                 children: [
                   Text(
                     row.$1,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 11.5,
-                      color: Colors.white54,
+                      color: isSun ? kSunSecondaryText : Colors.white54,
                     ),
                   ),
                   Flexible(
                     child: Text(
                       row.$2,
                       textAlign: TextAlign.right,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 11.5,
                         fontWeight: FontWeight.w600,
+                        color: isSun ? kSunHeaderText : Colors.white,
                       ),
                     ),
                   ),

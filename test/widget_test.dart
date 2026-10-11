@@ -312,6 +312,34 @@ void main() {
       expect(find.byTooltip('Mòd Lannwit'), findsOneWidget);
     });
 
+    testWidgets('sun mode updates balance text and header text contrast colors', (tester) async {
+      final wallet = WalletState(initialOutdoor: false, initialLocale: 'ht', initialMasked: false);
+      await tester.pumpWidget(
+        ChangeNotifierProvider.value(
+          value: wallet,
+          child: const HtdApp(),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // Check balance text in night mode
+      final balanceFinder = find.textContaining('128.50');
+      expect(balanceFinder, findsWidgets);
+
+      // Now toggle to sun mode
+      await tester.tap(find.byIcon(Icons.wb_sunny_outlined));
+      await tester.pumpAndSettle();
+
+      expect(wallet.isOutdoorMode, isTrue);
+
+      // Verify header title text color in Sun Mode is pitch black (0xFF000000)
+      final headerText = tester.widget<Text>(find.text('HAITIAN DOLLAR'));
+      expect(headerText.style?.color, const Color(0xFF000000));
+
+      // Elapse remaining unmask timer
+      await tester.pump(const Duration(seconds: 7));
+    });
+
     testWidgets('switching mode shows the agent terminal', (tester) async {
       tester.view.physicalSize = const Size(1080, 1920);
       tester.view.devicePixelRatio = 1.0;
