@@ -223,19 +223,23 @@ class _RatesScreenState extends State<RatesScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        Row(
                           children: [
-                            Text(
-                              'PARITY RULE',
-                              style: TextStyle(
-                                fontSize: 9,
-                                fontWeight: FontWeight.w800,
-                                letterSpacing: 1.0,
-                                color: Colors.white54,
+                            const Flexible(
+                              child: Text(
+                                'PARITY RULE',
+                                style: TextStyle(
+                                  fontSize: 9,
+                                  fontWeight: FontWeight.w800,
+                                  letterSpacing: 1.0,
+                                  color: Colors.white54,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
                               ),
                             ),
-                            Text(
+                            const SizedBox(width: 6),
+                            const Text(
                               'Fixed',
                               style: TextStyle(
                                 fontSize: 9,
@@ -289,19 +293,23 @@ class _RatesScreenState extends State<RatesScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        Row(
                           children: [
-                            Text(
-                              'IMPLIED USD',
-                              style: TextStyle(
-                                fontSize: 9,
-                                fontWeight: FontWeight.w800,
-                                letterSpacing: 1.0,
-                                color: Colors.white54,
+                            const Flexible(
+                              child: Text(
+                                'IMPLIED USD',
+                                style: TextStyle(
+                                  fontSize: 9,
+                                  fontWeight: FontWeight.w800,
+                                  letterSpacing: 1.0,
+                                  color: Colors.white54,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
                               ),
                             ),
-                            Text(
+                            const SizedBox(width: 6),
+                            const Text(
                               'BRH Ref',
                               style: TextStyle(
                                 fontSize: 9,
@@ -356,16 +364,19 @@ class _RatesScreenState extends State<RatesScreen> {
                         color: Color(0xFFFCC419),
                       ),
                       const SizedBox(width: 8),
-                      const Text(
-                        'TRI-CURRENCY CALCULATOR',
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w800,
-                          letterSpacing: 1.0,
-                          color: Colors.white70,
+                      const Expanded(
+                        child: Text(
+                          'TRI-CURRENCY CALCULATOR',
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w800,
+                            letterSpacing: 1.0,
+                            color: Colors.white70,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      const Spacer(),
+                      const SizedBox(width: 8),
                       Text(
                         '1 USD = ${brhRate.toStringAsFixed(2)} HTG',
                         style: const TextStyle(
@@ -440,13 +451,16 @@ class _RatesScreenState extends State<RatesScreen> {
                     children: [
                       Icon(Icons.analytics_outlined, size: 16, color: Colors.white70),
                       SizedBox(width: 8),
-                      Text(
-                        'MARKET SPREAD BENCHMARKS',
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w800,
-                          letterSpacing: 1.0,
-                          color: Colors.white70,
+                      Expanded(
+                        child: Text(
+                          'MARKET SPREAD BENCHMARKS',
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w800,
+                            letterSpacing: 1.0,
+                            color: Colors.white70,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
@@ -584,7 +598,8 @@ class _CurrencyInputField extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                width: 44,
+                constraints: const BoxConstraints(minWidth: 44),
+                padding: const EdgeInsets.symmetric(horizontal: 8),
                 alignment: Alignment.center,
                 child: Text(
                   symbol,
@@ -703,6 +718,7 @@ class _RateRow extends StatelessWidget {
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               rateText,

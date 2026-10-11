@@ -127,5 +127,28 @@ void main() {
       // 500 HTD * 5 = 2,500.00 HTG
       expect(find.text('2,500.00'), findsOneWidget);
     });
+
+    testWidgets('RatesScreen renders without overflow on narrow 320px viewport', (tester) async {
+      tester.view.physicalSize = const Size(320, 800);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(tester.view.resetPhysicalSize);
+
+      final wallet = WalletState(openingBalance: 200.0);
+
+      await tester.pumpWidget(
+        ChangeNotifierProvider<WalletState>.value(
+          value: wallet,
+          child: const MaterialApp(home: RatesScreen()),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('PARITY RULE'), findsOneWidget);
+      expect(find.text('Fixed'), findsOneWidget);
+      expect(find.text('IMPLIED USD'), findsOneWidget);
+      expect(find.text('BRH Ref'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    });
   });
 }
+
