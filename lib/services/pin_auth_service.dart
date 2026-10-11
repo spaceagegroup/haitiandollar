@@ -51,7 +51,15 @@ class PinAuthService {
   int _failCount = 0;
   DateTime? _lockoutUntil;
 
-  bool biometricsAvailable = true;
+  /// Whether the current device supports biometric authentication.
+  ///
+  /// Set to `true` during [init] only after [LocalAuthentication] confirms
+  /// the device supports biometrics AND the user has enrolled at least one
+  /// biometric credential.
+  ///
+  /// Remains `false` on devices without biometric hardware, on devices where
+  /// the user has not enrolled, and before [init] completes.
+  bool biometricsAvailable = false;
   Future<bool> Function()? biometricAuthHandler;
 
   bool get isPinSet => _pinHash != null && _pinSalt != null;

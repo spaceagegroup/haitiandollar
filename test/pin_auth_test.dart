@@ -186,6 +186,7 @@ void main() {
 
     testWidgets('tapping biometric clears entered PIN and authenticates', (tester) async {
       final auth = PinAuthService(pbkdf2Iterations: 100);
+      auth.biometricsAvailable = true;
       await auth.setPin('5829');
       auth.biometricAuthHandler = () async => true;
 
