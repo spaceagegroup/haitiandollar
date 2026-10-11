@@ -251,6 +251,44 @@ void main() {
       expect(prefs.getString('htd_user_locale_v1'), 'ht');
     });
 
+    test('outdoor sun mode state toggles and persists', () async {
+      SharedPreferences.setMockInitialValues({});
+      final wallet = WalletState(initialOutdoor: false);
+      expect(wallet.isOutdoorMode, isFalse);
+
+      wallet.toggleOutdoorMode();
+      expect(wallet.isOutdoorMode, isTrue);
+      await wallet.persist();
+
+      final prefs = await SharedPreferences.getInstance();
+      expect(prefs.getBool('htd_outdoor_theme_v1'), isTrue);
+
+      wallet.setOutdoorMode(false);
+      expect(wallet.isOutdoorMode, isFalse);
+      await wallet.persist();
+      expect(prefs.getBool('htd_outdoor_theme_v1'), isFalse);
+    });
+
+    testWidgets('themeMode updates in HtdApp when outdoor mode changes', (tester) async {
+      final wallet = WalletState(initialOutdoor: false);
+      await tester.pumpWidget(
+        ChangeNotifierProvider.value(
+          value: wallet,
+          child: const HtdApp(),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      var materialApp = tester.widget<MaterialApp>(find.byType(MaterialApp));
+      expect(materialApp.themeMode, ThemeMode.dark);
+
+      wallet.toggleOutdoorMode();
+      await tester.pumpAndSettle();
+
+      materialApp = tester.widget<MaterialApp>(find.byType(MaterialApp));
+      expect(materialApp.themeMode, ThemeMode.light);
+    });
+
     testWidgets('switching mode shows the agent terminal', (tester) async {
       tester.view.physicalSize = const Size(1080, 1920);
       tester.view.devicePixelRatio = 1.0;
