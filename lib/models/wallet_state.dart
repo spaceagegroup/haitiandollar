@@ -1,9 +1,12 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/services.dart' show HapticFeedback, rootBundle;
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// Which shell the application is currently presenting.
 enum AppMode { consumer, kiosk }
@@ -202,6 +205,45 @@ class TxnReceipt {
     return '${months[local.month - 1]} ${local.day}, ${local.year} '
         '· $hour12:$minute $meridiem';
   }
+
+  // Compatibility getters
+  String get id => txHash;
+  String get type => kind.name;
+  double get amountHtd => htdAmount;
+  double get grossHtg => htgEquivalent;
+  double get netHtd => htdAmount - feeHtd;
+  String get reference => txHash;
+  String get phone => counterparty;
+  String get status => 'settled';
+
+  Map<String, dynamic> toJson() => {
+    'kind': kind.name,
+    'title': title,
+    'htdAmount': htdAmount,
+    'timestamp': timestamp.millisecondsSinceEpoch,
+    'txHash': txHash,
+    'counterparty': counterparty,
+    'isLive': isLive,
+    'feeHtd': feeHtd,
+    if (loanId != null) 'loanId': loanId,
+  };
+
+  factory TxnReceipt.fromJson(Map<String, dynamic> json) => TxnReceipt(
+    kind: TxnKind.values.firstWhere(
+      (k) => k.name == json['kind'] || k.name == json['type'],
+      orElse: () => TxnKind.buy,
+    ),
+    title: json['title'] as String? ?? 'Transaction',
+    htdAmount: (json['htdAmount'] as num? ?? json['amountHtd'] as num?)?.toDouble() ?? 0.0,
+    timestamp: json['timestamp'] != null
+        ? DateTime.fromMillisecondsSinceEpoch(json['timestamp'] as int)
+        : DateTime.now(),
+    txHash: json['txHash'] as String? ?? json['id'] as String? ?? '',
+    counterparty: json['counterparty'] as String? ?? json['phone'] as String? ?? '—',
+    isLive: json['isLive'] as bool? ?? false,
+    feeHtd: (json['feeHtd'] as num?)?.toDouble() ?? 0.0,
+    loanId: json['loanId'] as String?,
+  );
 }
 
 /// Core domain and state for the HTD wallet.
@@ -213,11 +255,25 @@ class WalletState extends ChangeNotifier {
   static const String defaultWalletAddress =
       '0x71C8394A84e52514d7a9bA7879e604f323B049B2';
 
+  static const String _kPrefBalance = 'htd_wallet_balance_v1';
+  static const String _kPrefLedger = 'htd_wallet_ledger_v1';
+  static const String _kPrefLocale = 'htd_user_locale_v1';
+  static const String _kPrefStealth = 'htd_stealth_mode_v1';
+  static const String _kPrefOutdoorTheme = 'htd_outdoor_theme_v1';
+
   WalletState({
     double openingBalance = 128.50,
     this.walletAddress = defaultWalletAddress,
+    String? initialLocale,
+    bool? initialMasked,
+    bool? initialOutdoor,
   }) : _balance = openingBalance,
-       _htgPerUsd = kOfflineBaselineHtgPerUsd;
+       _currentLocale = initialLocale ?? 'ht',
+       _isBalanceMasked = initialMasked ?? true,
+       _isOutdoorMode = initialOutdoor ?? false,
+       _htgPerUsd = kOfflineBaselineHtgPerUsd {
+    _hydrateState();
+  }
 
   /// Active on-chain wallet address for this terminal or user.
   final String walletAddress;
@@ -229,18 +285,6 @@ class WalletState extends ChangeNotifier {
   static const double bridgeFeeRate = kBridgeFeeRate;
 
   /// Scoped partner registry.
-  ///
-  /// `availableMfis.first` is the default selection in the repayment sheet, so
-  /// the first slot may only ever hold an institution with an executed
-  /// agreement.
-  ///
-  /// The public materials name exactly one institutional rail — Digicel
-  /// MonCash, which also custodies the HTG reserve — and state that the pilot
-  /// has not launched. No microfinance MOU is documented, so no prospective
-  /// lender may appear here: a selectable entry would silently route a
-  /// borrower's repayment to an unvetted address. Candidates live in
-  /// [pendingMfis] until their MOU is countersigned, at which point they move
-  /// into this list, with the live pilot anchor first.
   static const List<MfiConfig> availableMfis = <MfiConfig>[
     MfiConfig(
       name: 'MonCash merchant depot — pilot anchor',
@@ -262,7 +306,6 @@ class WalletState extends ChangeNotifier {
   double _balance;
 
   /// In-memory ledger of receipts produced in this session.
-  /// TODO(persist): Cap at N entries or move to durable local storage / server-side index.
   final List<TxnReceipt> _ledger = <TxnReceipt>[];
 
   double _htgPerUsd;
@@ -277,6 +320,137 @@ class WalletState extends ChangeNotifier {
   DateTime? _ratesUpdatedAt;
   String? _quoteDate;
 
+  String _currentLocale = 'ht'; // Kreyòl Ayisyen default
+  bool _isBalanceMasked = true; // Street security default
+  bool _isOutdoorMode = false; // Sun Mode / Mòd Solèy vs Night Mode
+  Timer? _unmaskTimer;
+
+  // ---------------------------------------------------------------- persistence
+
+  Future<void> _hydrateState() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      if (prefs.containsKey(_kPrefBalance)) {
+        _balance = prefs.getDouble(_kPrefBalance) ?? _balance;
+      }
+      if (prefs.containsKey(_kPrefLocale)) {
+        _currentLocale = prefs.getString(_kPrefLocale) ?? 'ht';
+      }
+      if (prefs.containsKey(_kPrefStealth)) {
+        _isBalanceMasked = prefs.getBool(_kPrefStealth) ?? true;
+      }
+      if (prefs.containsKey(_kPrefOutdoorTheme)) {
+        _isOutdoorMode = prefs.getBool(_kPrefOutdoorTheme) ?? false;
+      }
+      if (prefs.containsKey(_kPrefLedger)) {
+        final raw = prefs.getString(_kPrefLedger);
+        if (raw != null) {
+          try {
+            final List decoded = jsonDecode(raw) as List;
+            _ledger.clear();
+            for (final item in decoded) {
+              if (item is Map<String, dynamic>) {
+                _ledger.add(TxnReceipt.fromJson(item));
+              }
+            }
+          } catch (e) {
+            debugPrint('Error hydrating ledger: $e');
+          }
+        }
+      }
+      _safeNotify();
+    } catch (e) {
+      debugPrint('SharedPreferences not available in current environment: $e');
+    }
+  }
+
+  Future<void> _persist() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setDouble(_kPrefBalance, _balance);
+      await prefs.setString(
+        _kPrefLedger,
+        jsonEncode(_ledger.map((e) => e.toJson()).toList()),
+      );
+      await prefs.setString(_kPrefLocale, _currentLocale);
+      await prefs.setBool(_kPrefStealth, _isBalanceMasked);
+      await prefs.setBool(_kPrefOutdoorTheme, _isOutdoorMode);
+    } catch (e) {
+      debugPrint('SharedPreferences persist error: $e');
+    }
+  }
+
+  /// Explicitly flushes current state to disk.
+  Future<void> persist() => _persist();
+
+  // ---------------------------------------------------------------- outdoor theme
+
+  bool get isOutdoorMode => _isOutdoorMode;
+
+  void toggleOutdoorMode() {
+    _isOutdoorMode = !_isOutdoorMode;
+    _safeNotify();
+    _persist();
+  }
+
+  void setOutdoorMode(bool value) {
+    if (_isOutdoorMode == value) return;
+    _isOutdoorMode = value;
+    _safeNotify();
+    _persist();
+  }
+
+  // ---------------------------------------------------------------- street privacy
+
+  bool get isBalanceMasked => _isBalanceMasked;
+
+  void toggleBalanceMask() {
+    _unmaskTimer?.cancel();
+    _isBalanceMasked = !_isBalanceMasked;
+    _safeNotify();
+
+    if (!_isBalanceMasked) {
+      _startUnmaskTimer();
+    }
+    _persist();
+  }
+
+  /// Resets the 6-second auto-mask countdown whenever the user is actively interacting with the screen.
+  void resetUnmaskTimer() {
+    if (_isBalanceMasked) return;
+    _startUnmaskTimer();
+  }
+
+  void _startUnmaskTimer() {
+    _unmaskTimer?.cancel();
+    _unmaskTimer = Timer(const Duration(seconds: 6), () {
+      _isBalanceMasked = true;
+      _safeNotify();
+      _persist();
+    });
+  }
+
+  // ---------------------------------------------------------------- i18n & haptics
+
+  String get currentLocale => _currentLocale;
+
+  void setLocale(String code) {
+    if (_currentLocale == code) return;
+    _currentLocale = code;
+    _safeNotify();
+    _persist();
+  }
+
+  void triggerMerchantHaptic() {
+    try {
+      HapticFeedback.heavyImpact();
+    } catch (_) {}
+  }
+
+  // Invariant Purchasing Power
+  double get balanceInHtg => _balance * kHtgPerHtd;
+  double get balanceInUsd => _htgPerUsd > 0 ? balanceInHtg / _htgPerUsd : 0.0;
+
   // ---------------------------------------------------------------- shell
 
   bool _disposed = false;
@@ -284,6 +458,7 @@ class WalletState extends ChangeNotifier {
   @override
   void dispose() {
     _disposed = true;
+    _unmaskTimer?.cancel();
     super.dispose();
   }
 
@@ -757,7 +932,22 @@ class WalletState extends ChangeNotifier {
     );
     _ledger.insert(0, receipt);
     _safeNotify();
+    triggerMerchantHaptic();
+    _persist();
     return receipt;
+  }
+
+  /// Directly records an externally supplied transaction receipt and persists it.
+  Future<void> recordTransaction(TxnReceipt receipt) async {
+    if (receipt.kind == TxnKind.buy || receipt.kind == TxnKind.charge) {
+      _balance += receipt.netHtd;
+    } else {
+      _balance -= receipt.htdAmount;
+    }
+    _ledger.insert(0, receipt);
+    triggerMerchantHaptic();
+    _safeNotify();
+    await _persist();
   }
 
   double _requirePositive(double amount) {
@@ -866,31 +1056,37 @@ String? validateHaitianMsisdn(String raw) {
   return null;
 }
 
-/// `12,480.00` — grouped to two decimals without pulling in `intl`.
-String formatAmount(double value, {int decimals = 2}) {
-  // toStringAsFixed returns 'Infinity'/'NaN' for non-finite values and switches
-  // to exponential notation for very large magnitudes. Grouping those digits
-  // renders nonsense like `In,fin,ity` or `1e,+25`, so pass them through.
+/// `12,480.00` — grouped to specified decimals with intl locale support.
+String formatAmount(double value, {int decimals = 2, String? locale}) {
   if (!value.isFinite) {
     return value.isNaN ? 'NaN' : (value.isNegative ? '-∞' : '∞');
   }
   final fixed = value.toStringAsFixed(decimals);
   if (fixed.contains('e')) return fixed;
-  final dot = fixed.indexOf('.');
-  final whole = dot == -1 ? fixed : fixed.substring(0, dot);
-  final fraction = dot == -1 ? '' : fixed.substring(dot);
-  final buffer = StringBuffer();
-  for (var i = 0; i < whole.length; i++) {
-    final remaining = whole.length - i;
-    if (i > 0 && remaining % 3 == 0 && whole[i] != '-') buffer.write(',');
-    buffer.write(whole[i]);
+  try {
+    final format = NumberFormat.currency(
+      locale: locale ?? 'en_US',
+      customPattern: '#,##0.${'0' * decimals}',
+      decimalDigits: decimals,
+    );
+    return format.format(value);
+  } catch (_) {
+    final dot = fixed.indexOf('.');
+    final whole = dot == -1 ? fixed : fixed.substring(0, dot);
+    final fraction = dot == -1 ? '' : fixed.substring(dot);
+    final buffer = StringBuffer();
+    for (var i = 0; i < whole.length; i++) {
+      final remaining = whole.length - i;
+      if (i > 0 && remaining % 3 == 0 && whole[i] != '-') buffer.write(',');
+      buffer.write(whole[i]);
+    }
+    return '$buffer$fraction';
   }
-  return '$buffer$fraction';
 }
 
 /// `H$ 12,480.00`
-String formatHtd(double value, {int decimals = 2}) =>
-    'H\$ ${formatAmount(value, decimals: decimals)}';
+String formatHtd(double value, {int decimals = 2, String? locale}) =>
+    'H\$ ${formatAmount(value, decimals: decimals, locale: locale)}';
 
 /// Relative age of a quotation: `just now`, `12 min ago`, `16:12`, or `10/3`.
 String formatRateAge(DateTime timestamp) {

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import 'package:haitiandollar/main.dart';
 import 'package:haitiandollar/models/wallet_state.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   group('protocol economics', () {
@@ -168,16 +169,20 @@ void main() {
   });
 
   group('shell', () {
-    testWidgets('consumer dashboard shows the fixed parity and balance', (
+    setUp(() {
+      SharedPreferences.setMockInitialValues({});
+    });
+
+    testWidgets('consumer dashboard shows the fixed parity and balance in English', (
       tester,
     ) async {
       await tester.pumpWidget(
         ChangeNotifierProvider(
-          create: (_) => WalletState(),
+          create: (_) => WalletState(initialLocale: 'en', initialMasked: false),
           child: const HtdApp(),
         ),
       );
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       expect(find.text('HAITIAN DOLLAR'), findsOneWidget);
       expect(find.text('1 HTD = 5 HTG. Fixed.'), findsOneWidget);
@@ -198,7 +203,7 @@ void main() {
 
         await tester.pumpWidget(
           ChangeNotifierProvider(
-            create: (_) => WalletState(),
+            create: (_) => WalletState(initialLocale: 'en', initialMasked: false),
             child: const HtdApp(),
           ),
         );
@@ -211,6 +216,40 @@ void main() {
         expect(find.text('Participating Institution'), findsOneWidget);
       },
     );
+
+    testWidgets('consumer dashboard renders in Kreyòl Ayisyen and masked by default', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        ChangeNotifierProvider(
+          create: (_) => WalletState(initialLocale: 'ht', initialMasked: true),
+          child: const HtdApp(),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('HAITIAN DOLLAR'), findsOneWidget);
+      expect(find.text('H\$ ••••••'), findsOneWidget);
+      expect(find.text('Achte HTD'), findsOneWidget);
+      expect(find.text('Retire Kòb'), findsOneWidget);
+      expect(find.text('Voye Kòb'), findsOneWidget);
+      expect(find.text('Peye Kredi'), findsOneWidget);
+
+      // Unmask by tapping the eye icon
+      await tester.tap(find.text('Kache'));
+      await tester.pumpAndSettle();
+
+      expect(find.textContaining('128.50'), findsWidgets);
+    });
+
+    test('state persists to SharedPreferences', () async {
+      final wallet = WalletState(openingBalance: 128.50, initialLocale: 'ht');
+      wallet.applyBuy(20.0);
+      await wallet.persist();
+      final prefs = await SharedPreferences.getInstance();
+      expect(prefs.getDouble('htd_wallet_balance_v1'), 148.50);
+      expect(prefs.getString('htd_user_locale_v1'), 'ht');
+    });
 
     testWidgets('switching mode shows the agent terminal', (tester) async {
       tester.view.physicalSize = const Size(1080, 1920);

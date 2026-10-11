@@ -12,6 +12,7 @@ import '../widgets/send_sheet.dart';
 
 import 'scanner_screen.dart';
 import 'rates_screen.dart';
+import '../utils/app_strings.dart';
 
 /// Primary consumer shell.
 ///
@@ -95,14 +96,19 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final wallet = context.watch<WalletState>();
     final mode = wallet.mode;
+    final loc = wallet.currentLocale;
 
     return Scaffold(
       body: SafeArea(
-        child: RefreshIndicator(
-          onRefresh: () => wallet.refreshRates(),
-          color: const Color(0xFFFCC419),
-          backgroundColor: const Color(0xFF141414),
-          child: ListView(
+        child: Listener(
+          behavior: HitTestBehavior.translucent,
+          onPointerDown: (_) => wallet.resetUnmaskTimer(),
+          onPointerMove: (_) => wallet.resetUnmaskTimer(),
+          child: RefreshIndicator(
+            onRefresh: () => wallet.refreshRates(),
+            color: const Color(0xFFFCC419),
+            backgroundColor: const Color(0xFF141414),
+            child: ListView(
             physics: const AlwaysScrollableScrollPhysics(),
             padding: const EdgeInsets.fromLTRB(16, 10, 16, 28),
             children: [
@@ -111,12 +117,17 @@ class DashboardScreen extends StatelessWidget {
                 mode == AppMode.consumer ? AppMode.kiosk : AppMode.consumer,
               ),
               onScan: () => _scanAndPay(context),
+              currentLocale: loc,
+              onSelectLocale: (lang) => wallet.setLocale(lang),
             ),
             const SizedBox(height: 18),
             _BalanceCard(
               balance: wallet.balance,
               htgValue: wallet.htgFor(wallet.balance),
               usdValue: wallet.usdFor(wallet.balance),
+              isMasked: wallet.isBalanceMasked,
+              onToggleMask: () => wallet.toggleBalanceMask(),
+              locale: loc,
             ),
             const SizedBox(height: 12),
             _RateBar(wallet: wallet),
@@ -126,8 +137,8 @@ class DashboardScreen extends StatelessWidget {
                 Expanded(
                   child: _Action(
                     icon: Icons.add_circle_outline,
-                    label: 'Buy HTD',
-                    detail: 'Cash-in',
+                    label: AppStrings.get('buy_action', loc),
+                    detail: loc == 'ht' ? 'Depo kach' : (loc == 'fr' ? 'Dépôt cash' : 'Cash-in'),
                     onTap: () => _buy(context),
                   ),
                 ),
@@ -135,8 +146,8 @@ class DashboardScreen extends StatelessWidget {
                 Expanded(
                   child: _Action(
                     icon: Icons.arrow_upward_rounded,
-                    label: 'Cash out',
-                    detail: '3% bridge',
+                    label: AppStrings.get('cashout_action', loc),
+                    detail: loc == 'ht' ? 'Pasrèl 3%' : (loc == 'fr' ? 'Pont 3%' : '3% bridge'),
                     onTap: () => _sell(context),
                   ),
                 ),
@@ -148,8 +159,8 @@ class DashboardScreen extends StatelessWidget {
                 Expanded(
                   child: _Action(
                     icon: Icons.send_rounded,
-                    label: 'Send',
-                    detail: 'Free, by phone',
+                    label: AppStrings.get('send_action', loc),
+                    detail: loc == 'ht' ? 'Gratis, pa nimewo' : (loc == 'fr' ? 'Gratuit, par tél' : 'Free, by phone'),
                     onTap: () => _send(context),
                   ),
                 ),
@@ -157,30 +168,38 @@ class DashboardScreen extends StatelessWidget {
                 Expanded(
                   child: _Action(
                     icon: Icons.account_balance_outlined,
-                    label: 'Loan repayment',
-                    detail: 'via institution',
+                    label: AppStrings.get('repay_loan_action', loc),
+                    detail: loc == 'ht' ? 'Mikwofinans' : (loc == 'fr' ? 'Microfinance' : 'via institution'),
                     onTap: () => _repayLoan(context),
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 24),
-            _Activity(ledger: wallet.ledger),
+            _Activity(ledger: wallet.ledger, locale: loc),
             const SizedBox(height: 24),
             const _Disclaimer(),
           ],
         ),
       ),
     ),
-  );
+  ),
+);
 }
 }
 
 class _Header extends StatelessWidget {
-  const _Header({required this.onSwitchShell, required this.onScan});
+  const _Header({
+    required this.onSwitchShell,
+    required this.onScan,
+    required this.currentLocale,
+    required this.onSelectLocale,
+  });
 
   final VoidCallback onSwitchShell;
   final VoidCallback onScan;
+  final String currentLocale;
+  final ValueChanged<String> onSelectLocale;
 
   @override
   Widget build(BuildContext context) {
@@ -226,6 +245,44 @@ class _Header extends StatelessWidget {
             ],
           ),
         ),
+        PopupMenuButton<String>(
+          tooltip: 'Chanje Lang / Language',
+          initialValue: currentLocale,
+          onSelected: onSelectLocale,
+          color: const Color(0xFF1E1E1E),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+            side: const BorderSide(color: Colors.white12),
+          ),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
+            margin: const EdgeInsets.only(right: 4),
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(alpha: 0.08),
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: Colors.white.withValues(alpha: 0.12)),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  currentLocale.toUpperCase(),
+                  style: const TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w800,
+                    color: Color(0xFFFCC419),
+                  ),
+                ),
+                const Icon(Icons.arrow_drop_down, size: 14, color: Colors.white70),
+              ],
+            ),
+          ),
+          itemBuilder: (_) => const [
+            PopupMenuItem(value: 'ht', child: Text('🇭🇹 Kreyòl (Ayisyen)')),
+            PopupMenuItem(value: 'fr', child: Text('🇫🇷 Français')),
+            PopupMenuItem(value: 'en', child: Text('🇺🇸 English')),
+          ],
+        ),
         IconButton(
           onPressed: onScan,
           tooltip: 'Scan QR to pay',
@@ -250,11 +307,17 @@ class _BalanceCard extends StatelessWidget {
     required this.balance,
     required this.htgValue,
     required this.usdValue,
+    required this.isMasked,
+    required this.onToggleMask,
+    required this.locale,
   });
 
   final double balance;
   final double htgValue;
   final double usdValue;
+  final bool isMasked;
+  final VoidCallback onToggleMask;
+  final String locale;
 
   @override
   Widget build(BuildContext context) {
@@ -271,28 +334,58 @@ class _BalanceCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Icon(
-                Icons.account_balance_wallet_outlined,
-                size: 14,
-                color: Colors.black54,
+              Row(
+                children: [
+                  const Icon(
+                    Icons.account_balance_wallet_outlined,
+                    size: 14,
+                    color: Colors.black54,
+                  ),
+                  const SizedBox(width: 6),
+                  Text(
+                    AppStrings.get('balance_title', locale),
+                    style: const TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: 1.1,
+                      color: Colors.black54,
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(width: 6),
-              Text(
-                'AVAILABLE BALANCE',
-                style: TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: 1.1,
-                  color: Colors.black54,
+              InkWell(
+                onTap: onToggleMask,
+                borderRadius: BorderRadius.circular(12),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                  child: Row(
+                    children: [
+                      Icon(
+                        isMasked ? Icons.visibility_off : Icons.visibility,
+                        size: 16,
+                        color: Colors.black87,
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        isMasked ? 'Kache' : 'Vizib',
+                        style: const TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w800,
+                          color: Colors.black87,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
           ),
           const SizedBox(height: 10),
           Text(
-            formatHtd(balance),
+            isMasked ? 'H\$ ••••••' : formatHtd(balance),
             style: const TextStyle(
               fontSize: 33,
               fontWeight: FontWeight.w900,
@@ -302,7 +395,9 @@ class _BalanceCard extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            '≈ ${formatAmount(htgValue)} HTG   ·   ≈ \$${usdValue.toStringAsFixed(2)} USD',
+            isMasked
+                ? '•••••• HTG   ·   •••• USD'
+                : '≈ ${formatAmount(htgValue)} HTG   ·   ≈ \$${usdValue.toStringAsFixed(2)} USD',
             style: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
@@ -532,9 +627,10 @@ class _Action extends StatelessWidget {
 }
 
 class _Activity extends StatelessWidget {
-  const _Activity({required this.ledger});
+  const _Activity({required this.ledger, required this.locale});
 
   final List<TxnReceipt> ledger;
+  final String locale;
 
   @override
   Widget build(BuildContext context) {
@@ -544,9 +640,9 @@ class _Activity extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-              'Activity',
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+            Text(
+              AppStrings.get('recent_txns', locale),
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
             ),
             Text(
               ledger.isEmpty
@@ -568,17 +664,17 @@ class _Activity extends StatelessWidget {
                 style: BorderStyle.solid,
               ),
             ),
-            child: const Column(
+            child: Column(
               children: [
-                Icon(
+                const Icon(
                   Icons.receipt_long_outlined,
                   size: 22,
                   color: Colors.white24,
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
-                  'Your receipts will appear here.',
-                  style: TextStyle(fontSize: 11.5, color: Colors.white38),
+                  AppStrings.get('no_txns', locale),
+                  style: const TextStyle(fontSize: 11.5, color: Colors.white38),
                 ),
               ],
             ),
