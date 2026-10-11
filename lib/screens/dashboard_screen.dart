@@ -396,25 +396,32 @@ class _BalanceCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  Icon(
-                    Icons.account_balance_wallet_outlined,
-                    size: 14,
-                    color: isSun ? kSunHeaderText : Colors.black54,
-                  ),
-                  const SizedBox(width: 6),
-                  Text(
-                    AppStrings.get('balance_title', locale),
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: 1.1,
+              Expanded(
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.account_balance_wallet_outlined,
+                      size: 14,
                       color: isSun ? kSunHeaderText : Colors.black54,
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 6),
+                    Flexible(
+                      child: Text(
+                        AppStrings.get('balance_title', locale),
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w800,
+                          letterSpacing: 1.1,
+                          color: isSun ? kSunHeaderText : Colors.black54,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
               ),
+              const SizedBox(width: 8),
               InkWell(
                 onTap: onToggleMask,
                 borderRadius: BorderRadius.circular(12),
@@ -464,10 +471,11 @@ class _BalanceCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 14),
-          Row(
+          Wrap(
+            spacing: 8,
+            runSpacing: 6,
             children: [
               const _Chip(text: '1 HTD = 5 HTG. Fixed.'),
-              const SizedBox(width: 8),
               _Chip(
                 text: kSandboxSettlement ? 'Sandbox build' : 'Base L2 · live',
               ),

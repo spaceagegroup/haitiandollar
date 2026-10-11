@@ -360,5 +360,40 @@ void main() {
       expect(find.text('Published fee schedule'), findsOneWidget);
       expect(find.text('Phase 1 guardrails'), findsOneWidget);
     });
+
+    testWidgets('DashboardScreen renders without overflow on narrow 320px viewport', (tester) async {
+      tester.view.physicalSize = const Size(320, 800);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
+
+      final wallet = WalletState(initialLocale: 'ht', initialMasked: false);
+      await tester.pumpWidget(
+        ChangeNotifierProvider.value(value: wallet, child: const HtdApp()),
+      );
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull);
+      await tester.pump(const Duration(seconds: 7));
+    });
+
+    testWidgets('KioskScreen renders without overflow on narrow 320px viewport', (tester) async {
+      tester.view.physicalSize = const Size(320, 800);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
+
+      final wallet = WalletState();
+      wallet.setMode(AppMode.kiosk);
+      await tester.pumpWidget(
+        ChangeNotifierProvider.value(value: wallet, child: const HtdApp()),
+      );
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull);
+    });
   });
 }
+
