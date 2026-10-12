@@ -1,13 +1,13 @@
 {
   "date": "Oct 12, 2026",
   "day": "Monday",
-  "fetchedAtET": "Monday, Oct 12, 2026 at 8:36 AM ET",
+  "fetchedAtET": "Monday, Oct 12, 2026 at 8:39 AM ET",
   "source": "Banque de la République d'Haïti (BRH)",
   "sourceUrl": "https://www.brh.ht/taux-du-jour/",
-  "updatedAt": "2026-10-12T12:36:50.455Z",
+  "updatedAt": "2026-10-12T12:39:09.471Z",
   "liveScraped": true,
-  "lastTweetedDate": null,
-  "lastTweetId": null,
+  "lastTweetedDate": "Oct 12, 2026",
+  "lastTweetId": "2109624917759299795",
   "status": {
     "isFresh": true,
     "badge": "fresh",
