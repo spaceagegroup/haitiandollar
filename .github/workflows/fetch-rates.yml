@@ -8,7 +8,7 @@ on:
   workflow_dispatch: # Allows manual one-click trigger from the GitHub Actions tab
 
 concurrency:
-  group: firebase-hosting-deploy
+  group: brh-rate-update
   cancel-in-progress: false
 
 permissions:
@@ -36,7 +36,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: npm install --no-package-lock
 
       - name: Capture previous rate before update
         id: prev
@@ -87,6 +87,7 @@ jobs:
           cp htd-quote-history.json public/htd-quote-history.json 2>/dev/null || true
 
       - name: Post Daily Rate to X
+        id: x_post
         if: steps.check.outputs.status == 'changed'
         continue-on-error: true
         env:
@@ -96,13 +97,18 @@ jobs:
           X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
         run: npm run post-to-x
 
+      - name: Report X post outcome
+        if: steps.x_post.outcome == 'failure'
+        run: |
+          echo "::warning::X post failed. Rate updated but tweet not sent."
+          echo "Manual retry: gh workflow run fetch-rates.yml"
+
       - name: Commit and push changes
         id: commit_step
         if: steps.check.outputs.status == 'changed'
         run: |
           git config user.name "Honson Luma"
           git config user.email "legal@haitiandollar.com"
-          git checkout -- package-lock.json 2>/dev/null || true
           git add htd-quote.json public/htd-quote.json htd-quote-history.json public/htd-quote-history.json
           if git diff --staged --quiet; then
             echo "No file changes detected."
