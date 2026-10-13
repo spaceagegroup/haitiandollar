@@ -2,9 +2,9 @@ name: Update BRH Daily Rates
 
 on:
   schedule:
-    # Run every 30 minutes at off-peak minutes (:17, :47) from 11:00 UTC (7:17 AM EDT) to 15:00 UTC (11:47 AM EDT), Monday - Saturday
+    # Run every 30 minutes at off-peak minutes (:17, :47) from 11:00 UTC (7:17 AM EDT) to 22:00 UTC (6:47 PM EDT), Monday - Saturday
     # Off-peak minute intervals avoid GitHub Actions top-of-the-hour queue starvation and ensure reliable auto-retries
-    - cron: '17,47 11-15 * * 1-6'
+    - cron: '17,47 11-22 * * 1-6'
   workflow_dispatch: # Allows manual one-click trigger from the GitHub Actions tab
 
 concurrency:
@@ -84,6 +84,7 @@ jobs:
         run: |
           mkdir -p public
           cp htd-quote.json public/htd-quote.json
+          cp htd-quote-history.json public/htd-quote-history.json 2>/dev/null || true
 
       - name: Post Daily Rate to X
         if: steps.check.outputs.status == 'changed'
@@ -102,7 +103,7 @@ jobs:
           git config user.name "Honson Luma"
           git config user.email "legal@haitiandollar.com"
           git checkout -- package-lock.json 2>/dev/null || true
-          git add htd-quote.json public/htd-quote.json
+          git add htd-quote.json public/htd-quote.json htd-quote-history.json public/htd-quote-history.json
           if git diff --staged --quiet; then
             echo "No file changes detected."
           else
