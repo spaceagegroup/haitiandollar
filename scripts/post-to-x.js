@@ -33,7 +33,14 @@ async function postRateToX() {
     return;
   }
 
-  const tweetText = [
+  const informalBuy = quote.informal && typeof quote.informal.buy === 'number'
+    ? quote.informal.buy.toFixed(2)
+    : quote.informal?.buy;
+  const informalSell = quote.informal && typeof quote.informal.sell === 'number'
+    ? quote.informal.sell.toFixed(2)
+    : quote.informal?.sell;
+
+  const tweetLines = [
     `🇭🇹 Haitian Dollar Daily (${quote.date})`,
     '',
     '1 HTD = 5.00 HTG (Fixed)',
@@ -41,11 +48,20 @@ async function postRateToX() {
     '',
     `Reference: 1 USD = ${quote.reference.htgPerUsd} HTG`,
     `Banking: ${quote.banking.buy} – ${quote.banking.sell} HTG`,
+  ];
+
+  if (informalBuy && informalSell) {
+    tweetLines.push(`Informal: ${informalBuy} – ${informalSell} HTG`);
+  }
+
+  tweetLines.push(
     '',
     'https://haitiandollar.com/rates',
     '',
-    '#Haiti #HTD #HaitianDollar #HTG #G #Gourde'
-  ].join('\n');
+    '#Haiti #HTD #HaitianDollar #HTG #Gourde #Diaspora'
+  );
+
+  const tweetText = tweetLines.join('\n');
 
   console.log('📝 Preparing tweet:\n' + tweetText);
 
