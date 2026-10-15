@@ -208,6 +208,10 @@
             <i data-lucide="shield-check" class="w-4 h-4 opacity-70"></i>
             <span>Privacy Policy</span>
           </a>
+          <a href="#cookies" class="legal-nav-item flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-ink/70 whitespace-nowrap">
+            <i data-lucide="cookie" class="w-4 h-4 opacity-70"></i>
+            <span>Cookie Policy</span>
+          </a>
           <a href="#contact-legal" class="legal-nav-item flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-ink/70 whitespace-nowrap">
             <i data-lucide="mail" class="w-4 h-4 opacity-70"></i>
             <span>Legal Contact</span>
@@ -493,7 +497,75 @@
       </div>
     </section>
 
-    <!-- 5. LEGAL CONTACT -->
+    <!-- 5. COOKIE POLICY -->
+    <section id="cookies" class="py-16 border-b border-borderGray bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 legal-body">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-12 h-12 rounded-lg bg-brandYellow/20 flex items-center justify-center">
+            <i data-lucide="cookie" class="w-6 h-6 text-brandYellow"></i>
+          </div>
+          <h2 class="font-display font-black text-3xl text-ink">Cookie Policy</h2>
+        </div>
+
+        <p class="text-ink/80 leading-relaxed">
+          <em>Last updated: 2026</em>
+        </p>
+
+        <p class="text-ink/80 leading-relaxed">
+          This Cookie Policy explains how Haitian Dollar Inc. (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) uses cookies and similar storage technologies on our website (<a href="https://haitiandollar.com" class="text-brandRed underline">haitiandollar.com</a>) and related digital applications.
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">1. What Are Cookies?</h3>
+        <p class="text-ink/80 leading-relaxed">
+          Cookies and local storage data are small text files placed on your device (computer, tablet, or smartphone) when you visit our website. They help the site recognize your device, preserve your functional preferences, and understand how visitors interact with our content.
+        </p>
+
+        <h3 class="font-display font-bold text-xl text-ink">2. Categories of Cookies We Use</h3>
+        <p class="text-ink/80 leading-relaxed">
+          We believe in strict data minimization. We only employ two categories of cookies and local storage items:
+        </p>
+        <ul class="text-ink/80 leading-relaxed space-y-2">
+          <li>
+            <strong>Strictly Necessary Cookies &amp; Local Storage (Always Active):</strong> Essential for the website to function securely and load properly. This includes storing your cookie consent preferences (<code>htd_cookie_consent</code>) and language preferences (<code>htd_rates_lang</code>) so you do not have to re-enter them on every page, as well as preserving secure cryptographic and network state. These cannot be disabled.
+          </li>
+          <li>
+            <strong>Analytics Cookies (Optional — Requires Your Explicit Consent):</strong> We use Google Analytics (GA4, Measurement ID: <code>G-DMBN9HX803</code>) configured with Google Consent Mode v2. When enabled, GA4 collects aggregated, pseudonymous metrics (such as visited pages, device category, screen resolution, and session duration) to help us measure and improve performance. No personal identifiers or financial wallet data are ever shared.
+          </li>
+        </ul>
+
+        <h3 class="font-display font-bold text-xl text-ink">3. What We Do NOT Use</h3>
+        <p class="text-ink/80 leading-relaxed">
+          We strictly respect your privacy:
+        </p>
+        <ul class="text-ink/80 leading-relaxed">
+          <li>We <strong>do not</strong> use third-party advertising, retargeting, or marketing cookies.</li>
+          <li>We <strong>do not</strong> build behavioral tracking profiles.</li>
+          <li>We <strong>do not</strong> sell, rent, or monetize cookie or browsing data under any circumstances.</li>
+        </ul>
+
+        <h3 class="font-display font-bold text-xl text-ink">4. How to Manage or Withdraw Your Consent</h3>
+        <p class="text-ink/80 leading-relaxed">
+          You are in full control of your cookie preferences:
+        </p>
+        <ul class="text-ink/80 leading-relaxed space-y-2">
+          <li>
+            <strong>On-Site Controls:</strong> You can review, modify, or revoke your cookie choices at any time by clicking the 
+            <a href="#" onclick="resetCookieConsent(); return false;" class="text-brandRed font-semibold underline">Cookie Settings</a> 
+            link located in the footer of every page on this website. This re-opens the consent banner immediately.
+          </li>
+          <li>
+            <strong>Browser Settings:</strong> You can configure your browser to block or delete cookies. Please note that blocking strictly necessary cookies may impact the proper functionality and display of the website.
+          </li>
+        </ul>
+
+        <h3 class="font-display font-bold text-xl text-ink">5. Contact Regarding Cookies</h3>
+        <p class="text-ink/80 leading-relaxed">
+          If you have questions about our cookie practices or data privacy, please reach out to our legal department at <a href="mailto:legal@haitiandollar.com" class="text-brandRed font-semibold underline">legal@haitiandollar.com</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- 6. LEGAL CONTACT -->
     <section id="contact-legal" class="py-16 bg-ink text-white">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div class="w-16 h-16 rounded-full bg-brandYellow/20 flex items-center justify-center mx-auto mb-6">
@@ -616,11 +688,13 @@
         <!-- Privacy / Legal / Copyright row -->
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-[11px] text-white/40 mb-4">
           <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
-            <a href="/legal" class="hover:text-brandYellow transition-colors">Privacy Policy</a>
+            <a href="/legal.html#privacy" class="hover:text-brandYellow transition-colors">Privacy Policy</a>
             <span class="text-white/20 hidden sm:inline">·</span>
-            <a href="/legal" class="hover:text-brandYellow transition-colors">Terms of Service</a>
+            <a href="/legal.html#cookies" class="hover:text-brandYellow transition-colors">Cookie Policy</a>
             <span class="text-white/20 hidden sm:inline">·</span>
-            <a href="/legal#reg-d" class="hover:text-brandYellow transition-colors">SEC Regulatory Notice</a>
+            <a href="/legal.html#terms" class="hover:text-brandYellow transition-colors">Terms of Service</a>
+            <span class="text-white/20 hidden sm:inline">·</span>
+            <a href="/legal.html#reg-d" class="hover:text-brandYellow transition-colors">SEC Regulatory Notice</a>
             <span class="text-white/20 hidden sm:inline">·</span>
             <a href="/feed.xml" class="hover:text-brandYellow transition-colors">RSS</a>
             <span class="text-white/20 hidden sm:inline">·</span>
@@ -662,7 +736,7 @@
           <p class="text-xs sm:text-sm text-ink/80 leading-snug">
             <strong class="font-display font-bold text-ink">We use cookies.</strong>
             Essential cookies keep the site working. Analytics cookies help us understand usage. Read our
-            <a href="/legal#privacy" class="underline text-brandRed hover:text-ink font-medium">Privacy Policy</a>.
+            <a href="/legal.html#cookies" class="underline text-brandRed hover:text-ink font-medium">Cookie Policy</a>.
           </p>
         </div>
 
@@ -739,7 +813,14 @@
     // Cookie Settings link handler (used in footer)
     function resetCookieConsent() {
       localStorage.removeItem('htd_cookie_consent');
-      window.location.reload();
+      const banner = document.getElementById('cookie-consent-banner');
+      if (banner) {
+        banner.classList.remove('hidden');
+        setTimeout(() => banner.classList.remove('translate-y-full'), 50);
+        banner.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      } else {
+        window.location.reload();
+      }
     }
 
     // Dynamic Live BRH Rates Fetcher

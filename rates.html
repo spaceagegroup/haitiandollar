@@ -700,11 +700,15 @@
 
       <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-[11px] text-white/40">
         <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
-          <a href="/legal.html" class="hover:text-brandYellow transition-colors">Privacy Policy</a>
+          <a href="/legal.html#privacy" class="hover:text-brandYellow transition-colors">Privacy Policy</a>
           <span>·</span>
-          <a href="/legal.html" class="hover:text-brandYellow transition-colors">Terms of Service</a>
+          <a href="/legal.html#cookies" class="hover:text-brandYellow transition-colors">Cookie Policy</a>
           <span>·</span>
-          <a href="/legal.html" class="hover:text-brandYellow transition-colors">Offering &amp; Risk Disclosures</a>
+          <a href="/legal.html#terms" class="hover:text-brandYellow transition-colors">Terms of Service</a>
+          <span>·</span>
+          <a href="/legal.html#reg-d" class="hover:text-brandYellow transition-colors">Offering &amp; Risk Disclosures</a>
+          <span>·</span>
+          <a href="#" onclick="resetCookieConsent(); return false;" class="hover:text-brandYellow transition-colors">Cookie Settings</a>
         </div>
         <p>&copy; 2026 Haitian Dollar Inc. All rights reserved.</p>
       </div>
@@ -971,6 +975,110 @@
         });
       }
     });
+  </script>
+
+  <!-- COOKIE CONSENT BANNER — Compact -->
+  <div 
+    id="cookie-consent-banner" 
+    class="hidden fixed bottom-0 left-0 right-0 z-[100] bg-white border-t border-borderGray shadow-[0_-4px_20px_rgba(0,0,0,0.08)] transition-transform duration-300 transform translate-y-full text-ink"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="cookie-title"
+  >
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4">
+      <div class="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-6">
+
+        <!-- Left: Text -->
+        <div class="flex-1 min-w-0">
+          <p class="text-xs sm:text-sm text-ink/80 leading-snug">
+            <strong class="font-display font-bold text-ink">We use cookies.</strong>
+            Essential cookies keep the site working. Analytics cookies help us understand usage. Read our
+            <a href="/legal.html#cookies" class="underline text-brandRed hover:text-ink font-medium">Cookie Policy</a>.
+          </p>
+        </div>
+
+        <!-- Center: Toggles -->
+        <div class="flex items-center gap-3 sm:gap-4 text-[11px] sm:text-xs">
+          <label class="flex items-center gap-2 cursor-not-allowed opacity-70 select-none" title="Required">
+            <input type="checkbox" checked disabled class="w-3.5 h-3.5 rounded cursor-not-allowed" />
+            <span class="font-display font-bold text-ink whitespace-nowrap">Necessary</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer select-none">
+            <input type="checkbox" id="cookie-analytics" checked class="w-3.5 h-3.5 rounded cursor-pointer" />
+            <span class="font-display font-bold text-ink whitespace-nowrap">Analytics</span>
+          </label>
+        </div>
+
+        <!-- Right: Buttons -->
+        <div class="flex items-center gap-2 flex-shrink-0">
+          <button type="button" id="btn-reject-all" class="px-3 py-2 rounded-lg border border-borderGray bg-white text-ink font-display font-bold text-xs hover:border-ink transition-colors whitespace-nowrap">
+            Reject
+          </button>
+          <button type="button" id="btn-allow-analytics" class="px-4 py-2 rounded-lg bg-brandRed text-white font-display font-bold text-xs hover:bg-brandRed/90 transition-colors whitespace-nowrap">
+            Accept
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function initCookieBanner() {
+      const banner = document.getElementById('cookie-consent-banner');
+      const analyticsCheck = document.getElementById('cookie-analytics');
+      const btnReject = document.getElementById('btn-reject-all');
+      const btnAllow = document.getElementById('btn-allow-analytics');
+
+      if (!banner) return;
+
+      const stored = localStorage.getItem('htd_cookie_consent');
+      if (!stored) {
+        banner.classList.remove('hidden');
+        setTimeout(() => banner.classList.remove('translate-y-full'), 50);
+      }
+
+      function dismissBanner() {
+        banner.classList.add('translate-y-full');
+        setTimeout(() => banner.classList.add('hidden'), 300);
+      }
+
+      function applyConsent(settings) {
+        localStorage.setItem('htd_cookie_consent', JSON.stringify(settings));
+        if (typeof gtag === 'function') {
+          gtag('consent', 'update', {
+            'analytics_storage': settings.analytics ? 'granted' : 'denied',
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'functionality_storage': 'denied',
+            'security_storage': 'granted'
+          });
+        }
+        dismissBanner();
+      }
+
+      btnReject.addEventListener('click', () => {
+        applyConsent({ necessary: true, analytics: false });
+      });
+
+      btnAllow.addEventListener('click', () => {
+        applyConsent({ necessary: true, analytics: analyticsCheck ? analyticsCheck.checked : true });
+      });
+    })();
+
+    // Cookie Settings link handler (used in footer)
+    function resetCookieConsent() {
+      localStorage.removeItem('htd_cookie_consent');
+      const banner = document.getElementById('cookie-consent-banner');
+      if (banner) {
+        banner.classList.remove('hidden');
+        setTimeout(() => banner.classList.remove('translate-y-full'), 50);
+        banner.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      } else {
+        window.location.reload();
+      }
+    }
   </script>
 </body>
 </html>

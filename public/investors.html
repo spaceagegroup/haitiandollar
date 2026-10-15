@@ -444,9 +444,11 @@
         <!-- Privacy / Legal / Copyright row -->
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-[11px] text-white/40 mb-4">
           <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
-            <a href="/legal.html" class="hover:text-brandYellow transition-colors">Privacy Policy</a>
+            <a href="/legal.html#privacy" class="hover:text-brandYellow transition-colors">Privacy Policy</a>
             <span class="text-white/20 hidden sm:inline">·</span>
-            <a href="/legal.html" class="hover:text-brandYellow transition-colors">Terms of Service</a>
+            <a href="/legal.html#cookies" class="hover:text-brandYellow transition-colors">Cookie Policy</a>
+            <span class="text-white/20 hidden sm:inline">·</span>
+            <a href="/legal.html#terms" class="hover:text-brandYellow transition-colors">Terms of Service</a>
             <span class="text-white/20 hidden sm:inline">·</span>
             <a href="/legal.html#reg-d" class="hover:text-brandYellow transition-colors">SEC Regulatory Notice</a>
             <span class="text-white/20 hidden sm:inline">·</span>
@@ -490,8 +492,7 @@
         <div class="flex-1 min-w-0">
           <p class="text-xs sm:text-sm text-ink/80 leading-snug">
             <strong class="font-display font-bold text-ink">We use cookies.</strong>
-            Essential cookies keep the site working. Analytics cookies help us understand usage. Read our
-            <a href="/legal.html#privacy" class="underline text-brandRed hover:text-ink font-medium">Privacy Policy</a>.
+            Essential cookies keep the site working. Analytics cookies help us understand usage. Read our <a href="/legal.html#cookies" class="underline text-brandRed hover:text-ink font-medium">Cookie Policy</a>.
           </p>
         </div>
 
@@ -568,7 +569,14 @@
     // Cookie Settings link handler (used in footer)
     function resetCookieConsent() {
       localStorage.removeItem('htd_cookie_consent');
-      window.location.reload();
+      const banner = document.getElementById('cookie-consent-banner');
+      if (banner) {
+        banner.classList.remove('hidden');
+        setTimeout(() => banner.classList.remove('translate-y-full'), 50);
+        banner.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      } else {
+        window.location.reload();
+      }
     }
 
     // Dynamic Live BRH Rates Fetcher
