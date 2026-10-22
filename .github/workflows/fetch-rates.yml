@@ -125,7 +125,9 @@ jobs:
           fi
 
       - name: Deploy updated rates to Firebase Hosting
+        id: firebase_deploy
         if: steps.check.outputs.status == 'changed' && env.HAS_FIREBASE_SECRET == 'true'
+        continue-on-error: true
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
