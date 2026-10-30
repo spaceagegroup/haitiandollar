@@ -1,13 +1,13 @@
 {
-  "date": "Oct 29, 2026",
-  "day": "Thursday",
-  "fetchedAtET": "Thursday, Oct 29, 2026 at 8:28 AM ET",
+  "date": "Oct 30, 2026",
+  "day": "Friday",
+  "fetchedAtET": "Friday, Oct 30, 2026 at 8:02 AM ET",
   "source": "Banque de la République d'Haïti (BRH)",
   "sourceUrl": "https://www.brh.ht/taux-du-jour/",
-  "updatedAt": "2026-10-29T12:28:37.099Z",
+  "updatedAt": "2026-10-30T12:02:55.264Z",
   "liveScraped": true,
-  "lastTweetedDate": "Oct 29, 2026",
-  "lastTweetId": "2115782858946286023",
+  "lastTweetedDate": "Oct 30, 2026",
+  "lastTweetId": "2116138780541223154",
   "status": {
     "isFresh": true,
     "badge": "fresh",
@@ -17,10 +17,10 @@
     }
   },
   "reference": {
-    "htgPerUsd": 130.6751,
+    "htgPerUsd": 130.7115,
     "htdInUsd": 0.0383,
     "usdInHtd": 26.14,
-    "raw": 130.6751,
+    "raw": 130.7115,
     "usdPerHtd": 0.0383,
     "htdPerUsd": 26.14
   },
@@ -32,46 +32,46 @@
     "htdPerUsd": 26.14
   },
   "banking": {
-    "buy": 130.4584,
-    "sell": 131.6413,
-    "spread": 1.1829,
-    "spreadPct": 0.9,
-    "spreadPercent": 0.9,
-    "htgPerUsd": 131.6413,
+    "buy": 130.4192,
+    "sell": 131.615,
+    "spread": 1.1958,
+    "spreadPct": 0.91,
+    "spreadPercent": 0.91,
+    "htgPerUsd": 131.615,
     "htdInUsd": 0.038,
-    "usdInHtd": 26.33
+    "usdInHtd": 26.32
   },
   "informal": {
-    "buy": 131,
-    "sell": 135.85,
+    "buy": 131.15,
+    "sell": 136,
     "spread": 4.85,
     "spreadPct": 3.57,
     "spreadPercent": 3.57,
-    "htgPerUsd": 135.85,
+    "htgPerUsd": 136,
     "htdInUsd": 0.0368,
-    "usdInHtd": 27.17
+    "usdInHtd": 27.2
   },
   "aar": {
-    "htgPerUsd": 131.6413,
+    "htgPerUsd": 131.615,
     "htdInUsd": 0.038,
-    "usdInHtd": 26.33,
-    "raw": 131.6413,
-    "sell": 131.6413,
+    "usdInHtd": 26.32,
+    "raw": 131.615,
+    "sell": 131.615,
     "buy": null
   },
   "tma": {
-    "htgPerUsd": 131.6413,
+    "htgPerUsd": 131.615,
     "htdInUsd": 0.038,
-    "usdInHtd": 26.33,
-    "raw": 131.6413,
-    "sell": 131.6413,
+    "usdInHtd": 26.32,
+    "raw": 131.615,
+    "sell": 131.615,
     "buy": null
   },
   "spreadComparison": {
     "informalToBankingRatio": 4.1,
     "ratioLabel": "4.1x",
-    "bankingSpreadHtg": 1.1829,
-    "bankingSpreadPercent": 0.9,
+    "bankingSpreadHtg": 1.1958,
+    "bankingSpreadPercent": 0.91,
     "informalSpreadHtg": 4.85,
     "informalSpreadPercent": 3.57
   },
@@ -103,10 +103,10 @@
     {
       "htd": 1000,
       "htg": 5000,
-      "usd": 38.26,
+      "usd": 38.25,
       "htdLabel": "1,000 HTD",
       "htgLabel": "5,000 HTG",
-      "usdLabel": "$38.26 USD"
+      "usdLabel": "$38.25 USD"
     }
   ],
   "i18n": {
