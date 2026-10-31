@@ -1,13 +1,13 @@
 {
-  "date": "Oct 30, 2026",
-  "day": "Friday",
-  "fetchedAtET": "Friday, Oct 30, 2026 at 8:02 AM ET",
+  "date": "Oct 31, 2026",
+  "day": "Saturday",
+  "fetchedAtET": "Saturday, Oct 31, 2026 at 9:25 AM ET",
   "source": "Banque de la République d'Haïti (BRH)",
   "sourceUrl": "https://www.brh.ht/taux-du-jour/",
-  "updatedAt": "2026-10-30T12:02:55.264Z",
+  "updatedAt": "2026-10-31T13:25:38.752Z",
   "liveScraped": true,
-  "lastTweetedDate": "Oct 30, 2026",
-  "lastTweetId": "2116138780541223154",
+  "lastTweetedDate": "Oct 31, 2026",
+  "lastTweetId": "2116521987203875156",
   "status": {
     "isFresh": true,
     "badge": "fresh",
@@ -17,29 +17,29 @@
     }
   },
   "reference": {
-    "htgPerUsd": 130.7115,
-    "htdInUsd": 0.0383,
-    "usdInHtd": 26.14,
-    "raw": 130.7115,
-    "usdPerHtd": 0.0383,
-    "htdPerUsd": 26.14
+    "htgPerUsd": 130.7348,
+    "htdInUsd": 0.0382,
+    "usdInHtd": 26.15,
+    "raw": 130.7348,
+    "usdPerHtd": 0.0382,
+    "htdPerUsd": 26.15
   },
   "htdInvariant": {
     "peg": 5,
     "htgPerHtd": 5,
     "htdPerHtg": 0.2,
-    "usdPerHtd": 0.0383,
-    "htdPerUsd": 26.14
+    "usdPerHtd": 0.0382,
+    "htdPerUsd": 26.15
   },
   "banking": {
-    "buy": 130.4192,
-    "sell": 131.615,
-    "spread": 1.1958,
-    "spreadPct": 0.91,
-    "spreadPercent": 0.91,
-    "htgPerUsd": 131.615,
+    "buy": 130.458,
+    "sell": 131.6921,
+    "spread": 1.2341,
+    "spreadPct": 0.94,
+    "spreadPercent": 0.94,
+    "htgPerUsd": 131.6921,
     "htdInUsd": 0.038,
-    "usdInHtd": 26.32
+    "usdInHtd": 26.34
   },
   "informal": {
     "buy": 131.15,
@@ -52,26 +52,26 @@
     "usdInHtd": 27.2
   },
   "aar": {
-    "htgPerUsd": 131.615,
+    "htgPerUsd": 131.6921,
     "htdInUsd": 0.038,
-    "usdInHtd": 26.32,
-    "raw": 131.615,
-    "sell": 131.615,
+    "usdInHtd": 26.34,
+    "raw": 131.6921,
+    "sell": 131.6921,
     "buy": null
   },
   "tma": {
-    "htgPerUsd": 131.615,
+    "htgPerUsd": 131.6921,
     "htdInUsd": 0.038,
-    "usdInHtd": 26.32,
-    "raw": 131.615,
-    "sell": 131.615,
+    "usdInHtd": 26.34,
+    "raw": 131.6921,
+    "sell": 131.6921,
     "buy": null
   },
   "spreadComparison": {
-    "informalToBankingRatio": 4.1,
-    "ratioLabel": "4.1x",
-    "bankingSpreadHtg": 1.1958,
-    "bankingSpreadPercent": 0.91,
+    "informalToBankingRatio": 3.9,
+    "ratioLabel": "3.9x",
+    "bankingSpreadHtg": 1.2341,
+    "bankingSpreadPercent": 0.94,
     "informalSpreadHtg": 4.85,
     "informalSpreadPercent": 3.57
   },
@@ -79,10 +79,10 @@
     {
       "htd": 1,
       "htg": 5,
-      "usd": 0.0383,
+      "usd": 0.0382,
       "htdLabel": "1 HTD",
       "htgLabel": "5 HTG",
-      "usdLabel": "$0.0383 USD"
+      "usdLabel": "$0.0382 USD"
     },
     {
       "htd": 10,
@@ -95,10 +95,10 @@
     {
       "htd": 100,
       "htg": 500,
-      "usd": 3.83,
+      "usd": 3.82,
       "htdLabel": "100 HTD",
       "htgLabel": "500 HTG",
-      "usdLabel": "$3.83 USD"
+      "usdLabel": "$3.82 USD"
     },
     {
       "htd": 1000,
@@ -127,7 +127,7 @@
       "buy": "Buy",
       "sell": "Sell",
       "spread": "Spread",
-      "spreadNotice": "The informal cash market spread (4.85 HTG) is 4.1x wider than commercial banks.",
+      "spreadNotice": "The informal cash market spread (4.85 HTG) is 3.9x wider than commercial banks.",
       "spreadTooltip": "Spread = Difference between Buy and Sell. The informal market spread is 4x wider than commercial banks.",
       "conversionTitle": "HTD Mental Math & Conversion Table",
       "conversionSubtitle": "Real-world purchasing power for street commerce and remittances (5 HTG = 1 HTD)",
@@ -153,7 +153,7 @@
       "buy": "Achte",
       "sell": "Vann",
       "spread": "Ekara",
-      "spreadNotice": "Ekara mache enfòmèl la (4.85 HTG) se 4.1 fwa pi laj pase bank komèsyal yo.",
+      "spreadNotice": "Ekara mache enfòmèl la (4.85 HTG) se 3.9 fwa pi laj pase bank komèsyal yo.",
       "spreadTooltip": "Ekara = Diferans ant Achte ak Vann. Ekara mache enfòmèl la 4 fwa pi laj pase bank komèsyal yo.",
       "conversionTitle": "Kalkil Rapid & Tab Konvèsyon HTD",
       "conversionSubtitle": "Pouvwa acha reyèl pou komès nan lari ak transfè lajan (5 HTG = 1 HTD)",
