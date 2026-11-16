@@ -1,10 +1,10 @@
 {
   "date": "Nov 16, 2026",
   "day": "Monday",
-  "fetchedAtET": "Monday, Nov 16, 2026 at 7:29 AM ET",
+  "fetchedAtET": "Monday, Nov 16, 2026 at 4:08 PM ET",
   "source": "Banque de la République d'Haïti (BRH)",
   "sourceUrl": "https://www.brh.ht/taux-du-jour/",
-  "updatedAt": "2026-11-16T12:29:19.538Z",
+  "updatedAt": "2026-11-16T21:08:19.351Z",
   "liveScraped": true,
   "lastTweetedDate": "Nov 16, 2026",
   "lastTweetId": "2122306018529128790",
@@ -17,10 +17,10 @@
     }
   },
   "reference": {
-    "htgPerUsd": 130.7434,
+    "htgPerUsd": 130.7437,
     "htdInUsd": 0.0382,
     "usdInHtd": 26.15,
-    "raw": 130.7434,
+    "raw": 130.7437,
     "usdPerHtd": 0.0382,
     "htdPerUsd": 26.15
   },
