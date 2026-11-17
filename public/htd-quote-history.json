@@ -701,5 +701,24 @@
       "spreadPct": 3.57
     },
     "spreadRatio": 4.1
+  },
+  {
+    "date": "Nov 17, 2026",
+    "updatedAt": "2026-11-17T13:42:45.502Z",
+    "reference": 130.6701,
+    "usdPerHtd": 0.0383,
+    "banking": {
+      "buy": 130.3501,
+      "sell": 131.682,
+      "spread": 1.3319,
+      "spreadPct": 1.01
+    },
+    "informal": {
+      "buy": 131.15,
+      "sell": 136,
+      "spread": 4.85,
+      "spreadPct": 3.57
+    },
+    "spreadRatio": 3.6
   }
 ]
